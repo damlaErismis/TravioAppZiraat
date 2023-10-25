@@ -39,7 +39,6 @@ enum FontStatus {
 }
 
 // MARK: Corner Mask
-
 extension CACornerMask {
     static let bottomLeft = CACornerMask.layerMinXMaxYCorner
     static let bottomRight = CACornerMask.layerMaxXMaxYCorner
@@ -49,7 +48,6 @@ extension CACornerMask {
 }
 
 // MARK: UIColor
-
 extension UIColor {
     
     convenience init(hexString: String) {
