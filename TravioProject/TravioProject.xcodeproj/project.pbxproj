@@ -10,6 +10,9 @@
 		0C04A7712AE92CA5002972CF /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7702AE92CA5002972CF /* Router.swift */; };
 		0C04A7742AE92CBD002972CF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0C04A7732AE92CBD002972CF /* Alamofire */; };
 		0C04A7762AE933B1002972CF /* GenericNetworkingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */; };
+		0C04A7782AE938CF002972CF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7772AE938CF002972CF /* User.swift */; };
+		0C04A77A2AE9396B002972CF /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7792AE9396B002972CF /* LoginResponse.swift */; };
+		0C04A77D2AE94147002972CF /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A77C2AE94147002972CF /* HomeVC.swift */; };
 		0C20B7C22ADC322900C71BF7 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20B7C12ADC322900C71BF7 /* SignUpVC.swift */; };
 		0CF741F52AD99AC7002B1389 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF741F42AD99AC7002B1389 /* AppDelegate.swift */; };
 		0CF741F72AD99AC7002B1389 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF741F62AD99AC7002B1389 /* SceneDelegate.swift */; };
@@ -46,6 +49,9 @@
 /* Begin PBXFileReference section */
 		0C04A7702AE92CA5002972CF /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericNetworkingHelper.swift; sourceTree = "<group>"; };
+		0C04A7772AE938CF002972CF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0C04A7792AE9396B002972CF /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		0C04A77C2AE94147002972CF /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		0C20B7C12ADC322900C71BF7 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		0CF741F12AD99AC7002B1389 /* TravioProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravioProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CF741F42AD99AC7002B1389 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +113,8 @@
 			isa = PBXGroup;
 			children = (
 				0CF742082AD99B64002B1389 /* LoginVC.swift */,
+				0C04A7772AE938CF002972CF /* User.swift */,
+				0C04A7792AE9396B002972CF /* LoginResponse.swift */,
 			);
 			path = LoginPage;
 			sourceTree = "<group>";
@@ -117,6 +125,14 @@
 				0C20B7C12ADC322900C71BF7 /* SignUpVC.swift */,
 			);
 			path = SignUpPage;
+			sourceTree = "<group>";
+		};
+		0C04A77B2AE94111002972CF /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				0C04A77C2AE94147002972CF /* HomeVC.swift */,
+			);
+			path = HomePage;
 			sourceTree = "<group>";
 		};
 		0CF741E82AD99AC7002B1389 = {
@@ -140,6 +156,7 @@
 			children = (
 				0CF741F42AD99AC7002B1389 /* AppDelegate.swift */,
 				0CF741F62AD99AC7002B1389 /* SceneDelegate.swift */,
+				0C04A77B2AE94111002972CF /* HomePage */,
 				0062B3C22AE910E5000066E5 /* SignUpPage */,
 				0062B3C12AE910B0000066E5 /* LoginPage */,
 				0062B3C02AE91055000066E5 /* Utils */,
@@ -297,6 +314,9 @@
 				0CF742092AD99B64002B1389 /* LoginVC.swift in Sources */,
 				0CF741F72AD99AC7002B1389 /* SceneDelegate.swift in Sources */,
 				0CF742642ADB3546002B1389 /* UITextFieldCC.swift in Sources */,
+				0C04A7782AE938CF002972CF /* User.swift in Sources */,
+				0C04A77A2AE9396B002972CF /* LoginResponse.swift in Sources */,
+				0C04A77D2AE94147002972CF /* HomeVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
