@@ -10,7 +10,6 @@
 		0C20B7C22ADC322900C71BF7 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20B7C12ADC322900C71BF7 /* SignUpVC.swift */; };
 		0CF741F52AD99AC7002B1389 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF741F42AD99AC7002B1389 /* AppDelegate.swift */; };
 		0CF741F72AD99AC7002B1389 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF741F62AD99AC7002B1389 /* SceneDelegate.swift */; };
-		0CF741F92AD99AC7002B1389 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF741F82AD99AC7002B1389 /* ViewController.swift */; };
 		0CF741FE2AD99AC9002B1389 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CF741FD2AD99AC9002B1389 /* Assets.xcassets */; };
 		0CF742012AD99AC9002B1389 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CF741FF2AD99AC9002B1389 /* LaunchScreen.storyboard */; };
 		0CF742092AD99B64002B1389 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF742082AD99B64002B1389 /* LoginVC.swift */; };
@@ -36,9 +35,9 @@
 		0CF7425D2ADACB06002B1389 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0CF7424A2ADACB06002B1389 /* Poppins-SemiBold.ttf */; };
 		0CF7425E2ADACB06002B1389 /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0CF7424B2ADACB06002B1389 /* Poppins-Italic.ttf */; };
 		0CF7425F2ADACB06002B1389 /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0CF7424C2ADACB06002B1389 /* Poppins-MediumItalic.ttf */; };
-		0CF742622ADB3474002B1389 /* UIViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF742612ADB3474002B1389 /* UIViewVC.swift */; };
-		0CF742642ADB3546002B1389 /* UITextFieldVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF742632ADB3546002B1389 /* UITextFieldVC.swift */; };
-		0CF742662ADB47B2002B1389 /* UILabelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF742652ADB47B2002B1389 /* UILabelVC.swift */; };
+		0CF742622ADB3474002B1389 /* UIViewCC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF742612ADB3474002B1389 /* UIViewCC.swift */; };
+		0CF742642ADB3546002B1389 /* UITextFieldCC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF742632ADB3546002B1389 /* UITextFieldCC.swift */; };
+		0CF742662ADB47B2002B1389 /* UILabelCC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF742652ADB47B2002B1389 /* UILabelCC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +45,6 @@
 		0CF741F12AD99AC7002B1389 /* TravioProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravioProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CF741F42AD99AC7002B1389 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0CF741F62AD99AC7002B1389 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		0CF741F82AD99AC7002B1389 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0CF741FD2AD99AC9002B1389 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0CF742002AD99AC9002B1389 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0CF742022AD99AC9002B1389 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -71,9 +69,9 @@
 		0CF7424A2ADACB06002B1389 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		0CF7424B2ADACB06002B1389 /* Poppins-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Italic.ttf"; sourceTree = "<group>"; };
 		0CF7424C2ADACB06002B1389 /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
-		0CF742612ADB3474002B1389 /* UIViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewVC.swift; sourceTree = "<group>"; };
-		0CF742632ADB3546002B1389 /* UITextFieldVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldVC.swift; sourceTree = "<group>"; };
-		0CF742652ADB47B2002B1389 /* UILabelVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelVC.swift; sourceTree = "<group>"; };
+		0CF742612ADB3474002B1389 /* UIViewCC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewCC.swift; sourceTree = "<group>"; };
+		0CF742632ADB3546002B1389 /* UITextFieldCC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldCC.swift; sourceTree = "<group>"; };
+		0CF742652ADB47B2002B1389 /* UILabelCC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelCC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +87,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0062B3C02AE91055000066E5 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				0CF742102AD99FE8002B1389 /* Extentions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		0062B3C12AE910B0000066E5 /* LoginPage */ = {
+			isa = PBXGroup;
+			children = (
+				0CF742082AD99B64002B1389 /* LoginVC.swift */,
+			);
+			path = LoginPage;
+			sourceTree = "<group>";
+		};
+		0062B3C22AE910E5000066E5 /* SignUpPage */ = {
+			isa = PBXGroup;
+			children = (
+				0C20B7C12ADC322900C71BF7 /* SignUpVC.swift */,
+			);
+			path = SignUpPage;
+			sourceTree = "<group>";
+		};
 		0CF741E82AD99AC7002B1389 = {
 			isa = PBXGroup;
 			children = (
@@ -110,11 +132,10 @@
 			children = (
 				0CF741F42AD99AC7002B1389 /* AppDelegate.swift */,
 				0CF741F62AD99AC7002B1389 /* SceneDelegate.swift */,
-				0CF742082AD99B64002B1389 /* LoginVC.swift */,
-				0C20B7C12ADC322900C71BF7 /* SignUpVC.swift */,
+				0062B3C22AE910E5000066E5 /* SignUpPage */,
+				0062B3C12AE910B0000066E5 /* LoginPage */,
+				0062B3C02AE91055000066E5 /* Utils */,
 				0CF742602ADB33AB002B1389 /* CustomViews */,
-				0CF742102AD99FE8002B1389 /* Extentions.swift */,
-				0CF741F82AD99AC7002B1389 /* ViewController.swift */,
 				0CF741FD2AD99AC9002B1389 /* Assets.xcassets */,
 				0CF741FF2AD99AC9002B1389 /* LaunchScreen.storyboard */,
 				0CF742022AD99AC9002B1389 /* Info.plist */,
@@ -152,9 +173,9 @@
 		0CF742602ADB33AB002B1389 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				0CF742632ADB3546002B1389 /* UITextFieldVC.swift */,
-				0CF742612ADB3474002B1389 /* UIViewVC.swift */,
-				0CF742652ADB47B2002B1389 /* UILabelVC.swift */,
+				0CF742632ADB3546002B1389 /* UITextFieldCC.swift */,
+				0CF742612ADB3474002B1389 /* UIViewCC.swift */,
+				0CF742652ADB47B2002B1389 /* UILabelCC.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -256,15 +277,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CF741F92AD99AC7002B1389 /* ViewController.swift in Sources */,
 				0C20B7C22ADC322900C71BF7 /* SignUpVC.swift in Sources */,
-				0CF742662ADB47B2002B1389 /* UILabelVC.swift in Sources */,
+				0CF742662ADB47B2002B1389 /* UILabelCC.swift in Sources */,
 				0CF741F52AD99AC7002B1389 /* AppDelegate.swift in Sources */,
-				0CF742622ADB3474002B1389 /* UIViewVC.swift in Sources */,
+				0CF742622ADB3474002B1389 /* UIViewCC.swift in Sources */,
 				0CF742112AD99FE8002B1389 /* Extentions.swift in Sources */,
 				0CF742092AD99B64002B1389 /* LoginVC.swift in Sources */,
 				0CF741F72AD99AC7002B1389 /* SceneDelegate.swift in Sources */,
-				0CF742642ADB3546002B1389 /* UITextFieldVC.swift in Sources */,
+				0CF742642ADB3546002B1389 /* UITextFieldCC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

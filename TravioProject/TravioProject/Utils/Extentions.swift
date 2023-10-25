@@ -18,6 +18,8 @@ enum FontStatus {
     case poppinsRegular20
     case poppinsRegular24
     case poppinsThin12
+    case poppinsBold36
+    case poppinsBold16
     
     var defineFont:UIFont? {
         switch self {
@@ -31,6 +33,10 @@ enum FontStatus {
             return UIFont(name: "Poppins-Regular", size: 24)
         case .poppinsThin12:
             return UIFont(name: "Poppins-Thin", size: 12)
+        case .poppinsBold36:
+            return UIFont(name: "Poppins-Bold", size: 36)
+        case .poppinsBold16:
+            return UIFont(name: "Poppins-Bold", size: 16)
             
         }
     
@@ -39,7 +45,6 @@ enum FontStatus {
 }
 
 // MARK: Corner Mask
-
 extension CACornerMask {
     static let bottomLeft = CACornerMask.layerMinXMaxYCorner
     static let bottomRight = CACornerMask.layerMaxXMaxYCorner
@@ -49,7 +54,6 @@ extension CACornerMask {
 }
 
 // MARK: UIColor
-
 extension UIColor {
     
     convenience init(hexString: String) {

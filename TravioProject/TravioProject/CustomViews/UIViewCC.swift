@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UIViewVC: UIView {
+class UIViewCC: UIView {
 
     override init(frame: CGRect) {
         

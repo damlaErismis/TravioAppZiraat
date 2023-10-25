@@ -10,14 +10,12 @@ import SnapKit
 import TinyConstraints
 
 class LoginVC: UIViewController {
-
     
     //MARK: -- Properties
     
     
     
     //    MARK: -- Views
-        
     private lazy var imageLogo:UIImageView = {
         let img = UIImageView()
         img.image = UIImage(named: "travio")
@@ -26,16 +24,15 @@ class LoginVC: UIViewController {
         
     }()
     
-    private lazy var labelWelcome:UILabelVC = {
-        let lbl = UILabelVC(labelText: "Welcome to Travio", font: .poppinsRegular24)
+    private lazy var labelWelcome:UILabelCC = {
+        let lbl = UILabelCC(labelText: "Welcome to Travio", font: .poppinsRegular24)
         lbl.textAlignment = .center
-
         return lbl
     }()
     
-    private lazy var labelEmail = UILabelVC(labelText: "Email", font: .poppinsRegular14)
-    private lazy var labelPassword = UILabelVC(labelText: "Password", font: .poppinsRegular14)
-    private lazy var labelSuggestion = UILabelVC(labelText: "Don’t have any account?", font: .poppinsRegular14)
+    private lazy var labelEmail = UILabelCC(labelText: "Email", font: .poppinsRegular14)
+    private lazy var labelPassword = UILabelCC(labelText: "Password", font: .poppinsRegular14)
+    private lazy var labelSuggestion = UILabelCC(labelText: "Don’t have any account?", font: .poppinsRegular14)
     
     private lazy var buttonLogin:UIButton = {
         let btn = UIButton()
@@ -44,7 +41,6 @@ class LoginVC: UIViewController {
         btn.setTitleColor(.white, for: .normal)
         btn.backgroundColor = UIColor(hexString: "#38ada9")
         btn.layer.cornerRadius = 12
-        
         return btn
     }()
     
@@ -55,7 +51,6 @@ class LoginVC: UIViewController {
         btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 14)
         btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
-        
         return btn
     }()
     
@@ -64,17 +59,15 @@ class LoginVC: UIViewController {
         view.backgroundColor = UIColor(hexString: "F8F8F8")
         view.layer.cornerRadius = 75
         view.layer.maskedCorners = [.topLeft]
-        
         return view
     }()
     
-    private lazy var viewEmail = UIViewVC()
-    private lazy var viewPassword = UIViewVC()
-    private lazy var textFieldEmail = UITextFieldVC(placeholderText: "developer@bilgeadam.com")
-    private lazy var textFieldPassword:UITextFieldVC = {
-        let txt = UITextFieldVC(placeholderText: "*************")
+    private lazy var viewEmail = UIViewCC()
+    private lazy var viewPassword = UIViewCC()
+    private lazy var textFieldEmail = UITextFieldCC(placeholderText: "developer@bilgeadam.com")
+    private lazy var textFieldPassword:UITextFieldCC = {
+        let txt = UITextFieldCC(placeholderText: "*************")
         txt.isSecureTextEntry = true
-        
         return txt
     }()
 
@@ -83,29 +76,24 @@ class LoginVC: UIViewController {
         stack.axis = .horizontal
         stack.spacing = 2
         stack.distribution = .fillProportionally
-        
         return stack
     }()
     
 
     
     //MARK: -- Life Cycles
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         setupView()
     }
     
     //MARK: -- Component Actions
-    
     @objc func handleSignUp(){
         let vc = SignUpVC()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     //MARK: -- UI Methods
-    
     private func setupView(){
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
         self.view.addSubviews(viewMain, imageLogo)
@@ -113,7 +101,6 @@ class LoginVC: UIViewController {
         viewEmail.addSubviews(labelEmail, textFieldEmail)
         viewPassword.addSubviews(labelPassword, textFieldPassword)
         stackViewSignUp.addArrangedSubviews(labelSuggestion, buttonSignUp)
-        
         setupLayout()
     }
     

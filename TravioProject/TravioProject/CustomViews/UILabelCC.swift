@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UILabelVC: UILabel {
+class UILabelCC: UILabel {
     
     var addFont: FontStatus? = nil {
         didSet{
@@ -33,7 +33,6 @@ class UILabelVC: UILabel {
     convenience init(labelText:String, font: FontStatus) {
         self.init(frame: .zero)
         set(labelText: labelText, font: font )
-
     }
     
     func configure(){
