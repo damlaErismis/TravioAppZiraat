@@ -84,7 +84,6 @@ class LoginVC: UIViewController {
     //MARK: -- Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         setupView()
     }
     
