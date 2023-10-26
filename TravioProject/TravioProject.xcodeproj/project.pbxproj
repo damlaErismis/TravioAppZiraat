@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C04A7712AE92CA5002972CF /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7702AE92CA5002972CF /* Router.swift */; };
+		0C04A7742AE92CBD002972CF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0C04A7732AE92CBD002972CF /* Alamofire */; };
+		0C04A7762AE933B1002972CF /* GenericNetworkingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */; };
+		0C04A7782AE938CF002972CF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7772AE938CF002972CF /* User.swift */; };
+		0C04A77A2AE9396B002972CF /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7792AE9396B002972CF /* LoginResponse.swift */; };
+		0C04A77D2AE94147002972CF /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A77C2AE94147002972CF /* HomeVC.swift */; };
 		0C20B7C22ADC322900C71BF7 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20B7C12ADC322900C71BF7 /* SignUpVC.swift */; };
 		0CF741F52AD99AC7002B1389 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF741F42AD99AC7002B1389 /* AppDelegate.swift */; };
 		0CF741F72AD99AC7002B1389 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF741F62AD99AC7002B1389 /* SceneDelegate.swift */; };
@@ -41,6 +47,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C04A7702AE92CA5002972CF /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericNetworkingHelper.swift; sourceTree = "<group>"; };
+		0C04A7772AE938CF002972CF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0C04A7792AE9396B002972CF /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		0C04A77C2AE94147002972CF /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		0C20B7C12ADC322900C71BF7 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		0CF741F12AD99AC7002B1389 /* TravioProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravioProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CF741F42AD99AC7002B1389 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C04A7742AE92CBD002972CF /* Alamofire in Frameworks */,
 				0CF7420C2AD99BCE002B1389 /* SnapKit in Frameworks */,
 				0CF7420F2AD99BEB002B1389 /* TinyConstraints in Frameworks */,
 			);
@@ -91,6 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				0CF742102AD99FE8002B1389 /* Extentions.swift */,
+				0C04A7702AE92CA5002972CF /* Router.swift */,
+				0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -99,6 +113,8 @@
 			isa = PBXGroup;
 			children = (
 				0CF742082AD99B64002B1389 /* LoginVC.swift */,
+				0C04A7772AE938CF002972CF /* User.swift */,
+				0C04A7792AE9396B002972CF /* LoginResponse.swift */,
 			);
 			path = LoginPage;
 			sourceTree = "<group>";
@@ -109,6 +125,14 @@
 				0C20B7C12ADC322900C71BF7 /* SignUpVC.swift */,
 			);
 			path = SignUpPage;
+			sourceTree = "<group>";
+		};
+		0C04A77B2AE94111002972CF /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				0C04A77C2AE94147002972CF /* HomeVC.swift */,
+			);
+			path = HomePage;
 			sourceTree = "<group>";
 		};
 		0CF741E82AD99AC7002B1389 = {
@@ -132,6 +156,7 @@
 			children = (
 				0CF741F42AD99AC7002B1389 /* AppDelegate.swift */,
 				0CF741F62AD99AC7002B1389 /* SceneDelegate.swift */,
+				0C04A77B2AE94111002972CF /* HomePage */,
 				0062B3C22AE910E5000066E5 /* SignUpPage */,
 				0062B3C12AE910B0000066E5 /* LoginPage */,
 				0062B3C02AE91055000066E5 /* Utils */,
@@ -199,6 +224,7 @@
 			packageProductDependencies = (
 				0CF7420B2AD99BCE002B1389 /* SnapKit */,
 				0CF7420E2AD99BEB002B1389 /* TinyConstraints */,
+				0C04A7732AE92CBD002972CF /* Alamofire */,
 			);
 			productName = TravioProject;
 			productReference = 0CF741F12AD99AC7002B1389 /* TravioProject.app */;
@@ -231,6 +257,7 @@
 			packageReferences = (
 				0CF7420A2AD99BCE002B1389 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				0CF7420D2AD99BEB002B1389 /* XCRemoteSwiftPackageReference "TinyConstraints" */,
+				0C04A7722AE92CBD002972CF /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 0CF741F22AD99AC7002B1389 /* Products */;
 			projectDirPath = "";
@@ -280,11 +307,16 @@
 				0C20B7C22ADC322900C71BF7 /* SignUpVC.swift in Sources */,
 				0CF742662ADB47B2002B1389 /* UILabelCC.swift in Sources */,
 				0CF741F52AD99AC7002B1389 /* AppDelegate.swift in Sources */,
+				0C04A7762AE933B1002972CF /* GenericNetworkingHelper.swift in Sources */,
 				0CF742622ADB3474002B1389 /* UIViewCC.swift in Sources */,
+				0C04A7712AE92CA5002972CF /* Router.swift in Sources */,
 				0CF742112AD99FE8002B1389 /* Extentions.swift in Sources */,
 				0CF742092AD99B64002B1389 /* LoginVC.swift in Sources */,
 				0CF741F72AD99AC7002B1389 /* SceneDelegate.swift in Sources */,
 				0CF742642ADB3546002B1389 /* UITextFieldCC.swift in Sources */,
+				0C04A7782AE938CF002972CF /* User.swift in Sources */,
+				0C04A77A2AE9396B002972CF /* LoginResponse.swift in Sources */,
+				0C04A77D2AE94147002972CF /* HomeVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,6 +526,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0C04A7722AE92CBD002972CF /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.0;
+			};
+		};
 		0CF7420A2AD99BCE002B1389 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -513,6 +553,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0C04A7732AE92CBD002972CF /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0C04A7722AE92CBD002972CF /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		0CF7420B2AD99BCE002B1389 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0CF7420A2AD99BCE002B1389 /* XCRemoteSwiftPackageReference "SnapKit" */;
