@@ -121,7 +121,6 @@ class LoginVC: UIViewController {
         })
     }
     
-    
     //MARK: -- Private Methods
     private func showAlert(title:String, message:String){
         

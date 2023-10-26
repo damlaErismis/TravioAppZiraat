@@ -7,7 +7,13 @@
 
 import Foundation
 
-struct User:Codable{
+struct User:Codable {
+    
     var email:String?
     var password:String?
+    var userName:String?
+    
+    enum CodingKeys:String,CodingKey {
+        case userName = "full_name"
+    }
 }
