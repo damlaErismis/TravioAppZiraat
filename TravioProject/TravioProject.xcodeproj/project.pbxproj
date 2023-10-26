@@ -11,8 +11,9 @@
 		0C04A7742AE92CBD002972CF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0C04A7732AE92CBD002972CF /* Alamofire */; };
 		0C04A7762AE933B1002972CF /* GenericNetworkingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */; };
 		0C04A7782AE938CF002972CF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7772AE938CF002972CF /* User.swift */; };
-		0C04A77A2AE9396B002972CF /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7792AE9396B002972CF /* LoginResponse.swift */; };
 		0C04A77D2AE94147002972CF /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A77C2AE94147002972CF /* HomeVC.swift */; };
+		0C04A7812AEA4B5D002972CF /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7802AEA4B5D002972CF /* LoginVM.swift */; };
+		0C04A7852AEA817B002972CF /* LoginSuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7842AEA817B002972CF /* LoginSuccessResponse.swift */; };
 		0C20B7C22ADC322900C71BF7 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20B7C12ADC322900C71BF7 /* SignUpVC.swift */; };
 		0CF741F52AD99AC7002B1389 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF741F42AD99AC7002B1389 /* AppDelegate.swift */; };
 		0CF741F72AD99AC7002B1389 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF741F62AD99AC7002B1389 /* SceneDelegate.swift */; };
@@ -50,8 +51,9 @@
 		0C04A7702AE92CA5002972CF /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericNetworkingHelper.swift; sourceTree = "<group>"; };
 		0C04A7772AE938CF002972CF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		0C04A7792AE9396B002972CF /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		0C04A77C2AE94147002972CF /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		0C04A7802AEA4B5D002972CF /* LoginVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVM.swift; sourceTree = "<group>"; };
+		0C04A7842AEA817B002972CF /* LoginSuccessResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSuccessResponse.swift; sourceTree = "<group>"; };
 		0C20B7C12ADC322900C71BF7 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		0CF741F12AD99AC7002B1389 /* TravioProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravioProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CF741F42AD99AC7002B1389 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -113,8 +115,9 @@
 			isa = PBXGroup;
 			children = (
 				0CF742082AD99B64002B1389 /* LoginVC.swift */,
+				0C04A7802AEA4B5D002972CF /* LoginVM.swift */,
 				0C04A7772AE938CF002972CF /* User.swift */,
-				0C04A7792AE9396B002972CF /* LoginResponse.swift */,
+				0C04A7842AEA817B002972CF /* LoginSuccessResponse.swift */,
 			);
 			path = LoginPage;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C04A7812AEA4B5D002972CF /* LoginVM.swift in Sources */,
 				0C20B7C22ADC322900C71BF7 /* SignUpVC.swift in Sources */,
 				0CF742662ADB47B2002B1389 /* UILabelCC.swift in Sources */,
 				0CF741F52AD99AC7002B1389 /* AppDelegate.swift in Sources */,
@@ -311,11 +315,11 @@
 				0CF742622ADB3474002B1389 /* UIViewCC.swift in Sources */,
 				0C04A7712AE92CA5002972CF /* Router.swift in Sources */,
 				0CF742112AD99FE8002B1389 /* Extentions.swift in Sources */,
+				0C04A7852AEA817B002972CF /* LoginSuccessResponse.swift in Sources */,
 				0CF742092AD99B64002B1389 /* LoginVC.swift in Sources */,
 				0CF741F72AD99AC7002B1389 /* SceneDelegate.swift in Sources */,
 				0CF742642ADB3546002B1389 /* UITextFieldCC.swift in Sources */,
 				0C04A7782AE938CF002972CF /* User.swift in Sources */,
-				0C04A77A2AE9396B002972CF /* LoginResponse.swift in Sources */,
 				0C04A77D2AE94147002972CF /* HomeVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
