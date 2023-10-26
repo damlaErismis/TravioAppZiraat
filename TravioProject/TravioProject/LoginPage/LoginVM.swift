@@ -11,7 +11,6 @@ import Alamofire
 class LoginVM{
     
     var loginSuccessResponse:LoginSuccessResponse?
-    
     var alertMessage: String? {
         didSet {
             self.showAlertClosure?()
