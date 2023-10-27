@@ -39,6 +39,9 @@ class HomeVC: UIViewController {
         tv.dataSource = self
         tv.register(HomeTableCell.self, forCellReuseIdentifier: "celll")
         tv.isPagingEnabled = true
+//        tv.backgroundColor = UIColor(hexString: "F8F8F8")
+        tv.layer.cornerRadius=50;
+        tv.backgroundColor = UIColor(hexString: "F8F8F8")
         
         return tv
     }()
@@ -87,13 +90,12 @@ class HomeVC: UIViewController {
         })
         
         tableView.snp.makeConstraints({cv in
-            cv.top.equalToSuperview().offset(70)
+            cv.top.equalToSuperview()
             cv.leading.equalToSuperview()
             cv.trailing.equalToSuperview()
             cv.bottom.equalToSuperview()
          
         })
-        // Add here the setup for layout
        
     }
   
@@ -103,17 +105,30 @@ class HomeVC: UIViewController {
 extension HomeVC:UITableViewDelegate{
     
     internal func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        return "Popular Places"
+    }
     
-        return "Title"
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+        
+        
+        let lbl = UILabelCC()
+        lbl.frame = CGRect(x: 25, y: 0, width: 149, height: 30)
+        lbl.font = UIFont(name: "Poppins-Regular", size: 20)
+        lbl.text = self.tableView(tableView, titleForHeaderInSection: section)
+        let headerView = UIView()
+        headerView.addSubview(lbl)
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20
+        return 25
      }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 200.0
+        return 240
     }
     
 }
@@ -132,8 +147,8 @@ extension HomeVC:UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "celll", for: indexPath) as! HomeTableCell
-        cell.collectionView.backgroundColor = .red
         cell.collectionView.reloadData()
+
         return cell
  
     }

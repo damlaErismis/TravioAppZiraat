@@ -104,6 +104,9 @@ extension UIStackView {
 
 // MARK: - UIView
 extension UIView {
+    
+    
+    
     /// Add multiple subview to a view.
     /// - Parameter view: It is a subviews array which add to parent view
     func addSubviews(_ view: UIView...) {
@@ -112,6 +115,12 @@ extension UIView {
         })
     }
     
+    func roundAllCorners(radius: CGFloat) {
+            let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: radius, height: radius))
+            let mask = CAShapeLayer()
+            mask.path = path.cgPath
+            layer.mask = mask
+        }
     
     func addShadow(shadowColor: UIColor,
                    offsetX: CGFloat, offsetY: CGFloat,

@@ -7,10 +7,15 @@
 
 import UIKit
 import SnapKit
+import TinyConstraints
 class HomeCollectionCell: UICollectionViewCell {
     
     lazy var imagePlace:UIImageView = {
         let img = UIImageView()
+        img.contentMode = .scaleAspectFill
+        img.layer.cornerRadius = 20
+        img.clipsToBounds = true
+    
         return img
         
     }()
@@ -21,17 +26,13 @@ class HomeCollectionCell: UICollectionViewCell {
     }
     
     func setupViews(){
-        self.contentView.backgroundColor = .blue
+
         self.contentView.addSubviews(imagePlace)
         setupLayout()
     }
     func setupLayout(){
-        imagePlace.snp.makeConstraints({ img in
-            img.top.equalToSuperview()
-            img.bottom.equalToSuperview()
-            img.leading.equalToSuperview()
-            img.trailing.equalToSuperview()
-        })
+        
+        imagePlace.edgesToSuperview()
 
     }
     required init?(coder: NSCoder) {
