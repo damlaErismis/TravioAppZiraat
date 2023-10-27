@@ -40,25 +40,28 @@ class SignUpVC: UIViewController {
     
     private lazy var textFieldUsername:UITextFieldCC = {
         let txt = UITextFieldCC(placeholderText: "bilge_adam")
-        txt.delegate = self
+        txt.autocapitalizationType = .none
         return txt
     }()
     private lazy var textFieldEmail:UITextFieldCC = {
         let txt = UITextFieldCC(placeholderText: "developer@bilgeadam.com")
-        txt.delegate = self
+        txt.autocapitalizationType = .none
         return txt
     }()
     private lazy var textFieldPassword:UITextFieldCC  = {
         let txt = UITextFieldCC(placeholderText: "")
-        txt.delegate = self
+        txt.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        txt.autocapitalizationType = .none
+        txt.isSecureTextEntry = true
         return txt
     }()
     private lazy var textFieldPasswordConfirm:UITextFieldCC = {
         let txt = UITextFieldCC(placeholderText: "")
-        txt.delegate = self
+        txt.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        txt.autocapitalizationType = .none
+        txt.isSecureTextEntry = true
         return txt
     }()
-    
     private lazy var buttonSignup:UIButton = {
         let btn = UIButton()
         btn.setTitle("Sign Up", for: .normal)
@@ -70,6 +73,29 @@ class SignUpVC: UIViewController {
         
         return btn
     }()
+    
+    private lazy var labelPasswordMismatch:UILabelCC = {
+        let lbl = UILabelCC(labelText: "Şifreler uyuşmuyor", font: .poppinsRegular14)
+        lbl.textColor = .red
+        lbl.isHidden = true
+        return lbl
+    }()
+    @objc func textFieldDidChange(_ textField: UITextField) {
+            if textField == textFieldPassword || textField == textFieldPasswordConfirm {
+                let usernameText = textFieldUsername.text ?? ""
+                let emailText = textFieldEmail.text ?? ""
+                let passwordText = textFieldPassword.text ?? ""
+                let passwordConfirmText = textFieldPasswordConfirm.text ?? ""
+                
+                let passwordsMatch = passwordText == passwordConfirmText
+                labelPasswordMismatch.isHidden = passwordsMatch
+                
+                isFormComplete = !usernameText.isEmpty && !emailText.isEmpty && !passwordText.isEmpty && !passwordConfirmText.isEmpty && passwordsMatch
+                
+                buttonSignup.isEnabled = isFormComplete
+                buttonSignup.backgroundColor = isFormComplete ? UIColor(hexString: "#38ada9") : .lightGray
+            }
+        }
     
     @objc func btnSignUpTapped(){
         guard let textUsername = textFieldUsername.text else{return}
@@ -102,6 +128,7 @@ class SignUpVC: UIViewController {
         
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
         self.view.addSubviews(viewMain, labelSignUp)
+        viewMain.addSubview(labelPasswordMismatch)
         
         viewMain.addSubviews(viewUsername, viewEmail, viewPassword, viewPasswordConfirm, buttonSignup)
         viewUsername.addSubviews(labelUsername, textFieldUsername)
@@ -248,29 +275,14 @@ class SignUpVC: UIViewController {
             btn.width.equalTo(342)
             btn.bottom.equalToSuperview().offset(-30)
         })
+        
+        labelPasswordMismatch.snp.makeConstraints({ label in
+            label.top.equalTo(viewPasswordConfirm.snp.bottom).offset(8)
+            label.leading.equalTo(labelPasswordConfirm)
+        })
     }
 }
 
-extension SignUpVC: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        if textField == textFieldUsername || textField == textFieldEmail || textField == textFieldPassword || textField == textFieldPasswordConfirm {
-            isFormComplete = !(textFieldUsername.text?.isEmpty ?? true) &&
-            !(textFieldEmail.text?.isEmpty ?? true) &&
-            !(textFieldPassword.text?.isEmpty ?? true) &&
-            !(textFieldPasswordConfirm.text?.isEmpty ?? true)
-        }
-        
-        buttonSignup.isEnabled = isFormComplete
-        
-        if isFormComplete {
-            buttonSignup.backgroundColor = UIColor(hexString: "#38ada9")
-        } else {
-            buttonSignup.backgroundColor = .lightGray
-        }
-        return true
-    }
-}
 
 
 
