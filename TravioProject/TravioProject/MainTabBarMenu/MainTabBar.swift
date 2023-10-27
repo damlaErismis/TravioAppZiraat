@@ -11,7 +11,6 @@ class MainTabBar: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBar.barTintColor = .black
         self.tabBar.backgroundColor = UIColor(hexString: "#F8f8F8")
         self.tabBar.unselectedItemTintColor = .lightGray
         self.viewControllers = setupControllers()
@@ -42,7 +41,7 @@ class MainTabBar: UITabBarController {
         let menuNC = UINavigationController(rootViewController: menuVC)
         let menuImage = UIImage(named: "Menu")
         let selectedImageMenu = UIImage(systemName: "Menu")
-        menuNC.tabBarItem = UITabBarItem(title: "Menu", image: homeImage, selectedImage: selectedImageHome )
+        menuNC.tabBarItem = UITabBarItem(title: "Menu", image: menuImage, selectedImage: selectedImageMenu )
         
         
         return [homeNC, visitsNC, mapNC, menuNC]

@@ -13,6 +13,7 @@
 		00C8106E2AEBB7A90077E800 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106D2AEBB7A90077E800 /* MenuVC.swift */; };
 		00C810702AEBB7B70077E800 /* VisitsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106F2AEBB7B70077E800 /* VisitsVC.swift */; };
 		00C810722AEBB7DF0077E800 /* MainTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810712AEBB7DF0077E800 /* MainTabBar.swift */; };
+		00C810742AEBD5320077E800 /* VisitsCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810732AEBD5320077E800 /* VisitsCustomCell.swift */; };
 		0C04A7712AE92CA5002972CF /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7702AE92CA5002972CF /* Router.swift */; };
 		0C04A7742AE92CBD002972CF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0C04A7732AE92CBD002972CF /* Alamofire */; };
 		0C04A7762AE933B1002972CF /* GenericNetworkingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */; };
@@ -60,6 +61,7 @@
 		00C8106D2AEBB7A90077E800 /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		00C8106F2AEBB7B70077E800 /* VisitsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsVC.swift; sourceTree = "<group>"; };
 		00C810712AEBB7DF0077E800 /* MainTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBar.swift; sourceTree = "<group>"; };
+		00C810732AEBD5320077E800 /* VisitsCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsCustomCell.swift; sourceTree = "<group>"; };
 		0C04A7702AE92CA5002972CF /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericNetworkingHelper.swift; sourceTree = "<group>"; };
 		0C04A7772AE938CF002972CF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				00C8106F2AEBB7B70077E800 /* VisitsVC.swift */,
+				00C810732AEBD5320077E800 /* VisitsCustomCell.swift */,
 			);
 			path = Visits;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				00C8106E2AEBB7A90077E800 /* MenuVC.swift in Sources */,
 				0CF742622ADB3474002B1389 /* UIViewCC.swift in Sources */,
 				00C810702AEBB7B70077E800 /* VisitsVC.swift in Sources */,
+				00C810742AEBD5320077E800 /* VisitsCustomCell.swift in Sources */,
 				00C810722AEBB7DF0077E800 /* MainTabBar.swift in Sources */,
 				0C04A7712AE92CA5002972CF /* Router.swift in Sources */,
 				0062B3C42AEA4B7A000066E5 /* SignUpVM.swift in Sources */,
