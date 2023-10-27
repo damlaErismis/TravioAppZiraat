@@ -22,8 +22,6 @@ class HomeVC: UIViewController {
         return img
         
     }()
-    
-    
     private lazy var viewMain:UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hexString: "F8F8F8")
@@ -31,23 +29,17 @@ class HomeVC: UIViewController {
         view.layer.maskedCorners = [.topLeft]
         return view
     }()
-    
     private lazy var tableView:UITableView = {
-        let tv = UITableView()
-        
+        let tv = UITableView(frame: .zero, style: .grouped)
+        tv.separatorColor = .white
         tv.delegate = self
         tv.dataSource = self
-        tv.register(HomeTableCell.self, forCellReuseIdentifier: "celll")
+        tv.register(HomeTableCell.self, forCellReuseIdentifier: "tableCell")
         tv.isPagingEnabled = true
-//        tv.backgroundColor = UIColor(hexString: "F8F8F8")
-        tv.layer.cornerRadius=50;
-        tv.backgroundColor = UIColor(hexString: "F8F8F8")
-        
+        tv.layer.cornerRadius = 50
+        tv.layer.maskedCorners = [.topLeft]
         return tv
     }()
-    
-    
-
     //MARK: -- Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,14 +66,12 @@ class HomeVC: UIViewController {
     
     func setupLayout() {
         
-        
         imageLogo.snp.makeConstraints({ img in
             img.bottom.equalTo(viewMain.snp.top).offset(-28)
             img.leading.equalToSuperview().offset(16)
             img.height.equalTo(62)
             img.width.equalTo(171)
         })
-        
         viewMain.snp.makeConstraints({ view in
             view.bottom.equalToSuperview()
             view.leading.equalToSuperview()
@@ -90,18 +80,13 @@ class HomeVC: UIViewController {
         })
         
         tableView.snp.makeConstraints({cv in
-            cv.top.equalToSuperview()
+            cv.top.equalToSuperview().offset(30)
             cv.leading.equalToSuperview()
             cv.trailing.equalToSuperview()
             cv.bottom.equalToSuperview()
-         
         })
-       
     }
-  
 }
-
-
 extension HomeVC:UITableViewDelegate{
     
     internal func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -111,24 +96,32 @@ extension HomeVC:UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
-        
-        
-        let lbl = UILabelCC()
-        lbl.frame = CGRect(x: 25, y: 0, width: 149, height: 30)
+        let lbl = UILabel()
+        lbl.frame = CGRect(x: 25, y: 10, width: 149, height: 30)
         lbl.font = UIFont(name: "Poppins-Regular", size: 20)
         lbl.text = self.tableView(tableView, titleForHeaderInSection: section)
-        let headerView = UIView()
-        headerView.addSubview(lbl)
+        tableView.backgroundColor = UIColor(hexString: "F8F8F8")
+
+        let btn = UIButton()
+        btn.setTitle("See All", for: .normal)
+        btn.setTitleColor(UIColor(hexString: "#17C0EB"), for: .normal)
+        btn.frame = CGRect(x: 265, y: 10, width: 149, height: 30)
+        btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 14)
+    
+        
+        var headerView = UIView()
+        headerView.addSubviews(lbl, btn)
+    
+
         return headerView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 25
+        return 30
      }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return 240
+        return 200
     }
     
 }
@@ -140,20 +133,17 @@ extension HomeVC:UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
-
     }
 
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "celll", for: indexPath) as! HomeTableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath) as! HomeTableCell
+        self.tableView = UITableView(frame: CGRect.zero, style: .grouped)
         cell.collectionView.reloadData()
 
         return cell
  
     }
-    
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
 //        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomContactTable

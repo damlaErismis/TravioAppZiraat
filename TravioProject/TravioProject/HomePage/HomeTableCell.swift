@@ -20,24 +20,19 @@ class HomeTableCell: UITableViewCell {
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 10
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.contentInset = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 10)
-        
-        cv.register(HomeCollectionCell.self, forCellWithReuseIdentifier: "cell")
+        cv.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 10)
+        cv.backgroundColor = UIColor(hexString: "F8F8F8")
+        cv.register(HomeCollectionCell.self, forCellWithReuseIdentifier: "collectionCell")
         cv.dataSource = self
         cv.delegate = self
-        
         return cv
     }()
-    
-    func setUpDataSource() {
-        self.collectionView.reloadData()
-    }
  
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         setupViews()
     }
+
 
     func setupViews(){
         self.contentView.addSubviews(labelSectionName, collectionView)
@@ -49,10 +44,8 @@ class HomeTableCell: UITableViewCell {
             lbl.leading.equalToSuperview()
             lbl.trailing.equalToSuperview()
             lbl.centerY.equalToSuperview()
-
         })
         collectionView.edgesToSuperview()
-
     }
 
     required init?(coder: NSCoder) {
@@ -64,13 +57,13 @@ class HomeTableCell: UITableViewCell {
 extension HomeTableCell:UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         print(indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: (collectionView.frame.width-10)*0.8, height: (collectionView.frame.height-10) )
+        return CGSize(width: 280, height: 178 )
         
-        return CGSize(width: (collectionView.frame.width-10)*0.8, height: (collectionView.frame.height-10) )
     }
 }
 
@@ -80,10 +73,8 @@ extension HomeTableCell:UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5
     }
-
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! HomeCollectionCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! HomeCollectionCell
         cell.imagePlace.image = UIImage(named: "placeImage")
         cell.layer.cornerRadius = 20
         cell.clipsToBounds = true
