@@ -19,6 +19,7 @@
 		0C04A7872AEA9FEE002972CF /* HomeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7862AEA9FEE002972CF /* HomeTableCell.swift */; };
 		0C04A78B2AEAB8EA002972CF /* HomeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A78A2AEAB8EA002972CF /* HomeCollectionCell.swift */; };
 		0C20B7C22ADC322900C71BF7 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20B7C12ADC322900C71BF7 /* SignUpVC.swift */; };
+		0C5A49D92AEF032C007CB2A8 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5A49D82AEF032C007CB2A8 /* APIError.swift */; };
 		0CF741F52AD99AC7002B1389 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF741F42AD99AC7002B1389 /* AppDelegate.swift */; };
 		0CF741F72AD99AC7002B1389 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF741F62AD99AC7002B1389 /* SceneDelegate.swift */; };
 		0CF741FE2AD99AC9002B1389 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CF741FD2AD99AC9002B1389 /* Assets.xcassets */; };
@@ -63,6 +64,7 @@
 		0C04A7862AEA9FEE002972CF /* HomeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableCell.swift; sourceTree = "<group>"; };
 		0C04A78A2AEAB8EA002972CF /* HomeCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionCell.swift; sourceTree = "<group>"; };
 		0C20B7C12ADC322900C71BF7 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		0C5A49D82AEF032C007CB2A8 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		0CF741F12AD99AC7002B1389 /* TravioProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravioProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CF741F42AD99AC7002B1389 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0CF741F62AD99AC7002B1389 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				0C04A7802AEA4B5D002972CF /* LoginVM.swift */,
 				0C04A7772AE938CF002972CF /* User.swift */,
 				0C04A7842AEA817B002972CF /* LoginSuccessResponse.swift */,
+				0C5A49D82AEF032C007CB2A8 /* APIError.swift */,
 			);
 			path = LoginPage;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				0CF742622ADB3474002B1389 /* UIViewCC.swift in Sources */,
 				0C04A7712AE92CA5002972CF /* Router.swift in Sources */,
 				0062B3C42AEA4B7A000066E5 /* SignUpVM.swift in Sources */,
+				0C5A49D92AEF032C007CB2A8 /* APIError.swift in Sources */,
 				0CF742112AD99FE8002B1389 /* Extentions.swift in Sources */,
 				0C04A7852AEA817B002972CF /* LoginSuccessResponse.swift in Sources */,
 				0C04A78B2AEAB8EA002972CF /* HomeCollectionCell.swift in Sources */,
