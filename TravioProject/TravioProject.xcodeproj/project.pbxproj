@@ -160,16 +160,8 @@
 				00C8106A2AEBB6570077E800 /* Map */,
 				00C810692AEBB6490077E800 /* Menu */,
 				00C810682AEBB63F0077E800 /* Visits */,
-				00C810672AEBB6380077E800 /* Home */,
 			);
 			path = MainTabBarMenu;
-			sourceTree = "<group>";
-		};
-		00C810672AEBB6380077E800 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Home;
 			sourceTree = "<group>";
 		};
 		00C810682AEBB63F0077E800 /* Visits */ = {
