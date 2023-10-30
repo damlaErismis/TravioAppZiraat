@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		0062B3C42AEA4B7A000066E5 /* SignUpVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0062B3C32AEA4B7A000066E5 /* SignUpVM.swift */; };
 		0062B3C62AEA5EF3000066E5 /* SignUpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0062B3C52AEA5EF3000066E5 /* SignUpResponse.swift */; };
+		00C8106C2AEBB79B0077E800 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106B2AEBB79B0077E800 /* MapVC.swift */; };
+		00C8106E2AEBB7A90077E800 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106D2AEBB7A90077E800 /* MenuVC.swift */; };
+		00C810702AEBB7B70077E800 /* VisitsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106F2AEBB7B70077E800 /* VisitsVC.swift */; };
+		00C810722AEBB7DF0077E800 /* MainTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810712AEBB7DF0077E800 /* MainTabBar.swift */; };
+		00C810742AEBD5320077E800 /* VisitsCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810732AEBD5320077E800 /* VisitsCustomCell.swift */; };
 		0C04A7712AE92CA5002972CF /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7702AE92CA5002972CF /* Router.swift */; };
 		0C04A7742AE92CBD002972CF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0C04A7732AE92CBD002972CF /* Alamofire */; };
 		0C04A7762AE933B1002972CF /* GenericNetworkingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */; };
@@ -55,6 +60,11 @@
 /* Begin PBXFileReference section */
 		0062B3C32AEA4B7A000066E5 /* SignUpVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVM.swift; sourceTree = "<group>"; };
 		0062B3C52AEA5EF3000066E5 /* SignUpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponse.swift; sourceTree = "<group>"; };
+		00C8106B2AEBB79B0077E800 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
+		00C8106D2AEBB7A90077E800 /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
+		00C8106F2AEBB7B70077E800 /* VisitsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsVC.swift; sourceTree = "<group>"; };
+		00C810712AEBB7DF0077E800 /* MainTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBar.swift; sourceTree = "<group>"; };
+		00C810732AEBD5320077E800 /* VisitsCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsCustomCell.swift; sourceTree = "<group>"; };
 		0C04A7702AE92CA5002972CF /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericNetworkingHelper.swift; sourceTree = "<group>"; };
 		0C04A7772AE938CF002972CF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -143,6 +153,50 @@
 			path = SignUpPage;
 			sourceTree = "<group>";
 		};
+		00C810662AEBB3430077E800 /* MainTabBarMenu */ = {
+			isa = PBXGroup;
+			children = (
+				00C810712AEBB7DF0077E800 /* MainTabBar.swift */,
+				00C8106A2AEBB6570077E800 /* Map */,
+				00C810692AEBB6490077E800 /* Menu */,
+				00C810682AEBB63F0077E800 /* Visits */,
+				00C810672AEBB6380077E800 /* Home */,
+			);
+			path = MainTabBarMenu;
+			sourceTree = "<group>";
+		};
+		00C810672AEBB6380077E800 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		00C810682AEBB63F0077E800 /* Visits */ = {
+			isa = PBXGroup;
+			children = (
+				00C8106F2AEBB7B70077E800 /* VisitsVC.swift */,
+				00C810732AEBD5320077E800 /* VisitsCustomCell.swift */,
+			);
+			path = Visits;
+			sourceTree = "<group>";
+		};
+		00C810692AEBB6490077E800 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				00C8106D2AEBB7A90077E800 /* MenuVC.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		00C8106A2AEBB6570077E800 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				00C8106B2AEBB79B0077E800 /* MapVC.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
 		0C04A77B2AE94111002972CF /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +228,7 @@
 			children = (
 				0CF741F42AD99AC7002B1389 /* AppDelegate.swift */,
 				0CF741F62AD99AC7002B1389 /* SceneDelegate.swift */,
+				00C810662AEBB3430077E800 /* MainTabBarMenu */,
 				0C04A77B2AE94111002972CF /* HomePage */,
 				0062B3C22AE910E5000066E5 /* SignUpPage */,
 				0062B3C12AE910B0000066E5 /* LoginPage */,
@@ -327,13 +382,18 @@
 				0CF742662ADB47B2002B1389 /* UILabelCC.swift in Sources */,
 				0CF741F52AD99AC7002B1389 /* AppDelegate.swift in Sources */,
 				0C04A7762AE933B1002972CF /* GenericNetworkingHelper.swift in Sources */,
+				00C8106E2AEBB7A90077E800 /* MenuVC.swift in Sources */,
 				0CF742622ADB3474002B1389 /* UIViewCC.swift in Sources */,
+				00C810702AEBB7B70077E800 /* VisitsVC.swift in Sources */,
+				00C810742AEBD5320077E800 /* VisitsCustomCell.swift in Sources */,
+				00C810722AEBB7DF0077E800 /* MainTabBar.swift in Sources */,
 				0C04A7712AE92CA5002972CF /* Router.swift in Sources */,
 				0062B3C42AEA4B7A000066E5 /* SignUpVM.swift in Sources */,
 				0C5A49D92AEF032C007CB2A8 /* APIError.swift in Sources */,
 				0CF742112AD99FE8002B1389 /* Extentions.swift in Sources */,
 				0C04A7852AEA817B002972CF /* LoginSuccessResponse.swift in Sources */,
 				0C04A78B2AEAB8EA002972CF /* HomeCollectionCell.swift in Sources */,
+				00C8106C2AEBB79B0077E800 /* MapVC.swift in Sources */,
 				0CF742092AD99B64002B1389 /* LoginVC.swift in Sources */,
 				0C04A7872AEA9FEE002972CF /* HomeTableCell.swift in Sources */,
 				0CF741F72AD99AC7002B1389 /* SceneDelegate.swift in Sources */,
