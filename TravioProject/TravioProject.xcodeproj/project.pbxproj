@@ -25,6 +25,9 @@
 		0C04A78B2AEAB8EA002972CF /* HomeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A78A2AEAB8EA002972CF /* HomeCollectionCell.swift */; };
 		0C20B7C22ADC322900C71BF7 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20B7C12ADC322900C71BF7 /* SignUpVC.swift */; };
 		0C2ECED62AF0D6AA0013F6C5 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2ECED52AF0D6AA0013F6C5 /* KeychainHelper.swift */; };
+		0C2ECEE32AF1231B0013F6C5 /* PlaceAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2ECEE22AF1231B0013F6C5 /* PlaceAnnotation.swift */; };
+		0C2ECEE72AF1239C0013F6C5 /* MapImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2ECEE62AF1239C0013F6C5 /* MapImageCollectionCell.swift */; };
+		0C2ECEEB2AF126240013F6C5 /* CLLocation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2ECEEA2AF126240013F6C5 /* CLLocation+Extension.swift */; };
 		0C5A49D92AEF032C007CB2A8 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5A49D82AEF032C007CB2A8 /* APIError.swift */; };
 		0CF741F52AD99AC7002B1389 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF741F42AD99AC7002B1389 /* AppDelegate.swift */; };
 		0CF741F72AD99AC7002B1389 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF741F62AD99AC7002B1389 /* SceneDelegate.swift */; };
@@ -76,6 +79,9 @@
 		0C04A78A2AEAB8EA002972CF /* HomeCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionCell.swift; sourceTree = "<group>"; };
 		0C20B7C12ADC322900C71BF7 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		0C2ECED52AF0D6AA0013F6C5 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		0C2ECEE22AF1231B0013F6C5 /* PlaceAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAnnotation.swift; sourceTree = "<group>"; };
+		0C2ECEE62AF1239C0013F6C5 /* MapImageCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapImageCollectionCell.swift; sourceTree = "<group>"; };
+		0C2ECEEA2AF126240013F6C5 /* CLLocation+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extension.swift"; sourceTree = "<group>"; };
 		0C5A49D82AEF032C007CB2A8 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		0CF741F12AD99AC7002B1389 /* TravioProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravioProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CF741F42AD99AC7002B1389 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -187,7 +193,10 @@
 		00C8106A2AEBB6570077E800 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				0C2ECEEA2AF126240013F6C5 /* CLLocation+Extension.swift */,
 				00C8106B2AEBB79B0077E800 /* MapVC.swift */,
+				0C2ECEE22AF1231B0013F6C5 /* PlaceAnnotation.swift */,
+				0C2ECEE62AF1239C0013F6C5 /* MapImageCollectionCell.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -376,6 +385,9 @@
 				0C20B7C22ADC322900C71BF7 /* SignUpVC.swift in Sources */,
 				0CF742662ADB47B2002B1389 /* UILabelCC.swift in Sources */,
 				0C2ECED62AF0D6AA0013F6C5 /* KeychainHelper.swift in Sources */,
+				0C2ECEEB2AF126240013F6C5 /* CLLocation+Extension.swift in Sources */,
+				0C2ECEE32AF1231B0013F6C5 /* PlaceAnnotation.swift in Sources */,
+				0C2ECEE72AF1239C0013F6C5 /* MapImageCollectionCell.swift in Sources */,
 				0CF741F52AD99AC7002B1389 /* AppDelegate.swift in Sources */,
 				0C04A7762AE933B1002972CF /* GenericNetworkingHelper.swift in Sources */,
 				00C8106E2AEBB7A90077E800 /* MenuVC.swift in Sources */,
