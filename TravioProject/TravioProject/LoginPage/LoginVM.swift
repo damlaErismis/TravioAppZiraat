@@ -10,6 +10,7 @@ import Alamofire
 
 class LoginVM{
     
+
     var loginSuccessResponse:LoginSuccessResponse?
     var alertMessage: String? {
         didSet {
@@ -18,10 +19,8 @@ class LoginVM{
     }
 
     var showAlertClosure: (()->())?
-    
 
     func postLoginData(email:String, password: String){
-        
         let params = [
             "email": email,
             "password": password
@@ -30,17 +29,21 @@ class LoginVM{
             switch result {
             case .success(let success):
                 self.processFetched(response: success)
+                
             case .failure(let failure):
                 self.alertMessage = failure.message
-                
-            
             }
         })
     }
     
-   func processFetched( response: LoginSuccessResponse ) {
-         self.loginSuccessResponse = response
-     }
+    func processFetched( response: LoginSuccessResponse ) {
+        self.loginSuccessResponse = response
+        
+        let userToken = response.accessToken
+        let service = "com.travio"
+        let account = "travio"
+        KeychainHelper.shared.save((userToken?.data(using: .utf8))!, service: service, account: account)
+    }
      
  }
     
