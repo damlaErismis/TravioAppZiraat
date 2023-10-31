@@ -14,8 +14,13 @@
 		00C810702AEBB7B70077E800 /* VisitsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106F2AEBB7B70077E800 /* VisitsVC.swift */; };
 		00C810722AEBB7DF0077E800 /* MainTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810712AEBB7DF0077E800 /* MainTabBar.swift */; };
 		00C810742AEBD5320077E800 /* VisitsCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810732AEBD5320077E800 /* VisitsCustomCell.swift */; };
+		00C8107E2AF0D56B0077E800 /* PlaceAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8107D2AF0D56B0077E800 /* PlaceAnnotation.swift */; };
+		00C810822AF0EB8F0077E800 /* AddNewPlaceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810812AF0EB8F0077E800 /* AddNewPlaceVC.swift */; };
+		00C8108F2AF0ED9F0077E800 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 00C8108E2AF0ED9F0077E800 /* SnapKit */; };
+		00C810922AF0EDA70077E800 /* TinyConstraints in Frameworks */ = {isa = PBXBuildFile; productRef = 00C810912AF0EDA70077E800 /* TinyConstraints */; };
+		00C810952AF0EDAF0077E800 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 00C810942AF0EDAF0077E800 /* Alamofire */; };
+		00C8109D2AF169F50077E800 /* AddPlaceCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8109C2AF169F50077E800 /* AddPlaceCollectionCell.swift */; };
 		0C04A7712AE92CA5002972CF /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7702AE92CA5002972CF /* Router.swift */; };
-		0C04A7742AE92CBD002972CF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0C04A7732AE92CBD002972CF /* Alamofire */; };
 		0C04A7762AE933B1002972CF /* GenericNetworkingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */; };
 		0C04A7782AE938CF002972CF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7772AE938CF002972CF /* User.swift */; };
 		0C04A77D2AE94147002972CF /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A77C2AE94147002972CF /* HomeVC.swift */; };
@@ -30,8 +35,6 @@
 		0CF741FE2AD99AC9002B1389 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CF741FD2AD99AC9002B1389 /* Assets.xcassets */; };
 		0CF742012AD99AC9002B1389 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CF741FF2AD99AC9002B1389 /* LaunchScreen.storyboard */; };
 		0CF742092AD99B64002B1389 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF742082AD99B64002B1389 /* LoginVC.swift */; };
-		0CF7420C2AD99BCE002B1389 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0CF7420B2AD99BCE002B1389 /* SnapKit */; };
-		0CF7420F2AD99BEB002B1389 /* TinyConstraints in Frameworks */ = {isa = PBXBuildFile; productRef = 0CF7420E2AD99BEB002B1389 /* TinyConstraints */; };
 		0CF742112AD99FE8002B1389 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF742102AD99FE8002B1389 /* Extentions.swift */; };
 		0CF7424D2ADACB06002B1389 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0CF7423A2ADACB06002B1389 /* Poppins-ExtraLight.ttf */; };
 		0CF7424E2ADACB06002B1389 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0CF7423B2ADACB06002B1389 /* Poppins-ThinItalic.ttf */; };
@@ -65,6 +68,9 @@
 		00C8106F2AEBB7B70077E800 /* VisitsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsVC.swift; sourceTree = "<group>"; };
 		00C810712AEBB7DF0077E800 /* MainTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBar.swift; sourceTree = "<group>"; };
 		00C810732AEBD5320077E800 /* VisitsCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsCustomCell.swift; sourceTree = "<group>"; };
+		00C8107D2AF0D56B0077E800 /* PlaceAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAnnotation.swift; sourceTree = "<group>"; };
+		00C810812AF0EB8F0077E800 /* AddNewPlaceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPlaceVC.swift; sourceTree = "<group>"; };
+		00C8109C2AF169F50077E800 /* AddPlaceCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlaceCollectionCell.swift; sourceTree = "<group>"; };
 		0C04A7702AE92CA5002972CF /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericNetworkingHelper.swift; sourceTree = "<group>"; };
 		0C04A7772AE938CF002972CF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -112,9 +118,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C04A7742AE92CBD002972CF /* Alamofire in Frameworks */,
-				0CF7420C2AD99BCE002B1389 /* SnapKit in Frameworks */,
-				0CF7420F2AD99BEB002B1389 /* TinyConstraints in Frameworks */,
+				00C810952AF0EDAF0077E800 /* Alamofire in Frameworks */,
+				00C8108F2AF0ED9F0077E800 /* SnapKit in Frameworks */,
+				00C810922AF0EDA70077E800 /* TinyConstraints in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,6 +195,16 @@
 			path = Map;
 			sourceTree = "<group>";
 		};
+		00C810782AF0D4EC0077E800 /* MapPages */ = {
+			isa = PBXGroup;
+			children = (
+				00C8107D2AF0D56B0077E800 /* PlaceAnnotation.swift */,
+				00C810812AF0EB8F0077E800 /* AddNewPlaceVC.swift */,
+				00C8109C2AF169F50077E800 /* AddPlaceCollectionCell.swift */,
+			);
+			path = MapPages;
+			sourceTree = "<group>";
+		};
 		0C04A77B2AE94111002972CF /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,6 +234,7 @@
 		0CF741F32AD99AC7002B1389 /* TravioProject */ = {
 			isa = PBXGroup;
 			children = (
+				00C810782AF0D4EC0077E800 /* MapPages */,
 				0CF741F42AD99AC7002B1389 /* AppDelegate.swift */,
 				0CF741F62AD99AC7002B1389 /* SceneDelegate.swift */,
 				00C810662AEBB3430077E800 /* MainTabBarMenu */,
@@ -287,9 +304,9 @@
 			);
 			name = TravioProject;
 			packageProductDependencies = (
-				0CF7420B2AD99BCE002B1389 /* SnapKit */,
-				0CF7420E2AD99BEB002B1389 /* TinyConstraints */,
-				0C04A7732AE92CBD002972CF /* Alamofire */,
+				00C8108E2AF0ED9F0077E800 /* SnapKit */,
+				00C810912AF0EDA70077E800 /* TinyConstraints */,
+				00C810942AF0EDAF0077E800 /* Alamofire */,
 			);
 			productName = TravioProject;
 			productReference = 0CF741F12AD99AC7002B1389 /* TravioProject.app */;
@@ -320,9 +337,9 @@
 			);
 			mainGroup = 0CF741E82AD99AC7002B1389;
 			packageReferences = (
-				0CF7420A2AD99BCE002B1389 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				0CF7420D2AD99BEB002B1389 /* XCRemoteSwiftPackageReference "TinyConstraints" */,
-				0C04A7722AE92CBD002972CF /* XCRemoteSwiftPackageReference "Alamofire" */,
+				00C8108D2AF0ED9F0077E800 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				00C810902AF0EDA70077E800 /* XCRemoteSwiftPackageReference "TinyConstraints" */,
+				00C810932AF0EDAF0077E800 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 0CF741F22AD99AC7002B1389 /* Products */;
 			projectDirPath = "";
@@ -377,9 +394,11 @@
 				00C8106E2AEBB7A90077E800 /* MenuVC.swift in Sources */,
 				0CF742622ADB3474002B1389 /* UIViewCC.swift in Sources */,
 				00C810702AEBB7B70077E800 /* VisitsVC.swift in Sources */,
+				00C8107E2AF0D56B0077E800 /* PlaceAnnotation.swift in Sources */,
 				00C810742AEBD5320077E800 /* VisitsCustomCell.swift in Sources */,
 				00C810722AEBB7DF0077E800 /* MainTabBar.swift in Sources */,
 				0C04A7712AE92CA5002972CF /* Router.swift in Sources */,
+				00C8109D2AF169F50077E800 /* AddPlaceCollectionCell.swift in Sources */,
 				0062B3C42AEA4B7A000066E5 /* SignUpVM.swift in Sources */,
 				0C5A49D92AEF032C007CB2A8 /* APIError.swift in Sources */,
 				0CF742112AD99FE8002B1389 /* Extentions.swift in Sources */,
@@ -392,6 +411,7 @@
 				0CF742642ADB3546002B1389 /* UITextFieldCC.swift in Sources */,
 				0C04A7782AE938CF002972CF /* User.swift in Sources */,
 				0062B3C62AEA5EF3000066E5 /* SignUpResponse.swift in Sources */,
+				00C810822AF0EB8F0077E800 /* AddNewPlaceVC.swift in Sources */,
 				0C04A77D2AE94147002972CF /* HomeVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -602,47 +622,47 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0C04A7722AE92CBD002972CF /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.8.0;
-			};
-		};
-		0CF7420A2AD99BCE002B1389 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		00C8108D2AF0ED9F0077E800 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
+				minimumVersion = 5.6.0;
 			};
 		};
-		0CF7420D2AD99BEB002B1389 /* XCRemoteSwiftPackageReference "TinyConstraints" */ = {
+		00C810902AF0EDA70077E800 /* XCRemoteSwiftPackageReference "TinyConstraints" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/roberthein/TinyConstraints.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
+				minimumVersion = 4.0.2;
+			};
+		};
+		00C810932AF0EDAF0077E800 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0C04A7732AE92CBD002972CF /* Alamofire */ = {
+		00C8108E2AF0ED9F0077E800 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0C04A7722AE92CBD002972CF /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
-		};
-		0CF7420B2AD99BCE002B1389 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0CF7420A2AD99BCE002B1389 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = 00C8108D2AF0ED9F0077E800 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
-		0CF7420E2AD99BEB002B1389 /* TinyConstraints */ = {
+		00C810912AF0EDA70077E800 /* TinyConstraints */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0CF7420D2AD99BEB002B1389 /* XCRemoteSwiftPackageReference "TinyConstraints" */;
+			package = 00C810902AF0EDA70077E800 /* XCRemoteSwiftPackageReference "TinyConstraints" */;
 			productName = TinyConstraints;
+		};
+		00C810942AF0EDAF0077E800 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00C810932AF0EDAF0077E800 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
