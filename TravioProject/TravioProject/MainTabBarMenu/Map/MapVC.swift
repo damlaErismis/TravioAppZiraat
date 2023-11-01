@@ -17,9 +17,13 @@ protocol DataTransferDetailPlaceVCToMapVC:AnyObject{
 }
 
 class MapVC: UIViewController, DataTransferDetailPlaceVCToMapVC {
- 
-
+    
     //MARK: -- Properties
+    
+    lazy var vm: MapVM = {
+        
+        return MapVM()
+    }()
     
     private var places:[PlaceAnnotation] = []
     

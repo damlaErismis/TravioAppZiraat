@@ -13,6 +13,7 @@ enum Router{
     
     case signUp(params:Parameters)
     case login(params:Parameters)
+    case getAllPlacesForUser
     var baseURL:String{
         return "https://api.iosclass.live"
     }
@@ -22,17 +23,24 @@ enum Router{
             return "/v1/auth/register"
         case .login:
             return "/v1/auth/login"
+        case .getAllPlacesForUser:
+            return "/v1/places/user"
         }
     }
     var method:HTTPMethod {
         switch self {
         case .signUp, .login:
             return .post
+        case .getAllPlacesForUser:
+            return .get
         }}
     var header:HTTPHeaders{
         switch self {
         case .signUp, .login:
             return [:]
+        
+        case .getAllPlacesForUser:
+            return HTTPHeaders(["Authorization": "Bearer"])
         }}
     var param:Parameters? {
         switch self {
@@ -40,6 +48,8 @@ enum Router{
             return params
         case .login(let params):
             return params
+        case .getAllPlacesForUser:
+            return nil
         }}
 }
 

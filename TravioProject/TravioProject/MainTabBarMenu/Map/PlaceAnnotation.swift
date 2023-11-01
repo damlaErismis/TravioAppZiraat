@@ -8,17 +8,6 @@
 import Foundation
 import MapKit
 
-struct Place{
-    
-    var place:String
-    var title:String
-    var description:String
-    var cover_image_url:String
-    var latitude:Double
-    var longitude:Double
-
-}
-
 class PlaceAnnotation: MKPointAnnotation {
     
     let mapItem:MKMapItem
