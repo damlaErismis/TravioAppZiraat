@@ -11,6 +11,8 @@ import SnapKit
 
 class HomeVC: UIViewController {
     
+    var viewModel = HomeVM()
+    
     //MARK: -- Properties
     
     

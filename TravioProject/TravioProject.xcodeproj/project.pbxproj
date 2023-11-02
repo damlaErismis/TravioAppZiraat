@@ -20,6 +20,8 @@
 		00C810922AF0EDA70077E800 /* TinyConstraints in Frameworks */ = {isa = PBXBuildFile; productRef = 00C810912AF0EDA70077E800 /* TinyConstraints */; };
 		00C810952AF0EDAF0077E800 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 00C810942AF0EDAF0077E800 /* Alamofire */; };
 		00C8109D2AF169F50077E800 /* AddPlaceCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8109C2AF169F50077E800 /* AddPlaceCollectionCell.swift */; };
+		00C810AA2AF391730077E800 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810A92AF391730077E800 /* HomeModel.swift */; };
+		00C810AC2AF3B86F0077E800 /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810AB2AF3B86F0077E800 /* HomeVM.swift */; };
 		0C04A7712AE92CA5002972CF /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7702AE92CA5002972CF /* Router.swift */; };
 		0C04A7762AE933B1002972CF /* GenericNetworkingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */; };
 		0C04A7782AE938CF002972CF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7772AE938CF002972CF /* User.swift */; };
@@ -78,6 +80,8 @@
 		00C8107D2AF0D56B0077E800 /* PlaceAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAnnotation.swift; sourceTree = "<group>"; };
 		00C810812AF0EB8F0077E800 /* AddNewPlaceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPlaceVC.swift; sourceTree = "<group>"; };
 		00C8109C2AF169F50077E800 /* AddPlaceCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlaceCollectionCell.swift; sourceTree = "<group>"; };
+		00C810A92AF391730077E800 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		00C810AB2AF3B86F0077E800 /* HomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
 		0C04A7702AE92CA5002972CF /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericNetworkingHelper.swift; sourceTree = "<group>"; };
 		0C04A7772AE938CF002972CF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -232,6 +236,8 @@
 				0C04A77C2AE94147002972CF /* HomeVC.swift */,
 				0C04A7862AEA9FEE002972CF /* HomeTableCell.swift */,
 				0C04A78A2AEAB8EA002972CF /* HomeCollectionCell.swift */,
+				00C810A92AF391730077E800 /* HomeModel.swift */,
+				00C810AB2AF3B86F0077E800 /* HomeVM.swift */,
 			);
 			path = HomePage;
 			sourceTree = "<group>";
@@ -410,6 +416,8 @@
 				0C04A7812AEA4B5D002972CF /* LoginVM.swift in Sources */,
 				0C20B7C22ADC322900C71BF7 /* SignUpVC.swift in Sources */,
 				0CF742662ADB47B2002B1389 /* UILabelCC.swift in Sources */,
+				00C810AC2AF3B86F0077E800 /* HomeVM.swift in Sources */,
+				00C810AA2AF391730077E800 /* HomeModel.swift in Sources */,
 				0C2ECED62AF0D6AA0013F6C5 /* KeychainHelper.swift in Sources */,
 				0C2ECEEB2AF126240013F6C5 /* CLLocation+Extension.swift in Sources */,
 				0C2ECEE32AF1231B0013F6C5 /* PlaceAnnotation.swift in Sources */,
