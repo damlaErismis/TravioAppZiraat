@@ -14,6 +14,7 @@ import SwiftUI
 enum FontStatus {
 
     case poppinsRegular14
+    case poppinsRegular10
     case poppinsRegular16
     case poppinsRegular20
     case poppinsRegular24
@@ -21,6 +22,7 @@ enum FontStatus {
     case poppinsBold36
     case poppinsBold16
     case poppinsBold30
+    case poppinsMedium30
     
     var defineFont:UIFont? {
         switch self {
@@ -40,6 +42,10 @@ enum FontStatus {
             return UIFont(name: "Poppins-Bold", size: 16)
         case .poppinsBold30:
             return UIFont(name: "Poppins-Bold", size: 30)
+        case .poppinsMedium30:
+            return UIFont(name: "Poppins-Medium", size: 30)
+        case .poppinsRegular10:
+            return UIFont(name: "Poppins-Regular", size: 10)
         }
     
     }
