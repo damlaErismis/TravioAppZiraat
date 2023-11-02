@@ -14,7 +14,6 @@
 		00C810702AEBB7B70077E800 /* VisitsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106F2AEBB7B70077E800 /* VisitsVC.swift */; };
 		00C810722AEBB7DF0077E800 /* MainTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810712AEBB7DF0077E800 /* MainTabBar.swift */; };
 		00C810742AEBD5320077E800 /* VisitsCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810732AEBD5320077E800 /* VisitsCustomCell.swift */; };
-		00C8107E2AF0D56B0077E800 /* PlaceAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8107D2AF0D56B0077E800 /* PlaceAnnotation.swift */; };
 		00C810822AF0EB8F0077E800 /* AddNewPlaceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810812AF0EB8F0077E800 /* AddNewPlaceVC.swift */; };
 		00C8108F2AF0ED9F0077E800 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 00C8108E2AF0ED9F0077E800 /* SnapKit */; };
 		00C810922AF0EDA70077E800 /* TinyConstraints in Frameworks */ = {isa = PBXBuildFile; productRef = 00C810912AF0EDA70077E800 /* TinyConstraints */; };
@@ -77,7 +76,6 @@
 		00C8106F2AEBB7B70077E800 /* VisitsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsVC.swift; sourceTree = "<group>"; };
 		00C810712AEBB7DF0077E800 /* MainTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBar.swift; sourceTree = "<group>"; };
 		00C810732AEBD5320077E800 /* VisitsCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsCustomCell.swift; sourceTree = "<group>"; };
-		00C8107D2AF0D56B0077E800 /* PlaceAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAnnotation.swift; sourceTree = "<group>"; };
 		00C810812AF0EB8F0077E800 /* AddNewPlaceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPlaceVC.swift; sourceTree = "<group>"; };
 		00C8109C2AF169F50077E800 /* AddPlaceCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlaceCollectionCell.swift; sourceTree = "<group>"; };
 		00C810A92AF391730077E800 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
@@ -223,7 +221,6 @@
 		00C810782AF0D4EC0077E800 /* MapPages */ = {
 			isa = PBXGroup;
 			children = (
-				00C8107D2AF0D56B0077E800 /* PlaceAnnotation.swift */,
 				00C810812AF0EB8F0077E800 /* AddNewPlaceVC.swift */,
 				00C8109C2AF169F50077E800 /* AddPlaceCollectionCell.swift */,
 			);
@@ -427,7 +424,6 @@
 				00C8106E2AEBB7A90077E800 /* MenuVC.swift in Sources */,
 				0CF742622ADB3474002B1389 /* UIViewCC.swift in Sources */,
 				00C810702AEBB7B70077E800 /* VisitsVC.swift in Sources */,
-				00C8107E2AF0D56B0077E800 /* PlaceAnnotation.swift in Sources */,
 				00C810742AEBD5320077E800 /* VisitsCustomCell.swift in Sources */,
 				00C810722AEBB7DF0077E800 /* MainTabBar.swift in Sources */,
 				0C04A7712AE92CA5002972CF /* Router.swift in Sources */,

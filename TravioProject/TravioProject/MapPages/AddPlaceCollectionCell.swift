@@ -32,7 +32,7 @@ class AddPlaceCollectionCell: UICollectionViewCell {
         self.contentView.addSubviews(imgNewPlace)
 //        self.layer.masksToBounds = false
 //        self.addShadow(shadowColor: .black, offsetX: 0, offsetY: 0, shadowOpacity: 0.2, shadowRadius: 10)
-//        setupLayout()
+        setupLayout()
     }
     func setupLayout(){
         
