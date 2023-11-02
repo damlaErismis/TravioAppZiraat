@@ -14,7 +14,7 @@ class PopularPlacesCell: UITableViewCell {
     private lazy var imgPlace:UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
-         
+        iv.clipsToBounds = true
         return iv
     }()
     
@@ -38,18 +38,24 @@ class PopularPlacesCell: UITableViewCell {
     
     private lazy var containerView:UIView = {
         let container = UIView()
+        container.layer.masksToBounds = false
+        container.layer.cornerRadius = 20
+       
+        container.layer.shadowColor = UIColor.black.cgColor
+        container.layer.shadowOffset = CGSize(width: 0, height: 0)
+        container.layer.shadowOpacity = 0.3
+        container.layer.shadowRadius = 8
         container.backgroundColor = .white
         return container
     }()
     
     override func layoutSubviews() {
-        super.layoutSubviews()
-        self.contentView.layer.cornerRadius = 20
-        self.containerView.layer.cornerRadius = 20
-        //self.containerView.layer.masksToBounds = true
-        self.containerView.addShadow(shadowColor: .black, offsetX: 0, offsetY: 0, shadowOpacity: 0.2, shadowRadius: 6)
         
-       
+        imgPlace.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner]
+        
+        //self.containerView.layer.cornerRadius = 20
+        //self.containerView.layer.masksToBounds = true
+        
     }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -62,9 +68,11 @@ class PopularPlacesCell: UITableViewCell {
         labelCountry.text = object.labelCountry
     }
     private func setupViews() {
+        
         self.backgroundColor = .clear
         self.contentView.addSubview(containerView)
         self.contentView.backgroundColor = .clear
+       
         containerView.addSubviews(imgPlace, labelPlace,imgPin,labelCountry)
         setupLayout()
     }
@@ -81,7 +89,7 @@ class PopularPlacesCell: UITableViewCell {
             image.leading.equalToSuperview()
             image.top.equalToSuperview()
             image.bottom.equalToSuperview()
-            image.width.equalTo(60)
+            image.width.equalTo(40)
         })
         
         labelPlace.snp.makeConstraints({ label in
