@@ -27,5 +27,9 @@
 		<string>Poppins-Italic.ttf</string>
 		<string>Poppins-LightItalic.ttf</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Near me requires location so it can offer nearby points of interests.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Near me requires location so it can offer nearby points of interests.</string>
 </dict>
 </plist>
