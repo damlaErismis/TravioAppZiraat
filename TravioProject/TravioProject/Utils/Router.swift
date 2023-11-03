@@ -13,9 +13,13 @@ enum Router{
     
     case signUp(params:Parameters)
     case login(params:Parameters)
-    case getAllPlacesForUser
+    case getAllPlaces
     var baseURL:String{
         return "https://api.iosclass.live"
+    }
+    var token:String {
+        let token = KeychainHelper.shared.getToken()
+        return token
     }
     var path:String{
         switch self {
@@ -23,24 +27,24 @@ enum Router{
             return "/v1/auth/register"
         case .login:
             return "/v1/auth/login"
-        case .getAllPlacesForUser:
-            return "/v1/places/user"
+        case .getAllPlaces:
+            return "/v1/places"
         }
     }
     var method:HTTPMethod {
         switch self {
         case .signUp, .login:
             return .post
-        case .getAllPlacesForUser:
+        case .getAllPlaces:
             return .get
         }}
-    var header:HTTPHeaders{
+    var headers:HTTPHeaders{
         switch self {
-        case .signUp, .login:
+        case .signUp, .login, .getAllPlaces:
             return [:]
         
-        case .getAllPlacesForUser:
-            return HTTPHeaders(["Authorization": "Bearer"])
+//        case .getAllPlaces:
+//            return HTTPHeaders(["Authorization": "Bearer \(token)"])
         }}
     var param:Parameters? {
         switch self {
@@ -48,7 +52,7 @@ enum Router{
             return params
         case .login(let params):
             return params
-        case .getAllPlacesForUser:
+        case .getAllPlaces:
             return nil
         }}
 }
@@ -59,7 +63,7 @@ extension Router:URLRequestConvertible{
         let url = try baseURL.asURL()
         var urlComponent = URLRequest(url: url.appendingPathComponent(path))
         urlComponent.httpMethod = method.rawValue
-        urlComponent.headers = header
+        urlComponent.headers = headers
         let encoding:ParameterEncoding = {
             switch method {
             case .post:

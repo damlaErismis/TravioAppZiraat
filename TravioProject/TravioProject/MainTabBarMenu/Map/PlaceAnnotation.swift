@@ -10,12 +10,20 @@ import MapKit
 
 class PlaceAnnotation: MKPointAnnotation {
     
-    let mapItem:MKMapItem
+    var mapItem:MKMapItem
     let id = UUID()
     var isSelected:Bool = false
     var isSaved:Bool = false
     var visitDescription:String?
     var titlePlace:String?
+    var image:String?
+    var addedBy:String?
+    var addedDate:String?
+    
+
+    init(mapItem: MKMapItem) {
+        self.mapItem = mapItem
+    }
     
     init(mapItem: MKMapItem, isSelected: Bool) {
         self.mapItem = mapItem
@@ -40,4 +48,5 @@ class PlaceAnnotation: MKPointAnnotation {
     var place:String{
         "\(mapItem.placemark.locality ?? "") \(mapItem.placemark.country ?? "")"
     }
+
 }

@@ -15,16 +15,14 @@ class MapImageCollectionCell:UICollectionViewCell{
         img.clipsToBounds = true
         return img
     }()
-    private lazy var labelPlace:UILabelCC = {
+    lazy var labelPlace:UILabelCC = {
         let lbl = UILabelCC()
-        lbl.text = "Colleseum"
         lbl.textColor = .white
             lbl.addFont = .poppinsRegular24
         return lbl
     }()
-    private lazy var labelCity:UILabelCC = {
+    lazy var labelCity:UILabelCC = {
         let lbl = UILabelCC()
-        lbl.text = "Rome"
             lbl.addFont = .poppinsRegular14
         lbl.textColor = .white
         return lbl

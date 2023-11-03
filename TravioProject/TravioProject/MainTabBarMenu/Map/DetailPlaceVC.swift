@@ -6,10 +6,10 @@
 //  Created by Burak Özer on 30.10.2023.
 //
 //
+
 import UIKit
 import SnapKit
 import CoreLocation
-
 class DetailPlaceVC: UIViewController {
 
     //MARK: -- Properties

@@ -11,14 +11,15 @@ import Alamofire
 
 class MapVM {
     
-    var getAllPlacesForUser:[Place]? {
-        
+ 
+    
+    var getData:PlaceResponse? {
         didSet{
-//            self.makeContactsDataManipulation()
+            
         }
     }
     
-
+    
     var isLoading: Bool = false {
         didSet {
             
@@ -26,31 +27,33 @@ class MapVM {
         }
     }
     
-//    var reloadTableViewClosure: (()->())?
+    var places:[Place] = [] {
+        didSet{
+            
+        }
+    }
+    
+    
+    func getPlacesData(){
+        guard let places = getData?.data.places else{
+            return
+        }
+        self.places = places
+    }
+    
+    
+    var reloadCollectionViewClosure: (()->())?
 //    
 //    var updateLoadingStatus: (()->())?
-
-    func getToken()->String{
-        
-        let service = "com.travio"
-        let account = "travio"
-        guard let storedTokenData = KeychainHelper.shared.read(service: service, account: account),
-              let storedToken = String(data: storedTokenData, encoding: .utf8) else{
-            return "Token okunamadı veya bulunamadı."
-        }
-        return storedToken
-    }
-
+    
     
     func initFetch(){
-        
-        let token = getToken()
-        let headers:HTTPHeaders = ["Authorization": "Bearer \(token)"]
-        
-        GenericNetworkingHelper.shared.getDataFromRemoteWithHeader(urlRequest: .getAllPlacesForUser, headers: headers, callback: {(result: Result<[Place],APIError>) in
+
+        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getAllPlaces, callback: {(result: Result<PlaceResponse,APIError>) in
             switch result {
             case .success(let success):
-                self.getAllPlacesForUser = success
+                self.getData = success
+                self.getPlacesData()
             case .failure(let failure):
                 print(failure.message)
             }
