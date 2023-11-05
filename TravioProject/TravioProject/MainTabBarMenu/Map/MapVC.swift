@@ -205,10 +205,9 @@ func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
                 let temp = self.vm.places[0]
                 self.vm.places[0] = self.vm.places[placeIndex]
                 self.vm.places[placeIndex]  = temp
-                reloadCollectionView()
             }
         })
- 
+        reloadCollectionView()
         
         var selectedItemIndex = vm.getData?.data.places.filter({place in
            place.title == selectedAnnotation.titlePlace

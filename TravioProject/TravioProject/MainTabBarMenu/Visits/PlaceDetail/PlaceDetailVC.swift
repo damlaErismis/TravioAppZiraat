@@ -78,6 +78,7 @@ class PlaceDetailVC: UIViewController {
     }
     
     @objc func imageBackTapped(tapGestureRecognizer: UITapGestureRecognizer){
+        let tappedImage = tapGestureRecognizer.view as! UIImageView
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -97,12 +98,12 @@ class PlaceDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let storedVisitedPlaceIDs = UserDefaults.standard.array(forKey: "savedVisitedPlaceIDs") as? [String] else{
-            return
-        }
-        if storedVisitedPlaceIDs.contains(selectedID){
-            imageFavorite.image = UIImage(named: "fullyFavorite")
-        }
+//        guard let storedVisitedPlaceIDs = UserDefaults.standard.array(forKey: "savedVisitedPlaceIDs") as? [String] else{
+//            return
+//        }
+//        if storedVisitedPlaceIDs.contains(selectedID){
+//            imageFavorite.image = UIImage(named: "fullyFavorite")
+//        }
         
         initView()
         
@@ -113,6 +114,7 @@ class PlaceDetailVC: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         setupViews()
     }
+    
     func initVM(){
         vm.initFetchImages()
         vm.initFetchLayersAndMap()
@@ -126,6 +128,7 @@ class PlaceDetailVC: UIViewController {
                 self?.collectionBottomView.reloadData()
             }
         }
+        
         vm.reloadPageControlPages = { [weak self] () in
             DispatchQueue.main.async {
                 let numberOfPages = self?.vm.galleryData?.data.images.count ?? 0
@@ -172,6 +175,7 @@ class PlaceDetailVC: UIViewController {
             cv.trailing.equalToSuperview()
             cv.bottom.equalToSuperview()
         })
+        
     }
 }
 extension PlaceDetailVC: UICollectionViewDelegateFlowLayout {
