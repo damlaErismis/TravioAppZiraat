@@ -19,12 +19,12 @@ class PlaceAnnotation: MKPointAnnotation {
     var image:String?
     var addedBy:String?
     var addedDate:String?
+    var customImage: UIImage?
     
 
     init(mapItem: MKMapItem) {
         self.mapItem = mapItem
     }
-    
     init(mapItem: MKMapItem, isSelected: Bool) {
         self.mapItem = mapItem
         self.isSelected = isSelected

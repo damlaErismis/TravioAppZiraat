@@ -31,3 +31,14 @@ struct PlaceData: Codable {
 }
 
 
+
+struct PlaceIdData: Codable {
+    let data: PlaceIdResponse
+    let status: String
+}
+
+struct PlaceIdResponse: Codable {
+    let place: Place
+}
+
+

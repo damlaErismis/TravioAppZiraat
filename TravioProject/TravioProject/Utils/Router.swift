@@ -8,12 +8,16 @@
 import Foundation
 import Alamofire
 
-
 enum Router{
     
     case signUp(params:Parameters)
     case login(params:Parameters)
     case getAllPlaces
+    case getAllGalleryByPlaceID(placeId:String)
+    case getAPlaceById(placeId:String)
+    case postAVisit(params:Parameters)
+    case deleteAVisit(placeId:String)
+    
     var baseURL:String{
         return "https://api.iosclass.live"
     }
@@ -29,22 +33,31 @@ enum Router{
             return "/v1/auth/login"
         case .getAllPlaces:
             return "/v1/places"
+        case .getAllGalleryByPlaceID(let placeId):
+            return "/v1/galleries/\(placeId)"
+        case .getAPlaceById(let placeId):
+            return "/v1/places/\(placeId)"
+        case .postAVisit:
+            return "/v1/visits"
+        case .deleteAVisit(let placeId):
+            return "/v1/visits/\(placeId)"
         }
     }
     var method:HTTPMethod {
         switch self {
-        case .signUp, .login:
+        case .signUp, .login, .postAVisit:
             return .post
-        case .getAllPlaces:
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById:
             return .get
+        case .deleteAVisit:
+            return .delete
         }}
     var headers:HTTPHeaders{
         switch self {
-        case .signUp, .login, .getAllPlaces:
+        case .signUp, .login, .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById:
             return [:]
-        
-//        case .getAllPlaces:
-//            return HTTPHeaders(["Authorization": "Bearer \(token)"])
+        case .postAVisit, .deleteAVisit:
+            return HTTPHeaders(["Authorization": "Bearer \(token)"])
         }}
     var param:Parameters? {
         switch self {
@@ -52,8 +65,10 @@ enum Router{
             return params
         case .login(let params):
             return params
-        case .getAllPlaces:
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit:
             return nil
+        case .postAVisit(let params):
+            return params
         }}
 }
 
