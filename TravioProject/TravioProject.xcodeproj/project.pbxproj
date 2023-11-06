@@ -53,7 +53,7 @@
 		0C988ED62AF37EAC0090E85A /* Visit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988ED52AF37EAC0090E85A /* Visit.swift */; };
 		0C988EE22AF51EAD0090E85A /* PlaceDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988EE12AF51EAD0090E85A /* PlaceDetailVM.swift */; };
 		0C988EE42AF527F80090E85A /* PlaceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988EE32AF527F80090E85A /* PlaceDetail.swift */; };
-		0C988EE62AF679B30090E85A /* PostDeleteVisitResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988EE52AF679B30090E85A /* PostDeleteVisitResponse.swift */; };
+		0C988EE62AF679B30090E85A /* PostDeleteVisitCheckResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988EE52AF679B30090E85A /* PostDeleteVisitCheckResponse.swift */; };
 		0CF741F52AD99AC7002B1389 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF741F42AD99AC7002B1389 /* AppDelegate.swift */; };
 		0CF741F72AD99AC7002B1389 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF741F62AD99AC7002B1389 /* SceneDelegate.swift */; };
 		0CF741FE2AD99AC9002B1389 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CF741FD2AD99AC9002B1389 /* Assets.xcassets */; };
@@ -126,7 +126,7 @@
 		0C988ED52AF37EAC0090E85A /* Visit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visit.swift; sourceTree = "<group>"; };
 		0C988EE12AF51EAD0090E85A /* PlaceDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailVM.swift; sourceTree = "<group>"; };
 		0C988EE32AF527F80090E85A /* PlaceDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetail.swift; sourceTree = "<group>"; };
-		0C988EE52AF679B30090E85A /* PostDeleteVisitResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDeleteVisitResponse.swift; sourceTree = "<group>"; };
+		0C988EE52AF679B30090E85A /* PostDeleteVisitCheckResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDeleteVisitCheckResponse.swift; sourceTree = "<group>"; };
 		0CF741F12AD99AC7002B1389 /* TravioProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravioProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CF741F42AD99AC7002B1389 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0CF741F62AD99AC7002B1389 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -294,7 +294,7 @@
 				0C988ECD2AF2C0EC0090E85A /* CompositionalLayoutCell.swift */,
 				0C988EE12AF51EAD0090E85A /* PlaceDetailVM.swift */,
 				0C988EE32AF527F80090E85A /* PlaceDetail.swift */,
-				0C988EE52AF679B30090E85A /* PostDeleteVisitResponse.swift */,
+				0C988EE52AF679B30090E85A /* PostDeleteVisitCheckResponse.swift */,
 				0C499D0E2AF6E9A400A7C916 /* PlaceDetailCellInfo.swift */,
 			);
 			path = PlaceDetail;
@@ -505,7 +505,7 @@
 				0C499D0D2AF6DD5F00A7C916 /* ApiErrorStatus.swift in Sources */,
 				0CF742112AD99FE8002B1389 /* Extentions.swift in Sources */,
 				0C04A7852AEA817B002972CF /* LoginSuccessResponse.swift in Sources */,
-				0C988EE62AF679B30090E85A /* PostDeleteVisitResponse.swift in Sources */,
+				0C988EE62AF679B30090E85A /* PostDeleteVisitCheckResponse.swift in Sources */,
 				0C04A78B2AEAB8EA002972CF /* HomeCollectionCell.swift in Sources */,
 				0C988EB02AF14EB80090E85A /* MapVM.swift in Sources */,
 				0C499D0F2AF6E9A400A7C916 /* PlaceDetailCellInfo.swift in Sources */,

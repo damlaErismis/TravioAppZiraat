@@ -21,9 +21,10 @@ enum Router{
     case getAPlaceById(placeId:String)
     case postAVisit(params:Parameters)
     case deleteAVisit(placeId:String)
+    case checkVisitByPlaceId(placeId:String)
     
     var baseURL:String{
-        return "https://api.iosclass.live"
+        return "https://ios-class-2f9672c5c549.herokuapp.com"
     }
     var token:String {
         let token = KeychainHelper.shared.getToken()
@@ -49,8 +50,9 @@ enum Router{
             return "/v1/places/\(placeId)"
         case .postAVisit:
             return "/v1/visits"
-        case .deleteAVisit(let placeId):
+        case .deleteAVisit(let placeId), .checkVisitByPlaceId(let placeId) :
             return "/v1/visits/\(placeId)"
+       
         }
     }
     var method:HTTPMethod {
@@ -59,7 +61,7 @@ enum Router{
             return .post
         case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces:
             return .get
-        case .deleteAVisit:
+        case .deleteAVisit, .checkVisitByPlaceId:
             return .delete
         
         }}
@@ -67,7 +69,7 @@ enum Router{
         switch self {
         case .signUp, .login, .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getPopularPlaces, .getLastPlaces, .getAllPlacesForUser:
             return [:]
-        case .postAVisit, .deleteAVisit:
+        case .postAVisit, .deleteAVisit, .checkVisitByPlaceId:
             return HTTPHeaders(["Authorization": "Bearer \(token)"])
 
         }}
@@ -77,7 +79,7 @@ enum Router{
             return params
         case .login(let params):
             return params
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser:
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .checkVisitByPlaceId:
             return nil
         case .getPopularPlaces(limit: let limit), .getLastPlaces(limit: let limit):
             let limited = min(limit, 20)
