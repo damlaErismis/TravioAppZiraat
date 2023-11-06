@@ -48,6 +48,7 @@ class VisitsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
         setupViews()
     }
     
