@@ -18,8 +18,7 @@ class MapVM {
             
         }
     }
-    
-    
+
     var isLoading: Bool = false {
         didSet {
             
@@ -32,8 +31,6 @@ class MapVM {
             
         }
     }
-    
-    
     func getPlacesData(){
         guard let places = getData?.data.places else{
             return

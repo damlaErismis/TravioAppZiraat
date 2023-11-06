@@ -13,11 +13,9 @@ import SnapKit
 import MapKit
 import Kingfisher
 
-protocol DataTransferDetailPlaceVCToMapVC:AnyObject{
-    func getAnnotationInfo(isSaved:Bool, titlePlace:String, description:String)
-}
 
-class MapVC: UIViewController, DataTransferDetailPlaceVCToMapVC {
+
+class MapVC: UIViewController{
     
     //MARK: -- Properties
     
@@ -25,8 +23,6 @@ class MapVC: UIViewController, DataTransferDetailPlaceVCToMapVC {
         
         return MapVM()
     }()
-    
-    private var places:[PlaceAnnotation] = []
     
     private var place:PlaceAnnotation?
  
@@ -60,7 +56,7 @@ class MapVC: UIViewController, DataTransferDetailPlaceVCToMapVC {
     //MARK: -- Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-  
+        
         locationManager = CLLocationManager()
         locationManager?.delegate = self
         locationManager?.requestWhenInUseAuthorization()
@@ -93,7 +89,6 @@ class MapVC: UIViewController, DataTransferDetailPlaceVCToMapVC {
         vm.getData?.data.places.forEach({ place in
             let latitude = place.latitude
             let longitude = place.longitude
-            
             let placeTitle = place.title
  
             let mapItem = MKMapItem()
@@ -132,7 +127,6 @@ class MapVC: UIViewController, DataTransferDetailPlaceVCToMapVC {
             place!.coordinate = coordinate
             mapView.addAnnotation(place!)
             let placesTVC = DetailPlaceVC()
-            placesTVC.delegate = self
             placesTVC.modalPresentationStyle = .pageSheet
             if let sheet = placesTVC.sheetPresentationController{
                 sheet.prefersGrabberVisible = true
@@ -146,23 +140,13 @@ class MapVC: UIViewController, DataTransferDetailPlaceVCToMapVC {
         
         addPins()
         reloadCollectionView()
-        
 //        let allAnnotations = mapView.annotations
 //        mapView.removeAnnotations(allAnnotations)
     }
 
-    func getAnnotationInfo(isSaved: Bool, titlePlace: String, description: String) {
-        
-        self.place?.isSaved = isSaved
-        self.place?.titlePlace = titlePlace
-        self.place?.visitDescription = description
-        places.append(place!)
-    }
-    
-
-
     //MARK: -- Private Methods
     private func checkLocationAuthorization(){
+        
         guard let locationManager = locationManager,
               let location = locationManager.location else{
             return
@@ -185,6 +169,7 @@ class MapVC: UIViewController, DataTransferDetailPlaceVCToMapVC {
         self.view.addSubviews(mapView, collectionView)
         setupLayout()
     }
+    
     func setupLayout() {
         // Add here the setup for layout
         mapView.snp.makeConstraints({mv in
@@ -210,41 +195,25 @@ func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
     }
     
     func mapView(_ mapView: MKMapView, didSelect annotation: MKAnnotation) {
+        
         guard let selectedAnnotation = annotation as? PlaceAnnotation else {return}
         
-//        guard let firstItem = vm.getData?.data.places.first else {
-//            return
-//        }
-        guard let places = vm.getData?.data.places else{
-
-            return
-        }
+        let places = vm.places
         places.enumerated().forEach({ placeIndex, place in
-         
             if place.latitude == selectedAnnotation.coordinate.latitude && place.longitude == selectedAnnotation.coordinate.longitude {
-                if placeIndex < places.count, placeIndex > 0 {
-                    let temp = self.vm.places[0]
-                    self.vm.places[0] = self.vm.places[placeIndex]
-                    self.vm.places[placeIndex]  = temp
-                }
+                
+                let temp = self.vm.places[0]
+                self.vm.places[0] = self.vm.places[placeIndex]
+                self.vm.places[placeIndex]  = temp
             }
         })
-
+        reloadCollectionView()
+        
         var selectedItemIndex = vm.getData?.data.places.filter({place in
- 
            place.title == selectedAnnotation.titlePlace
         })
-        reloadCollectionView()
-    
-//    let vc = PlaceDetailPageVC()
-//    vc.placeInfo?.mapItem = selectedAnnotation.mapItem
-//    vc.placeInfo?.visitDescription = selectedAnnotation.visitDescription
-//    vc.placeInfo?.titlePlace = selectedAnnotation.titlePlace
-//    vc.placeInfo?.addedBy = selectedAnnotation.addedBy
-//    vc.placeInfo?.addedDate = selectedAnnotation.addedDate
-//    self.navigationController?.pushViewController(vc, animated: true)
-    
-    
+
+
     }
 func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
@@ -264,7 +233,7 @@ func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnota
 
             let detailLabel = UILabel()
             detailLabel.numberOfLines = 0
-            detailLabel.text = "\(annotation.title ?? "")\n\(annotation.subtitle ?? "")"
+            detailLabel.text = "\(annotation.title ?? "")"
             annotationView.detailCalloutAccessoryView = detailLabel
         }
         return annotationView
@@ -274,7 +243,6 @@ func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnota
 extension MapVC: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print(locations)
         checkLocationAuthorization()
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -287,16 +255,11 @@ extension MapVC: CLLocationManagerDelegate {
 extension MapVC:UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-//            let vc = PlaceDetailPageVC()
-//        
-//            vc.placeInfo?.mapItem = selectedAnnotation.mapItem
-//            vc.placeInfo?.visitDescription = selectedAnnotation.visitDescription
-//            vc.placeInfo?.titlePlace = selectedAnnotation.titlePlace
-//            vc.placeInfo?.addedBy = selectedAnnotation.addedBy
-//            vc.placeInfo?.addedDate = selectedAnnotation.addedDate
-//        
-//            self.navigationController?.pushViewController(vc, animated: true)
+        
+        let selectedID = vm.places[indexPath.row].id
+        let vc = PlaceDetailVC()
+        vc.selectedID = selectedID
+        self.navigationController?.pushViewController(vc, animated: true)
 
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -310,6 +273,7 @@ extension MapVC:UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCellMap", for: indexPath) as! MapImageCollectionCell
+        
         
        let url = vm.places[indexPath.row].cover_image_url
         cell.imagePlace.kf.setImage(with: url)

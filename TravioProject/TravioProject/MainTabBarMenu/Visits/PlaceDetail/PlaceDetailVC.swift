@@ -8,14 +8,17 @@
 //
 import UIKit
 import SnapKit
+import Kingfisher
 
-class PlaceDetailPageVC: UIViewController {
+class PlaceDetailVC: UIViewController {
     
-
-    var placeInfo:PlaceAnnotation?
+    var selectedID:String = ""
     
-    private lazy var collectionTopView:UICollectionView = {
+    lazy var vm: PlaceDetailVM = {
         
+        return PlaceDetailVM(selectedID: selectedID)
+    }()
+    private lazy var collectionTopView:UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createCompositionalLayout())
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = true
@@ -25,15 +28,12 @@ class PlaceDetailPageVC: UIViewController {
         collectionView.delegate = self
         return collectionView
     }()
-    
     private lazy var pageControl:UIPageControl = {
-      let pageControl = UIPageControl()
-        pageControl.numberOfPages = 3
+        let pageControl = UIPageControl()
         pageControl.currentPage = 0
         pageControl.addTarget(self, action: #selector(pageControlDidChange(_:)), for: .valueChanged)
         return pageControl
     }()
-
     lazy var collectionBottomView:UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -51,44 +51,97 @@ class PlaceDetailPageVC: UIViewController {
         let img = UIImageView()
         img.image = UIImage(named: "backLogo")
         img.contentMode = .scaleToFill
-        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageBackTapped(tapGestureRecognizer:)))
-         img.isUserInteractionEnabled = true
-         img.addGestureRecognizer(tapGestureRecognizer)
+        img.isUserInteractionEnabled = true
+        img.addGestureRecognizer(tapGestureRecognizer)
         return img
     }()
     
-    @objc func imageBackTapped(tapGestureRecognizer: UITapGestureRecognizer)
-    {
-        let tappedImage = tapGestureRecognizer.view as! UIImageView
-        self.navigationController?.popViewController(animated: true)
-
-        
-    }
     private lazy var imageFavorite:UIImageView = {
         let img = UIImageView()
         img.image = UIImage(named: "emptyFavorite")
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleAddVisit))
+        img.addGestureRecognizer(tap)
+        img.isUserInteractionEnabled = true
         return img
     }()
+    
+    @objc func handleAddVisit(){
+        vm.showAlertClosure = { [weak self] () in
+            DispatchQueue.main.async {
+                if let message = self?.vm.successMessage {
+                    self?.showAlert(title: "", message: message)
+                    self?.imageFavorite.image = UIImage(named: "fullyFavorite")
+                }
+            }
+        }
+    }
+    
+    @objc func imageBackTapped(tapGestureRecognizer: UITapGestureRecognizer){
+        let tappedImage = tapGestureRecognizer.view as! UIImageView
+        self.navigationController?.popViewController(animated: true)
+    }
     
     @objc func pageControlDidChange(_ sender: UIPageControl) {
         let currentPage = sender.currentPage
         let indexPath = IndexPath(item: currentPage, section: 0)
         collectionTopView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
-
+    
+    private func showAlert(title:String, message:String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     //MARK: -- Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
-        navigationController?.navigationBar.isHidden = true
+        
+//        guard let storedVisitedPlaceIDs = UserDefaults.standard.array(forKey: "savedVisitedPlaceIDs") as? [String] else{
+//            return
+//        }
+//        if storedVisitedPlaceIDs.contains(selectedID){
+//            imageFavorite.image = UIImage(named: "fullyFavorite")
+//        }
+        
+        initView()
+        
+        initVM()
     }
+    
+    func initView(){
+        self.navigationController?.navigationBar.isHidden = true
+        setupViews()
+    }
+    
+    func initVM(){
+        vm.initFetchImages()
+        vm.initFetchLayersAndMap()
+        vm.reloadCompositionalLayoutClosure = { [weak self] () in
+            DispatchQueue.main.async {
+                self?.collectionTopView.reloadData()
+            }
+        }
+        vm.reloadClosure = { [weak self] () in
+            DispatchQueue.main.async {
+                self?.collectionBottomView.reloadData()
+            }
+        }
+        
+        vm.reloadPageControlPages = { [weak self] () in
+            DispatchQueue.main.async {
+                let numberOfPages = self?.vm.galleryData?.data.images.count ?? 0
+                self?.pageControl.numberOfPages = numberOfPages
+            }
+        }
+    }
+    
     //MARK: -- UI Methods
     func setupViews() {
         // Add here the setup for the UI
         self.view.backgroundColor = .white
         self.view.addSubviews(collectionBottomView, collectionTopView, imageBack, imageFavorite, pageControl)
-    
         setupLayout()
     }
     func setupLayout() {
@@ -122,12 +175,10 @@ class PlaceDetailPageVC: UIViewController {
             cv.trailing.equalToSuperview()
             cv.bottom.equalToSuperview()
         })
-
+        
     }
 }
-
-extension PlaceDetailPageVC: UICollectionViewDelegateFlowLayout {
-    
+extension PlaceDetailVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == collectionBottomView {
             return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
@@ -138,43 +189,55 @@ extension PlaceDetailPageVC: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension PlaceDetailPageVC: UICollectionViewDataSource {
+extension PlaceDetailVC: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            if collectionView == collectionBottomView {
-                return 1
-            }
-            else{
-                return 3
-            }
+        let numberOfImages = vm.galleryData?.data.images.count ?? 0
+        if collectionView == collectionBottomView {
+            return 1
+        }
+        else{
+            return numberOfImages
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if collectionView == collectionTopView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompositionalLayoutCell.identifier, for: indexPath) as! CompositionalLayoutCell
+            let visibleCells = collectionView.visibleCells
+            pageControl.currentPage = indexPath.item
+        }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == collectionTopView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompositionalLayoutCell.identifier, for: indexPath) as! CompositionalLayoutCell
-            
-            
-            cell.imagePlace.image = UIImage(named: "suleymaniyeMosque")
-            
-            pageControl.currentPage = indexPath.row
-            
+            if let imageUrlString = vm.galleryData?.data.images[indexPath.row].image_url,
+               let imageUrl = URL(string: imageUrlString) {
+                cell.imagePlace.kf.setImage(with: imageUrl)
+            }
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCellBottom", for: indexPath) as! DetailPlaceCollectionCell
+            let placeDetailData = vm.place
+            var placeDetailInfo = PlaceDetailCellInfo()
+            placeDetailInfo.labelAddedByText = placeDetailData?.creator
+            placeDetailInfo.labelCityText = placeDetailData?.place
+            placeDetailInfo.labelDateText = placeDetailData?.updated_at
+            placeDetailInfo.labelDescriptionText = placeDetailData?.description
+            placeDetailInfo.latitude = placeDetailData?.latitude
+            placeDetailInfo.longitude = placeDetailData?.longitude
+            cell.getDetailPlaceCollectionCellData(data: placeDetailInfo)
             return cell
         }
     }
 }
-
-extension PlaceDetailPageVC {
+extension PlaceDetailVC {
     func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
-        
         return UICollectionViewCompositionalLayout { (sectionNumber, env) -> NSCollectionLayoutSection? in
-
-                    return PlaceDetailLayout.shared.makePlacesLayout()
+            return PlaceDetailLayout.shared.makePlacesLayout()
         }
     }
 }

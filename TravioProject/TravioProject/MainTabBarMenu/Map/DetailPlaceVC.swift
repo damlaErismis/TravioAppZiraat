@@ -13,7 +13,6 @@ import CoreLocation
 class DetailPlaceVC: UIViewController {
 
     //MARK: -- Properties
-    weak var delegate:DataTransferDetailPlaceVCToMapVC?
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -34,14 +33,10 @@ class DetailPlaceVC: UIViewController {
             b.setTitle("Kaydet", for: .normal)
             b.setTitleColor(.black, for: .normal)
             b.backgroundColor = .systemBlue
-            b.addTarget(self, action: #selector(btnSaveTapped), for: .touchUpInside)
             b.tintColor = .white
             return b
         }()
 
-         @objc func btnSaveTapped(){
-             delegate?.getAnnotationInfo(isSaved: true, titlePlace: "Title Place", description: "Description   ddvdvdv")
-         }
 
     //MARK: -- Life Cycles
     override func viewDidLoad() {
@@ -85,9 +80,7 @@ class DetailPlaceVC: UIViewController {
             btn.height.equalTo(50)
             btn.width.equalTo(300)
         })
-        
-        
-       
+
     }
   
 }

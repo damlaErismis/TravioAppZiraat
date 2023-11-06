@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 import MapKit
-class DetailPlaceCollectionCell: UICollectionViewCell {
+class DetailPlaceCollectionCell: UICollectionViewCell,MKMapViewDelegate {
     
     
     private lazy var viewBottom: UIView = {
@@ -24,25 +24,23 @@ class DetailPlaceCollectionCell: UICollectionViewCell {
         map.showsUserLocation = true
         map.clipsToBounds = true
         map.layer.cornerRadius = 16
+        map.delegate = self
         return map
     }()
     private lazy var labelCity:UILabelCC = {
         let lbl = UILabelCC()
-        lbl.text = "İstanbul"
         lbl.addFont = .poppinsMedium30
         return lbl
         
     }()
     private lazy var labelDate:UILabelCC = {
         let lbl = UILabelCC()
-        lbl.text = "22-12-2023"
         lbl.addFont = .poppinsRegular14
         return lbl
         
     }()
     private lazy var labelAddedBy:UILabelCC = {
         let lbl = UILabelCC()
-        lbl.text = "added by @burakozer"
         lbl.textColor = UIColor(hexString: "#999999")
         lbl.addFont = .poppinsRegular10
         return lbl
@@ -53,20 +51,53 @@ class DetailPlaceCollectionCell: UICollectionViewCell {
         lbl.numberOfLines = 0
         lbl.lineBreakMode = NSLineBreakMode.byWordWrapping
         lbl.textAlignment = .left
-        lbl.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-        
-      lbl.addFont = .poppinsRegular14
+        lbl.addFont = .poppinsRegular14
         return lbl
-        
     }()
 
-//    public func getDetailPlaceCollectionCellData(labelCityText:String, labelDateText:String, labelAddedByText:String, labelDescriptionText:String){
-////        self.mapView = mapView
-//        self.labelCity.text = labelCityText
-//        self.labelDate.text = labelDateText
-//        self.labelAddedBy.text = labelAddedByText
-//        self.labelDescription.text = labelDescriptionText
-//    }
+    public func getDetailPlaceCollectionCellData(data: PlaceDetailCellInfo){
+
+        let latitude: CLLocationDegrees = data.latitude ?? 0
+        let longitude: CLLocationDegrees = data.longitude ?? 0
+        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+        let locationCoordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        let mapItem = MKMapItem()
+        let annotation = PlaceAnnotation(mapItem: mapItem)
+        annotation.coordinate = locationCoordinate
+//        annotation.customImage = UIImage(named: "mapPin")
+        mapView.addAnnotation(annotation)
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), span: span)
+        mapView.setRegion(region, animated: true)
+        self.labelCity.text = data.labelCityText
+        self.labelDate.text = data.labelDateText
+        self.labelAddedBy.text = data.labelAddedByText
+        self.labelDescription.text = data.labelDescriptionText
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        guard let annotation = annotation as? PlaceAnnotation else {
+            return nil
+        }
+        let identifier = "customPin"
+        var annotationView: MKAnnotationView
+        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) {
+            annotationView = dequeuedView
+        } else {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView.canShowCallout = true
+            
+            let pinImage = UIImage(named: "mapPin")?.resize(targetSize: CGSize(width: 50, height: 50))
+            annotationView.image = pinImage
+            
+            let detailLabel = UILabel()
+            detailLabel.numberOfLines = 0
+            detailLabel.text = "\(annotation.title ?? "")"
+            annotationView.detailCalloutAccessoryView = detailLabel
+        }
+        return annotationView
+    }
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -122,4 +153,7 @@ class DetailPlaceCollectionCell: UICollectionViewCell {
     }
 
 }
+
+
+
 
