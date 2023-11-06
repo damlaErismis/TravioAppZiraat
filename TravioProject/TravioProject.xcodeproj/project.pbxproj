@@ -22,6 +22,10 @@
 		00C810AA2AF391730077E800 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810A92AF391730077E800 /* HomeModel.swift */; };
 		00C810AC2AF3B86F0077E800 /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810AB2AF3B86F0077E800 /* HomeVM.swift */; };
 		00C810AF2AF4D0700077E800 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 00C810AE2AF4D0700077E800 /* Kingfisher */; };
+		00C810A02AF223740077E800 /* PopularPlacesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8109F2AF223740077E800 /* PopularPlacesVC.swift */; };
+		00C810A22AF2243E0077E800 /* PopularPlacesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810A12AF2243E0077E800 /* PopularPlacesCell.swift */; };
+		00C810A42AF37BD80077E800 /* PopularPlacesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810A32AF37BD80077E800 /* PopularPlacesModel.swift */; };
+		00C810A62AF37BEE0077E800 /* PopularPlacesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810A52AF37BEE0077E800 /* PopularPlacesVM.swift */; };
 		0C04A7712AE92CA5002972CF /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7702AE92CA5002972CF /* Router.swift */; };
 		0C04A7762AE933B1002972CF /* GenericNetworkingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */; };
 		0C04A7782AE938CF002972CF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7772AE938CF002972CF /* User.swift */; };
@@ -92,6 +96,10 @@
 		00C8109C2AF169F50077E800 /* AddPlaceCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlaceCollectionCell.swift; sourceTree = "<group>"; };
 		00C810A92AF391730077E800 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		00C810AB2AF3B86F0077E800 /* HomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
+		00C8109F2AF223740077E800 /* PopularPlacesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularPlacesVC.swift; sourceTree = "<group>"; };
+		00C810A12AF2243E0077E800 /* PopularPlacesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularPlacesCell.swift; sourceTree = "<group>"; };
+		00C810A32AF37BD80077E800 /* PopularPlacesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularPlacesModel.swift; sourceTree = "<group>"; };
+		00C810A52AF37BEE0077E800 /* PopularPlacesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularPlacesVM.swift; sourceTree = "<group>"; };
 		0C04A7702AE92CA5002972CF /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericNetworkingHelper.swift; sourceTree = "<group>"; };
 		0C04A7772AE938CF002972CF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -253,6 +261,17 @@
 			path = MapPages;
 			sourceTree = "<group>";
 		};
+		00C8109E2AF223530077E800 /* PopularPlacesPage */ = {
+			isa = PBXGroup;
+			children = (
+				00C8109F2AF223740077E800 /* PopularPlacesVC.swift */,
+				00C810A12AF2243E0077E800 /* PopularPlacesCell.swift */,
+				00C810A32AF37BD80077E800 /* PopularPlacesModel.swift */,
+				00C810A52AF37BEE0077E800 /* PopularPlacesVM.swift */,
+			);
+			path = PopularPlacesPage;
+			sourceTree = "<group>";
+		};
 		0C04A77B2AE94111002972CF /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
@@ -299,6 +318,7 @@
 		0CF741F32AD99AC7002B1389 /* TravioProject */ = {
 			isa = PBXGroup;
 			children = (
+				00C8109E2AF223530077E800 /* PopularPlacesPage */,
 				00C810782AF0D4EC0077E800 /* MapPages */,
 				0CF741F42AD99AC7002B1389 /* AppDelegate.swift */,
 				0CF741F62AD99AC7002B1389 /* SceneDelegate.swift */,
@@ -463,12 +483,15 @@
 				0C2ECEEB2AF126240013F6C5 /* CLLocation+Extension.swift in Sources */,
 				0C2ECEE32AF1231B0013F6C5 /* PlaceAnnotation.swift in Sources */,
 				0C2ECEE72AF1239C0013F6C5 /* MapImageCollectionCell.swift in Sources */,
+				00C810A62AF37BEE0077E800 /* PopularPlacesVM.swift in Sources */,
 				0CF741F52AD99AC7002B1389 /* AppDelegate.swift in Sources */,
 				0C988ED02AF2C11C0090E85A /* PlaceDetailLayout.swift in Sources */,
 				0C04A7762AE933B1002972CF /* GenericNetworkingHelper.swift in Sources */,
 				00C8106E2AEBB7A90077E800 /* MenuVC.swift in Sources */,
 				0CF742622ADB3474002B1389 /* UIViewCC.swift in Sources */,
 				00C810702AEBB7B70077E800 /* VisitsVC.swift in Sources */,
+				00C810A02AF223740077E800 /* PopularPlacesVC.swift in Sources */,
+				00C8107E2AF0D56B0077E800 /* PlaceAnnotation.swift in Sources */,
 				00C810742AEBD5320077E800 /* VisitsCustomCell.swift in Sources */,
 				00C810722AEBB7DF0077E800 /* MainTabBar.swift in Sources */,
 				0C04A7712AE92CA5002972CF /* Router.swift in Sources */,
@@ -489,11 +512,13 @@
 				00C8106C2AEBB79B0077E800 /* MapVC.swift in Sources */,
 				0C988ECE2AF2C0EC0090E85A /* CompositionalLayoutCell.swift in Sources */,
 				0CF742092AD99B64002B1389 /* LoginVC.swift in Sources */,
+				00C810A22AF2243E0077E800 /* PopularPlacesCell.swift in Sources */,
 				0C04A7872AEA9FEE002972CF /* HomeTableCell.swift in Sources */,
 				0CF741F72AD99AC7002B1389 /* SceneDelegate.swift in Sources */,
 				0CF742642ADB3546002B1389 /* UITextFieldCC.swift in Sources */,
 				0C04A7782AE938CF002972CF /* User.swift in Sources */,
 				0062B3C62AEA5EF3000066E5 /* SignUpResponse.swift in Sources */,
+				00C810A42AF37BD80077E800 /* PopularPlacesModel.swift in Sources */,
 				00C810822AF0EB8F0077E800 /* AddNewPlaceVC.swift in Sources */,
 				0C04A77D2AE94147002972CF /* HomeVC.swift in Sources */,
 				0C988EB22AF15B960090E85A /* DetailPlaceVC.swift in Sources */,

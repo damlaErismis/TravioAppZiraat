@@ -1,5 +1,5 @@
 //
-//  
+//
 //  HomeVCVC.swift
 //  TravioProject
 //
@@ -46,10 +46,8 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        setupViews()
         
-    setupViews()
-       
     }
     
     
@@ -63,7 +61,7 @@ class HomeVC: UIViewController {
     //MARK: -- UI Methods
     func setupViews() {
         // Add here the setup for the UI
-
+        
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
         self.view.addSubviews(imageLogo, viewMain)
         self.viewMain.addSubviews(tableView)
@@ -109,30 +107,30 @@ extension HomeVC:UITableViewDelegate{
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
+        
         let lbl = UILabel()
         lbl.frame = CGRect(x: 25, y: 10, width: 180, height: 30)
         lbl.font = UIFont(name: "Poppins-Regular", size: 20)
         lbl.text = self.tableView(tableView, titleForHeaderInSection: section)
         tableView.backgroundColor = UIColor(hexString: "F8F8F8")
-
+        
         let btn = UIButton()
         btn.setTitle("See All", for: .normal)
         btn.setTitleColor(UIColor(hexString: "#17C0EB"), for: .normal)
         btn.frame = CGRect(x: view.frame.width - 120, y: 10, width: 149, height: 30)
         btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 14)
-    
+        
         
         let headerView = UIView()
         headerView.addSubviews(lbl, btn)
-    
-
+        
+        
         return headerView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
-     }
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
@@ -148,26 +146,26 @@ extension HomeVC:UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath) as! HomeTableCell
         self.tableView = UITableView(frame: CGRect.zero, style: .grouped)
         cell.collectionView.reloadData()
-
+        
         return cell
- 
+        
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomContactTable
+        //        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomContactTable
         
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
-      }
-
+    }
+    
 }
 
 
