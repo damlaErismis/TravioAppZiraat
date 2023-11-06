@@ -8,6 +8,8 @@
 import UIKit
 import SnapKit
 import TinyConstraints
+import Kingfisher
+
 class HomeCollectionCell: UICollectionViewCell {
     
     lazy var imagePlace:UIImageView = {
@@ -42,6 +44,14 @@ class HomeCollectionCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
+    }
+    
+    public func configurePopularPlaces(with object:PopularPlaces){
+        if let imageURL = URL(string: object.cover_image_url) {
+            imagePlace.kf.setImage(with: imageURL)
+            }
+        labelPlace.text = object.title
+        labelCity.text = object.place
     }
     
     func setupViews(){

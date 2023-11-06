@@ -13,7 +13,8 @@ enum Router{
     case signUp(params:Parameters)
     case login(params:Parameters)
     case getAllPlacesForUser
-    case getPopularPlaces(limit: Int)
+    case getPopularPlaces
+    case getPopularPlacesWithLimit(limit: Int)
     case getLastPlaces(limit: Int)
     
     case getAllPlaces
@@ -23,7 +24,7 @@ enum Router{
     case deleteAVisit(placeId:String)
     
     var baseURL:String{
-        return "https://api.iosclass.live"
+        return "https://ios-class-2f9672c5c549.herokuapp.com"
     }
     var token:String {
         let token = KeychainHelper.shared.getToken()
@@ -37,7 +38,7 @@ enum Router{
             return "/v1/auth/login"
         case .getAllPlacesForUser:
             return "/v1/places/user"
-        case .getPopularPlaces:
+        case .getPopularPlacesWithLimit, .getPopularPlaces:
             return "/v1/places/popular"
         case .getLastPlaces:
             return "/v1/places/last"
@@ -57,7 +58,7 @@ enum Router{
         switch self {
         case .signUp, .login, .postAVisit:
             return .post
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces:
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlacesWithLimit, .getLastPlaces, .getPopularPlaces:
             return .get
         case .deleteAVisit:
             return .delete
@@ -65,7 +66,7 @@ enum Router{
         }}
     var headers:HTTPHeaders{
         switch self {
-        case .signUp, .login, .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getPopularPlaces, .getLastPlaces, .getAllPlacesForUser:
+        case .signUp, .login, .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getPopularPlacesWithLimit, .getLastPlaces, .getAllPlacesForUser, .getPopularPlaces:
             return [:]
         case .postAVisit, .deleteAVisit:
             return HTTPHeaders(["Authorization": "Bearer \(token)"])
@@ -77,9 +78,9 @@ enum Router{
             return params
         case .login(let params):
             return params
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser:
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .getPopularPlaces:
             return nil
-        case .getPopularPlaces(limit: let limit), .getLastPlaces(limit: let limit):
+        case .getPopularPlacesWithLimit(limit: let limit), .getLastPlaces(limit: let limit):
             let limited = min(limit, 20)
             return ["limit": limited]
         case .postAVisit(let params):

@@ -11,7 +11,7 @@ import SnapKit
 
 class HomeVC: UIViewController {
     
-    var viewModel = HomeVM()
+//    var viewModel = HomeVM()
     
     //MARK: -- Properties
     
@@ -119,13 +119,17 @@ extension HomeVC:UITableViewDelegate{
         btn.setTitleColor(UIColor(hexString: "#17C0EB"), for: .normal)
         btn.frame = CGRect(x: view.frame.width - 120, y: 10, width: 149, height: 30)
         btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 14)
-        
+        btn.addTarget(self, action: #selector(btnSeeAllTapped), for: .touchUpInside)
         
         let headerView = UIView()
         headerView.addSubviews(lbl, btn)
         
         
         return headerView
+    }
+    @objc func btnSeeAllTapped(){
+        var popPlaces = PopularPlacesVC()
+        self.navigationController?.pushViewController(popPlaces, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

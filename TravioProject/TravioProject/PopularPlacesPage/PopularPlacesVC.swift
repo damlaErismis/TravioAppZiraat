@@ -9,23 +9,39 @@
 import UIKit
 import TinyConstraints
 import SnapKit
+import Kingfisher
 
 
 class PopularPlacesVC: UIViewController {
     
-    var popularPlaces: [PopularPlaces] = [
-//        PopularPlaces(image: UIImage(named: "suleymaniyee"), labelPlace: "Süleymaniye", imgPin: UIImage(named: "blackPin"), labelCountry: "İstanbul")
-    ]
-    private lazy var tableView:UITableView = {
-        let tv = UITableView()
-        tv.delegate = self
-        tv.dataSource = self
-        tv.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tv.register(PopularPlacesCell.self, forCellReuseIdentifier: "customCell")
-        tv.separatorStyle = .none
-        tv.backgroundColor = UIColor(hexString: "F8F8F8")
-        tv.layer.cornerRadius = 20
-        return tv
+//    var popularPlacesPage: [PopularPlaces] = [
+////        PopularPlaces(image: UIImage(named: "suleymaniyee"), labelPlace: "Süleymaniye", imgPin: UIImage(named: "blackPin"), labelCountry: "İstanbul")
+//    ]
+    
+    var viewModel = HomeVM()
+    
+//    private lazy var collectionView:UICollectionView = {
+//        let tv = UICollectionView()
+//        tv.delegate = self
+//        tv.dataSource = self
+//        tv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+//        tv.register(PopularPlacesCell.self, forCellWithReuseIdentifier: "customCell")
+//        tv.backgroundColor = UIColor(hexString: "F8F8F8")
+//        tv.layer.cornerRadius = 20
+//        return tv
+//    }()
+    lazy var collectionView:UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 10
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.backgroundColor = UIColor(hexString: "F8F8F8")
+        cv.register(PopularPlacesCell.self, forCellWithReuseIdentifier: "collectionCell")
+        cv.layer.cornerRadius = 20
+        cv.layer.maskedCorners = [.topLeft]
+        cv.dataSource = self
+        cv.delegate = self
+        return cv
     }()
     
     private lazy var viewMain:UIView = {
@@ -66,16 +82,32 @@ class PopularPlacesVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        initVM()
         setupViews()
+        bindViewModel()
         
+    }
+    func bindViewModel() {
+        viewModel.popularPlacesChange = { [weak self] in
+            self?.collectionView.reloadData()
+        }
+        viewModel.getPopularPlaces() { result in
+        }
+    }
+    func initVM(){
+        viewModel.reloadCollectionView = { [weak self] () in
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
+        }
     }
     
     func setupViews() {
+        
         self.navigationItem.leftBarButtonItem = createLeftBarButton()
         self.view.addSubviews(viewMain, labelPopularPlaces)
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
-        viewMain.addSubview(tableView)
+        viewMain.addSubview(collectionView)
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
@@ -97,54 +129,44 @@ class PopularPlacesVC: UIViewController {
             view.trailing.equalToSuperview()
             view.height.equalToSuperview().multipliedBy(0.80)
         })
-        
-        tableView.snp.makeConstraints({view in
-            view.bottom.equalTo(self.viewMain.safeAreaLayoutGuide)
-            view.top.equalToSuperview().offset(50)
+
+        collectionView.snp.makeConstraints({view in
+            view.bottom.equalToSuperview()
+            view.top.equalToSuperview().offset(60)
             view.leading.equalToSuperview()
             view.trailing.equalToSuperview()
-            view.height.equalToSuperview()
         })
     }
     
 }
-
-extension PopularPlacesVC:UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+extension PopularPlacesVC:UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath)
-        
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-      return 110
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 90 )
+    }
 }
-extension PopularPlacesVC:UITableViewDataSource {
-    
-    //MARK: -- Kaç tane section olacağını belirler.
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+extension PopularPlacesVC:UICollectionViewDataSource {
+ 
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.popularPlaces.count
     }
-    
-    //MARK: -- Her bir section içinde kaç adet cell olacağına karar verir.
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! PopularPlacesCell
         
-//        return popularPlaces.count
-        return 3
+        cell.configure(with: viewModel.popularPlaces[indexPath.item])
         
-    }
-    
-    
-    //MARK: -- Her bir satıra denk gelen cell'lerin hangisi olacağı ve veri kaynağını belirler
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! PopularPlacesCell
-        
-//        let object = popularPlaces[indexPath.row]
-//        cell.configure(object: object)
-        
+        cell.layer.cornerRadius = 20
+        cell.clipsToBounds = true
         return cell
-        
     }
+    
+//    override func setSelected(_ selected: Bool, animated: Bool) {
+//         super.setSelected(selected, animated: animated)
+//
+//     }
 }

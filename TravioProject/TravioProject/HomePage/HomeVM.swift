@@ -21,22 +21,22 @@ class HomeVM {
             self.reloadCollectionView?()
         }
     }
+
     func getPopularPlacesData(){
         
         guard let popularPlaces = popularPlacesResponse?.data.places else {return}
         self.popularPlaces = popularPlaces
     }
+//    
+//    var places: [HomePlaces] = [] {
+//        didSet {
+//            placesDidChange?()
+//        }
+//    }
+//    var placesDidChange: (() -> Void)?
     
-    var places: [HomePlaces] = [] {
-        didSet {
-            placesDidChange?()
-        }
-    }
     var reloadCollectionView: (() -> Void)?
-    
     var popularPlacesChange: (() -> Void)?
-
-    var placesDidChange: (() -> Void)?
 
     func getToken()->String{
         
@@ -50,13 +50,24 @@ class HomeVM {
     }
     
     
-    func getPopularPlaces(completion: @escaping (Result<PopularPlacesResponse, Error>) -> Void) {
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getPopularPlaces(limit: 20), callback: {(result: Result<PopularPlacesResponse,APIError>) in
+    func getPopularPlacesWithLimit(completion: @escaping (Result<PopularPlacesResponse, Error>) -> Void) {
+        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getPopularPlacesWithLimit(limit: 20), callback: {(result: Result<PopularPlacesResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.popularPlacesResponse = success
                 self.getPopularPlacesData()
-                print(success.data.places)
+            case .failure(let failure):
+                print(failure.message)
+            }
+        })
+    }
+    
+    func getPopularPlaces(completion: @escaping (Result<PopularPlacesResponse, Error>) -> Void) {
+        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getPopularPlaces, callback: {(result: Result<PopularPlacesResponse,APIError>) in
+            switch result {
+            case .success(let success):
+                self.popularPlacesResponse = success
+                self.getPopularPlacesData()
             case .failure(let failure):
                 print(failure.message)
             }

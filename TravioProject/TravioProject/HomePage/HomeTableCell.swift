@@ -39,7 +39,7 @@ class HomeTableCell: UITableViewCell {
             self?.collectionView.reloadData()
         }
 
-        viewModel.getPopularPlaces(){ result in
+        viewModel.getPopularPlacesWithLimit(){ result in
         }
         setupViews()
     }
@@ -94,9 +94,7 @@ extension HomeTableCell:UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! HomeCollectionCell
         
-        
-        let url = URL(string: viewModel.popularPlaces[indexPath.row].cover_image_url)
-        cell.imagePlace.kf.setImage(with: url)
+        cell.configurePopularPlaces(with: viewModel.popularPlaces[indexPath.item])
         
         cell.layer.cornerRadius = 20
         cell.clipsToBounds = true
