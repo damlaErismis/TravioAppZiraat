@@ -10,11 +10,31 @@ import Alamofire
 
 class HomeVM {
     
+    var popularPlacesResponse:PopularPlacesResponse? {
+        didSet {
+            popularPlacesChange?()
+        }
+    }
+    
+    var popularPlaces:[PopularPlaces] = [] {
+        didSet {
+            self.reloadCollectionView?()
+        }
+    }
+    func getPopularPlacesData(){
+        
+        guard let popularPlaces = popularPlacesResponse?.data.places else {return}
+        self.popularPlaces = popularPlaces
+    }
+    
     var places: [HomePlaces] = [] {
         didSet {
             placesDidChange?()
         }
     }
+    var reloadCollectionView: (() -> Void)?
+    
+    var popularPlacesChange: (() -> Void)?
 
     var placesDidChange: (() -> Void)?
 
@@ -38,6 +58,19 @@ class HomeVM {
             switch result {
             case .success(let success):
                 self.places = success
+            case .failure(let failure):
+                print(failure.message)
+            }
+        })
+    }
+    
+    func getPopularPlaces(completion: @escaping (Result<PopularPlacesResponse, Error>) -> Void) {
+        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getPopularPlaces(limit: 20), callback: {(result: Result<PopularPlacesResponse,APIError>) in
+            switch result {
+            case .success(let success):
+                self.popularPlacesResponse = success
+                self.getPopularPlacesData()
+                print(success.data.places)
             case .failure(let failure):
                 print(failure.message)
             }

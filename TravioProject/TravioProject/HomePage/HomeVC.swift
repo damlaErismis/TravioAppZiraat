@@ -46,9 +46,13 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       setupViews()
+
+        
+    setupViews()
        
     }
+    
+    
     
     //MARK: -- Component Actions
     
@@ -92,14 +96,22 @@ class HomeVC: UIViewController {
 extension HomeVC:UITableViewDelegate{
     
     internal func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        return "Popular Places"
+        switch section {
+        case 0:
+            return "Popular Places"
+        case 1:
+            return "New Places"
+        case 2:
+            return "My Added Places"
+        default:
+            return nil
+        }
     }
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
         let lbl = UILabel()
-        lbl.frame = CGRect(x: 25, y: 10, width: 149, height: 30)
+        lbl.frame = CGRect(x: 25, y: 10, width: 180, height: 30)
         lbl.font = UIFont(name: "Poppins-Regular", size: 20)
         lbl.text = self.tableView(tableView, titleForHeaderInSection: section)
         tableView.backgroundColor = UIColor(hexString: "F8F8F8")
@@ -107,11 +119,11 @@ extension HomeVC:UITableViewDelegate{
         let btn = UIButton()
         btn.setTitle("See All", for: .normal)
         btn.setTitleColor(UIColor(hexString: "#17C0EB"), for: .normal)
-        btn.frame = CGRect(x: 265, y: 10, width: 149, height: 30)
+        btn.frame = CGRect(x: view.frame.width - 120, y: 10, width: 149, height: 30)
         btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 14)
     
         
-        var headerView = UIView()
+        let headerView = UIView()
         headerView.addSubviews(lbl, btn)
     
 
@@ -131,7 +143,7 @@ extension HomeVC:UITableViewDelegate{
 extension HomeVC:UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 3
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
