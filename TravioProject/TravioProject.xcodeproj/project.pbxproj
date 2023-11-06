@@ -29,6 +29,9 @@
 		00C810B22AF8CC7C0077E800 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 00C810B12AF8CC7C0077E800 /* SnapKit */; };
 		00C810C22AF9502A0077E800 /* NewPlacesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810C12AF9502A0077E800 /* NewPlacesVC.swift */; };
 		00C810C42AF950520077E800 /* MyAddedPlacesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810C32AF950520077E800 /* MyAddedPlacesVC.swift */; };
+		00C810C62AF95D0C0077E800 /* NewPlacesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810C52AF95D0C0077E800 /* NewPlacesCell.swift */; };
+		00C810C82AF95D2A0077E800 /* NewPlacesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810C72AF95D2A0077E800 /* NewPlacesVM.swift */; };
+		00C810CA2AF95D410077E800 /* NewPlacesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810C92AF95D410077E800 /* NewPlacesModel.swift */; };
 		0C04A7712AE92CA5002972CF /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7702AE92CA5002972CF /* Router.swift */; };
 		0C04A7762AE933B1002972CF /* GenericNetworkingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */; };
 		0C04A7782AE938CF002972CF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7772AE938CF002972CF /* User.swift */; };
@@ -104,6 +107,9 @@
 		00C810AB2AF3B86F0077E800 /* HomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
 		00C810C12AF9502A0077E800 /* NewPlacesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlacesVC.swift; sourceTree = "<group>"; };
 		00C810C32AF950520077E800 /* MyAddedPlacesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAddedPlacesVC.swift; sourceTree = "<group>"; };
+		00C810C52AF95D0C0077E800 /* NewPlacesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlacesCell.swift; sourceTree = "<group>"; };
+		00C810C72AF95D2A0077E800 /* NewPlacesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlacesVM.swift; sourceTree = "<group>"; };
+		00C810C92AF95D410077E800 /* NewPlacesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlacesModel.swift; sourceTree = "<group>"; };
 		0C04A7702AE92CA5002972CF /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericNetworkingHelper.swift; sourceTree = "<group>"; };
 		0C04A7772AE938CF002972CF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -289,6 +295,9 @@
 			isa = PBXGroup;
 			children = (
 				00C810C12AF9502A0077E800 /* NewPlacesVC.swift */,
+				00C810C52AF95D0C0077E800 /* NewPlacesCell.swift */,
+				00C810C72AF95D2A0077E800 /* NewPlacesVM.swift */,
+				00C810C92AF95D410077E800 /* NewPlacesModel.swift */,
 			);
 			path = NewPlacesPage;
 			sourceTree = "<group>";
@@ -503,6 +512,7 @@
 				00C810AC2AF3B86F0077E800 /* HomeVM.swift in Sources */,
 				00C810AA2AF391730077E800 /* HomeModel.swift in Sources */,
 				0C2ECED62AF0D6AA0013F6C5 /* KeychainHelper.swift in Sources */,
+				00C810C82AF95D2A0077E800 /* NewPlacesVM.swift in Sources */,
 				0C2ECEEB2AF126240013F6C5 /* CLLocation+Extension.swift in Sources */,
 				0C2ECEE32AF1231B0013F6C5 /* PlaceAnnotation.swift in Sources */,
 				0C2ECEE72AF1239C0013F6C5 /* MapImageCollectionCell.swift in Sources */,
@@ -536,6 +546,7 @@
 				00C8106C2AEBB79B0077E800 /* MapVC.swift in Sources */,
 				0C988ECE2AF2C0EC0090E85A /* CompositionalLayoutCell.swift in Sources */,
 				0CF742092AD99B64002B1389 /* LoginVC.swift in Sources */,
+				00C810C62AF95D0C0077E800 /* NewPlacesCell.swift in Sources */,
 				00C810A22AF2243E0077E800 /* PopularPlacesCell.swift in Sources */,
 				0C04A7872AEA9FEE002972CF /* HomeTableCell.swift in Sources */,
 				0CF741F72AD99AC7002B1389 /* SceneDelegate.swift in Sources */,
@@ -544,6 +555,7 @@
 				0062B3C62AEA5EF3000066E5 /* SignUpResponse.swift in Sources */,
 				00C810A42AF37BD80077E800 /* PopularPlacesModel.swift in Sources */,
 				00C810822AF0EB8F0077E800 /* AddNewPlaceVC.swift in Sources */,
+				00C810CA2AF95D410077E800 /* NewPlacesModel.swift in Sources */,
 				0C04A77D2AE94147002972CF /* HomeVC.swift in Sources */,
 				0C988EB22AF15B960090E85A /* DetailPlaceVC.swift in Sources */,
 				0C988EE22AF51EAD0090E85A /* PlaceDetailVM.swift in Sources */,

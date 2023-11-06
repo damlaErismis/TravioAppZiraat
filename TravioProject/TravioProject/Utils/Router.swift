@@ -15,7 +15,8 @@ enum Router{
     case getAllPlacesForUser
     case getPopularPlaces
     case getPopularPlacesWithLimit(limit: Int)
-    case getLastPlaces(limit: Int)
+    case getLastPlaces
+    case getLastPlacesWithLimit(limit: Int)
     
     case getAllPlaces
     case getAllGalleryByPlaceID(placeId:String)
@@ -40,7 +41,7 @@ enum Router{
             return "/v1/places/user"
         case .getPopularPlacesWithLimit, .getPopularPlaces:
             return "/v1/places/popular"
-        case .getLastPlaces:
+        case .getLastPlacesWithLimit, .getLastPlaces:
             return "/v1/places/last"
         case .getAllPlaces:
             return "/v1/places"
@@ -58,7 +59,7 @@ enum Router{
         switch self {
         case .signUp, .login, .postAVisit:
             return .post
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlacesWithLimit, .getLastPlaces, .getPopularPlaces:
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlacesWithLimit, .getLastPlacesWithLimit, .getPopularPlaces, .getLastPlaces:
             return .get
         case .deleteAVisit:
             return .delete
@@ -66,7 +67,7 @@ enum Router{
         }}
     var headers:HTTPHeaders{
         switch self {
-        case .signUp, .login, .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getPopularPlacesWithLimit, .getLastPlaces, .getAllPlacesForUser, .getPopularPlaces:
+        case .signUp, .login, .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getPopularPlacesWithLimit, .getLastPlacesWithLimit, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces:
             return [:]
         case .postAVisit, .deleteAVisit:
             return HTTPHeaders(["Authorization": "Bearer \(token)"])
@@ -78,9 +79,9 @@ enum Router{
             return params
         case .login(let params):
             return params
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .getPopularPlaces:
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces:
             return nil
-        case .getPopularPlacesWithLimit(limit: let limit), .getLastPlaces(limit: let limit):
+        case .getPopularPlacesWithLimit(limit: let limit), .getLastPlacesWithLimit(limit: let limit):
             let limited = min(limit, 20)
             return ["limit": limited]
         case .postAVisit(let params):
