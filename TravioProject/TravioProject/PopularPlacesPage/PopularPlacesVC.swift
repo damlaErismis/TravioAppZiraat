@@ -14,22 +14,8 @@ import Kingfisher
 
 class PopularPlacesVC: UIViewController {
     
-//    var popularPlacesPage: [PopularPlaces] = [
-////        PopularPlaces(image: UIImage(named: "suleymaniyee"), labelPlace: "Süleymaniye", imgPin: UIImage(named: "blackPin"), labelCountry: "İstanbul")
-//    ]
-    
     var viewModel = HomeVM()
-    
-//    private lazy var collectionView:UICollectionView = {
-//        let tv = UICollectionView()
-//        tv.delegate = self
-//        tv.dataSource = self
-//        tv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-//        tv.register(PopularPlacesCell.self, forCellWithReuseIdentifier: "customCell")
-//        tv.backgroundColor = UIColor(hexString: "F8F8F8")
-//        tv.layer.cornerRadius = 20
-//        return tv
-//    }()
+
     lazy var collectionView:UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -165,8 +151,4 @@ extension PopularPlacesVC:UICollectionViewDataSource {
         return cell
     }
     
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//         super.setSelected(selected, animated: animated)
-//
-//     }
 }

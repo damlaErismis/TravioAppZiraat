@@ -11,7 +11,6 @@ import SnapKit
 
 class HomeVC: UIViewController {
     
-//    var viewModel = HomeVM()
     
     //MARK: -- Properties
     
@@ -49,14 +48,6 @@ class HomeVC: UIViewController {
         setupViews()
         
     }
-    
-    
-    
-    //MARK: -- Component Actions
-    
-    
-    //MARK: -- Private Methods
-    
     
     //MARK: -- UI Methods
     func setupViews() {
@@ -105,32 +96,43 @@ extension HomeVC:UITableViewDelegate{
             return nil
         }
     }
-
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
         let lbl = UILabel()
         lbl.frame = CGRect(x: 25, y: 10, width: 180, height: 30)
         lbl.font = UIFont(name: "Poppins-Regular", size: 20)
         lbl.text = self.tableView(tableView, titleForHeaderInSection: section)
         tableView.backgroundColor = UIColor(hexString: "F8F8F8")
-        
+
         let btn = UIButton()
         btn.setTitle("See All", for: .normal)
         btn.setTitleColor(UIColor(hexString: "#17C0EB"), for: .normal)
         btn.frame = CGRect(x: view.frame.width - 120, y: 10, width: 149, height: 30)
         btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 14)
         btn.addTarget(self, action: #selector(btnSeeAllTapped), for: .touchUpInside)
-        
+        btn.tag = section
+
         let headerView = UIView()
         headerView.addSubviews(lbl, btn)
-        
-        
+
         return headerView
     }
-    @objc func btnSeeAllTapped(){
-        var popPlaces = PopularPlacesVC()
-        self.navigationController?.pushViewController(popPlaces, animated: true)
+
+    @objc func btnSeeAllTapped(sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            let popPlaces = PopularPlacesVC()
+            self.navigationController?.pushViewController(popPlaces, animated: true)
+        case 1:
+            let newPlaces = NewPlacesVC()
+            self.navigationController?.pushViewController(newPlaces, animated: true)
+        case 2:
+            let myAddedPlaces = MyAddedPlacesVC()
+            self.navigationController?.pushViewController(myAddedPlaces, animated: true)
+        default:
+            break
+        }
     }
+
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
@@ -154,15 +156,13 @@ extension HomeVC:UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath) as! HomeTableCell
-        self.tableView = UITableView(frame: CGRect.zero, style: .grouped)
+//        self.tableView = UITableView(frame: CGRect.zero, style: .grouped)
         cell.collectionView.reloadData()
         
         return cell
         
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        //        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomContactTable
         
     }
     

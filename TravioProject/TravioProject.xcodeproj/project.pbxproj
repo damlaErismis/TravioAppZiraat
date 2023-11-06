@@ -27,6 +27,8 @@
 		00C810AC2AF3B86F0077E800 /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810AB2AF3B86F0077E800 /* HomeVM.swift */; };
 		00C810AF2AF4D0700077E800 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 00C810AE2AF4D0700077E800 /* Kingfisher */; };
 		00C810B22AF8CC7C0077E800 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 00C810B12AF8CC7C0077E800 /* SnapKit */; };
+		00C810C22AF9502A0077E800 /* NewPlacesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810C12AF9502A0077E800 /* NewPlacesVC.swift */; };
+		00C810C42AF950520077E800 /* MyAddedPlacesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810C32AF950520077E800 /* MyAddedPlacesVC.swift */; };
 		0C04A7712AE92CA5002972CF /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7702AE92CA5002972CF /* Router.swift */; };
 		0C04A7762AE933B1002972CF /* GenericNetworkingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */; };
 		0C04A7782AE938CF002972CF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7772AE938CF002972CF /* User.swift */; };
@@ -100,6 +102,8 @@
 		00C810A52AF37BEE0077E800 /* PopularPlacesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularPlacesVM.swift; sourceTree = "<group>"; };
 		00C810A92AF391730077E800 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		00C810AB2AF3B86F0077E800 /* HomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
+		00C810C12AF9502A0077E800 /* NewPlacesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlacesVC.swift; sourceTree = "<group>"; };
+		00C810C32AF950520077E800 /* MyAddedPlacesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAddedPlacesVC.swift; sourceTree = "<group>"; };
 		0C04A7702AE92CA5002972CF /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericNetworkingHelper.swift; sourceTree = "<group>"; };
 		0C04A7772AE938CF002972CF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -273,6 +277,22 @@
 			path = PopularPlacesPage;
 			sourceTree = "<group>";
 		};
+		00C810BF2AF94FF40077E800 /* MyAddedPlacesPage */ = {
+			isa = PBXGroup;
+			children = (
+				00C810C32AF950520077E800 /* MyAddedPlacesVC.swift */,
+			);
+			path = MyAddedPlacesPage;
+			sourceTree = "<group>";
+		};
+		00C810C02AF950090077E800 /* NewPlacesPage */ = {
+			isa = PBXGroup;
+			children = (
+				00C810C12AF9502A0077E800 /* NewPlacesVC.swift */,
+			);
+			path = NewPlacesPage;
+			sourceTree = "<group>";
+		};
 		0C04A77B2AE94111002972CF /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,6 +339,8 @@
 		0CF741F32AD99AC7002B1389 /* TravioProject */ = {
 			isa = PBXGroup;
 			children = (
+				00C810C02AF950090077E800 /* NewPlacesPage */,
+				00C810BF2AF94FF40077E800 /* MyAddedPlacesPage */,
 				00C8109E2AF223530077E800 /* PopularPlacesPage */,
 				00C810782AF0D4EC0077E800 /* MapPages */,
 				0CF741F42AD99AC7002B1389 /* AppDelegate.swift */,
@@ -485,12 +507,14 @@
 				0C2ECEE32AF1231B0013F6C5 /* PlaceAnnotation.swift in Sources */,
 				0C2ECEE72AF1239C0013F6C5 /* MapImageCollectionCell.swift in Sources */,
 				00C810A62AF37BEE0077E800 /* PopularPlacesVM.swift in Sources */,
+				00C810C42AF950520077E800 /* MyAddedPlacesVC.swift in Sources */,
 				0CF741F52AD99AC7002B1389 /* AppDelegate.swift in Sources */,
 				0C988ED02AF2C11C0090E85A /* PlaceDetailLayout.swift in Sources */,
 				0C04A7762AE933B1002972CF /* GenericNetworkingHelper.swift in Sources */,
 				00C8106E2AEBB7A90077E800 /* MenuVC.swift in Sources */,
 				0CF742622ADB3474002B1389 /* UIViewCC.swift in Sources */,
 				00C810702AEBB7B70077E800 /* VisitsVC.swift in Sources */,
+				00C810C22AF9502A0077E800 /* NewPlacesVC.swift in Sources */,
 				00C810A02AF223740077E800 /* PopularPlacesVC.swift in Sources */,
 				00C810742AEBD5320077E800 /* VisitsCustomCell.swift in Sources */,
 				00C810722AEBB7DF0077E800 /* MainTabBar.swift in Sources */,
