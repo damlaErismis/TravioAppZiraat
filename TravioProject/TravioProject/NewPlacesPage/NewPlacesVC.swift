@@ -13,7 +13,7 @@ import Kingfisher
 
 class NewPlacesVC: UIViewController {
     
-    var viewModel = HomeVM()
+    var viewModel = NewPlacesVM()
     
     lazy var collectionView:UICollectionView = {
         let layout = UICollectionViewFlowLayout()
