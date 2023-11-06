@@ -29,21 +29,6 @@ class GenericNetworkingHelper{
             }
         }
     }
-    public func getDataFromRemoteWithHeader<T: Codable>(urlRequest: Router, headers: HTTPHeaders? = nil, callback: @escaping Callback<T>) {
-        AF.request(urlRequest as! URLConvertible,  headers: headers).validate().responseDecodable(of: T.self) { response in
-            switch response.result {
-            case .success(let success):
-                callback(.success(success))
-            case .failure(let error):
-                if let statusCode = response.response?.statusCode {
-                    let apiError = APIError(statusCode: statusCode, message: error.localizedDescription)
-                    callback(.failure(apiError))
-                } else {
-                    let unknownError = APIError(statusCode: -1, message: "Unknown error occurred")
-                    callback(.failure(unknownError))
-                }
-            }
-        }
-    }
+    
 }
 

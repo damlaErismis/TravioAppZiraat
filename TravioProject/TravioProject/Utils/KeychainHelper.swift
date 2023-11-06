@@ -13,6 +13,27 @@ final class KeychainHelper {
     
     init(){ }
     
+    
+    func getToken()->String{
+        
+        let service = "com.travio"
+        let account = "travio"
+        guard let storedTokenData = KeychainHelper.shared.read(service: service, account: account),
+              let storedToken = String(data: storedTokenData, encoding: .utf8) else{
+            return "Token okunamadı veya bulunamadı."
+        }
+        return storedToken
+    }
+
+    func setToken(response: LoginSuccessResponse) {
+        
+        let userToken = response.accessToken
+        let service = "com.travio"
+        let account = "travio"
+        KeychainHelper.shared.save((userToken?.data(using: .utf8))!, service: service, account: account)
+    }
+    
+    
     func save(_ data:Data, service:String, account:String) {
         
         let query = [

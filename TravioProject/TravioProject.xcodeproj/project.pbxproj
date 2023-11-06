@@ -43,6 +43,8 @@
 		0C988ED02AF2C11C0090E85A /* PlaceDetailLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988ECF2AF2C11C0090E85A /* PlaceDetailLayout.swift */; };
 		0C988ED22AF2C1460090E85A /* PlaceDetailPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988ED12AF2C1460090E85A /* PlaceDetailPageVC.swift */; };
 		0C988ED42AF2C15A0090E85A /* DetailPlaceCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988ED32AF2C15A0090E85A /* DetailPlaceCollectionCell.swift */; };
+		0C988ED62AF37EAC0090E85A /* Visit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988ED52AF37EAC0090E85A /* Visit.swift */; };
+		0C988EE02AF4D0CE0090E85A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0C988EDF2AF4D0CE0090E85A /* Kingfisher */; };
 		0CF741F52AD99AC7002B1389 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF741F42AD99AC7002B1389 /* AppDelegate.swift */; };
 		0CF741F72AD99AC7002B1389 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF741F62AD99AC7002B1389 /* SceneDelegate.swift */; };
 		0CF741FE2AD99AC9002B1389 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CF741FD2AD99AC9002B1389 /* Assets.xcassets */; };
@@ -106,6 +108,7 @@
 		0C988ECF2AF2C11C0090E85A /* PlaceDetailLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceDetailLayout.swift; sourceTree = "<group>"; };
 		0C988ED12AF2C1460090E85A /* PlaceDetailPageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceDetailPageVC.swift; sourceTree = "<group>"; };
 		0C988ED32AF2C15A0090E85A /* DetailPlaceCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPlaceCollectionCell.swift; sourceTree = "<group>"; };
+		0C988ED52AF37EAC0090E85A /* Visit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visit.swift; sourceTree = "<group>"; };
 		0CF741F12AD99AC7002B1389 /* TravioProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravioProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CF741F42AD99AC7002B1389 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0CF741F62AD99AC7002B1389 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -225,6 +228,7 @@
 				0C2ECEE62AF1239C0013F6C5 /* MapImageCollectionCell.swift */,
 				0C988EAF2AF14EB80090E85A /* MapVM.swift */,
 				0C988EB32AF15F140090E85A /* Place.swift */,
+				0C988ED52AF37EAC0090E85A /* Visit.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -454,6 +458,7 @@
 				0C04A7712AE92CA5002972CF /* Router.swift in Sources */,
 				00C8109D2AF169F50077E800 /* AddPlaceCollectionCell.swift in Sources */,
 				0062B3C42AEA4B7A000066E5 /* SignUpVM.swift in Sources */,
+				0C988ED62AF37EAC0090E85A /* Visit.swift in Sources */,
 				0C988EB42AF15F140090E85A /* Place.swift in Sources */,
 				0C988ED22AF2C1460090E85A /* PlaceDetailPageVC.swift in Sources */,
 				0C988ED42AF2C15A0090E85A /* DetailPlaceCollectionCell.swift in Sources */,
@@ -682,7 +687,23 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		00C8108D2AF0ED9F0077E800 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		0C04A7722AE92CBD002972CF /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.0;
+			};
+		};
+		0C988EDE2AF4D0CE0090E85A /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.10.0;
+			};
+		};
+		0CF7420A2AD99BCE002B1389 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -717,9 +738,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		00C8108E2AF0ED9F0077E800 /* SnapKit */ = {
+		0C04A7732AE92CBD002972CF /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 00C8108D2AF0ED9F0077E800 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = 0C04A7722AE92CBD002972CF /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		0C988EDF2AF4D0CE0090E85A /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0C988EDE2AF4D0CE0090E85A /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		0CF7420B2AD99BCE002B1389 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0CF7420A2AD99BCE002B1389 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 		00C810912AF0EDA70077E800 /* TinyConstraints */ = {

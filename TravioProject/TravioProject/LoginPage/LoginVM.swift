@@ -28,22 +28,13 @@ class LoginVM{
         GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .login(params: params as Parameters), callback: {(result: Result<LoginSuccessResponse,APIError>) in
             switch result {
             case .success(let success):
-                self.processFetched(response: success)
-                
+                KeychainHelper.shared.setToken(response: success)
             case .failure(let failure):
                 self.alertMessage = failure.message
             }
         })
     }
     
-    func processFetched( response: LoginSuccessResponse ) {
-        self.loginSuccessResponse = response
-        
-        let userToken = response.accessToken
-        let service = "com.travio"
-        let account = "travio"
-        KeychainHelper.shared.save((userToken?.data(using: .utf8))!, service: service, account: account)
-    }
      
  }
     

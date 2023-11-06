@@ -12,6 +12,8 @@ import SnapKit
 class PlaceDetailPageVC: UIViewController {
     
 
+    var placeInfo:PlaceAnnotation?
+    
     private lazy var collectionTopView:UICollectionView = {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createCompositionalLayout())
@@ -49,8 +51,20 @@ class PlaceDetailPageVC: UIViewController {
         let img = UIImageView()
         img.image = UIImage(named: "backLogo")
         img.contentMode = .scaleToFill
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageBackTapped(tapGestureRecognizer:)))
+         img.isUserInteractionEnabled = true
+         img.addGestureRecognizer(tapGestureRecognizer)
         return img
     }()
+    
+    @objc func imageBackTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        let tappedImage = tapGestureRecognizer.view as! UIImageView
+        self.navigationController?.popViewController(animated: true)
+
+        
+    }
     private lazy var imageFavorite:UIImageView = {
         let img = UIImageView()
         img.image = UIImage(named: "emptyFavorite")
@@ -142,12 +156,11 @@ extension PlaceDetailPageVC: UICollectionViewDataSource {
         if collectionView == collectionTopView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompositionalLayoutCell.identifier, for: indexPath) as! CompositionalLayoutCell
             
-            cell.imagePlace.image = UIImage(named: "süleymaniyeMosque")
+            
+            cell.imagePlace.image = UIImage(named: "suleymaniyeMosque")
             
             pageControl.currentPage = indexPath.row
             
-
-            cell.imagePlace.image = UIImage(named: "süleymaniyeMosque")
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCellBottom", for: indexPath) as! DetailPlaceCollectionCell
