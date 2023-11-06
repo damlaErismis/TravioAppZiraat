@@ -10,23 +10,11 @@ import UIKit
 import TinyConstraints
 import SnapKit
 
-struct PopularPlaces {
-    
-    var image:UIImage?
-    var labelPlace:String?
-    var imgPin:UIImage?
-    var labelCountry:String?
-}
 
 class PopularPlacesVC: UIViewController {
     
     var popularPlaces: [PopularPlaces] = [
-        PopularPlaces(image: UIImage(named: "suleymaniyee"), labelPlace: "Süleymaniye", imgPin: UIImage(named: "blackPin"), labelCountry: "İstanbul"),
-        PopularPlaces(image: UIImage(named: "suleymaniyee"), labelPlace: "Süleymaniye", imgPin: UIImage(named: "blackPin"), labelCountry: "İstanbul"),
-        PopularPlaces(image: UIImage(named: "suleymaniyee"), labelPlace: "Süleymaniye", imgPin: UIImage(named: "blackPin"), labelCountry: "İstanbul"),
-        PopularPlaces(image: UIImage(named: "suleymaniyee"), labelPlace: "Süleymaniye", imgPin: UIImage(named: "blackPin"), labelCountry: "İstanbul"),
-        PopularPlaces(image: UIImage(named: "suleymaniyee"), labelPlace: "Süleymaniye", imgPin: UIImage(named: "blackPin"), labelCountry: "İstanbul"),
-        PopularPlaces(image: UIImage(named: "suleymaniyee"), labelPlace: "Süleymaniye", imgPin: UIImage(named: "blackPin"), labelCountry: "İstanbul")
+//        PopularPlaces(image: UIImage(named: "suleymaniyee"), labelPlace: "Süleymaniye", imgPin: UIImage(named: "blackPin"), labelCountry: "İstanbul")
     ]
     private lazy var tableView:UITableView = {
         let tv = UITableView()
@@ -142,7 +130,8 @@ extension PopularPlacesVC:UITableViewDataSource {
     //MARK: -- Her bir section içinde kaç adet cell olacağına karar verir.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return popularPlaces.count
+//        return popularPlaces.count
+        return 3
         
     }
     
@@ -152,8 +141,8 @@ extension PopularPlacesVC:UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! PopularPlacesCell
         
-        let object = popularPlaces[indexPath.row]
-        cell.configure(object: object)
+//        let object = popularPlaces[indexPath.row]
+//        cell.configure(object: object)
         
         return cell
         

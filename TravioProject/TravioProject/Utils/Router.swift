@@ -57,9 +57,7 @@ enum Router{
         switch self {
         case .signUp, .login, .postAVisit:
             return .post
-        case .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces:
-        case .getAllPlaces:
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById:
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces:
             return .get
         case .deleteAVisit:
             return .delete
@@ -67,12 +65,11 @@ enum Router{
         }}
     var headers:HTTPHeaders{
         switch self {
-        case .signUp, .login, .getPopularPlaces, .getLastPlaces:
-        case .signUp, .login, .getAllPlaces:
-        case .signUp, .login, .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById:
+        case .signUp, .login, .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getPopularPlaces, .getLastPlaces, .getAllPlacesForUser:
             return [:]
         case .postAVisit, .deleteAVisit:
             return HTTPHeaders(["Authorization": "Bearer \(token)"])
+
         }}
     var param:Parameters? {
         switch self {
@@ -80,13 +77,14 @@ enum Router{
             return params
         case .login(let params):
             return params
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit:
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser:
             return nil
         case .getPopularPlaces(limit: let limit), .getLastPlaces(limit: let limit):
             let limited = min(limit, 20)
             return ["limit": limited]
         case .postAVisit(let params):
             return params
+
         }}
 }
 

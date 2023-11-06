@@ -62,10 +62,10 @@ class PopularPlacesCell: UITableViewCell {
         setupViews()
     }
     public func configure(object:PopularPlaces){
-        imgPlace.image = object.image
-        labelPlace.text = object.labelPlace
-        imgPin.image = object.imgPin
-        labelCountry.text = object.labelCountry
+//        imgPlace.image = object.image
+//        labelPlace.text = object.labelPlace
+//        imgPin.image = object.imgPin
+//        labelCountry.text = object.labelCountry
     }
     private func setupViews() {
         

@@ -15,17 +15,18 @@
 		00C810722AEBB7DF0077E800 /* MainTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810712AEBB7DF0077E800 /* MainTabBar.swift */; };
 		00C810742AEBD5320077E800 /* VisitsCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810732AEBD5320077E800 /* VisitsCustomCell.swift */; };
 		00C810822AF0EB8F0077E800 /* AddNewPlaceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810812AF0EB8F0077E800 /* AddNewPlaceVC.swift */; };
-		00C8108F2AF0ED9F0077E800 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 00C8108E2AF0ED9F0077E800 /* SnapKit */; };
+		00C8108F2AF0ED9F0077E800 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		00C810922AF0EDA70077E800 /* TinyConstraints in Frameworks */ = {isa = PBXBuildFile; productRef = 00C810912AF0EDA70077E800 /* TinyConstraints */; };
 		00C810952AF0EDAF0077E800 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 00C810942AF0EDAF0077E800 /* Alamofire */; };
 		00C8109D2AF169F50077E800 /* AddPlaceCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8109C2AF169F50077E800 /* AddPlaceCollectionCell.swift */; };
-		00C810AA2AF391730077E800 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810A92AF391730077E800 /* HomeModel.swift */; };
-		00C810AC2AF3B86F0077E800 /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810AB2AF3B86F0077E800 /* HomeVM.swift */; };
-		00C810AF2AF4D0700077E800 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 00C810AE2AF4D0700077E800 /* Kingfisher */; };
 		00C810A02AF223740077E800 /* PopularPlacesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8109F2AF223740077E800 /* PopularPlacesVC.swift */; };
 		00C810A22AF2243E0077E800 /* PopularPlacesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810A12AF2243E0077E800 /* PopularPlacesCell.swift */; };
 		00C810A42AF37BD80077E800 /* PopularPlacesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810A32AF37BD80077E800 /* PopularPlacesModel.swift */; };
 		00C810A62AF37BEE0077E800 /* PopularPlacesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810A52AF37BEE0077E800 /* PopularPlacesVM.swift */; };
+		00C810AA2AF391730077E800 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810A92AF391730077E800 /* HomeModel.swift */; };
+		00C810AC2AF3B86F0077E800 /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810AB2AF3B86F0077E800 /* HomeVM.swift */; };
+		00C810AF2AF4D0700077E800 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 00C810AE2AF4D0700077E800 /* Kingfisher */; };
+		00C810B22AF8CC7C0077E800 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 00C810B12AF8CC7C0077E800 /* SnapKit */; };
 		0C04A7712AE92CA5002972CF /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7702AE92CA5002972CF /* Router.swift */; };
 		0C04A7762AE933B1002972CF /* GenericNetworkingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */; };
 		0C04A7782AE938CF002972CF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A7772AE938CF002972CF /* User.swift */; };
@@ -50,7 +51,6 @@
 		0C988ED22AF2C1460090E85A /* PlaceDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988ED12AF2C1460090E85A /* PlaceDetailVC.swift */; };
 		0C988ED42AF2C15A0090E85A /* DetailPlaceCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988ED32AF2C15A0090E85A /* DetailPlaceCollectionCell.swift */; };
 		0C988ED62AF37EAC0090E85A /* Visit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988ED52AF37EAC0090E85A /* Visit.swift */; };
-		0C988EE02AF4D0CE0090E85A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0C988EDF2AF4D0CE0090E85A /* Kingfisher */; };
 		0C988EE22AF51EAD0090E85A /* PlaceDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988EE12AF51EAD0090E85A /* PlaceDetailVM.swift */; };
 		0C988EE42AF527F80090E85A /* PlaceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988EE32AF527F80090E85A /* PlaceDetail.swift */; };
 		0C988EE62AF679B30090E85A /* PostDeleteVisitResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988EE52AF679B30090E85A /* PostDeleteVisitResponse.swift */; };
@@ -94,12 +94,12 @@
 		00C810732AEBD5320077E800 /* VisitsCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsCustomCell.swift; sourceTree = "<group>"; };
 		00C810812AF0EB8F0077E800 /* AddNewPlaceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPlaceVC.swift; sourceTree = "<group>"; };
 		00C8109C2AF169F50077E800 /* AddPlaceCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlaceCollectionCell.swift; sourceTree = "<group>"; };
-		00C810A92AF391730077E800 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
-		00C810AB2AF3B86F0077E800 /* HomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
 		00C8109F2AF223740077E800 /* PopularPlacesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularPlacesVC.swift; sourceTree = "<group>"; };
 		00C810A12AF2243E0077E800 /* PopularPlacesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularPlacesCell.swift; sourceTree = "<group>"; };
 		00C810A32AF37BD80077E800 /* PopularPlacesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularPlacesModel.swift; sourceTree = "<group>"; };
 		00C810A52AF37BEE0077E800 /* PopularPlacesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularPlacesVM.swift; sourceTree = "<group>"; };
+		00C810A92AF391730077E800 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		00C810AB2AF3B86F0077E800 /* HomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
 		0C04A7702AE92CA5002972CF /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericNetworkingHelper.swift; sourceTree = "<group>"; };
 		0C04A7772AE938CF002972CF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -166,8 +166,9 @@
 			files = (
 				00C810AF2AF4D0700077E800 /* Kingfisher in Frameworks */,
 				00C810952AF0EDAF0077E800 /* Alamofire in Frameworks */,
-				00C8108F2AF0ED9F0077E800 /* SnapKit in Frameworks */,
+				00C8108F2AF0ED9F0077E800 /* (null) in Frameworks */,
 				00C810922AF0EDA70077E800 /* TinyConstraints in Frameworks */,
+				00C810B22AF8CC7C0077E800 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,10 +390,10 @@
 			);
 			name = TravioProject;
 			packageProductDependencies = (
-				00C8108E2AF0ED9F0077E800 /* SnapKit */,
 				00C810912AF0EDA70077E800 /* TinyConstraints */,
 				00C810942AF0EDAF0077E800 /* Alamofire */,
 				00C810AE2AF4D0700077E800 /* Kingfisher */,
+				00C810B12AF8CC7C0077E800 /* SnapKit */,
 			);
 			productName = TravioProject;
 			productReference = 0CF741F12AD99AC7002B1389 /* TravioProject.app */;
@@ -423,10 +424,10 @@
 			);
 			mainGroup = 0CF741E82AD99AC7002B1389;
 			packageReferences = (
-				00C8108D2AF0ED9F0077E800 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				00C810902AF0EDA70077E800 /* XCRemoteSwiftPackageReference "TinyConstraints" */,
 				00C810932AF0EDAF0077E800 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				00C810AD2AF4D0700077E800 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				00C810B02AF8CC7C0077E800 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 0CF741F22AD99AC7002B1389 /* Products */;
 			projectDirPath = "";
@@ -491,7 +492,6 @@
 				0CF742622ADB3474002B1389 /* UIViewCC.swift in Sources */,
 				00C810702AEBB7B70077E800 /* VisitsVC.swift in Sources */,
 				00C810A02AF223740077E800 /* PopularPlacesVC.swift in Sources */,
-				00C8107E2AF0D56B0077E800 /* PlaceAnnotation.swift in Sources */,
 				00C810742AEBD5320077E800 /* VisitsCustomCell.swift in Sources */,
 				00C810722AEBB7DF0077E800 /* MainTabBar.swift in Sources */,
 				0C04A7712AE92CA5002972CF /* Router.swift in Sources */,
@@ -732,30 +732,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0C04A7722AE92CBD002972CF /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.8.0;
-			};
-		};
-		0C988EDE2AF4D0CE0090E85A /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.10.0;
-			};
-		};
-		0CF7420A2AD99BCE002B1389 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.6.0;
-			};
-		};
 		00C810902AF0EDA70077E800 /* XCRemoteSwiftPackageReference "TinyConstraints" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/roberthein/TinyConstraints.git";
@@ -780,24 +756,17 @@
 				minimumVersion = 7.10.0;
 			};
 		};
+		00C810B02AF8CC7C0077E800 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0C04A7732AE92CBD002972CF /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0C04A7722AE92CBD002972CF /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
-		};
-		0C988EDF2AF4D0CE0090E85A /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0C988EDE2AF4D0CE0090E85A /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
-		};
-		0CF7420B2AD99BCE002B1389 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0CF7420A2AD99BCE002B1389 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
 		00C810912AF0EDA70077E800 /* TinyConstraints */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 00C810902AF0EDA70077E800 /* XCRemoteSwiftPackageReference "TinyConstraints" */;
@@ -812,6 +781,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 00C810AD2AF4D0700077E800 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		00C810B12AF8CC7C0077E800 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00C810B02AF8CC7C0077E800 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
