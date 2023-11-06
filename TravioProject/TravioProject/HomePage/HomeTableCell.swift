@@ -8,8 +8,12 @@
 import UIKit
 import SnapKit
 import TinyConstraints
+import Kingfisher
+
 class HomeTableCell: UITableViewCell {
 
+    var viewModel = HomeVM()
+    
     private lazy var labelSectionName:UILabel = {
         let lbl = UILabel()
         return lbl
@@ -30,6 +34,13 @@ class HomeTableCell: UITableViewCell {
  
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        initVM()
+        viewModel.popularPlacesChange = { [weak self] in
+            self?.collectionView.reloadData()
+        }
+
+        viewModel.getPopularPlaces(){ result in
+        }
         setupViews()
     }
 
@@ -46,6 +57,14 @@ class HomeTableCell: UITableViewCell {
             lbl.centerY.equalToSuperview()
         })
         collectionView.edgesToSuperview()
+    }
+    
+    func initVM(){
+        viewModel.reloadCollectionView = { [weak self] () in
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
+        }
     }
 
     required init?(coder: NSCoder) {
@@ -71,11 +90,15 @@ extension HomeTableCell:UICollectionViewDataSource {
  
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return viewModel.popularPlaces.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! HomeCollectionCell
-        cell.imagePlace.image = UIImage(named: "placeImage")
+        
+        
+        let url = URL(string: viewModel.popularPlaces[indexPath.row].cover_image_url)
+        cell.imagePlace.kf.setImage(with: url)
+        
         cell.layer.cornerRadius = 20
         cell.clipsToBounds = true
         return cell

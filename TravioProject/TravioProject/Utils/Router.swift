@@ -14,6 +14,9 @@ enum Router{
     case signUp(params:Parameters)
     case login(params:Parameters)
     case getAllPlacesForUser
+    case getPopularPlaces(limit: Int)
+    case getLastPlaces(limit: Int)
+    
     var baseURL:String{
         return "https://api.iosclass.live"
     }
@@ -25,18 +28,23 @@ enum Router{
             return "/v1/auth/login"
         case .getAllPlacesForUser:
             return "/v1/places/user"
+        case .getPopularPlaces:
+            return "/v1/places/popular"
+        case .getLastPlaces:
+            return "/v1/places/last"
         }
     }
     var method:HTTPMethod {
         switch self {
         case .signUp, .login:
             return .post
-        case .getAllPlacesForUser:
+        case .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces:
             return .get
+        
         }}
     var header:HTTPHeaders{
         switch self {
-        case .signUp, .login:
+        case .signUp, .login, .getPopularPlaces, .getLastPlaces:
             return [:]
         
         case .getAllPlacesForUser:
@@ -50,6 +58,9 @@ enum Router{
             return params
         case .getAllPlacesForUser:
             return nil
+        case .getPopularPlaces(limit: let limit), .getLastPlaces(limit: let limit):
+            let limited = min(limit, 20)
+            return ["limit": limited]
         }}
 }
 

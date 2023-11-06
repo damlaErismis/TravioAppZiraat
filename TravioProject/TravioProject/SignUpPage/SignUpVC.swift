@@ -70,7 +70,6 @@ class SignUpVC: UIViewController {
         btn.backgroundColor = .lightGray
         btn.layer.cornerRadius = 12
         btn.addTarget(self, action: #selector(btnSignUpTapped), for: .touchUpInside)
-        
         return btn
     }()
     
