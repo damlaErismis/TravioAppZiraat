@@ -10,7 +10,7 @@
 		0062B3C42AEA4B7A000066E5 /* SignUpVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0062B3C32AEA4B7A000066E5 /* SignUpVM.swift */; };
 		0062B3C62AEA5EF3000066E5 /* SignUpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0062B3C52AEA5EF3000066E5 /* SignUpResponse.swift */; };
 		00C8106C2AEBB79B0077E800 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106B2AEBB79B0077E800 /* MapVC.swift */; };
-		00C8106E2AEBB7A90077E800 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106D2AEBB7A90077E800 /* MenuVC.swift */; };
+		00C8106E2AEBB7A90077E800 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106D2AEBB7A90077E800 /* SettingsVC.swift */; };
 		00C810702AEBB7B70077E800 /* VisitsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106F2AEBB7B70077E800 /* VisitsVC.swift */; };
 		00C810722AEBB7DF0077E800 /* MainTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810712AEBB7DF0077E800 /* MainTabBar.swift */; };
 		00C810742AEBD5320077E800 /* VisitsCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810732AEBD5320077E800 /* VisitsCustomCell.swift */; };
@@ -42,6 +42,8 @@
 		0C2ECEEB2AF126240013F6C5 /* CLLocation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2ECEEA2AF126240013F6C5 /* CLLocation+Extension.swift */; };
 		0C499D0D2AF6DD5F00A7C916 /* ApiErrorStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C499D0C2AF6DD5F00A7C916 /* ApiErrorStatus.swift */; };
 		0C499D0F2AF6E9A400A7C916 /* PlaceDetailCellInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C499D0E2AF6E9A400A7C916 /* PlaceDetailCellInfo.swift */; };
+		0C499D152AF917BE00A7C916 /* SettingCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C499D142AF917BE00A7C916 /* SettingCollectionCell.swift */; };
+		0C499D182AF9481500A7C916 /* SecuritySettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C499D172AF9481500A7C916 /* SecuritySettingsVC.swift */; };
 		0C5A49D92AEF032C007CB2A8 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5A49D82AEF032C007CB2A8 /* APIError.swift */; };
 		0C988EB02AF14EB80090E85A /* MapVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988EAF2AF14EB80090E85A /* MapVM.swift */; };
 		0C988EB22AF15B960090E85A /* DetailPlaceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988EB12AF15B960090E85A /* DetailPlaceVC.swift */; };
@@ -88,7 +90,7 @@
 		0062B3C32AEA4B7A000066E5 /* SignUpVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVM.swift; sourceTree = "<group>"; };
 		0062B3C52AEA5EF3000066E5 /* SignUpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponse.swift; sourceTree = "<group>"; };
 		00C8106B2AEBB79B0077E800 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
-		00C8106D2AEBB7A90077E800 /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
+		00C8106D2AEBB7A90077E800 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		00C8106F2AEBB7B70077E800 /* VisitsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsVC.swift; sourceTree = "<group>"; };
 		00C810712AEBB7DF0077E800 /* MainTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBar.swift; sourceTree = "<group>"; };
 		00C810732AEBD5320077E800 /* VisitsCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsCustomCell.swift; sourceTree = "<group>"; };
@@ -115,6 +117,8 @@
 		0C2ECEEA2AF126240013F6C5 /* CLLocation+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extension.swift"; sourceTree = "<group>"; };
 		0C499D0C2AF6DD5F00A7C916 /* ApiErrorStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorStatus.swift; sourceTree = "<group>"; };
 		0C499D0E2AF6E9A400A7C916 /* PlaceDetailCellInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailCellInfo.swift; sourceTree = "<group>"; };
+		0C499D142AF917BE00A7C916 /* SettingCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCollectionCell.swift; sourceTree = "<group>"; };
+		0C499D172AF9481500A7C916 /* SecuritySettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecuritySettingsVC.swift; sourceTree = "<group>"; };
 		0C5A49D82AEF032C007CB2A8 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		0C988EAF2AF14EB80090E85A /* MapVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVM.swift; sourceTree = "<group>"; };
 		0C988EB12AF15B960090E85A /* DetailPlaceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPlaceVC.swift; sourceTree = "<group>"; };
@@ -233,7 +237,9 @@
 		00C810692AEBB6490077E800 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				00C8106D2AEBB7A90077E800 /* MenuVC.swift */,
+				0C499D162AF9478D00A7C916 /* SubSettings */,
+				00C8106D2AEBB7A90077E800 /* SettingsVC.swift */,
+				0C499D142AF917BE00A7C916 /* SettingCollectionCell.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -283,6 +289,14 @@
 				00C810AB2AF3B86F0077E800 /* HomeVM.swift */,
 			);
 			path = HomePage;
+			sourceTree = "<group>";
+		};
+		0C499D162AF9478D00A7C916 /* SubSettings */ = {
+			isa = PBXGroup;
+			children = (
+				0C499D172AF9481500A7C916 /* SecuritySettingsVC.swift */,
+			);
+			path = SubSettings;
 			sourceTree = "<group>";
 		};
 		0C988ECC2AF2C08B0090E85A /* PlaceDetail */ = {
@@ -475,6 +489,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C04A7812AEA4B5D002972CF /* LoginVM.swift in Sources */,
+				0C499D182AF9481500A7C916 /* SecuritySettingsVC.swift in Sources */,
 				0C20B7C22ADC322900C71BF7 /* SignUpVC.swift in Sources */,
 				0C988EE42AF527F80090E85A /* PlaceDetail.swift in Sources */,
 				0CF742662ADB47B2002B1389 /* UILabelCC.swift in Sources */,
@@ -488,7 +503,7 @@
 				0CF741F52AD99AC7002B1389 /* AppDelegate.swift in Sources */,
 				0C988ED02AF2C11C0090E85A /* PlaceDetailLayout.swift in Sources */,
 				0C04A7762AE933B1002972CF /* GenericNetworkingHelper.swift in Sources */,
-				00C8106E2AEBB7A90077E800 /* MenuVC.swift in Sources */,
+				00C8106E2AEBB7A90077E800 /* SettingsVC.swift in Sources */,
 				0CF742622ADB3474002B1389 /* UIViewCC.swift in Sources */,
 				00C810702AEBB7B70077E800 /* VisitsVC.swift in Sources */,
 				00C810A02AF223740077E800 /* PopularPlacesVC.swift in Sources */,
@@ -514,6 +529,7 @@
 				0CF742092AD99B64002B1389 /* LoginVC.swift in Sources */,
 				00C810A22AF2243E0077E800 /* PopularPlacesCell.swift in Sources */,
 				0C04A7872AEA9FEE002972CF /* HomeTableCell.swift in Sources */,
+				0C499D152AF917BE00A7C916 /* SettingCollectionCell.swift in Sources */,
 				0CF741F72AD99AC7002B1389 /* SceneDelegate.swift in Sources */,
 				0CF742642ADB3546002B1389 /* UITextFieldCC.swift in Sources */,
 				0C04A7782AE938CF002972CF /* User.swift in Sources */,

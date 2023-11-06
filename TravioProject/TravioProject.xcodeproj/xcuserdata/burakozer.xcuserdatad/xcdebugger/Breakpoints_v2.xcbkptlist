@@ -18,6 +18,38 @@
             endingLineNumber = "72"
             landmarkName = "handleAddVisit()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6AEBE9F6-797F-4BDA-9A8A-6CFE8D98828A - 36410491433519a9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TravioProject.PlaceDetailVC.handleAddVisit() -&gt; ()"
+                  moduleName = "TravioProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/burakozer/TravioAppZiraat/TravioProject/TravioProject/MainTabBarMenu/Visits/PlaceDetail/PlaceDetailVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "612">
+               </Location>
+               <Location
+                  uuid = "6AEBE9F6-797F-4BDA-9A8A-6CFE8D98828A - 36410491433519a9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TravioProject.PlaceDetailVC.handleAddVisit() -&gt; ()"
+                  moduleName = "TravioProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/burakozer/TravioAppZiraat/TravioProject/TravioProject/MainTabBarMenu/Visits/PlaceDetail/PlaceDetailVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "600">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -80,6 +112,21 @@
                   endingLineNumber = "77"
                   offsetFromSymbolStart = "28">
                </Location>
+               <Location
+                  uuid = "4C317BB8-7DB9-4029-9914-1A23E2951F79 - 3641049143351814"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TravioProject.PlaceDetailVC.handleAddVisit() -&gt; ()"
+                  moduleName = "TravioProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/burakozer/TravioAppZiraat/TravioProject/TravioProject/MainTabBarMenu/Visits/PlaceDetail/PlaceDetailVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "1180">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -97,6 +144,38 @@
             endingLineNumber = "75"
             landmarkName = "handleAddVisit()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B66C29DB-28ED-4578-B05F-AA32784E190A - 36410491433519ca"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TravioProject.PlaceDetailVC.handleAddVisit() -&gt; ()"
+                  moduleName = "TravioProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/burakozer/TravioAppZiraat/TravioProject/TravioProject/MainTabBarMenu/Visits/PlaceDetail/PlaceDetailVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "75"
+                  endingLineNumber = "75"
+                  offsetFromSymbolStart = "1004">
+               </Location>
+               <Location
+                  uuid = "B66C29DB-28ED-4578-B05F-AA32784E190A - 36410491433519ca"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TravioProject.PlaceDetailVC.handleAddVisit() -&gt; ()"
+                  moduleName = "TravioProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/burakozer/TravioAppZiraat/TravioProject/TravioProject/MainTabBarMenu/Visits/PlaceDetail/PlaceDetailVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "75"
+                  endingLineNumber = "75"
+                  offsetFromSymbolStart = "772">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -113,6 +192,38 @@
             endingLineNumber = "76"
             landmarkName = "handleAddVisit()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D8E0DA6C-AA74-4DAE-8F06-CBC9D98A2D5A - 3641049143351835"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TravioProject.PlaceDetailVC.handleAddVisit() -&gt; ()"
+                  moduleName = "TravioProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/burakozer/TravioAppZiraat/TravioProject/TravioProject/MainTabBarMenu/Visits/PlaceDetail/PlaceDetailVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "76"
+                  endingLineNumber = "76"
+                  offsetFromSymbolStart = "1180">
+               </Location>
+               <Location
+                  uuid = "D8E0DA6C-AA74-4DAE-8F06-CBC9D98A2D5A - 3641049143351835"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TravioProject.PlaceDetailVC.handleAddVisit() -&gt; ()"
+                  moduleName = "TravioProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/burakozer/TravioAppZiraat/TravioProject/TravioProject/MainTabBarMenu/Visits/PlaceDetail/PlaceDetailVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "76"
+                  endingLineNumber = "76"
+                  offsetFromSymbolStart = "1004">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

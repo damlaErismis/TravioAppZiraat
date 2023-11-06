@@ -1,15 +1,15 @@
 //
 //  
-//  MenuVC.swift
+//  SecuritySettingsVCVC.swift
 //  TravioProject
 //
-//  Created by Damla Erişmiş on 27.10.2023.
+//  Created by Burak Özer on 6.11.2023.
 //
 //
 import UIKit
 import TinyConstraints
 
-class MenuVC: UIViewController {
+class SecuritySettingsVC: UIViewController {
     
     //MARK: -- Properties
     
@@ -34,6 +34,7 @@ class MenuVC: UIViewController {
     //MARK: -- UI Methods
     func setupViews() {
         // Add here the setup for the UI
+        self.view.backgroundColor = .white
         self.view.addSubviews()
         setupLayout()
     }
@@ -44,15 +45,3 @@ class MenuVC: UIViewController {
     }
   
 }
-
-#if DEBUG
-import SwiftUI
-
-@available(iOS 13, *)
-struct MenuVC_Preview: PreviewProvider {
-    static var previews: some View{
-         
-        MenuVC().showPreview()
-    }
-}
-#endif
