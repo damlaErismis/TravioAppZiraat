@@ -22,6 +22,7 @@ enum Router{
     case postAVisit(params:Parameters)
     case deleteAVisit(placeId:String)
     case checkVisitByPlaceId(placeId:String)
+    case postAPlace(params:Parameters)
     
     var baseURL:String{
         return "https://ios-class-2f9672c5c549.herokuapp.com"
@@ -52,12 +53,13 @@ enum Router{
             return "/v1/visits"
         case .deleteAVisit(let placeId), .checkVisitByPlaceId(let placeId) :
             return "/v1/visits/\(placeId)"
-       
+        case .postAPlace:
+            return "/v1/places"
         }
     }
     var method:HTTPMethod {
         switch self {
-        case .signUp, .login, .postAVisit:
+        case .signUp, .login, .postAVisit, .postAPlace:
             return .post
         case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces:
             return .get
@@ -69,7 +71,7 @@ enum Router{
         switch self {
         case .signUp, .login, .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getPopularPlaces, .getLastPlaces, .getAllPlacesForUser:
             return [:]
-        case .postAVisit, .deleteAVisit, .checkVisitByPlaceId:
+        case .postAVisit, .deleteAVisit, .checkVisitByPlaceId, .postAPlace:
             return HTTPHeaders(["Authorization": "Bearer \(token)"])
 
         }}
@@ -86,7 +88,8 @@ enum Router{
             return ["limit": limited]
         case .postAVisit(let params):
             return params
-
+        case .postAPlace(params: let params):
+            return params
         }}
 }
 

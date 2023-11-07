@@ -11,6 +11,24 @@ import TinyConstraints
 
 class AddNewPlaceVC: UIViewController {
     
+    weak var delegate: ViewControllerDelegate?
+    
+    func closePage() {
+        self.dismiss(animated: true) {
+            self.delegate?.didDismissViewController()
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        closePage()
+    }
+    
+    var selectedPlace: PlaceAnnotation?
+    
+    var vm:AddNewPlaceVM = {
+        AddNewPlaceVM()
+    }()
+    
     private lazy var viewMain:UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hexString: "F8F8F8")
@@ -31,13 +49,12 @@ class AddNewPlaceVC: UIViewController {
         return lbl
     }()
 
-    
     private lazy var textFieldPlaceName:UITextFieldCC = {
         let txt = UITextFieldCC(placeholderText: "Please write a place name")
         txt.autocapitalizationType = .none
         return txt
     }()
-
+    
     private lazy var textViewDescription: UITextView = {
         let tv = UITextView()
         tv.font = UIFont.systemFont(ofSize: 14)
@@ -46,7 +63,6 @@ class AddNewPlaceVC: UIViewController {
         return tv
     }()
 
-    
     private lazy var btnAddPlace:UIButton = {
         let btn = UIButton()
         btn.setTitle("Add Place", for: .normal)
@@ -54,7 +70,7 @@ class AddNewPlaceVC: UIViewController {
         btn.setTitleColor(.white, for: .normal)
         btn.backgroundColor = UIColor(hexString: "#38ada9")
         btn.layer.cornerRadius = 12
-//        btn.addTarget(self, action: #selector(btnSignUpTapped), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(handleAddPlace), for: .touchUpInside)
         return btn
     }()
     
@@ -76,10 +92,38 @@ class AddNewPlaceVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        setupViews()
+        
+        initView()
+        initVM()
         
     }
     
+    @objc func handleAddPlace(){
+        
+        labelCountryCity.text = selectedPlace?.place
+        let place = labelCountryCity.text
+        let placeTitle = textFieldPlaceName.text
+        let placeDescription = UITextView.text
+        let latitude = selectedPlace?.coordinate.latitude
+        let longitude = selectedPlace?.coordinate.longitude
+        
+//     vm.addNewPlace(place: place, placeTitle: placeTitle, placeDescription: placeDescription, imageURL: , latitude: latitude, longitude: longitude)
+       
+  }
+ 
+    
+    func initView(){
+        self.navigationController?.navigationBar.isHidden = true
+        setupViews()
+    }
+    
+    
+
+    func initVM(){
+        
+       
+    }
+
     func setupViews() {
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
         self.view.addSubview(viewMain)

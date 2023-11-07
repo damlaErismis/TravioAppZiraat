@@ -11,8 +11,7 @@ import Alamofire
 
 class MapVM {
     
- 
-    
+
     var getData:PlaceResponse? {
         didSet{
             
