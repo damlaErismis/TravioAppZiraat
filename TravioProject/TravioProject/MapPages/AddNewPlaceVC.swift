@@ -9,9 +9,11 @@ import UIKit
 import SnapKit
 import TinyConstraints
 
-class AddNewPlaceVC: UIViewController {
+class AddNewPlaceVC: UIViewController{
     
     weak var delegate: ViewControllerDelegate?
+    
+    var selectedIndex:IndexPath?
     
     func closePage() {
         self.dismiss(animated: true) {
@@ -107,20 +109,18 @@ class AddNewPlaceVC: UIViewController {
         let latitude = selectedPlace?.coordinate.latitude
         let longitude = selectedPlace?.coordinate.longitude
         
+        
+        
 //     vm.addNewPlace(place: place, placeTitle: placeTitle, placeDescription: placeDescription, imageURL: , latitude: latitude, longitude: longitude)
        
   }
  
-    
     func initView(){
         self.navigationController?.navigationBar.isHidden = true
         setupViews()
     }
-    
-    
 
     func initVM(){
-        
        
     }
 
@@ -208,14 +208,21 @@ class AddNewPlaceVC: UIViewController {
             btn.width.equalTo(342)
             btn.bottom.equalToSuperview().offset(-30)
         })
-        
     }
     
+   func imageTapped() {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .photoLibrary
+            present(imagePicker, animated: true, completion: nil)
+    }
 }
 extension AddNewPlaceVC:UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
+        selectedIndex = indexPath
+        self.imageTapped()
+
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -227,9 +234,8 @@ extension AddNewPlaceVC:UICollectionViewDelegateFlowLayout {
 
 extension AddNewPlaceVC:UICollectionViewDataSource {
  
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 3
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! AddPlaceCollectionCell
@@ -238,10 +244,21 @@ extension AddNewPlaceVC:UICollectionViewDataSource {
         cell.clipsToBounds = true
         return cell
     }
-    
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//         super.setSelected(selected, animated: animated)
-//
-//     }
 }
 
+extension AddNewPlaceVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let selectedImage = info[.originalImage] as? UIImage {
+
+            if let cell = collectionView.cellForItem(at: selectedIndex!) as? AddPlaceCollectionCell {
+                cell.imgNewPlace.image = selectedImage
+            }
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}

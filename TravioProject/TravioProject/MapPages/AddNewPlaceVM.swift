@@ -10,6 +10,11 @@ import Alamofire
 import UIKit
 
 class AddNewPlaceVM {
+    var uploadResponse:UploadResponse?{
+        didSet{
+            
+        }
+    }
     
     var  placeResponse:PlaceResponse?{
         didSet{
@@ -17,7 +22,12 @@ class AddNewPlaceVM {
         }
     }
     
-    
+    var  galleryResponse:GalleryResponse?{
+        didSet{
+            
+        }
+    }
+
     public func addNewPlace(place:String, placeTitle:String, placeDescription:String, imageURL:String, latitude:Double, longitude:Double){
         
         let params = [
@@ -28,7 +38,6 @@ class AddNewPlaceVM {
             "latitude": latitude,
             "longitude": longitude
         ] as [String : Any]
-        
         
         GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .postAPlace(params: params), callback: {(result: Result<PlaceResponse,APIError>) in
             switch result {
@@ -41,38 +50,35 @@ class AddNewPlaceVM {
         })
     }
     
-
-    
-    func uploadImage(image: UIImage, completionHandler: @escaping (Result<UploadImageResponse, Error>) -> Void) {
-        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
-            completionHandler(.failure(NSError(domain: "Invalid Image Data", code: 500, userInfo: nil) as! APIError))
-            return
-        }
-
-        let url = "YOUR_UPLOAD_ENDPOINT_URL"
-        let headers: HTTPHeaders = ["Authorization": "Bearer YOUR_ACCESS_TOKEN"] // Eğer bir authorization gerekiyorsa
-
-        AF.upload(
-            multipartFormData: { multipartFormData in
-                multipartFormData.append(imageData, withName: "image", fileName: "image.jpg", mimeType: "image/jpeg")
-                // Diğer multipart form data alanlarını da ekleyebilirsiniz
-            },
-            to: url,
-            method: .post,
-            headers: headers
-        ).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                if let data = value as? UploadImageResponse, let imageUrl = data.message {
-                    // Sunucudan dönen verilere göre işlem yapabilirsiniz
-                    print("Image uploaded successfully. Image URL: \(imageUrl)")
-                    completionHandler(.success(data))
-                } else {
-                    completionHandler(.failure(NSError(domain: "Invalid Response", code: 500, userInfo: nil)))
-                }
-            case .failure(let error):
-                completionHandler(.failure(error))
+    public func createGalleryImage(placeId:String, imageURL: String){
+        let params = [
+            "place_id": placeId,
+            "image_url": imageURL
+        ]
+        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .postAGalleryImage(params: params), callback: {(result: Result<GalleryResponse,APIError>) in
+            switch result {
+            case .success(let success):
+                self.galleryResponse = success
+            case .failure(let failure):
+                print(failure.message)
             }
-        }
+        })
     }
+    
+    public func uploadImage(images: [UIImage]){
+        
+        let token = KeychainHelper.shared.getToken()
+        let url = "https://ios-class-2f9672c5c549.herokuapp.com/upload"
+        let headers = HTTPHeaders(["Authorization": "Bearer \(token)"])
+        GenericNetworkingHelper.shared.uploadImages(images: images, url: url, headers: headers, callback: {(result: Result<UploadResponse,APIError>) in
+            switch result {
+            case .success(let success):
+                self.uploadResponse = success
+            case .failure(let failure):
+                print(failure.message)
+            }
+        })
+    }
+    
+    
 }
