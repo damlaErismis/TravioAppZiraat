@@ -110,7 +110,7 @@ class SignUpVC: UIViewController {
     }
     
     @objc func backButtonTapped(){
-        var login = LoginVC()
+        let login = LoginVC()
         self.navigationController?.pushViewController(login, animated: true)
     }
     

@@ -4,8 +4,8 @@
 //  TravioProject
 //
 //  Created by Damla Erişmiş on 7.11.2023.
-//
-//
+
+
 import UIKit
 import TinyConstraints
 import SnapKit
@@ -26,7 +26,6 @@ class EditProfileVC: UIViewController {
         lbl.adjustsFontSizeToFitWidth = true
         return lbl
     }()
-    
     private lazy var imgProfilePic:UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -35,6 +34,38 @@ class EditProfileVC: UIViewController {
         iv.image = UIImage(named: "bruce")
         return iv
     }()
+    private lazy var viewCreatedAtTime = UIViewCC()
+    private lazy var viewUserRole = UIViewCC()
+    private lazy var viewFullName = UIViewCC()
+    private lazy var viewEmail = UIViewCC()
+    
+    private lazy var labelFullNameTitle = UILabelCC(labelText: "Bruce Willis", font: .poppinsRegular24)
+    private lazy var labelCreatedAtTime = UILabelCC(labelText: "Aug 30, 2023", font: .poppinsRegular14)
+    private lazy var labelUserRole = UILabelCC(labelText: "Admin", font: .poppinsRegular14)
+    private lazy var labelFullName = UILabelCC(labelText: "Full Name", font: .poppinsRegular14)
+    private lazy var labelEmail = UILabelCC(labelText: "Email", font: .poppinsRegular14)
+    
+    private lazy var textFieldFullName:UITextFieldCC = {
+        let txt = UITextFieldCC(placeholderText: "bilge_adam")
+        txt.autocapitalizationType = .none
+        return txt
+    }()
+    private lazy var textFieldEmail:UITextFieldCC = {
+        let txt = UITextFieldCC(placeholderText: "developer@bilgeadam.com")
+        txt.autocapitalizationType = .none
+        return txt
+    }()
+    private lazy var imageCreatedAtTime:UIImageView = {
+        let img = UIImageView()
+        img.image = UIImage(named: "createdAtTime")
+        return img
+    }()
+    private lazy var imageUserRole:UIImageView = {
+        let img = UIImageView()
+        img.image = UIImage(named: "userRole")
+        return img
+    }()
+    
     private lazy var buttonSave:UIButton = {
         let btn = UIButton()
         btn.setTitle("Save", for: .normal)
@@ -80,12 +111,15 @@ class EditProfileVC: UIViewController {
        
     }
     
-
     func setupViews() {
         self.navigationItem.rightBarButtonItem = createCrossButton()
         self.view.addSubviews(viewMain, labelEditProfile)
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
-        viewMain.addSubviews(imgProfilePic, buttonChangePhoto ,buttonSave)
+        viewMain.addSubviews(imgProfilePic, buttonChangePhoto ,buttonSave,viewCreatedAtTime,viewUserRole,viewFullName,viewEmail, labelFullNameTitle)
+        viewCreatedAtTime.addSubviews(imageCreatedAtTime, labelCreatedAtTime)
+        viewUserRole.addSubviews(imageUserRole, labelUserRole)
+        viewFullName.addSubviews(labelFullName, textFieldFullName)
+        viewEmail.addSubviews(labelEmail, textFieldEmail)
         setupLayout()
     }
     
@@ -109,11 +143,85 @@ class EditProfileVC: UIViewController {
             img.centerX.equalTo(viewMain)
             img.height.equalTo(120)
             img.width.equalTo(120)
-
+            
         })
         buttonChangePhoto.snp.makeConstraints({ btn in
             btn.top.equalTo(imgProfilePic.snp.bottom)
             btn.centerX.equalTo(viewMain)
+        })
+        labelFullNameTitle.snp.makeConstraints({ lbl in
+            lbl.top.equalTo(buttonChangePhoto.snp.bottom)
+            lbl.centerX.equalTo(viewMain)
+        })
+        viewCreatedAtTime.snp.makeConstraints({ view in
+            view.top.equalTo(labelFullNameTitle.snp.bottom).offset(20)
+            view.leading.equalToSuperview().offset(20)
+            view.height.equalTo(55)
+            view.width.equalTo(163)
+        })
+        imageCreatedAtTime.snp.makeConstraints ({ img in
+            img.centerY.equalToSuperview()
+            img.leading.equalToSuperview().offset(13)
+        })
+            
+        labelCreatedAtTime.snp.makeConstraints ({ lbl in
+            lbl.centerY.equalToSuperview()
+            lbl.leading.equalTo(imageCreatedAtTime.snp.trailing).offset(13)
+        })
+        viewUserRole.snp.makeConstraints({ view in
+            view.top.equalTo(labelFullNameTitle.snp.bottom).offset(20)
+            view.leading.equalTo(viewCreatedAtTime.snp.trailing).offset(13)
+            view.trailing.equalToSuperview().offset(-20)
+            view.height.equalTo(55)
+            view.width.equalTo(163)
+        })
+        imageUserRole.snp.makeConstraints ({ img in
+            img.centerY.equalToSuperview()
+            img.leading.equalToSuperview().offset(13)
+        })
+        labelUserRole.snp.makeConstraints ({ lbl in
+            lbl.centerY.equalToSuperview()
+            lbl.leading.equalTo(imageUserRole.snp.trailing).offset(13)
+        })
+        viewFullName.snp.makeConstraints({ view in
+            view.top.equalTo(viewUserRole.snp.bottom).offset(24)
+            view.trailing.equalToSuperview().offset(-20)
+            view.leading.equalToSuperview().offset(20)
+            view.height.equalTo(74)
+            view.centerX.equalToSuperview()
+        })
+        labelFullName.snp.makeConstraints({ label in
+            label.top.equalToSuperview().offset(13)
+            label.leading.equalToSuperview().offset(13)
+            label.trailing.equalToSuperview().offset(-13)
+            label.bottom.equalTo(textFieldFullName.snp.top)
+        })
+        
+        textFieldFullName.snp.makeConstraints({ txt in
+            txt.bottom.equalToSuperview().offset(-13)
+            txt.leading.equalToSuperview().offset(13)
+            txt.trailing.equalToSuperview().offset(-13)
+            txt.height.equalTo(30)
+        })
+        viewEmail.snp.makeConstraints({ view in
+            view.top.equalTo(viewFullName.snp.bottom).offset(24)
+            view.trailing.equalToSuperview().offset(-20)
+            view.leading.equalToSuperview().offset(20)
+            view.height.equalTo(74)
+            view.centerX.equalToSuperview()
+        })
+        labelEmail.snp.makeConstraints({ label in
+            label.top.equalToSuperview().offset(13)
+            label.leading.equalToSuperview().offset(13)
+            label.trailing.equalToSuperview().offset(-13)
+            label.bottom.equalTo(textFieldEmail.snp.top)
+        })
+        
+        textFieldEmail.snp.makeConstraints({ txt in
+            txt.bottom.equalToSuperview().offset(-13)
+            txt.leading.equalToSuperview().offset(13)
+            txt.trailing.equalToSuperview().offset(-13)
+            txt.height.equalTo(30)
         })
         
         buttonSave.snp.makeConstraints({ btn in
