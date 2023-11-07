@@ -14,7 +14,7 @@ final class KeychainHelper {
     init(){ }
     
     
-    func getToken()->String{
+    func getToken()->String?{
         
         let service = "com.travio"
         let account = "travio"

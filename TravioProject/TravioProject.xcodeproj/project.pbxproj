@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0062B3C42AEA4B7A000066E5 /* SignUpVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0062B3C32AEA4B7A000066E5 /* SignUpVM.swift */; };
 		0062B3C62AEA5EF3000066E5 /* SignUpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0062B3C52AEA5EF3000066E5 /* SignUpResponse.swift */; };
+		00A47A6A2AFA5528001EDF1D /* EditProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A692AFA5528001EDF1D /* EditProfileVM.swift */; };
+		00A47A6C2AFA5710001EDF1D /* EditProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A6B2AFA5710001EDF1D /* EditProfileModel.swift */; };
 		00C8106C2AEBB79B0077E800 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106B2AEBB79B0077E800 /* MapVC.swift */; };
 		00C8106E2AEBB7A90077E800 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106D2AEBB7A90077E800 /* MenuVC.swift */; };
 		00C810702AEBB7B70077E800 /* VisitsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106F2AEBB7B70077E800 /* VisitsVC.swift */; };
@@ -93,6 +95,8 @@
 /* Begin PBXFileReference section */
 		0062B3C32AEA4B7A000066E5 /* SignUpVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVM.swift; sourceTree = "<group>"; };
 		0062B3C52AEA5EF3000066E5 /* SignUpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponse.swift; sourceTree = "<group>"; };
+		00A47A692AFA5528001EDF1D /* EditProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVM.swift; sourceTree = "<group>"; };
+		00A47A6B2AFA5710001EDF1D /* EditProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileModel.swift; sourceTree = "<group>"; };
 		00C8106B2AEBB79B0077E800 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		00C8106D2AEBB7A90077E800 /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		00C8106F2AEBB7B70077E800 /* VisitsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsVC.swift; sourceTree = "<group>"; };
@@ -308,6 +312,8 @@
 			isa = PBXGroup;
 			children = (
 				00C810CC2AF9904C0077E800 /* EditProfileVC.swift */,
+				00A47A692AFA5528001EDF1D /* EditProfileVM.swift */,
+				00A47A6B2AFA5710001EDF1D /* EditProfileModel.swift */,
 			);
 			path = EditProfilePage;
 			sourceTree = "<group>";
@@ -540,6 +546,7 @@
 				00C810A02AF223740077E800 /* PopularPlacesVC.swift in Sources */,
 				00C810742AEBD5320077E800 /* VisitsCustomCell.swift in Sources */,
 				00C810722AEBB7DF0077E800 /* MainTabBar.swift in Sources */,
+				00A47A6A2AFA5528001EDF1D /* EditProfileVM.swift in Sources */,
 				0C04A7712AE92CA5002972CF /* Router.swift in Sources */,
 				00C8109D2AF169F50077E800 /* AddPlaceCollectionCell.swift in Sources */,
 				0062B3C42AEA4B7A000066E5 /* SignUpVM.swift in Sources */,
@@ -552,6 +559,7 @@
 				0CF742112AD99FE8002B1389 /* Extentions.swift in Sources */,
 				0C04A7852AEA817B002972CF /* LoginSuccessResponse.swift in Sources */,
 				0C988EE62AF679B30090E85A /* PostDeleteVisitResponse.swift in Sources */,
+				00A47A6C2AFA5710001EDF1D /* EditProfileModel.swift in Sources */,
 				0C04A78B2AEAB8EA002972CF /* HomeCollectionCell.swift in Sources */,
 				0C988EB02AF14EB80090E85A /* MapVM.swift in Sources */,
 				0C499D0F2AF6E9A400A7C916 /* PlaceDetailCellInfo.swift in Sources */,

@@ -17,8 +17,9 @@ enum Router{
     case getPopularPlacesWithLimit(limit: Int)
     case getLastPlaces
     case getLastPlacesWithLimit(limit: Int)
-    
+    case editProfile(params:Parameters)
     case getAllPlaces
+    case getPersonalInfo
     case getAllGalleryByPlaceID(placeId:String)
     case getAPlaceById(placeId:String)
     case postAVisit(params:Parameters)
@@ -28,7 +29,7 @@ enum Router{
         return "https://ios-class-2f9672c5c549.herokuapp.com"
     }
     var token:String {
-        let token = KeychainHelper.shared.getToken()
+        guard let token = KeychainHelper.shared.getToken() else { return "" }
         return token
     }
     var path:String{
@@ -53,23 +54,28 @@ enum Router{
             return "/v1/visits"
         case .deleteAVisit(let placeId):
             return "/v1/visits/\(placeId)"
+        case .editProfile:
+            return "v1/edit-profile"
+        case .getPersonalInfo:
+            return "v1/me"
         }
     }
     var method:HTTPMethod {
         switch self {
         case .signUp, .login, .postAVisit:
             return .post
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlacesWithLimit, .getLastPlacesWithLimit, .getPopularPlaces, .getLastPlaces:
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlacesWithLimit, .getLastPlacesWithLimit, .getPopularPlaces, .getLastPlaces, .getPersonalInfo:
             return .get
         case .deleteAVisit:
             return .delete
-        
+        case .editProfile:
+            return .put
         }}
     var headers:HTTPHeaders{
         switch self {
         case .signUp, .login, .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getPopularPlacesWithLimit, .getLastPlacesWithLimit, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces:
             return [:]
-        case .postAVisit, .deleteAVisit:
+        case .postAVisit, .deleteAVisit, .editProfile, .getPersonalInfo:
             return HTTPHeaders(["Authorization": "Bearer \(token)"])
 
         }}
@@ -79,14 +85,15 @@ enum Router{
             return params
         case .login(let params):
             return params
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces:
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces, .getPersonalInfo:
             return nil
         case .getPopularPlacesWithLimit(limit: let limit), .getLastPlacesWithLimit(limit: let limit):
             let limited = min(limit, 20)
             return ["limit": limited]
         case .postAVisit(let params):
             return params
-
+        case .editProfile(let params):
+            return params
         }}
 }
 
@@ -99,7 +106,7 @@ extension Router:URLRequestConvertible{
         urlComponent.headers = headers
         let encoding:ParameterEncoding = {
             switch method {
-            case .post:
+            case .post, .put:
                 return JSONEncoding.default
             default:
                 return URLEncoding.default

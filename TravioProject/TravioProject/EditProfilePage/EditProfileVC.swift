@@ -1,5 +1,5 @@
 //
-//  
+//
 //  EditProfileVCVC.swift
 //  TravioProject
 //
@@ -29,9 +29,11 @@ class EditProfileVC: UIViewController {
     private lazy var imgProfilePic:UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
-//        iv.roundAllCorners(radius: 50)
         iv.clipsToBounds = true
-        iv.image = UIImage(named: "bruce")
+        //        iv.image = UIImage(named: "bruce")
+        iv.isUserInteractionEnabled = true
+        iv.layer.cornerRadius = 60
+        iv.layer.masksToBounds = true
         return iv
     }()
     private lazy var viewCreatedAtTime = UIViewCC()
@@ -92,7 +94,7 @@ class EditProfileVC: UIViewController {
         rightBarButtonItem.tintColor = .white
         return rightBarButtonItem
     }
-
+    
     @objc func crossButtonTapped(){
         let home = HomeVC()
         self.navigationController?.pushViewController(home, animated: true)
@@ -100,15 +102,19 @@ class EditProfileVC: UIViewController {
     @objc func btnSaveTapped(){
         
     }
-    @objc func btnChangePhotoTapped(){
+    
+    @objc func btnChangePhotoTapped() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true, completion: nil)
         
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       setupViews()
-       
+        setupViews()
+        
     }
     
     func setupViews() {
@@ -163,7 +169,7 @@ class EditProfileVC: UIViewController {
             img.centerY.equalToSuperview()
             img.leading.equalToSuperview().offset(13)
         })
-            
+        
         labelCreatedAtTime.snp.makeConstraints ({ lbl in
             lbl.centerY.equalToSuperview()
             lbl.leading.equalTo(imageCreatedAtTime.snp.trailing).offset(13)
@@ -231,6 +237,18 @@ class EditProfileVC: UIViewController {
             btn.bottom.equalToSuperview().offset(-30)
         })
     }
-  
+    
 }
-
+extension EditProfileVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let selectedImage = info[.originalImage] as? UIImage {
+            imgProfilePic.image = selectedImage
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+}
