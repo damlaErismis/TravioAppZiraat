@@ -41,7 +41,7 @@ class PlaceDetailVC: UIViewController {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 10)
         cv.backgroundColor = .white
-        cv.register(DetailPlaceCollectionCell.self, forCellWithReuseIdentifier: "collectionCellBottom")
+        cv.register(PlaceDetailCollectionCell.self, forCellWithReuseIdentifier: "collectionCellBottom")
         cv.dataSource = self
         cv.delegate = self
         return cv
@@ -59,43 +59,42 @@ class PlaceDetailVC: UIViewController {
     
     private lazy var imageFavorite:UIImageView = {
         let img = UIImageView()
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleAddVisit))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleAddorRemoveVisit))
         img.addGestureRecognizer(tap)
         img.isUserInteractionEnabled = true
         return img
     }()
     
-    @objc func handleAddVisit(){
+    @objc func handleAddorRemoveVisit(){
         
         if self.imageFavorite.image == UIImage(named: "emptyFavorite"){
             
             let currentDate = Date()
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-               dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
             let formattedDate = dateFormatter.string(from: currentDate)
-                vm.postAVisit(placeId: selectedID, visitedAt: formattedDate)
-                vm.showAlertClosure = { [weak self] () in
-                    DispatchQueue.main.async {
-                        if let message = self?.vm.successMessage {
-                            self?.showAlert(title: "", message: message)
-                            self?.imageFavorite.image = UIImage(named: "fullyFavorite")
-                        }
-                    }
+            
+            vm.postAVisit(placeId: selectedID, visitedAt: formattedDate)
+            vm.showAlertClosure = { [weak self] () in
+                DispatchQueue.main.async {
+                    
+                    self?.showAlert(title: "", message: "Favorilere eklendi")
+                    self?.imageFavorite.image = UIImage(named: "fullyFavorite")
                 }
-            }else
-            {
-                vm.deleteAVisit(placeId: selectedID)
-                vm.showAlertClosure = { [weak self] () in
-                    DispatchQueue.main.async {
-                        if let message = self?.vm.successMessage {
-                            self?.showAlert(title: "", message: message)
-                            self?.imageFavorite.image = UIImage(named: "emptyFavorite")
-                        }
+            }
+        }else
+        {
+            vm.deleteAVisit(placeId: selectedID)
+            vm.showAlertClosure = { [weak self] () in
+                DispatchQueue.main.async {
+                    if let message = self?.vm.successMessage {
+                        self?.showAlert(title: "", message: message)
+                        self?.imageFavorite.image = UIImage(named: "emptyFavorite")
                     }
                 }
             }
         }
+    }
     @objc func imageBackTapped(tapGestureRecognizer: UITapGestureRecognizer){
         let tappedImage = tapGestureRecognizer.view as! UIImageView
         self.navigationController?.popViewController(animated: true)
@@ -135,6 +134,7 @@ class PlaceDetailVC: UIViewController {
         vm.successCheckId = { [weak self] () in
          self?.imageFavorite.image = UIImage(named: "fullyFavorite")
         }
+        
         vm.errorCheckId = { [weak self] () in
             self?.imageFavorite.image = UIImage(named: "emptyFavorite")
            }
@@ -241,11 +241,12 @@ extension PlaceDetailVC: UICollectionViewDataSource {
             }
             return cell
         }else{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCellBottom", for: indexPath) as! DetailPlaceCollectionCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCellBottom", for: indexPath) as! PlaceDetailCollectionCell
             let placeDetailData = vm.place
             var placeDetailInfo = PlaceDetailCellInfo()
             placeDetailInfo.labelAddedByText = placeDetailData?.creator
             placeDetailInfo.labelCityText = placeDetailData?.place
+//            placeDetailInfo.labelTitleText = placeDetailData?.title
             placeDetailInfo.labelDateText = placeDetailData?.updated_at
             placeDetailInfo.labelDescriptionText = placeDetailData?.description
             placeDetailInfo.latitude = placeDetailData?.latitude

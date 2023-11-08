@@ -18,16 +18,11 @@ class MapVM {
         }
     }
 
-    var isLoading: Bool = false {
-        didSet {
-            
-//            self.updateLoadingStatus?()
-        }
-    }
+
     
     var places:[Place] = [] {
         didSet{
-            
+            addPins?()
         }
     }
     func getPlacesData(){
@@ -38,9 +33,8 @@ class MapVM {
     }
     
     
-    var reloadCollectionViewClosure: (()->())?
-//    
-//    var updateLoadingStatus: (()->())?
+    var addPins: (()->())?
+
     
     
     func initFetch(){

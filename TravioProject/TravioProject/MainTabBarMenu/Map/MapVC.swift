@@ -14,15 +14,10 @@ import MapKit
 import Kingfisher
 
 protocol ViewControllerDelegate: AnyObject {
-    func didDismissViewController()
+    func didDismissPlaceDetailVC()
 }
 
 class MapVC: UIViewController, ViewControllerDelegate{
-    
-    
-    func didDismissViewController() {
-        print("tetikleme yapıldı")
-    }
     
 
     //MARK: -- Properties
@@ -37,6 +32,13 @@ class MapVC: UIViewController, ViewControllerDelegate{
     
     //MARK: -- Views
     
+    func didDismissPlaceDetailVC() {
+        
+        let allAnnotations = mapView.annotations
+        mapView.removeAnnotations(allAnnotations)
+        initVM()
+        
+    }
     private lazy var mapView:MKMapView = {
         let map = MKMapView()
         map.showsUserLocation = true
@@ -73,7 +75,6 @@ class MapVC: UIViewController, ViewControllerDelegate{
         mapView.addGestureRecognizer(tapGesture)
         
         initView()
-        
         initVM()
         
     }
@@ -86,19 +87,25 @@ class MapVC: UIViewController, ViewControllerDelegate{
     func initVM(){
         
         vm.initFetch()
+        
+        vm.addPins = {
+            self.addPins()
+            self.reloadCollectionView()
+        }
+
     }
-    
     func addPins(){
         vm.getData?.data.places.forEach({ place in
             let latitude = place.latitude
             let longitude = place.longitude
             let placeTitle = place.title
- 
-            let mapItem = MKMapItem()
-            let pin = PlaceAnnotation(mapItem: mapItem)
+            let placeId = place.id
+            
+            let pin = PlaceAnnotation()
             pin.coordinate = CLLocationCoordinate2D(
                 latitude: latitude, longitude: longitude)
             pin.title = placeTitle
+            pin.placeId = placeId
             
             pin.visitDescription = place.description
             pin.image = place.cover_image_url.absoluteString
@@ -120,11 +127,9 @@ class MapVC: UIViewController, ViewControllerDelegate{
             let coordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
             let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
             let geocoder = CLGeocoder()
-            let place = PlaceAnnotation(mapItem: MKMapItem())
+            let place = PlaceAnnotation()
             place.coordinate = coordinate
             mapView.addAnnotation(place)
-            
-            
             let placesTVC = AddNewPlaceVC()
             placesTVC.delegate = self
             geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
@@ -150,8 +155,6 @@ class MapVC: UIViewController, ViewControllerDelegate{
         
     @objc func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
         
-        addPins()
-        reloadCollectionView()
 //        let allAnnotations = mapView.annotations
 //        mapView.removeAnnotations(allAnnotations)
     }
@@ -208,24 +211,11 @@ func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
     
     func mapView(_ mapView: MKMapView, didSelect annotation: MKAnnotation) {
         
-        guard let selectedAnnotation = annotation as? PlaceAnnotation else {return}
-        
-        let places = vm.places
-        places.enumerated().forEach({ placeIndex, place in
-            if place.latitude == selectedAnnotation.coordinate.latitude && place.longitude == selectedAnnotation.coordinate.longitude {
-              
-                let temp = self.vm.places[0]
-                self.vm.places[0] = self.vm.places[placeIndex]
-                self.vm.places[placeIndex]  = temp
-            }
-        })
-        reloadCollectionView()
-        
-        var selectedItemIndex = vm.getData?.data.places.filter({place in
-           place.title == selectedAnnotation.titlePlace
-        })
-
-
+        guard let selectedAnnotation = annotation as? PlaceAnnotation else { return }
+        guard let selectedID = selectedAnnotation.placeId else {return}
+        let vc = PlaceDetailVC()
+        vc.selectedID = selectedID
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
@@ -268,11 +258,10 @@ extension MapVC:UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let selectedID = vm.places[indexPath.row].id
-        let vc = PlaceDetailVC()
-        vc.selectedID = selectedID
-        self.navigationController?.pushViewController(vc, animated: true)
-
+        let selectedPlace = vm.places[indexPath.row]
+        let selectedCoordinate = CLLocationCoordinate2D(latitude: selectedPlace.latitude, longitude: selectedPlace.longitude)
+        let region = MKCoordinateRegion(center: selectedCoordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        mapView.setRegion(region, animated: true)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 310, height: 180 )
@@ -291,28 +280,8 @@ extension MapVC:UICollectionViewDataSource {
         cell.imagePlace.kf.setImage(with: url)
         
         cell.labelCity.text = vm.places[indexPath.row].place
-        cell.labelPlace.text = vm.places[indexPath.row].place
+        cell.labelPlace.text = vm.places[indexPath.row].title
         return cell
-        
     }
 }
 
-extension UIImage {
-    func resize(targetSize: CGSize) -> UIImage {
-        let size = self.size
-        let widthRatio  = targetSize.width  / size.width
-        let heightRatio = targetSize.height / size.height
-        var newSize: CGSize
-        if widthRatio > heightRatio {
-            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-        } else {
-            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
-        }
-        let rect = CGRect(origin: .zero, size: newSize)
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        self.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage ?? self
-    }
-}
