@@ -13,12 +13,12 @@ class LoginVC: UIViewController {
     
     //MARK: -- Properties
     
-    
+
     private lazy var vm:LoginVM = {
         return LoginVM()
     }()
     
-    
+    private var isFormComplete: Bool = false
     
     //    MARK: -- Views
     private lazy var imageLogo:UIImageView = {
@@ -74,6 +74,7 @@ class LoginVC: UIViewController {
     private lazy var textFieldEmail: UITextFieldCC = {
         
         let txt = UITextFieldCC(placeholderText: "developer@bilgeadam.com")
+        txt.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         txt.autocapitalizationType = .none
         
         txt.delegate = self
@@ -81,10 +82,19 @@ class LoginVC: UIViewController {
     }()
     private lazy var textFieldPassword:UITextFieldCC = {
         let txt = UITextFieldCC(placeholderText: "*************")
+        txt.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         txt.isSecureTextEntry = true
         txt.delegate = self
         return txt
     }()
+    
+    private lazy var labelPasswordControl:UILabelCC = {
+        let lbl = UILabelCC(labelText: "En az 6 karakter giriniz", font: .poppinsRegular14)
+        lbl.textColor = .red
+        lbl.isHidden = true
+        return lbl
+    }()
+    
     
     private lazy var stackViewSignUp:UIStackView = {
         let stack = UIStackView()
@@ -114,6 +124,7 @@ class LoginVC: UIViewController {
             }
         }
     }
+    
 
     //MARK: -- Component Actions
     @objc func handleSignUp(){
@@ -132,6 +143,24 @@ class LoginVC: UIViewController {
         }
         
     }
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        
+        
+        if textField == textFieldPassword || textField == textFieldEmail {
+            
+            let emailText = textFieldEmail.text ?? ""
+            let passwordText = textFieldPassword.text ?? ""
+            isFormComplete = (passwordText.count > 6) && emailText.isValidEmail
+            buttonLogin.isEnabled = isFormComplete
+            buttonLogin.backgroundColor = isFormComplete ? UIColor(hexString: "#38ada9") : .lightGray
+            
+        }
+        if textField == textFieldPassword{
+            let passwordText = textFieldPassword.text ?? ""
+            let passwordChracterCountControl = passwordText.count > 6
+            labelPasswordControl.isHidden = passwordChracterCountControl
+        }
+    }
     
     //MARK: -- Private Methods
     private func showAlert(title:String, message:String){
@@ -146,7 +175,7 @@ class LoginVC: UIViewController {
     private func setupView(){
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
         self.view.addSubviews(viewMain, imageLogo)
-        viewMain.addSubviews(labelWelcome,viewEmail, viewPassword, buttonLogin, stackViewSignUp)
+        viewMain.addSubviews(labelWelcome,viewEmail, viewPassword, buttonLogin, stackViewSignUp, labelPasswordControl)
         viewEmail.addSubviews(labelEmail, textFieldEmail)
         viewPassword.addSubviews(labelPassword, textFieldPassword)
         stackViewSignUp.addArrangedSubviews(labelSuggestion, buttonSignUp)
@@ -231,6 +260,13 @@ class LoginVC: UIViewController {
             stack.centerX.equalTo(labelWelcome.snp.centerX)
             stack.width.equalTo(238)
         })
+        
+        labelPasswordControl.snp.makeConstraints({lbl in
+            lbl.top.equalTo(labelPassword.snp.bottom).offset(14)
+            lbl.leading.equalTo(labelPassword)
+            
+        })
+        
     }
     
 }
@@ -260,10 +296,6 @@ extension LoginVC:UITextFieldDelegate{
                 buttonLogin.isEnabled = false
             }
         }
-//        if textField == textFieldEmail{
-//        textField.text = (textField.text as NSString?)?.replacingCharacters(in: range, with: string.lowercased())
-//        return false
-//    }
         return true
     }
     
