@@ -31,9 +31,7 @@ class MapVC: UIViewController, ViewControllerDelegate{
         
         return MapVM()
     }()
-    
-    private var place:PlaceAnnotation?
- 
+
     var locationManager:CLLocationManager?
     
     
@@ -115,25 +113,32 @@ class MapVC: UIViewController, ViewControllerDelegate{
              self.collectionView.reloadData()
          }
      }
-    
-    //MARK: -- Component Actions
-    
     @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
         
-        guard let locationManager = locationManager,
-              let userLocation = locationManager.location else{
-            return
-        }
-        self.place = PlaceAnnotation(mapItem: MKMapItem(), isSelected: false)
         if gesture.state == .began {
-            
             let touchPoint = gesture.location(in: mapView)
             let coordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
-            place!.coordinate = coordinate
-            mapView.addAnnotation(place!)
+            let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+            let geocoder = CLGeocoder()
+            let place = PlaceAnnotation(mapItem: MKMapItem())
+            place.coordinate = coordinate
+            mapView.addAnnotation(place)
+            
+            
             let placesTVC = AddNewPlaceVC()
-            placesTVC.selectedPlace?.coordinate = coordinate
             placesTVC.delegate = self
+            geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+                if let error = error {
+                    return
+                }
+                if let placemark = placemarks?.first {
+                    if let city = placemark.locality, let country = placemark.country {
+                        let place = "\(city), \(country)"
+                        placesTVC.selectedPlace.coordinate = coordinate
+                        placesTVC.labelCountryCity.text = place
+                    }
+                }
+            }
             placesTVC.modalPresentationStyle = .pageSheet
             if let sheet = placesTVC.sheetPresentationController{
                 sheet.prefersGrabberVisible = true

@@ -8,12 +8,16 @@
 import UIKit
 import SnapKit
 import TinyConstraints
+import MapKit
 
 class AddNewPlaceVC: UIViewController{
     
     weak var delegate: ViewControllerDelegate?
     
     var selectedIndex:IndexPath?
+    
+    var imagesFromLibrary:[UIImage] = []
+    var newPlaceId:String?
     
     func closePage() {
         self.dismiss(animated: true) {
@@ -25,7 +29,7 @@ class AddNewPlaceVC: UIViewController{
         closePage()
     }
     
-    var selectedPlace: PlaceAnnotation?
+    var selectedPlace = PlaceAnnotation(mapItem: MKMapItem())
     
     var vm:AddNewPlaceVM = {
         AddNewPlaceVM()
@@ -43,7 +47,7 @@ class AddNewPlaceVC: UIViewController{
     
     private lazy var labelPlaceName = UILabelCC(labelText: "Place Name", font: .poppinsRegular14)
     private lazy var labelDescription = UILabelCC(labelText: "Visit Description", font: .poppinsRegular14)
-    private lazy var labelCountryCity = UILabelCC(labelText: "Country, City", font: .poppinsRegular14)
+    lazy var labelCountryCity = UILabelCC(labelText: "Country, City", font: .poppinsRegular14)
     
     private lazy var labelCountryCityData:UILabelCC = {
         let lbl = UILabelCC(labelText: "country,city verisi gelecek!!", font: .poppinsRegular14)
@@ -97,23 +101,61 @@ class AddNewPlaceVC: UIViewController{
         
         initView()
         initVM()
-        
     }
     
     @objc func handleAddPlace(){
         
-        labelCountryCity.text = selectedPlace?.place
-        let place = labelCountryCity.text
-        let placeTitle = textFieldPlaceName.text
-        let placeDescription = UITextView.text
-        let latitude = selectedPlace?.coordinate.latitude
-        let longitude = selectedPlace?.coordinate.longitude
+        uploadImages()
         
+        vm.addNewPlaceClosure = {
+            
+            guard let imageResponse = self.vm.imageUrls else {return }
+            guard let place = self.labelCountryCity.text else {return }
+            guard let placeTitle = self.textFieldPlaceName.text else {
+                return  }
+            guard let placeDescription = self.textViewDescription.text else {
+                return  }
+            let latitude = self.selectedPlace.coordinate.latitude
+            let longitude = self.selectedPlace.coordinate.longitude
+            
+            var addPlacerequest = AddPlaceRequest(place: place, title: placeTitle, description: placeDescription, cover_image_url: imageResponse[0], latitude: latitude, longitude: longitude)
+            
+            self.vm.addNewPlace( place: place, placeTitle: placeTitle, placeDescription: placeDescription, imageString: imageResponse[0], latitude: latitude, longitude: longitude)
+        }
         
-        
-//     vm.addNewPlace(place: place, placeTitle: placeTitle, placeDescription: placeDescription, imageURL: , latitude: latitude, longitude: longitude)
-       
+        vm.addGalleriesClosure = {
+            guard let imageResponse = self.vm.imageUrls else {return }
+            guard let placeId = self.vm.placeId else {return}
+            imageResponse.forEach({ imageURL in
+                self.vm.createGalleryImage(placeId: placeId, imageURL: imageURL)
+            })
+        }
   }
+    func uploadImages(){
+        
+        let images = imagesFromLibrary
+        if images.count >= 2 {
+            vm.uploadImage(images: images)
+        }else{
+            self.showAlert(title: "Alert", message: "En az 2 fotoğraf ekleyiniz'")
+            return
+        }
+    }
+    
+    
+   func showAlert(title:String, message:String){
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func imageTapped() {
+             let imagePicker = UIImagePickerController()
+             imagePicker.delegate = self
+             imagePicker.sourceType = .photoLibrary
+             present(imagePicker, animated: true, completion: nil)
+     }
  
     func initView(){
         self.navigationController?.navigationBar.isHidden = true
@@ -210,12 +252,6 @@ class AddNewPlaceVC: UIViewController{
         })
     }
     
-   func imageTapped() {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = .photoLibrary
-            present(imagePicker, animated: true, completion: nil)
-    }
 }
 extension AddNewPlaceVC:UICollectionViewDelegateFlowLayout {
     
@@ -253,6 +289,7 @@ extension AddNewPlaceVC: UIImagePickerControllerDelegate, UINavigationController
 
             if let cell = collectionView.cellForItem(at: selectedIndex!) as? AddPlaceCollectionCell {
                 cell.imgNewPlace.image = selectedImage
+                imagesFromLibrary.append(selectedImage)
             }
         }
         picker.dismiss(animated: true, completion: nil)

@@ -8,7 +8,7 @@
 import Foundation
 
 struct UploadResponse: Codable {
-    let messageType: String
-    let message: String
-    let urls: [String]
+    var messageType: String
+    var message: String
+    var urls: [String]
 }

@@ -19,6 +19,7 @@ class LoginVC: UIViewController {
     }()
     
     
+    
     //    MARK: -- Views
     private lazy var imageLogo:UIImageView = {
         let img = UIImageView()
@@ -71,7 +72,10 @@ class LoginVC: UIViewController {
     private lazy var viewEmail = UIViewCC()
     private lazy var viewPassword = UIViewCC()
     private lazy var textFieldEmail: UITextFieldCC = {
+        
         let txt = UITextFieldCC(placeholderText: "developer@bilgeadam.com")
+        txt.autocapitalizationType = .none
+        
         txt.delegate = self
         return txt
     }()
@@ -120,11 +124,13 @@ class LoginVC: UIViewController {
     @objc func handleLogin(){
         guard let textEmail = textFieldEmail.text else{return}
         guard let textPassword = textFieldPassword.text else{return}
+      
         vm.postLoginData(email:textEmail , password: textPassword)
-        if let loginResponse = vm.loginSuccessResponse {
-            let vc = HomeVC()
-            self.navigationController?.pushViewController(vc, animated: true)
+        vm.makeLogin = { [weak self] () in
+                let vc = HomeVC()
+                self?.navigationController?.pushViewController(vc, animated: true)
         }
+        
     }
     
     //MARK: -- Private Methods
@@ -254,6 +260,12 @@ extension LoginVC:UITextFieldDelegate{
                 buttonLogin.isEnabled = false
             }
         }
+//        if textField == textFieldEmail{
+//        textField.text = (textField.text as NSString?)?.replacingCharacters(in: range, with: string.lowercased())
+//        return false
+//    }
         return true
     }
+    
+    
 }

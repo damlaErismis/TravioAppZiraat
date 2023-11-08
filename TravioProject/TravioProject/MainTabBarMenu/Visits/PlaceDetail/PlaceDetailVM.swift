@@ -50,7 +50,7 @@ class PlaceDetailVM {
         }
     }
     
-    var successCheckIdResponse: PostDeleteVisitCheckResponse? {
+    var successCheckIdResponse: SuccessResponse? {
         didSet {
             successCheckId?()
         }
@@ -105,7 +105,7 @@ class PlaceDetailVM {
             ]
         
         print(params)
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .postAVisit(params: params), callback: {(result: Result<PostDeleteVisitCheckResponse,APIError>) in
+        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .postAVisit(params: params), callback: {(result: Result<SuccessResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.successMessage = success.message
@@ -115,7 +115,7 @@ class PlaceDetailVM {
         })
     }
     func deleteAVisit(placeId:String){
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .deleteAVisit(placeId: placeId), callback: {(result: Result<PostDeleteVisitCheckResponse,APIError>) in
+        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .deleteAVisit(placeId: placeId), callback: {(result: Result<SuccessResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.successMessage = success.message
@@ -126,7 +126,7 @@ class PlaceDetailVM {
     }
     
     func checkVisit(placeId:String){
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .checkVisitByPlaceId(placeId: placeId), callback: {(result: Result<PostDeleteVisitCheckResponse,APIError>) in
+        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .checkVisitByPlaceId(placeId: placeId), callback: {(result: Result<SuccessResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.successCheckIdResponse = success

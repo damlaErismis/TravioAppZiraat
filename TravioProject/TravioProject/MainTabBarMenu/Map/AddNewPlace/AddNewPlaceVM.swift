@@ -10,36 +10,49 @@ import Alamofire
 import UIKit
 
 class AddNewPlaceVM {
+    
+    var imageUrls:[String]?
+    var placeId:String?
+    
     var uploadResponse:UploadResponse?{
         didSet{
-            
+            imageUrls = uploadResponse?.urls
+            addNewPlaceClosure?()
         }
     }
     
-    var  placeResponse:PlaceResponse?{
+    var  placeResponse:SuccessResponse?{
         didSet{
-            
+            placeId = placeResponse?.message
+            addGalleriesClosure?()
         }
     }
     
-    var  galleryResponse:GalleryResponse?{
+    var  galleryResponse:SuccessResponse?{
         didSet{
             
         }
     }
 
-    public func addNewPlace(place:String, placeTitle:String, placeDescription:String, imageURL:String, latitude:Double, longitude:Double){
+   
+    var addNewPlaceClosure : (()->())?
+    var addGalleriesClosure : (()->())?
+
+    
+    public func addNewPlace(place:String, placeTitle:String, placeDescription:String, imageString:String, latitude:Double, longitude:Double){
         
+//        let imageURL = URL(string: imageString)
+
         let params = [
             "place": place,
             "title": placeTitle,
             "description": placeDescription,
-            "cover_image_url":imageURL,
+            "cover_image_url":imageString,
             "latitude": latitude,
             "longitude": longitude
         ] as [String : Any]
         
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .postAPlace(params: params), callback: {(result: Result<PlaceResponse,APIError>) in
+        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .postAPlace(params: params), callback: {(result: Result<SuccessResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.placeResponse = success
@@ -55,7 +68,7 @@ class AddNewPlaceVM {
             "place_id": placeId,
             "image_url": imageURL
         ]
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .postAGalleryImage(params: params), callback: {(result: Result<GalleryResponse,APIError>) in
+        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .postAGalleryImage(params: params), callback: {(result: Result<SuccessResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.galleryResponse = success
@@ -67,9 +80,9 @@ class AddNewPlaceVM {
     
     public func uploadImage(images: [UIImage]){
         
-        let token = KeychainHelper.shared.getToken()
         let url = "https://ios-class-2f9672c5c549.herokuapp.com/upload"
-        let headers = HTTPHeaders(["Authorization": "Bearer \(token)"])
+        let headers = HTTPHeaders(["Content-Type": "multipart/form-data"])
+        
         GenericNetworkingHelper.shared.uploadImages(images: images, url: url, headers: headers, callback: {(result: Result<UploadResponse,APIError>) in
             switch result {
             case .success(let success):

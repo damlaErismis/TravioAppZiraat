@@ -38,14 +38,14 @@ class GenericNetworkingHelper{
             if let imageData = image.jpegData(compressionQuality: 0.5) {
                 imageDataArray.append(imageData)
             } else {
-                callback(.failure(APIError(statusCode: 500, message: "Invalid Image Data")))
+                //callback(.failure(APIError(statusCode: 500, message: "Invalid Image Data")))
                 return
             }
         }
         AF.upload(
             multipartFormData: { multipartFormData in
                 for (index, imageData) in imageDataArray.enumerated() {
-                    multipartFormData.append(imageData, withName: "image[\(index)]", fileName: "image\(index).jpg", mimeType: "image/jpeg")
+                    multipartFormData.append(imageData, withName: "file", fileName: "image\(index).jpg", mimeType: "image/jpeg")
                 }
             },
             to: url,

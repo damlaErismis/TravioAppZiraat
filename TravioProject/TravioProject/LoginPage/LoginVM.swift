@@ -11,13 +11,19 @@ import Alamofire
 class LoginVM{
     
 
-    var loginSuccessResponse:LoginSuccessResponse?
+    var loginSuccessResponse:LoginSuccessResponse? {
+        didSet{
+            self.makeLogin?()
+        }
+    }
+
     var alertMessage: String? {
         didSet {
             self.showAlertClosure?()
         }
     }
 
+    var makeLogin: (()->())?
     var showAlertClosure: (()->())?
 
     func postLoginData(email:String, password: String){
@@ -28,6 +34,7 @@ class LoginVM{
         GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .login(params: params as Parameters), callback: {(result: Result<LoginSuccessResponse,APIError>) in
             switch result {
             case .success(let success):
+                self.loginSuccessResponse = success
                 KeychainHelper.shared.setToken(response: success)
             case .failure(let failure):
                 self.alertMessage = failure.message
