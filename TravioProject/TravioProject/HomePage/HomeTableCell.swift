@@ -14,6 +14,8 @@ class HomeTableCell: UITableViewCell {
 
     var viewModel = HomeVM()
     
+    var data:[String]?
+    
     private lazy var labelSectionName:UILabel = {
         let lbl = UILabel()
         return lbl
@@ -39,12 +41,23 @@ class HomeTableCell: UITableViewCell {
             self?.collectionView.reloadData()
         }
 
-        viewModel.getPopularPlacesWithLimit(){ result in
+        viewModel.getPopularPlacesWithLimit { result in
+           
         }
         setupViews()
     }
+    
+    func configure(data:[String]) {
+        self.data = data
+        
+    }
 
-
+//    public func configure(data: [PopularPlaces]) {
+//        self.data = data
+//        print("Configured data: ", data)
+//    }
+    
+    
     func setupViews(){
         self.contentView.addSubviews(labelSectionName, collectionView)
         setupLayout()
@@ -70,6 +83,8 @@ class HomeTableCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    var selectedIndex:IndexPath?
 }
 
 
@@ -89,13 +104,19 @@ extension HomeTableCell:UICollectionViewDataSource {
  
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.popularPlaces.count
+        return data?.count ?? 0
+//        return viewModel.popularPlaces.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! HomeCollectionCell
         
-        cell.configurePopularPlaces(with: viewModel.popularPlaces[indexPath.item])
-        
+
+//        if let popularPlace = self.data?[indexPath.row] {
+//            cell.configurePopularPlaces(with: popularPlace)
+//        }
+
+        cell.labelPlace.text = self.data?[indexPath.row]
+//        cell.configurePopularPlaces(with: viewModel.popularPlaces[indexPath.item])
         return cell
     }
     

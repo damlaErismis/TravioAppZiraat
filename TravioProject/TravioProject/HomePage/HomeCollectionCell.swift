@@ -20,14 +20,14 @@ class HomeCollectionCell: UICollectionViewCell {
         return img
     }()
     
-    private lazy var labelPlace:UILabelCC = {
+    public lazy var labelPlace:UILabelCC = {
         let lbl = UILabelCC()
-        lbl.textColor = .white
+        lbl.textColor = .red
         lbl.addFont = .poppinsRegular24
         return lbl
     }()
     
-    private lazy var labelCity:UILabelCC = {
+    public lazy var labelCity:UILabelCC = {
         let lbl = UILabelCC()
         lbl.addFont = .poppinsRegular14
         lbl.textColor = .white
@@ -84,5 +84,6 @@ class HomeCollectionCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 
 }

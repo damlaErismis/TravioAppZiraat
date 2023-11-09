@@ -23,18 +23,18 @@ class HelpAndSupportCell: UITableViewCell {
         }
     }
  
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        if selected {
-            print("isSelected changed: \(isSelected)")
-            imageChevron.image = UIImage(named: "chevronUp")
-        } else {
-            imageChevron.image = UIImage(named: "chevronDown")
-        }
-    }
+//    override func setSelected(_ selected: Bool, animated: Bool) {
+//        if selected {
+//            print("isSelected changed: \(isSelected)")
+//            imageChevron.image = UIImage(named: "chevronUp")
+//        } else {
+//            imageChevron.image = UIImage(named: "chevronDown")
+//        }
+//    }
     
     private lazy var imageChevron: UIImageView = {
         let img = UIImageView()
-        img.image = isSelected ? UIImage(named: "chevronUp") : UIImage(named: "chevronDown")
+        img.image = UIImage(named: "chevronDown")
         return img
     }()
     
@@ -61,6 +61,10 @@ class HelpAndSupportCell: UITableViewCell {
         return v
     }()
     
+    func updateChevronStatus(imageName: String){
+        
+        imageChevron.image = UIImage(named: imageName)
+    }
     func animate() {
         UIView.animate(withDuration: 0.5, delay: 0.3, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
             self.contentView.layoutIfNeeded()

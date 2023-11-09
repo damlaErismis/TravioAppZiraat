@@ -13,7 +13,7 @@ class HomeVC: UIViewController {
     
     
     //MARK: -- Properties
-    
+    var viewModel = HomeVM()
     
     //MARK: -- Views
     
@@ -31,7 +31,7 @@ class HomeVC: UIViewController {
         return view
     }()
     private lazy var tableView:UITableView = {
-        let tv = UITableView(frame: .zero, style: .grouped)
+        let tv = UITableView()
         tv.separatorColor = .white
         tv.delegate = self
         tv.dataSource = self
@@ -150,25 +150,34 @@ extension HomeVC:UITableViewDataSource{
         return 3
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return  1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath) as! HomeTableCell
 //        self.tableView = UITableView(frame: CGRect.zero, style: .grouped)
-        cell.collectionView.reloadData()
+//        cell.collectionView.reloadData()
         
-        return cell
-        
+        switch indexPath.section {
+        case 0:
+            cell.configure(data: ["popular places"])
+            return cell
+        case 1:
+            cell.configure(data: ["new places", "new places"])
+            return cell
+        default:
+            cell.configure(data: ["my added places"])
+            return cell
+
+        }
+
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
-    }
+
     
 }
 
