@@ -49,6 +49,7 @@
 		0C563C482AFCB2CC00A0F5F0 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0C563C472AFCB2CC00A0F5F0 /* IQKeyboardManagerSwift */; };
 		0C563C4A2AFCF6E800A0F5F0 /* SettingsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C563C492AFCF6E800A0F5F0 /* SettingsVM.swift */; };
 		0C563C4C2AFCF84600A0F5F0 /* UserProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C563C4B2AFCF84600A0F5F0 /* UserProfileResponse.swift */; };
+		0C563C4E2AFD6D1D00A0F5F0 /* UIStackViewSettingHorizontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C563C4D2AFD6D1D00A0F5F0 /* UIStackViewSettingHorizontal.swift */; };
 		0C5A49D92AEF032C007CB2A8 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5A49D82AEF032C007CB2A8 /* APIError.swift */; };
 		0C988EB02AF14EB80090E85A /* MapVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988EAF2AF14EB80090E85A /* MapVM.swift */; };
 		0C988EB42AF15F140090E85A /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988EB32AF15F140090E85A /* Place.swift */; };
@@ -127,6 +128,7 @@
 		0C499D282AFBC03400A7C916 /* AddPlaceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlaceRequest.swift; sourceTree = "<group>"; };
 		0C563C492AFCF6E800A0F5F0 /* SettingsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVM.swift; sourceTree = "<group>"; };
 		0C563C4B2AFCF84600A0F5F0 /* UserProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileResponse.swift; sourceTree = "<group>"; };
+		0C563C4D2AFD6D1D00A0F5F0 /* UIStackViewSettingHorizontal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackViewSettingHorizontal.swift; sourceTree = "<group>"; };
 		0C5A49D82AEF032C007CB2A8 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		0C988EAF2AF14EB80090E85A /* MapVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVM.swift; sourceTree = "<group>"; };
 		0C988EB32AF15F140090E85A /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 				0CF742632ADB3546002B1389 /* UITextFieldCC.swift */,
 				0CF742612ADB3474002B1389 /* UIViewCC.swift */,
 				0CF742652ADB47B2002B1389 /* UILabelCC.swift */,
+				0C563C4D2AFD6D1D00A0F5F0 /* UIStackViewSettingHorizontal.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				0C04A7872AEA9FEE002972CF /* HomeTableCell.swift in Sources */,
 				0C499D152AF917BE00A7C916 /* SettingCollectionCell.swift in Sources */,
 				0C499D292AFBC03400A7C916 /* AddPlaceRequest.swift in Sources */,
+				0C563C4E2AFD6D1D00A0F5F0 /* UIStackViewSettingHorizontal.swift in Sources */,
 				0CF741F72AD99AC7002B1389 /* SceneDelegate.swift in Sources */,
 				0CF742642ADB3546002B1389 /* UITextFieldCC.swift in Sources */,
 				0062B3C62AEA5EF3000066E5 /* SignUpResponse.swift in Sources */,
