@@ -16,7 +16,6 @@ class HomeVC: UIViewController {
     var viewModel = HomeVM()
     
     //MARK: -- Views
-    
     private lazy var imageLogo:UIImageView = {
         let img = UIImageView()
         img.image = UIImage(named: "homeLogo")
@@ -41,18 +40,21 @@ class HomeVC: UIViewController {
         tv.layer.maskedCorners = [.topLeft]
         return tv
     }()
+    
     //MARK: -- Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        viewModel.delegate = self
         setupViews()
+        viewModel.getPopularPlaces()
+//        viewModel.getNewPlaces()
+//        viewModel.getMyAddedPlaces()
         
     }
     
+    
     //MARK: -- UI Methods
     func setupViews() {
-        // Add here the setup for the UI
-        
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
         self.view.addSubviews(imageLogo, viewMain)
         self.viewMain.addSubviews(tableView)
@@ -60,7 +62,7 @@ class HomeVC: UIViewController {
     }
     
     func setupLayout() {
-        
+                
         imageLogo.snp.makeConstraints({ img in
             img.bottom.equalTo(viewMain.snp.top).offset(-28)
             img.leading.equalToSuperview().offset(16)
@@ -85,17 +87,16 @@ class HomeVC: UIViewController {
 extension HomeVC:UITableViewDelegate{
     
     internal func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
+        switch viewModel.tableSection[section] {
+        case .popularPlaces:
             return "Popular Places"
-        case 1:
+        case .newPlaces:
             return "New Places"
-        case 2:
+        case .myAddedPlaces:
             return "My Added Places"
-        default:
-            return nil
         }
     }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let lbl = UILabel()
         lbl.frame = CGRect(x: 25, y: 10, width: 180, height: 30)
@@ -147,32 +148,37 @@ extension HomeVC:UITableViewDelegate{
 extension HomeVC:UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return viewModel.tableSection.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return  1
+        switch viewModel.tableSection[section] {
+        case .popularPlaces:
+            return 1
+        case .newPlaces:
+            return 1
+        case .myAddedPlaces:
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath) as! HomeTableCell
-//        self.tableView = UITableView(frame: CGRect.zero, style: .grouped)
-//        cell.collectionView.reloadData()
-        
-        switch indexPath.section {
-        case 0:
-            cell.configure(data: ["popular places"])
-            return cell
-        case 1:
-            cell.configure(data: ["new places", "new places"])
-            return cell
-        default:
-            cell.configure(data: ["my added places"])
-            return cell
-
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath) as? HomeTableCell {
+            switch viewModel.tableSection[indexPath.section] {
+            case .popularPlaces:
+                cell.prepareCategory(with: viewModel.popularPlaces)
+                return cell
+            case .newPlaces:
+                cell.prepareCategory(with: viewModel.newPlaces)
+                return cell
+            case .myAddedPlaces:
+                cell.prepareCategory(with: viewModel.myAddedPlaces)
+                return cell
+            }
         }
-
+        return UITableViewCell()
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
@@ -181,5 +187,22 @@ extension HomeVC:UITableViewDataSource{
     
 }
 
+extension HomeVC: HomeViewModelDelegate {
+    func reloadTableView() {
+        self.tableView.reloadData()
+    }
+}
 
-
+//extension UIApplication {
+//    public class func topViewController(base: UIViewController? =
+//        UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+//        if let nav = base as? UINavigationController {
+//            return topViewController(base: nav.visibleViewController)
+//        } else if let tab = base as? UITabBarController, let selected = tab.selectedViewController {
+//            return topViewController(base: selected)
+//        } else if let presented = base?.presentedViewController {
+//            return topViewController(base: presented)
+//        }
+//        return base
+//    }
+//}

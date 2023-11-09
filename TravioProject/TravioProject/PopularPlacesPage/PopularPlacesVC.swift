@@ -62,32 +62,13 @@ class PopularPlacesVC: UIViewController {
         return leftBarButton
     }
     @objc func backButtonTapped(){
-        let home = HomeVC()
-        self.navigationController?.pushViewController(home, animated: true)
+    self.navigationController?.popViewController(animated: true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initVM()
         setupViews()
-        bindViewModel()
-        
     }
-    func bindViewModel() {
-        viewModel.popularPlacesChange = { [weak self] in
-            self?.collectionView.reloadData()
-        }
-        viewModel.getPopularPlaces() { result in
-        }
-    }
-    func initVM(){
-        viewModel.reloadCollectionView = { [weak self] () in
-            DispatchQueue.main.async {
-                self?.collectionView.reloadData()
-            }
-        }
-    }
-    
     func setupViews() {
         
         self.navigationItem.leftBarButtonItem = createLeftBarButton()

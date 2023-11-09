@@ -73,9 +73,9 @@ enum Router{
         }}
     var headers:HTTPHeaders{
         switch self {
-        case .signUp, .login, .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getPopularPlacesWithLimit, .getLastPlacesWithLimit, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces:
+        case .signUp, .login, .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getPopularPlacesWithLimit, .getLastPlacesWithLimit, .getPopularPlaces, .getLastPlaces:
             return [:]
-        case .postAVisit, .deleteAVisit, .editProfile, .getPersonalInfo:
+        case .postAVisit, .deleteAVisit, .editProfile, .getPersonalInfo, .getAllPlacesForUser:
             return HTTPHeaders(["Authorization": "Bearer \(token)"])
 
         }}

@@ -8,37 +8,26 @@
 import Foundation
 import Alamofire
 
-class HomeVM {
-    
-    var popularPlacesResponse:PopularPlacesResponse? {
-        didSet {
-            popularPlacesChange?()
-        }
-    }
-    
-    var popularPlaces:[PopularPlaces] = [] {
-        didSet {
-            self.reloadCollectionView?()
-        }
-    }
+protocol HomeViewModelDelegate: AnyObject {
+    func reloadTableView()
+}
 
-    func getPopularPlacesData(){
-        
-        guard let popularPlaces = popularPlacesResponse?.data.places else {return}
-        self.popularPlaces = popularPlaces
-    }
-//    
-//    var places: [HomePlaces] = [] {
-//        didSet {
-//            placesDidChange?()
-//        }
-//    }
-//    var placesDidChange: (() -> Void)?
-    
-    var reloadCollectionView: (() -> Void)?
-    var popularPlacesChange: (() -> Void)?
 
-    func getToken()->String{
+final class HomeVM {
+    
+    enum TableViewSection {
+        case popularPlaces
+        case newPlaces
+        case myAddedPlaces
+    }
+    var popularPlaces:[PopularPlaces] = []
+    var newPlaces: [PopularPlaces] = []
+    var myAddedPlaces: [PopularPlaces] = []
+    
+    weak var delegate: HomeViewModelDelegate?
+    var tableSection: [TableViewSection] = []
+
+    func getToken()-> String{
         
         let service = "com.travio"
         let account = "travio"
@@ -50,29 +39,57 @@ class HomeVM {
     }
     
     
-    func getPopularPlacesWithLimit(completion: @escaping (Result<PopularPlacesResponse, Error>) -> Void) {
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getPopularPlacesWithLimit(limit: 20), callback: {(result: Result<PopularPlacesResponse,APIError>) in
+//    func getPopularPlacesWithLimit(completion: @escaping (Result<PopularPlacesResponse, Error>) -> Void) {
+//        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getPopularPlacesWithLimit(limit: 20), callback: {(result: Result<PopularPlacesResponse,APIError>) in
+//            switch result {
+//            case .success(let success):
+//                self.popularPlaces = success.data.places
+//            case .failure(let failure):
+//                print(failure.message)
+//            }
+//        })
+//    }
+    
+    func getPopularPlaces() {
+        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getPopularPlaces, callback: {(result: Result<PopularPlacesResponse,APIError>) in
             switch result {
             case .success(let success):
-                self.popularPlacesResponse = success
-                self.getPopularPlacesData()
+                self.tableSection.append(.popularPlaces)
+                self.popularPlaces = success.data.places
+                self.delegate?.reloadTableView()
+                self.getNewPlaces()
             case .failure(let failure):
                 print(failure.message)
             }
         })
     }
     
-    func getPopularPlaces(completion: @escaping (Result<PopularPlacesResponse, Error>) -> Void) {
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getPopularPlaces, callback: {(result: Result<PopularPlacesResponse,APIError>) in
+    func getNewPlaces() {
+        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getLastPlaces, callback: {(result: Result<PopularPlacesResponse,APIError>) in
             switch result {
             case .success(let success):
-                self.popularPlacesResponse = success
-                self.getPopularPlacesData()
+                self.tableSection.append(.newPlaces)
+                self.newPlaces = success.data.places
+                self.delegate?.reloadTableView()
             case .failure(let failure):
                 print(failure.message)
             }
         })
     }
+   
+//    func getMyAddedPlaces(){
+//        GenericNetworkingHelper.shared.getProfileInfoWithHeader(urlRequest: .getLastPlaces, callback: {(result: Result<PopularPlacesResponse,APIError>) in
+//            switch result {
+//            case .success(let success):
+//                self.tableSection.append(.newPlaces)
+//                self.newPlaces = success.data.places
+//                self.delegate?.reloadTableView()
+//            case .failure(let failure):
+//                print(failure.message)
+//            }
+//        })
+//    }
+
 }
 
 
