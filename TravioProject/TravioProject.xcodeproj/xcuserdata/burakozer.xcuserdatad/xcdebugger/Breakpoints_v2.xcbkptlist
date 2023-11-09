@@ -24,7 +24,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "9B8472F6-2C88-4A8F-863E-379FD6F0A970"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TravioProject/MapPages/AddNewPlace/AddNewPlaceVC.swift"
@@ -37,7 +37,7 @@
             <Locations>
                <Location
                   uuid = "9B8472F6-2C88-4A8F-863E-379FD6F0A970 - 5b402683d3414fbf"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "TravioProject.AddNewPlaceVC.handleAddPlace() -&gt; ()"
@@ -52,7 +52,7 @@
                </Location>
                <Location
                   uuid = "9B8472F6-2C88-4A8F-863E-379FD6F0A970 - 5b402683d3415012"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "TravioProject.AddNewPlaceVC.handleAddPlace() -&gt; ()"
@@ -184,7 +184,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "11C842AB-6908-4594-BCC4-5F9B417C300B"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TravioProject/MainTabBarMenu/Visits/PlaceDetail/PlaceDetailVM.swift"
@@ -200,7 +200,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "D7EF0767-F324-4CF4-8E4D-8EE7FA7B564C"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TravioProject/MainTabBarMenu/Visits/PlaceDetail/PlaceDetailVM.swift"
@@ -216,7 +216,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "BBC29664-5528-440C-B1A8-8873178F4923"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TravioProject/MainTabBarMenu/Visits/PlaceDetail/PlaceDetailVM.swift"
@@ -229,7 +229,7 @@
             <Locations>
                <Location
                   uuid = "BBC29664-5528-440C-B1A8-8873178F4923 - 938e710b1bbb7de7"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "TravioProject.PlaceDetailVM.postAVisit(placeId: Swift.String) -&gt; ()"
@@ -244,7 +244,7 @@
                </Location>
                <Location
                   uuid = "BBC29664-5528-440C-B1A8-8873178F4923 - c0c5b3544d751fd6"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 (Swift.Result&lt;TravioProject.SuccessResponse, TravioProject.APIError&gt;) -&gt; () in TravioProject.PlaceDetailVM.postAVisit(placeId: Swift.String) -&gt; ()"

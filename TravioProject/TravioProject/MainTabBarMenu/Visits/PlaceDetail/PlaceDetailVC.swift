@@ -71,13 +71,11 @@ class PlaceDetailVC: UIViewController {
             vm.postAVisit(placeId: selectedID)
             vm.showAlertClosure = { [weak self] () in
                 DispatchQueue.main.async {
-                    
                     self?.showAlert(title: "", message: "Favorilere eklendi")
                     self?.imageFavorite.image = UIImage(named: "fullyFavorite")
                 }
             }
-        }else
-        {
+        }else{
             vm.deleteAVisit(placeId: selectedID)
             vm.showAlertClosure = { [weak self] () in
                 DispatchQueue.main.async {

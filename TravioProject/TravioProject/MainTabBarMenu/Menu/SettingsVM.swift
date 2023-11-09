@@ -10,38 +10,19 @@ import Foundation
 class SettingsVM {
     
     
-    var getData:PlaceResponse? {
+    var userProfileResponse:UserProfileResponse? {
         didSet{
-            
+            getUserProfileData?()
         }
     }
+    var getUserProfileData: (()->())?
 
-
-    
-    var places:[Place] = [] {
-        didSet{
-            addPins?()
-        }
-    }
-    func getPlacesData(){
-        guard let places = getData?.data.places else{
-            return
-        }
-        self.places = places
-    }
-    
-    
-    var addPins: (()->())?
-
-    
-    
     func initFetch(){
 
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getAllPlaces, callback: {(result: Result<PlaceResponse,APIError>) in
+        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getUserProfile, callback: {(result: Result<UserProfileResponse,APIError>) in
             switch result {
             case .success(let success):
-                self.getData = success
-                self.getPlacesData()
+                self.userProfileResponse = success
             case .failure(let failure):
                 print(failure.message)
             }
