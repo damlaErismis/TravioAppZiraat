@@ -68,13 +68,7 @@ class PlaceDetailVC: UIViewController {
     @objc func handleAddorRemoveVisit(){
         
         if self.imageFavorite.image == UIImage(named: "emptyFavorite"){
-            
-            let currentDate = Date()
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-            let formattedDate = dateFormatter.string(from: currentDate)
-            
-            vm.postAVisit(placeId: selectedID, visitedAt: formattedDate)
+            vm.postAVisit(placeId: selectedID)
             vm.showAlertClosure = { [weak self] () in
                 DispatchQueue.main.async {
                     
@@ -131,13 +125,16 @@ class PlaceDetailVC: UIViewController {
         vm.initFetchLayersAndMap()
         vm.checkVisit(placeId: vm.selectedID)
         
-        vm.successCheckId = { [weak self] () in
-         self?.imageFavorite.image = UIImage(named: "fullyFavorite")
-        }
         
         vm.errorCheckId = { [weak self] () in
             self?.imageFavorite.image = UIImage(named: "emptyFavorite")
            }
+        
+        vm.successCheckId = { [weak self] () in
+         self?.imageFavorite.image = UIImage(named: "fullyFavorite")
+        }
+        
+
         
         vm.reloadCompositionalLayoutClosure = { [weak self] () in
             DispatchQueue.main.async {

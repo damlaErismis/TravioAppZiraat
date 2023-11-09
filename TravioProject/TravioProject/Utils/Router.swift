@@ -52,8 +52,10 @@ enum Router{
             return "/v1/places/\(placeId)"
         case .postAVisit:
             return "/v1/visits"
-        case .deleteAVisit(let placeId), .checkVisitByPlaceId(let placeId) :
+        case .deleteAVisit(let placeId) :
             return "/v1/visits/\(placeId)"
+        case .checkVisitByPlaceId(let placeId):
+            return "/v1/visits/user/\(placeId)"
         case .postAPlace:
             return "/v1/places"
         case .postAGalleryImage:
@@ -64,9 +66,9 @@ enum Router{
         switch self {
         case .signUp, .login, .postAVisit, .postAPlace, .postAGalleryImage:
             return .post
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces:
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces, .checkVisitByPlaceId:
             return .get
-        case .deleteAVisit, .checkVisitByPlaceId:
+        case .deleteAVisit:
             return .delete
         
         }}

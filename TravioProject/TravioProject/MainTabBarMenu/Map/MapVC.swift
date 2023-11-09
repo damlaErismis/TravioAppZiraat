@@ -212,8 +212,12 @@ func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
     func mapView(_ mapView: MKMapView, didSelect annotation: MKAnnotation) {
         
         guard let selectedAnnotation = annotation as? PlaceAnnotation else { return }
+        
+        
         guard let selectedID = selectedAnnotation.placeId else {return}
         let vc = PlaceDetailVC()
+ 
+        
         vc.selectedID = selectedID
         self.navigationController?.pushViewController(vc, animated: true)
     }

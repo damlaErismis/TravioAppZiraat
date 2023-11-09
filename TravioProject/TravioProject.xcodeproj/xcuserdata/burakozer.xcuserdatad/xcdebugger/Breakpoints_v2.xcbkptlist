@@ -183,47 +183,79 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "47DE8073-8FF3-4722-8DF8-2D2981215C47"
+            uuid = "11C842AB-6908-4594-BCC4-5F9B417C300B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TravioProject/MainTabBarMenu/Visits/PlaceDetail/PlaceDetailVC.swift"
+            filePath = "TravioProject/MainTabBarMenu/Visits/PlaceDetail/PlaceDetailVM.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "handleAddorRemoveVisit()"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "postAVisit(placeId:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D7EF0767-F324-4CF4-8E4D-8EE7FA7B564C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TravioProject/MainTabBarMenu/Visits/PlaceDetail/PlaceDetailVM.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "postAVisit(placeId:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BBC29664-5528-440C-B1A8-8873178F4923"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TravioProject/MainTabBarMenu/Visits/PlaceDetail/PlaceDetailVM.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "postAVisit(placeId:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "47DE8073-8FF3-4722-8DF8-2D2981215C47 - d9541d6a32436cbb"
+                  uuid = "BBC29664-5528-440C-B1A8-8873178F4923 - 938e710b1bbb7de7"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "TravioProject.PlaceDetailVC.handleAddorRemoveVisit() -&gt; ()"
+                  symbolName = "TravioProject.PlaceDetailVM.postAVisit(placeId: Swift.String) -&gt; ()"
                   moduleName = "TravioProject"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/burakozer/TravioAppZiraat/TravioProject/TravioProject/MainTabBarMenu/Visits/PlaceDetail/PlaceDetailVC.swift"
+                  urlString = "file:///Users/burakozer/TravioAppZiraat/TravioProject/TravioProject/MainTabBarMenu/Visits/PlaceDetail/PlaceDetailVM.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "77"
-                  endingLineNumber = "77"
-                  offsetFromSymbolStart = "1076">
+                  startingLineNumber = "115"
+                  endingLineNumber = "115"
+                  offsetFromSymbolStart = "344">
                </Location>
                <Location
-                  uuid = "47DE8073-8FF3-4722-8DF8-2D2981215C47 - d9541d6a32436cbb"
+                  uuid = "BBC29664-5528-440C-B1A8-8873178F4923 - c0c5b3544d751fd6"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "TravioProject.PlaceDetailVC.handleAddorRemoveVisit() -&gt; ()"
+                  symbolName = "closure #1 (Swift.Result&lt;TravioProject.SuccessResponse, TravioProject.APIError&gt;) -&gt; () in TravioProject.PlaceDetailVM.postAVisit(placeId: Swift.String) -&gt; ()"
                   moduleName = "TravioProject"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/burakozer/TravioAppZiraat/TravioProject/TravioProject/MainTabBarMenu/Visits/PlaceDetail/PlaceDetailVC.swift"
+                  urlString = "file:///Users/burakozer/TravioAppZiraat/TravioProject/TravioProject/MainTabBarMenu/Visits/PlaceDetail/PlaceDetailVM.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "77"
-                  endingLineNumber = "77"
-                  offsetFromSymbolStart = "860">
+                  startingLineNumber = "117"
+                  endingLineNumber = "117"
+                  offsetFromSymbolStart = "204">
                </Location>
             </Locations>
          </BreakpointContent>

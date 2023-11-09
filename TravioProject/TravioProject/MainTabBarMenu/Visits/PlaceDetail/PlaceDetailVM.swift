@@ -93,15 +93,24 @@ class PlaceDetailVM {
             }
         })
     }
+    func dateFormatter()->String{
+        let currentDate = Date()
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        dateFormatter.string(from: currentDate)
+
+        let formattedDate = dateFormatter.string(from: currentDate)
+        return formattedDate
+    }
     
-    func postAVisit(placeId:String, visitedAt:String){
+    func postAVisit(placeId:String){
         
-        
+        let visitedAt = dateFormatter()
         
         let params = [
             "place_id": placeId,
-//            "visited_at": visitedAt
-            "visited_at": "2023-08-10T00:00:00Z"
+            "visited_at": visitedAt
             ]
         GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .postAVisit(params: params), callback: {(result: Result<SuccessResponse,APIError>) in
             switch result {
