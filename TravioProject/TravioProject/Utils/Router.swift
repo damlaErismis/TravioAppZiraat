@@ -24,6 +24,7 @@ enum Router{
     case checkVisitByPlaceId(placeId:String)
     case postAPlace(params:Parameters)
     case postAGalleryImage(params:Parameters)
+    case getUserProfile
     
     var baseURL:String{
         return "https://ios-class-2f9672c5c549.herokuapp.com"
@@ -60,13 +61,15 @@ enum Router{
             return "/v1/places"
         case .postAGalleryImage:
             return "/v1/galleries"
+        case .getUserProfile:
+            return "/v1/me"
         }
     }
     var method:HTTPMethod {
         switch self {
         case .signUp, .login, .postAVisit, .postAPlace, .postAGalleryImage:
             return .post
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces, .checkVisitByPlaceId:
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces, .checkVisitByPlaceId, .getUserProfile:
             return .get
         case .deleteAVisit:
             return .delete
@@ -76,7 +79,7 @@ enum Router{
         switch self {
         case .signUp, .login, .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getPopularPlaces, .getLastPlaces, .getAllPlacesForUser:
             return [:]
-        case .postAVisit, .deleteAVisit, .checkVisitByPlaceId, .postAPlace, .postAGalleryImage:
+        case .postAVisit, .deleteAVisit, .checkVisitByPlaceId, .postAPlace, .postAGalleryImage, .getUserProfile:
             return HTTPHeaders(["Authorization": "Bearer \(token)"])
 
         }}
@@ -86,7 +89,7 @@ enum Router{
             return params
         case .login(let params):
             return params
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .checkVisitByPlaceId:
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .checkVisitByPlaceId, .getUserProfile:
             return nil
         case .getPopularPlaces(limit: let limit), .getLastPlaces(limit: let limit):
             let limited = min(limit, 20)
