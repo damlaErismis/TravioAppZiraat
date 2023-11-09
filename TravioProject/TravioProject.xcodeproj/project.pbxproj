@@ -13,6 +13,7 @@
 		00A47A6C2AFA5710001EDF1D /* EditProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A6B2AFA5710001EDF1D /* EditProfileModel.swift */; };
 		00A47A6F2AFA6657001EDF1D /* HelpAndSupportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A6E2AFA6657001EDF1D /* HelpAndSupportVC.swift */; };
 		00A47A732AFA6D46001EDF1D /* HelpAndSupportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A722AFA6D46001EDF1D /* HelpAndSupportCell.swift */; };
+		00A47A792AFCB25E001EDF1D /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 00A47A782AFCB25E001EDF1D /* IQKeyboardManagerSwift */; };
 		00C8106C2AEBB79B0077E800 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106B2AEBB79B0077E800 /* MapVC.swift */; };
 		00C8106E2AEBB7A90077E800 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106D2AEBB7A90077E800 /* MenuVC.swift */; };
 		00C810702AEBB7B70077E800 /* VisitsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106F2AEBB7B70077E800 /* VisitsVC.swift */; };
@@ -189,6 +190,7 @@
 				00C8108F2AF0ED9F0077E800 /* (null) in Frameworks */,
 				00C810922AF0EDA70077E800 /* TinyConstraints in Frameworks */,
 				00C810B22AF8CC7C0077E800 /* SnapKit in Frameworks */,
+				00A47A792AFCB25E001EDF1D /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +458,7 @@
 				00C810942AF0EDAF0077E800 /* Alamofire */,
 				00C810AE2AF4D0700077E800 /* Kingfisher */,
 				00C810B12AF8CC7C0077E800 /* SnapKit */,
+				00A47A782AFCB25E001EDF1D /* IQKeyboardManagerSwift */,
 			);
 			productName = TravioProject;
 			productReference = 0CF741F12AD99AC7002B1389 /* TravioProject.app */;
@@ -490,6 +493,7 @@
 				00C810932AF0EDAF0077E800 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				00C810AD2AF4D0700077E800 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				00C810B02AF8CC7C0077E800 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				00A47A772AFCB25E001EDF1D /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 0CF741F22AD99AC7002B1389 /* Products */;
 			projectDirPath = "";
@@ -804,6 +808,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		00A47A772AFCB25E001EDF1D /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.5.16;
+			};
+		};
 		00C810902AF0EDA70077E800 /* XCRemoteSwiftPackageReference "TinyConstraints" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/roberthein/TinyConstraints.git";
@@ -839,6 +851,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		00A47A782AFCB25E001EDF1D /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00A47A772AFCB25E001EDF1D /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
 		00C810912AF0EDA70077E800 /* TinyConstraints */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 00C810902AF0EDA70077E800 /* XCRemoteSwiftPackageReference "TinyConstraints" */;

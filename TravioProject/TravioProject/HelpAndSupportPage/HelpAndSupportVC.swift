@@ -133,10 +133,18 @@ extension HelpAndSupportVC: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedIndex = indexPath
         
-        tableView.beginUpdates()
+        print("asdasdasd")
+        if let cell = tableView.cellForRow(at: indexPath) as? HelpAndSupportCell{
+            cell.isSelected.toggle()
+        }
+        
+        selectedIndex = indexPath
         tableView.reloadRows(at: [selectedIndex], with: .none)
+        tableView.beginUpdates()
+        
         tableView.endUpdates()
     }
+    
+    
 }

@@ -10,15 +10,33 @@ import SnapKit
 import TinyConstraints
 import Kingfisher
 
+
+
+
 class HelpAndSupportCell: UITableViewCell {
     
     var data: HelpAndSupportContent? {
-            didSet {
-                guard let data = data else { return }
-                self.lblQuestion.text = data.question
-                self.lblAnswer.text = data.answer
-            }
+        didSet {
+            guard let data = data else { return }
+            self.lblQuestion.text = data.question
+            self.lblAnswer.text = data.answer
         }
+    }
+ 
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        if selected {
+            print("isSelected changed: \(isSelected)")
+            imageChevron.image = UIImage(named: "chevronUp")
+        } else {
+            imageChevron.image = UIImage(named: "chevronDown")
+        }
+    }
+    
+    private lazy var imageChevron: UIImageView = {
+        let img = UIImageView()
+        img.image = isSelected ? UIImage(named: "chevronUp") : UIImage(named: "chevronDown")
+        return img
+    }()
     
     private lazy var lblQuestion:UILabelCC = {
         let lbl = UILabelCC(labelText: " ", font: .poppinsBold16)
@@ -33,14 +51,9 @@ class HelpAndSupportCell: UITableViewCell {
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
-    private lazy var imageChevron:UIImageView = {
-        let img = UIImageView()
-        img.image = UIImage(named: "chevron")
-        return img
-    }()
-    
+
     private let container: UIView = {
-       let v = UIView()
+        let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
         v.clipsToBounds = true
         v.backgroundColor = .white
@@ -96,8 +109,8 @@ class HelpAndSupportCell: UITableViewCell {
             make.trailing.equalTo(container.snp.trailing).offset(-4)
             make.height.equalTo(140)
         })
-
-
+        
+        
     }
     
     required init?(coder: NSCoder) {
