@@ -37,7 +37,7 @@ class MainTabBar: UITabBarController {
         let selectedImageMap = UIImage(systemName: "Map")
         mapNC.tabBarItem = UITabBarItem(title: "Map", image: mapImage, selectedImage: selectedImageMap )
         
-        let menuVC = MenuVC()
+        let menuVC = SettingsVC()
         let menuNC = UINavigationController(rootViewController: menuVC)
         let menuImage = UIImage(named: "Menu")
         let selectedImageMenu = UIImage(systemName: "Menu")

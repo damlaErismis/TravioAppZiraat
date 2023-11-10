@@ -59,7 +59,6 @@ class PlaceDetailVC: UIViewController {
     
     private lazy var imageFavorite:UIImageView = {
         let img = UIImageView()
-        img.image = UIImage(named: "emptyFavorite")
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleAddVisit))
         img.addGestureRecognizer(tap)
         img.isUserInteractionEnabled = true
@@ -67,16 +66,36 @@ class PlaceDetailVC: UIViewController {
     }()
     
     @objc func handleAddVisit(){
-        vm.showAlertClosure = { [weak self] () in
-            DispatchQueue.main.async {
-                if let message = self?.vm.successMessage {
-                    self?.showAlert(title: "", message: message)
-                    self?.imageFavorite.image = UIImage(named: "fullyFavorite")
+        
+        if self.imageFavorite.image == UIImage(named: "emptyFavorite"){
+            
+            let currentDate = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+               dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+            let formattedDate = dateFormatter.string(from: currentDate)
+                vm.postAVisit(placeId: selectedID, visitedAt: formattedDate)
+                vm.showAlertClosure = { [weak self] () in
+                    DispatchQueue.main.async {
+                        if let message = self?.vm.successMessage {
+                            self?.showAlert(title: "", message: message)
+                            self?.imageFavorite.image = UIImage(named: "fullyFavorite")
+                        }
+                    }
+                }
+            }else
+            {
+                vm.deleteAVisit(placeId: selectedID)
+                vm.showAlertClosure = { [weak self] () in
+                    DispatchQueue.main.async {
+                        if let message = self?.vm.successMessage {
+                            self?.showAlert(title: "", message: message)
+                            self?.imageFavorite.image = UIImage(named: "emptyFavorite")
+                        }
+                    }
                 }
             }
         }
-    }
-    
     @objc func imageBackTapped(tapGestureRecognizer: UITapGestureRecognizer){
         let tappedImage = tapGestureRecognizer.view as! UIImageView
         self.navigationController?.popViewController(animated: true)
@@ -98,13 +117,6 @@ class PlaceDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        guard let storedVisitedPlaceIDs = UserDefaults.standard.array(forKey: "savedVisitedPlaceIDs") as? [String] else{
-//            return
-//        }
-//        if storedVisitedPlaceIDs.contains(selectedID){
-//            imageFavorite.image = UIImage(named: "fullyFavorite")
-//        }
-        
         initView()
         
         initVM()
@@ -118,6 +130,15 @@ class PlaceDetailVC: UIViewController {
     func initVM(){
         vm.initFetchImages()
         vm.initFetchLayersAndMap()
+        vm.checkVisit(placeId: vm.selectedID)
+        
+        vm.successCheckId = { [weak self] () in
+         self?.imageFavorite.image = UIImage(named: "fullyFavorite")
+        }
+        vm.errorCheckId = { [weak self] () in
+            self?.imageFavorite.image = UIImage(named: "emptyFavorite")
+           }
+        
         vm.reloadCompositionalLayoutClosure = { [weak self] () in
             DispatchQueue.main.async {
                 self?.collectionTopView.reloadData()

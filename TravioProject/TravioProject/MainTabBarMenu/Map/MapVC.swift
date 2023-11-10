@@ -13,26 +13,31 @@ import SnapKit
 import MapKit
 import Kingfisher
 
+protocol ViewControllerDelegate: AnyObject {
+    func didDismissViewController()
+}
 
-
-class MapVC: UIViewController{
+class MapVC: UIViewController, ViewControllerDelegate{
     
+    
+    func didDismissViewController() {
+        print("tetikleme yapıldı")
+    }
+    
+
     //MARK: -- Properties
     
     lazy var vm: MapVM = {
         
         return MapVM()
     }()
-    
-    private var place:PlaceAnnotation?
- 
+
     var locationManager:CLLocationManager?
     
     
     //MARK: -- Views
     
     private lazy var mapView:MKMapView = {
-        
         let map = MKMapView()
         map.showsUserLocation = true
         map.delegate = self
@@ -56,7 +61,6 @@ class MapVC: UIViewController{
     //MARK: -- Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         locationManager = CLLocationManager()
         locationManager?.delegate = self
         locationManager?.requestWhenInUseAuthorization()
@@ -73,7 +77,6 @@ class MapVC: UIViewController{
         initVM()
         
     }
-    
     
     func initView(){
         self.navigationController?.navigationBar.isHidden = true
@@ -110,27 +113,36 @@ class MapVC: UIViewController{
              self.collectionView.reloadData()
          }
      }
-    
-    //MARK: -- Component Actions
-    
     @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
         
-        guard let locationManager = locationManager,
-              let userLocation = locationManager.location else{
-            return
-        }
-        self.place = PlaceAnnotation(mapItem: MKMapItem(), isSelected: false)
         if gesture.state == .began {
-            
             let touchPoint = gesture.location(in: mapView)
             let coordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
-            place!.coordinate = coordinate
-            mapView.addAnnotation(place!)
-            let placesTVC = DetailPlaceVC()
+            let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+            let geocoder = CLGeocoder()
+            let place = PlaceAnnotation(mapItem: MKMapItem())
+            place.coordinate = coordinate
+            mapView.addAnnotation(place)
+            
+            
+            let placesTVC = AddNewPlaceVC()
+            placesTVC.delegate = self
+            geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+                if let error = error {
+                    return
+                }
+                if let placemark = placemarks?.first {
+                    if let city = placemark.locality, let country = placemark.country {
+                        let place = "\(city), \(country)"
+                        placesTVC.selectedPlace.coordinate = coordinate
+                        placesTVC.labelCountryCity.text = place
+                    }
+                }
+            }
             placesTVC.modalPresentationStyle = .pageSheet
             if let sheet = placesTVC.sheetPresentationController{
                 sheet.prefersGrabberVisible = true
-                sheet.detents = [.medium(), .large()]
+                sheet.detents = [.large(), .large()]
                 present(placesTVC, animated: true)
             }
         }
@@ -153,7 +165,7 @@ class MapVC: UIViewController{
         }
         switch locationManager.authorizationStatus{
         case .authorizedWhenInUse, .authorizedAlways:
-            let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 750, longitudinalMeters: 750)
+            let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 10000, longitudinalMeters: 10000)
             mapView.setRegion(region, animated: true)
         case .denied:
             print("location is denied")
@@ -201,7 +213,7 @@ func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         let places = vm.places
         places.enumerated().forEach({ placeIndex, place in
             if place.latitude == selectedAnnotation.coordinate.latitude && place.longitude == selectedAnnotation.coordinate.longitude {
-                
+              
                 let temp = self.vm.places[0]
                 self.vm.places[0] = self.vm.places[placeIndex]
                 self.vm.places[placeIndex]  = temp
@@ -228,12 +240,12 @@ func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnota
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             annotationView.canShowCallout = true
             
-            let pinImage = UIImage(named: "mapPin")?.resize(targetSize: CGSize(width: 50, height: 50))
+            let pinImage = UIImage(named: "mapPin")
             annotationView.image = pinImage
 
             let detailLabel = UILabel()
             detailLabel.numberOfLines = 0
-            detailLabel.text = "\(annotation.title ?? "")"
+            detailLabel.text = "\(annotation.titlePlace ?? "")"
             annotationView.detailCalloutAccessoryView = detailLabel
         }
         return annotationView

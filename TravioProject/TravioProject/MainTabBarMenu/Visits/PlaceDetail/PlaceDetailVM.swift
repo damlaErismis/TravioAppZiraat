@@ -8,10 +8,8 @@
 import Foundation
 
 class PlaceDetailVM {
-    
-    var savedVisitedPlacesIDs: Set<String> = []
-    
-    let selectedID: String
+
+    var selectedID: String
     
     var galleryData:ImageData? {
         didSet{
@@ -22,6 +20,8 @@ class PlaceDetailVM {
         didSet{
         }
     }
+    
+    
     var place:Place?{
         didSet{
             self.reloadClosure?()
@@ -49,17 +49,27 @@ class PlaceDetailVM {
             self.showAlertClosure?()
         }
     }
+    
+    var successCheckIdResponse: SuccessResponse? {
+        didSet {
+            successCheckId?()
+        }
+    }
+    var errorCheckIdResponse:String?{
+        didSet {
+            errorCheckId?()
+        }
+    }
+    
+    var errorCheckId:(()->())?
+    var successCheckId:(()->())?
     var reloadPageControlPages: (()->())?
     var reloadCompositionalLayoutClosure: (()->())?
     var reloadClosure: (()->())?
     var showAlertClosure: (()->())?
     
     init(selectedID: String) {
-        
         self.selectedID = selectedID
-        if let storedVisitedPlaceIDs = UserDefaults.standard.array(forKey: "savedVisitedPlaceIDs") as? [String] {
-               savedVisitedPlacesIDs = Set(storedVisitedPlaceIDs)
-           }
     }
     func initFetchImages(){
         
@@ -88,17 +98,14 @@ class PlaceDetailVM {
     
     func postAVisit(placeId:String, visitedAt:String){
         
-        if let storedVisitedPlaceIDs = UserDefaults.standard.array(forKey: "savedVisitedPlaceIDs") as? [String] {
-            savedVisitedPlacesIDs = Set(storedVisitedPlaceIDs)
-        }
-        savedVisitedPlacesIDs.insert(selectedID)
-        UserDefaults.standard.set(Array(savedVisitedPlacesIDs), forKey: "savedVisitedPlaceIDs")
-        
         let params = [
             "place_id": placeId,
             "visited_at": visitedAt
+//            "visited_at": "2023-08-10T00:00:00Z"
             ]
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .postAVisit(params: params), callback: {(result: Result<PostDeleteVisitResponse,APIError>) in
+        
+        print(params)
+        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .postAVisit(params: params), callback: {(result: Result<SuccessResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.successMessage = success.message
@@ -108,19 +115,23 @@ class PlaceDetailVM {
         })
     }
     func deleteAVisit(placeId:String){
-        
-        guard let storedVisitedPlaceIDs = UserDefaults.standard.array(forKey: "savedVisitedPlaceIDs") as? [String] else{
-            return
-        }
-        savedVisitedPlacesIDs = Set(storedVisitedPlaceIDs)
-        savedVisitedPlacesIDs.remove(placeId)
-        UserDefaults.standard.set(Array(savedVisitedPlacesIDs), forKey: "savedVisitedPlaceIDs")
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .deleteAVisit(placeId: placeId), callback: {(result: Result<PostDeleteVisitResponse,APIError>) in
+        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .deleteAVisit(placeId: placeId), callback: {(result: Result<SuccessResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.successMessage = success.message
             case .failure(let failure):
                 print(failure.message)
+            }
+        })
+    }
+    
+    func checkVisit(placeId:String){
+        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .checkVisitByPlaceId(placeId: placeId), callback: {(result: Result<SuccessResponse,APIError>) in
+            switch result {
+            case .success(let success):
+                self.successCheckIdResponse = success
+            case .failure(let failure):
+                self.errorCheckIdResponse = failure.message
             }
         })
     }

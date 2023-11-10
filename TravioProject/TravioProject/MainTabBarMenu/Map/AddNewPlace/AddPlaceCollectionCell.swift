@@ -15,6 +15,7 @@ class AddPlaceCollectionCell: UICollectionViewCell {
         img.layer.cornerRadius = 20
         img.clipsToBounds = true
         img.backgroundColor = .white
+        img.isUserInteractionEnabled = true
         return img
     }()
     

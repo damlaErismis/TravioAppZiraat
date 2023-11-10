@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct PostDeleteVisitResponse:Codable{
+struct SuccessResponse:Codable{
     
-    var message:String?
-    var status:String?
+    var message:String
+    var status:String
     
 }

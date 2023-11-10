@@ -8,8 +8,32 @@
 import UIKit
 import SnapKit
 import TinyConstraints
+import MapKit
 
-class AddNewPlaceVC: UIViewController {
+class AddNewPlaceVC: UIViewController{
+    
+    weak var delegate: ViewControllerDelegate?
+    
+    var selectedIndex:IndexPath?
+    
+    var imagesFromLibrary:[UIImage] = []
+    var newPlaceId:String?
+    
+    func closePage() {
+        self.dismiss(animated: true) {
+            self.delegate?.didDismissViewController()
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        closePage()
+    }
+    
+    var selectedPlace = PlaceAnnotation(mapItem: MKMapItem())
+    
+    var vm:AddNewPlaceVM = {
+        AddNewPlaceVM()
+    }()
     
     private lazy var viewMain:UIView = {
         let view = UIView()
@@ -23,7 +47,7 @@ class AddNewPlaceVC: UIViewController {
     
     private lazy var labelPlaceName = UILabelCC(labelText: "Place Name", font: .poppinsRegular14)
     private lazy var labelDescription = UILabelCC(labelText: "Visit Description", font: .poppinsRegular14)
-    private lazy var labelCountryCity = UILabelCC(labelText: "Country, City", font: .poppinsRegular14)
+    lazy var labelCountryCity = UILabelCC(labelText: "Country, City", font: .poppinsRegular14)
     
     private lazy var labelCountryCityData:UILabelCC = {
         let lbl = UILabelCC(labelText: "country,city verisi gelecek!!", font: .poppinsRegular14)
@@ -31,13 +55,12 @@ class AddNewPlaceVC: UIViewController {
         return lbl
     }()
 
-    
     private lazy var textFieldPlaceName:UITextFieldCC = {
         let txt = UITextFieldCC(placeholderText: "Please write a place name")
         txt.autocapitalizationType = .none
         return txt
     }()
-
+    
     private lazy var textViewDescription: UITextView = {
         let tv = UITextView()
         tv.font = UIFont.systemFont(ofSize: 14)
@@ -46,7 +69,6 @@ class AddNewPlaceVC: UIViewController {
         return tv
     }()
 
-    
     private lazy var btnAddPlace:UIButton = {
         let btn = UIButton()
         btn.setTitle("Add Place", for: .normal)
@@ -54,7 +76,7 @@ class AddNewPlaceVC: UIViewController {
         btn.setTitleColor(.white, for: .normal)
         btn.backgroundColor = UIColor(hexString: "#38ada9")
         btn.layer.cornerRadius = 12
-//        btn.addTarget(self, action: #selector(btnSignUpTapped), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(handleAddPlace), for: .touchUpInside)
         return btn
     }()
     
@@ -76,10 +98,74 @@ class AddNewPlaceVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        setupViews()
         
+        initView()
+        initVM()
     }
     
+    @objc func handleAddPlace(){
+        
+        uploadImages()
+        
+        vm.addNewPlaceClosure = {
+            
+            guard let imageResponse = self.vm.imageUrls else {return }
+            guard let place = self.labelCountryCity.text else {return }
+            guard let placeTitle = self.textFieldPlaceName.text else {
+                return  }
+            guard let placeDescription = self.textViewDescription.text else {
+                return  }
+            let latitude = self.selectedPlace.coordinate.latitude
+            let longitude = self.selectedPlace.coordinate.longitude
+            
+            var addPlacerequest = AddPlaceRequest(place: place, title: placeTitle, description: placeDescription, cover_image_url: imageResponse[0], latitude: latitude, longitude: longitude)
+            
+            self.vm.addNewPlace( place: place, placeTitle: placeTitle, placeDescription: placeDescription, imageString: imageResponse[0], latitude: latitude, longitude: longitude)
+        }
+        
+        vm.addGalleriesClosure = {
+            guard let imageResponse = self.vm.imageUrls else {return }
+            guard let placeId = self.vm.placeId else {return}
+            imageResponse.forEach({ imageURL in
+                self.vm.createGalleryImage(placeId: placeId, imageURL: imageURL)
+            })
+        }
+  }
+    func uploadImages(){
+        
+        let images = imagesFromLibrary
+        if images.count >= 2 {
+            vm.uploadImage(images: images)
+        }else{
+            self.showAlert(title: "Alert", message: "En az 2 fotoğraf ekleyiniz'")
+            return
+        }
+    }
+    
+    
+   func showAlert(title:String, message:String){
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func imageTapped() {
+             let imagePicker = UIImagePickerController()
+             imagePicker.delegate = self
+             imagePicker.sourceType = .photoLibrary
+             present(imagePicker, animated: true, completion: nil)
+     }
+ 
+    func initView(){
+        self.navigationController?.navigationBar.isHidden = true
+        setupViews()
+    }
+
+    func initVM(){
+       
+    }
+
     func setupViews() {
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
         self.view.addSubview(viewMain)
@@ -164,14 +250,15 @@ class AddNewPlaceVC: UIViewController {
             btn.width.equalTo(342)
             btn.bottom.equalToSuperview().offset(-30)
         })
-        
     }
     
 }
 extension AddNewPlaceVC:UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
+        selectedIndex = indexPath
+        self.imageTapped()
+
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -183,9 +270,8 @@ extension AddNewPlaceVC:UICollectionViewDelegateFlowLayout {
 
 extension AddNewPlaceVC:UICollectionViewDataSource {
  
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 3
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! AddPlaceCollectionCell
@@ -194,10 +280,22 @@ extension AddNewPlaceVC:UICollectionViewDataSource {
         cell.clipsToBounds = true
         return cell
     }
-    
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//         super.setSelected(selected, animated: animated)
-//
-//     }
 }
 
+extension AddNewPlaceVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let selectedImage = info[.originalImage] as? UIImage {
+
+            if let cell = collectionView.cellForItem(at: selectedIndex!) as? AddPlaceCollectionCell {
+                cell.imgNewPlace.image = selectedImage
+                imagesFromLibrary.append(selectedImage)
+            }
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
