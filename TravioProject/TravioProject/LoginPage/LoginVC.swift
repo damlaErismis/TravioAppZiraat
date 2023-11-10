@@ -21,6 +21,14 @@ class LoginVC: UIViewController {
     private var isFormComplete: Bool = false
     
     //    MARK: -- Views
+    
+    private lazy var viewEmaill:UIViewCC = {
+        let view = UIViewCC(labeltext: "deneme", placeholderText: "deneme")
+        return view
+        
+    }()
+    
+    
     private lazy var imageLogo:UIImageView = {
         let img = UIImageView()
         img.image = UIImage(named: "travio")
@@ -71,9 +79,13 @@ class LoginVC: UIViewController {
     
     private lazy var viewEmail = UIViewCC()
     private lazy var viewPassword = UIViewCC()
+    
+    
     private lazy var textFieldEmail: UITextFieldCC = {
         
         let txt = UITextFieldCC(placeholderText: "developer@bilgeadam.com")
+        
+        
         txt.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         txt.autocapitalizationType = .none
         
@@ -175,7 +187,7 @@ class LoginVC: UIViewController {
     private func setupView(){
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
         self.view.addSubviews(viewMain, imageLogo)
-        viewMain.addSubviews(labelWelcome,viewEmail, viewPassword, buttonLogin, stackViewSignUp, labelPasswordControl)
+        viewMain.addSubviews(labelWelcome, viewEmaill, viewEmail, viewPassword, buttonLogin, stackViewSignUp, labelPasswordControl)
         viewEmail.addSubviews(labelEmail, textFieldEmail)
         viewPassword.addSubviews(labelPassword, textFieldPassword)
         stackViewSignUp.addArrangedSubviews(labelSuggestion, buttonSignUp)
@@ -204,9 +216,18 @@ class LoginVC: UIViewController {
             label.width.equalTo(226)
         })
         
-        viewEmail.snp.makeConstraints({ view in
+        viewEmaill.snp.makeConstraints({view in
+            
             view.top.equalTo(labelWelcome.snp.bottom).offset(40)
             view.centerX.equalTo(labelWelcome.snp.centerX)
+            view.height.equalTo(74)
+            view.width.equalTo(342)
+            
+        })
+        
+        viewEmail.snp.makeConstraints({ view in
+            view.top.equalTo(viewEmaill.snp.bottom).offset(40)
+            view.centerX.equalTo(viewEmaill.snp.centerX)
             view.height.equalTo(74)
             view.width.equalTo(342)
         })

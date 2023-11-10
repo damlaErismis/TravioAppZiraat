@@ -20,7 +20,6 @@ class UIStackViewSettingHorizontal: UIStackView {
         self.spacing = 170
         self.backgroundColor = .white
         self.layer.cornerRadius = 16
-
         
     }
     
