@@ -22,7 +22,7 @@ class HomeCollectionCell: UICollectionViewCell {
     
     public lazy var labelPlace:UILabelCC = {
         let lbl = UILabelCC()
-        lbl.textColor = .white
+        lbl.textColor = .red
         lbl.addFont = .poppinsRegular24
         return lbl
     }()
@@ -87,3 +87,4 @@ class HomeCollectionCell: UICollectionViewCell {
     
 
 }
+

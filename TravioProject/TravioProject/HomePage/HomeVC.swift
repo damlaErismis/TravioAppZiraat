@@ -30,13 +30,15 @@ class HomeVC: UIViewController {
         return view
     }()
     private lazy var tableView:UITableView = {
-        let tv = UITableView()
+        let tv = UITableView(frame: .zero, style: .grouped)
         tv.separatorColor = .white
         tv.delegate = self
         tv.dataSource = self
+        tv.backgroundColor = UIColor(hexString: "F8F8F8")
+
         tv.register(HomeTableCell.self, forCellReuseIdentifier: "tableCell")
         tv.isPagingEnabled = true
-        tv.layer.cornerRadius = 50
+        tv.layer.cornerRadius = 75
         tv.layer.maskedCorners = [.topLeft]
         return tv
     }()
@@ -47,9 +49,6 @@ class HomeVC: UIViewController {
         viewModel.delegate = self
         setupViews()
         viewModel.getPopularPlaces()
-//        viewModel.getNewPlaces()
-//        viewModel.getMyAddedPlaces()
-        
     }
     
     
@@ -77,7 +76,7 @@ class HomeVC: UIViewController {
         })
         
         tableView.snp.makeConstraints({cv in
-            cv.top.equalToSuperview().offset(30)
+            cv.top.equalToSuperview()
             cv.leading.equalToSuperview()
             cv.trailing.equalToSuperview()
             cv.bottom.equalToSuperview()
@@ -98,22 +97,34 @@ extension HomeVC:UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        
         let lbl = UILabel()
-        lbl.frame = CGRect(x: 25, y: 10, width: 180, height: 30)
         lbl.font = UIFont(name: "Poppins-Regular", size: 20)
         lbl.text = self.tableView(tableView, titleForHeaderInSection: section)
-        tableView.backgroundColor = UIColor(hexString: "F8F8F8")
-
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        
         let btn = UIButton()
         btn.setTitle("See All", for: .normal)
         btn.setTitleColor(UIColor(hexString: "#17C0EB"), for: .normal)
-        btn.frame = CGRect(x: view.frame.width - 120, y: 10, width: 149, height: 30)
         btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 14)
         btn.addTarget(self, action: #selector(btnSeeAllTapped), for: .touchUpInside)
         btn.tag = section
-
-        let headerView = UIView()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        
         headerView.addSubviews(lbl, btn)
+
+        lbl.snp.makeConstraints { make in
+            make.leading.equalTo(headerView).offset(25)
+            make.top.equalTo(headerView).offset(10)
+            make.bottom.equalTo(headerView).offset(-10)
+        }
+        
+        btn.snp.makeConstraints { make in
+            make.trailing.equalTo(headerView).offset(-20)
+            make.top.equalTo(headerView).offset(10)
+            make.bottom.equalTo(headerView).offset(-10)
+        }
 
         return headerView
     }
@@ -136,7 +147,10 @@ extension HomeVC:UITableViewDelegate{
 
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+        if section == 0 {
+            return 60
+        }else{ return 40 }
+       
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -162,7 +176,7 @@ extension HomeVC:UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         if let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath) as? HomeTableCell {
             switch viewModel.tableSection[indexPath.section] {
             case .popularPlaces:

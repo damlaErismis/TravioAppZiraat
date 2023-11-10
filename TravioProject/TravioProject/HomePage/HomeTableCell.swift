@@ -55,6 +55,7 @@ class HomeTableCell: UITableViewCell {
             lbl.trailing.equalToSuperview()
             lbl.centerY.equalToSuperview()
         })
+        
         collectionView.edgesToSuperview()
     }
 
@@ -89,7 +90,9 @@ extension HomeTableCell:UICollectionViewDataSource {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as? HomeCollectionCell {
             cell.configurePopularPlaces(with: self.popularPlaces[indexPath.row])
             return cell
+            
         }
+        
         return UICollectionViewCell()
     }
     
@@ -98,5 +101,6 @@ extension HomeTableCell:UICollectionViewDataSource {
 
      }
 }
+
 
 

@@ -71,24 +71,25 @@ final class HomeVM {
                 self.tableSection.append(.newPlaces)
                 self.newPlaces = success.data.places
                 self.delegate?.reloadTableView()
+                self.getMyAddedPlaces()
             case .failure(let failure):
                 print(failure.message)
             }
         })
     }
    
-//    func getMyAddedPlaces(){
-//        GenericNetworkingHelper.shared.getProfileInfoWithHeader(urlRequest: .getLastPlaces, callback: {(result: Result<PopularPlacesResponse,APIError>) in
-//            switch result {
-//            case .success(let success):
-//                self.tableSection.append(.newPlaces)
-//                self.newPlaces = success.data.places
-//                self.delegate?.reloadTableView()
-//            case .failure(let failure):
-//                print(failure.message)
-//            }
-//        })
-//    }
+    func getMyAddedPlaces() {
+        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getAllPlacesForUser, callback: {(result: Result<PopularPlacesResponse,APIError>) in
+            switch result {
+            case .success(let success):
+                self.tableSection.append(.myAddedPlaces)
+                self.myAddedPlaces = success.data.places
+                self.delegate?.reloadTableView()
+            case .failure(let failure):
+                print(failure.message)
+            }
+        })
+    }
 
 }
 
