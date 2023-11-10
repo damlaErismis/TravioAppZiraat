@@ -10,10 +10,10 @@ import UIKit
 import TinyConstraints
 
 
-class SecuritySettingsVC: UIViewController {
+class SecuritySettingsVC: UIViewController{
     
     //MARK: -- Properties
-    
+    private var isFormComplete: Bool = false
     
     //MARK: -- Views
     
@@ -32,46 +32,80 @@ class SecuritySettingsVC: UIViewController {
         view.layer.maskedCorners = [.topLeft]
         return view
     }()
-    private lazy var viewPassword = UIViewCC()
-    private lazy var viewPasswordConfirm = UIViewCC()
+    private lazy var labelPasswordControl:UILabelCC = {
+        let lbl = UILabelCC(labelText: "En az 6 karakter giriniz", font: .poppinsRegular14)
+        lbl.textColor = .red
+        lbl.isHidden = true
+        return lbl
+    }()
+    private lazy var labelPasswordMismatch:UILabelCC = {
+        let lbl = UILabelCC(labelText: "Parola Eşleşmiyor", font: .poppinsRegular14)
+        lbl.textColor = .red
+        lbl.isHidden = true
+        return lbl
+    }()
+    private lazy var labelPrivacy:UILabelCC = {
+        let lbl = UILabelCC(labelText: "Privacy", font: .poppinsRegular20)
+        lbl.textColor =  UIColor(hexString: "#38ADA9")
+        return lbl
+    }()
+    private lazy var labelChangePassword:UILabelCC = {
+        let lbl = UILabelCC(labelText: "Change Password", font: .poppinsRegular20)
+        lbl.textColor =  UIColor(hexString: "#38ADA9")
+        return lbl
+    }()
+    
     private lazy var viewCamera = UIViewCC()
     private lazy var viewPhotoLibrary = UIViewCC()
     private lazy var viewLocation = UIViewCC()
     private lazy var labelSecuritySetting:UILabelCC = {
-        
         let lbl =  UILabelCC(labelText: "Security Setting", font: .poppinsMedium30)
         lbl.textColor = .white
         return lbl
     }()
-    private lazy var labelPassword = UILabelCC(labelText: "New Password", font: .poppinsRegular14)
-    private lazy var labelPasswordConfirm = UILabelCC(labelText: "New Password Confirm", font: .poppinsRegular14)
     private lazy var labelCamera = UILabelCC(labelText: "Camera", font: .poppinsRegular14)
     private lazy var labelPhotoLibrary = UILabelCC(labelText: "Photo Library", font: .poppinsRegular14)
     private lazy var labelLocation = UILabelCC(labelText: "Location", font: .poppinsRegular14)
-    
-    private lazy var labelChangePassword:UILabelCC = {
-        let lbl = UILabelCC(labelText: "Change Password", font: .poppinsRegular24)
-        lbl.textColor =  UIColor(hexString: "#38ADA9")
-        return lbl
+    private lazy var viewPassword:UIViewCC = {
+        let view = UIViewCC(labeltext: "New Password", placeholderText: "***********")
+        view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        view.textField.autocapitalizationType = .none
+        return view
     }()
-    private lazy var labelPrivacy:UILabelCC = {
-        let lbl = UILabelCC(labelText: "Privacy", font: .poppinsRegular24)
-        lbl.textColor =  UIColor(hexString: "#38ADA9")
-        return lbl
-    }()
-    private lazy var textFieldPassword:UITextFieldCC = {
-        let txt = UITextFieldCC(placeholderText: "*************")
-        txt.isSecureTextEntry = true
-        txt.delegate = self
-        return txt
-    }()
-    private lazy var textFieldPasswordConfirm:UITextFieldCC = {
-        let txt = UITextFieldCC(placeholderText: "*************")
-        txt.isSecureTextEntry = true
-        txt.delegate = self
-        return txt
+    private lazy var viewPasswordConfirm:UIViewCC = {
+        let view = UIViewCC(labeltext: "New Password Confirm", placeholderText: "***********")
+        view.textField.isSecureTextEntry = true
+        view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        return view
     }()
     
+    private lazy var stackViewTop:UIStackView = {
+        let sv = UIStackView()
+        sv.axis = .vertical
+        sv.spacing = 12
+        sv.distribution = .fillProportionally
+        return sv
+    }()
+    private lazy var stackViewBottom:UIStackView = {
+        let sv = UIStackView()
+        sv.axis = .vertical
+        sv.spacing = 12
+        sv.distribution = .fillProportionally
+        return sv
+    }()
+    private lazy var buttonSave:UIButton = {
+        let btn = UIButton()
+        btn.setTitle("Login", for: .normal)
+        btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 16)
+        btn.setTitleColor(.white, for: .normal)
+        btn.backgroundColor = UIColor(hexString: "#38ada9")
+        btn.layer.cornerRadius = 12
+        btn.isEnabled = false
+        btn.addTarget(self, action: #selector(handleSave), for: .touchUpInside)
+        
+        return btn
+    }()
+
     private lazy var toggleSwitchCamera = {
         let s = UISwitch()
         s.addTarget(self, action: #selector(toggleSwitcChangeForCamera), for: .valueChanged)
@@ -87,6 +121,16 @@ class SecuritySettingsVC: UIViewController {
         s.addTarget(self, action: #selector(toggleSwitcChangeForLocation), for: .valueChanged)
         return s
     }()
+
+    
+    //MARK: -- Life Cycles
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
+        setupViews()
+    }
+    
+    //MARK: -- Component Actions
     @objc func handleBack(){
         
         navigationController?.popViewController(animated: true)
@@ -102,32 +146,31 @@ class SecuritySettingsVC: UIViewController {
         
     }
     
-    private lazy var buttonSave:UIButton = {
-        let btn = UIButton()
-        btn.setTitle("Login", for: .normal)
-        btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 16)
-        btn.setTitleColor(.white, for: .normal)
-        btn.backgroundColor = UIColor(hexString: "#38ada9")
-        btn.layer.cornerRadius = 12
-        btn.isEnabled = false
-        btn.addTarget(self, action: #selector(handleSave), for: .touchUpInside)
-        
-        return btn
-    }()
     @objc func handleSave(){
         
     }
     
-    //MARK: -- Life Cycles
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
-        setupViews()
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        
+        if textField == viewPassword.textField || textField == viewPasswordConfirm.textField {
+            
+            let passwordText = viewPassword.textField.text ?? ""
+            let passwordConfirmText = viewPasswordConfirm.textField.text ?? ""
+            let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmText.count > 6
+            labelPasswordMismatch.isHidden = passwordsMatch
+            let passwordLenght = passwordText.count > 6
+            labelPasswordControl.isHidden = passwordLenght
+            isFormComplete = passwordText.count > 6 && passwordsMatch
+            buttonSave.isEnabled = isFormComplete
+            buttonSave.backgroundColor = isFormComplete ? UIColor(hexString: "#38ada9") : .lightGray
+        }
+        if textField == viewPassword.textField{
+            let passwordText = viewPassword.textField.text ?? ""
+            let passwordChracterCountControl = passwordText.count > 6
+            labelPasswordControl.isHidden = passwordChracterCountControl
+        }
     }
-    
-    //MARK: -- Component Actions
-    
-    
+
     //MARK: -- Private Methods
     
     
@@ -136,9 +179,12 @@ class SecuritySettingsVC: UIViewController {
         // Add here the setup for the UI
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
         self.view.addSubviews(imageBack, labelSecuritySetting, viewMain)
-        self.viewMain.addSubviews(labelChangePassword, viewPassword, viewPasswordConfirm, labelPrivacy, viewCamera, viewPhotoLibrary, viewLocation, buttonSave)
-        viewPassword.addSubviews(labelPassword, textFieldPassword)
-        viewPasswordConfirm.addSubviews(labelPasswordConfirm, textFieldPasswordConfirm)
+        self.viewMain.addSubviews(labelChangePassword,stackViewTop,labelPrivacy, stackViewBottom, buttonSave)
+ 
+        stackViewTop.addArrangedSubviews(viewPassword,viewPasswordConfirm)
+        viewPassword.addSubviews(labelPasswordControl)
+        viewPasswordConfirm.addSubviews(labelPasswordMismatch)
+        stackViewBottom.addArrangedSubviews(viewCamera,viewPhotoLibrary,viewLocation)
         viewCamera.addSubviews(labelCamera, toggleSwitchCamera)
         viewPhotoLibrary.addSubviews(labelPhotoLibrary, toggleSwitchPhotoLibrary)
         viewLocation.addSubviews(labelLocation, toggleSwitchLocation)
@@ -154,7 +200,7 @@ class SecuritySettingsVC: UIViewController {
         })
         labelSecuritySetting.snp.makeConstraints({lbl in
             lbl.centerY.equalTo(imageBack.snp.centerY)
-            lbl.trailing.equalToSuperview().offset(-45)
+            lbl.centerX.equalToSuperview()
         })
         viewMain.snp.makeConstraints({ view in
             view.bottom.equalToSuperview()
@@ -166,47 +212,27 @@ class SecuritySettingsVC: UIViewController {
             lbl.top.equalToSuperview().offset(45)
             lbl.leading.equalToSuperview().offset(25)
         })
-        viewPassword.snp.makeConstraints({ view in
-            view.top.equalTo(labelChangePassword.snp.bottom).offset(15)
-            view.leading.equalToSuperview().offset(25)
-            view.trailing.equalToSuperview().offset(-25)
-            view.height.equalTo(75)
+        labelPasswordControl.snp.makeConstraints({lbl in
+            lbl.bottom.equalToSuperview()
+            lbl.leading.equalToSuperview().offset(12)
         })
-        labelPassword.snp.makeConstraints({lbl in
-            lbl.top.equalToSuperview().offset(8)
-            lbl.leading.equalToSuperview().offset(10)
+        labelPasswordMismatch.snp.makeConstraints({lbl in
+            lbl.bottom.equalToSuperview()
+            lbl.leading.equalToSuperview().offset(12)
         })
-        textFieldPassword.snp.makeConstraints({ txt in
-            txt.top.equalTo(labelPassword.snp.bottom).offset(10)
-            txt.leading.equalToSuperview().offset(10)
-            txt.trailing.equalToSuperview().offset(-10)
-            txt.height.equalTo(30)
-        })
-        viewPasswordConfirm.snp.makeConstraints({ view in
-            view.top.equalTo(viewPassword.snp.bottom).offset(15)
-            view.leading.equalToSuperview().offset(25)
-            view.trailing.equalToSuperview().offset(-25)
-            view.height.equalTo(75)
-        })
-        labelPasswordConfirm.snp.makeConstraints({lbl in
-            lbl.top.equalToSuperview().offset(8)
-            lbl.leading.equalToSuperview().offset(10)
-        })
-        textFieldPasswordConfirm.snp.makeConstraints({ txt in
-            txt.top.equalTo(labelPasswordConfirm.snp.bottom).offset(10)
-            txt.leading.equalToSuperview().offset(10)
-            txt.trailing.equalToSuperview().offset(-10)
-            txt.height.equalTo(30)
+        stackViewTop.snp.makeConstraints({sv in
+            sv.top.equalTo(labelChangePassword.snp.bottom).offset(8)
+            sv.leading.equalToSuperview().offset(25)
+            sv.trailing.equalToSuperview().offset(-25)
         })
         labelPrivacy.snp.makeConstraints({lbl in
             lbl.top.equalTo(viewPasswordConfirm.snp.bottom).offset(25)
             lbl.leading.equalToSuperview().offset(25)
         })
-        viewCamera.snp.makeConstraints({ view in
-            view.top.equalTo(labelPrivacy.snp.bottom).offset(8)
-            view.leading.equalToSuperview().offset(25)
-            view.trailing.equalToSuperview().offset(-25)
-            view.height.equalTo(75)
+        stackViewBottom.snp.makeConstraints({sv in
+            sv.top.equalTo(labelPrivacy.snp.bottom).offset(8)
+            sv.leading.equalToSuperview().offset(25)
+            sv.trailing.equalToSuperview().offset(-25)
         })
         labelCamera.snp.makeConstraints({lbl in
             lbl.leading.equalTo(15)
@@ -218,12 +244,6 @@ class SecuritySettingsVC: UIViewController {
             ts.height.equalTo(30)
             ts.width.equalTo(50)
         })
-        viewPhotoLibrary.snp.makeConstraints({ view in
-            view.top.equalTo(viewCamera.snp.bottom).offset(8)
-            view.leading.equalToSuperview().offset(25)
-            view.trailing.equalToSuperview().offset(-25)
-            view.height.equalTo(75)
-        })
         labelPhotoLibrary.snp.makeConstraints({lbl in
             lbl.leading.equalTo(15)
             lbl.centerY.equalToSuperview()
@@ -233,12 +253,6 @@ class SecuritySettingsVC: UIViewController {
             ts.centerY.equalToSuperview()
             ts.height.equalTo(30)
             ts.width.equalTo(50)
-        })
-        viewLocation.snp.makeConstraints({ view in
-            view.top.equalTo(viewPhotoLibrary.snp.bottom).offset(8)
-            view.leading.equalToSuperview().offset(25)
-            view.trailing.equalToSuperview().offset(-25)
-            view.height.equalTo(75)
         })
         labelLocation.snp.makeConstraints({lbl in
             lbl.leading.equalTo(15)
@@ -251,27 +265,11 @@ class SecuritySettingsVC: UIViewController {
             ts.width.equalTo(50)
         })
         buttonSave.snp.makeConstraints({ btn in
-            btn.bottom.equalToSuperview().offset(-20)
+            btn.bottom.equalToSuperview().offset(-50)
             btn.centerX.equalToSuperview()
             btn.height.equalTo(54)
             btn.width.equalTo(342)
         })
-    }
-}
-
-extension SecuritySettingsVC:UITextFieldDelegate{
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        //        guard let textPassword = textFieldPassword.text else{
-        //            return false
-        //        }
-        //
-        //        if textField == textFieldPassword {
-        //
-        //        }
-        return true
-        
     }
 }
 
