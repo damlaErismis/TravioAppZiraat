@@ -50,6 +50,7 @@
 		0C563C4A2AFCF6E800A0F5F0 /* SettingsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C563C492AFCF6E800A0F5F0 /* SettingsVM.swift */; };
 		0C563C4C2AFCF84600A0F5F0 /* UserProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C563C4B2AFCF84600A0F5F0 /* UserProfileResponse.swift */; };
 		0C563C4E2AFD6D1D00A0F5F0 /* UIStackViewSettingHorizontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C563C4D2AFD6D1D00A0F5F0 /* UIStackViewSettingHorizontal.swift */; };
+		0C563C502AFE1C4A00A0F5F0 /* SecuritySettingsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C563C4F2AFE1C4A00A0F5F0 /* SecuritySettingsVM.swift */; };
 		0C5A49D92AEF032C007CB2A8 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5A49D82AEF032C007CB2A8 /* APIError.swift */; };
 		0C988EB02AF14EB80090E85A /* MapVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988EAF2AF14EB80090E85A /* MapVM.swift */; };
 		0C988EB42AF15F140090E85A /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988EB32AF15F140090E85A /* Place.swift */; };
@@ -129,6 +130,7 @@
 		0C563C492AFCF6E800A0F5F0 /* SettingsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVM.swift; sourceTree = "<group>"; };
 		0C563C4B2AFCF84600A0F5F0 /* UserProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileResponse.swift; sourceTree = "<group>"; };
 		0C563C4D2AFD6D1D00A0F5F0 /* UIStackViewSettingHorizontal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackViewSettingHorizontal.swift; sourceTree = "<group>"; };
+		0C563C4F2AFE1C4A00A0F5F0 /* SecuritySettingsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecuritySettingsVM.swift; sourceTree = "<group>"; };
 		0C5A49D82AEF032C007CB2A8 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		0C988EAF2AF14EB80090E85A /* MapVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVM.swift; sourceTree = "<group>"; };
 		0C988EB32AF15F140090E85A /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				0C499D172AF9481500A7C916 /* SecuritySettingsVC.swift */,
+				0C563C4F2AFE1C4A00A0F5F0 /* SecuritySettingsVM.swift */,
 			);
 			path = SubSettings;
 			sourceTree = "<group>";
@@ -519,6 +522,7 @@
 				00C810A62AF37BEE0077E800 /* PopularPlacesVM.swift in Sources */,
 				0CF741F52AD99AC7002B1389 /* AppDelegate.swift in Sources */,
 				0C988ED02AF2C11C0090E85A /* PlaceDetailLayout.swift in Sources */,
+				0C563C502AFE1C4A00A0F5F0 /* SecuritySettingsVM.swift in Sources */,
 				0C04A7762AE933B1002972CF /* GenericNetworkingHelper.swift in Sources */,
 				00C8106E2AEBB7A90077E800 /* SettingsVC.swift in Sources */,
 				0C563C4C2AFCF84600A0F5F0 /* UserProfileResponse.swift in Sources */,

@@ -25,6 +25,7 @@ enum Router{
     case postAPlace(params:Parameters)
     case postAGalleryImage(params:Parameters)
     case getUserProfile
+    case changePassword(params:Parameters)
     
     var baseURL:String{
         return "https://ios-class-2f9672c5c549.herokuapp.com"
@@ -63,6 +64,8 @@ enum Router{
             return "/v1/galleries"
         case .getUserProfile:
             return "/v1/me"
+        case .changePassword:
+            return "v1/change-password"
         }
     }
     var method:HTTPMethod {
@@ -73,33 +76,26 @@ enum Router{
             return .get
         case .deleteAVisit:
             return .delete
-        
+        case .changePassword:
+            return .put
         }}
     var headers:HTTPHeaders{
         switch self {
         case .signUp, .login, .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getPopularPlaces, .getLastPlaces, .getAllPlacesForUser:
             return [:]
-        case .postAVisit, .deleteAVisit, .checkVisitByPlaceId, .postAPlace, .postAGalleryImage, .getUserProfile:
+        case .postAVisit, .deleteAVisit, .checkVisitByPlaceId, .postAPlace, .postAGalleryImage, .getUserProfile, .changePassword:
             return HTTPHeaders(["Authorization": "Bearer \(token)"])
 
         }}
     var param:Parameters? {
         switch self {
-        case .signUp(let params):
-            return params
-        case .login(let params):
+        case .signUp(let params), .login(let params), .postAVisit(let params), .postAPlace(let params), .postAGalleryImage(let params), .changePassword(let params):
             return params
         case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .checkVisitByPlaceId, .getUserProfile:
             return nil
         case .getPopularPlaces(limit: let limit), .getLastPlaces(limit: let limit):
             let limited = min(limit, 20)
             return ["limit": limited]
-        case .postAVisit(let params):
-            return params
-        case .postAPlace(let params):
-            return params
-        case .postAGalleryImage(let params):
-            return params
         }}
 }
 
@@ -112,7 +108,7 @@ extension Router:URLRequestConvertible{
         urlComponent.headers = headers
         let encoding:ParameterEncoding = {
             switch method {
-            case .post:
+            case .post, .put:
                 return JSONEncoding.default
             default:
                 return URLEncoding.default
