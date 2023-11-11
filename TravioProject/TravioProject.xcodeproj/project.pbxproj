@@ -202,7 +202,6 @@
 			files = (
 				00C810AF2AF4D0700077E800 /* Kingfisher in Frameworks */,
 				00C810952AF0EDAF0077E800 /* Alamofire in Frameworks */,
-				00C8108F2AF0ED9F0077E800 /* (null) in Frameworks */,
 				00C810922AF0EDA70077E800 /* TinyConstraints in Frameworks */,
 				00C810B22AF8CC7C0077E800 /* SnapKit in Frameworks */,
 
@@ -524,6 +523,7 @@
 				00C810AD2AF4D0700077E800 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				00C810B02AF8CC7C0077E800 /* XCRemoteSwiftPackageReference "SnapKit" */,
 
+
 			);
 			productRefGroup = 0CF741F22AD99AC7002B1389 /* Products */;
 			projectDirPath = "";
@@ -599,6 +599,9 @@
 				00C810742AEBD5320077E800 /* VisitsCustomCell.swift in Sources */,
 				00C810722AEBB7DF0077E800 /* MainTabBar.swift in Sources */,
 
+				0C499D1A2AF97E4700A7C916 /* AddNewPlaceVM.swift in Sources */,
+
+				00A47A6A2AFA5528001EDF1D /* EditProfileVM.swift in Sources */,
 				0C04A7712AE92CA5002972CF /* Router.swift in Sources */,
 				00C8109D2AF169F50077E800 /* AddPlaceCollectionCell.swift in Sources */,
 				0062B3C42AEA4B7A000066E5 /* SignUpVM.swift in Sources */,
@@ -612,6 +615,10 @@
 				0C499D0D2AF6DD5F00A7C916 /* ApiErrorStatus.swift in Sources */,
 				0CF742112AD99FE8002B1389 /* Extentions.swift in Sources */,
 				0C04A7852AEA817B002972CF /* LoginSuccessResponse.swift in Sources */,
+				0C988EE62AF679B30090E85A /* SuccessResponse.swift in Sources */,
+
+				0C988EE62AF679B30090E85A /* PostDeleteVisitResponse.swift in Sources */,
+				00A47A6C2AFA5710001EDF1D /* EditProfileModel.swift in Sources */,
 
 				0C04A78B2AEAB8EA002972CF /* HomeCollectionCell.swift in Sources */,
 				0C988EB02AF14EB80090E85A /* MapVM.swift in Sources */,
