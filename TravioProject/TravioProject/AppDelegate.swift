@@ -7,10 +7,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
-<<<<<<< HEAD
-=======
 
->>>>>>> sprint3/helpAndSupportUI
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
