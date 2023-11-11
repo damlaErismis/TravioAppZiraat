@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 import MapKit
-class DetailPlaceCollectionCell: UICollectionViewCell,MKMapViewDelegate {
+class PlaceDetailCollectionCell: UICollectionViewCell,MKMapViewDelegate {
     
     
     private lazy var viewBottom: UIView = {
@@ -61,8 +61,7 @@ class DetailPlaceCollectionCell: UICollectionViewCell,MKMapViewDelegate {
         let longitude: CLLocationDegrees = data.longitude ?? 0
         let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         let locationCoordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        let mapItem = MKMapItem()
-        let annotation = PlaceAnnotation(mapItem: mapItem)
+        let annotation = PlaceAnnotation()
         annotation.coordinate = locationCoordinate
 //        annotation.customImage = UIImage(named: "mapPin")
         mapView.addAnnotation(annotation)
@@ -87,17 +86,11 @@ class DetailPlaceCollectionCell: UICollectionViewCell,MKMapViewDelegate {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             annotationView.canShowCallout = true
             
-            let pinImage = UIImage(named: "mapPin")?.resize(targetSize: CGSize(width: 50, height: 50))
+            let pinImage = UIImage(named: "mapPin")
             annotationView.image = pinImage
-            
-            let detailLabel = UILabel()
-            detailLabel.numberOfLines = 0
-            detailLabel.text = "\(annotation.title ?? "")"
-            annotationView.detailCalloutAccessoryView = detailLabel
         }
         return annotationView
     }
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)

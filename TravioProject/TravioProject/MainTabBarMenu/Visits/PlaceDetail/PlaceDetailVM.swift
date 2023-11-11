@@ -20,8 +20,6 @@ class PlaceDetailVM {
         didSet{
         }
     }
-    
-    
     var place:Place?{
         didSet{
             self.reloadClosure?()
@@ -50,7 +48,7 @@ class PlaceDetailVM {
         }
     }
     
-    var successCheckIdResponse: SuccessResponse? {
+    var successCheckIdResponse: String? {
         didSet {
             successCheckId?()
         }
@@ -95,16 +93,25 @@ class PlaceDetailVM {
             }
         })
     }
+    func dateFormatter()->String{
+        let currentDate = Date()
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        dateFormatter.string(from: currentDate)
+
+        let formattedDate = dateFormatter.string(from: currentDate)
+        return formattedDate
+    }
     
-    func postAVisit(placeId:String, visitedAt:String){
+    func postAVisit(placeId:String){
+        
+        let visitedAt = dateFormatter()
         
         let params = [
             "place_id": placeId,
             "visited_at": visitedAt
-//            "visited_at": "2023-08-10T00:00:00Z"
             ]
-        
-        print(params)
         GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .postAVisit(params: params), callback: {(result: Result<SuccessResponse,APIError>) in
             switch result {
             case .success(let success):
@@ -129,7 +136,7 @@ class PlaceDetailVM {
         GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .checkVisitByPlaceId(placeId: placeId), callback: {(result: Result<SuccessResponse,APIError>) in
             switch result {
             case .success(let success):
-                self.successCheckIdResponse = success
+                self.successCheckIdResponse = success.message
             case .failure(let failure):
                 self.errorCheckIdResponse = failure.message
             }

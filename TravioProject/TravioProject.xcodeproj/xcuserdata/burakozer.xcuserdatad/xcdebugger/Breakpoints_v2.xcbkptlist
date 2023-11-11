@@ -7,6 +7,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+<<<<<<< HEAD
             uuid = "6AEBE9F6-797F-4BDA-9A8A-6CFE8D98828A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -319,6 +320,8 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+=======
+>>>>>>> sprint3/customView
             uuid = "B1E8EED2-5E21-4302-A1DB-E2E2A3F48ED1"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -336,7 +339,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "9B8472F6-2C88-4A8F-863E-379FD6F0A970"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TravioProject/MapPages/AddNewPlace/AddNewPlaceVC.swift"
@@ -349,7 +352,7 @@
             <Locations>
                <Location
                   uuid = "9B8472F6-2C88-4A8F-863E-379FD6F0A970 - 5b402683d3414fbf"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "TravioProject.AddNewPlaceVC.handleAddPlace() -&gt; ()"
@@ -364,7 +367,7 @@
                </Location>
                <Location
                   uuid = "9B8472F6-2C88-4A8F-863E-379FD6F0A970 - 5b402683d3415012"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "TravioProject.AddNewPlaceVC.handleAddPlace() -&gt; ()"
@@ -479,6 +482,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+<<<<<<< HEAD
             uuid = "A2B46A29-FC3D-455E-83B1-C4412A217251"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -684,8 +688,10 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+=======
+>>>>>>> sprint3/customView
             uuid = "2598F48F-7E3A-46C7-AE88-687B82FFC83C"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TravioProject/MainTabBarMenu/Map/AddNewPlace/AddNewPlaceVC.swift"
@@ -700,63 +706,79 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9A87CB2F-1C3C-470E-8B7F-55C607C4A31E"
-            shouldBeEnabled = "Yes"
+            uuid = "11C842AB-6908-4594-BCC4-5F9B417C300B"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TravioProject/MainTabBarMenu/Map/AddNewPlace/AddNewPlaceVC.swift"
+            filePath = "TravioProject/MainTabBarMenu/Visits/PlaceDetail/PlaceDetailVM.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
-            landmarkName = "handleAddPlace()"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "postAVisit(placeId:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9C7E3F40-432B-41A4-B7F3-485FCA69CA82"
-            shouldBeEnabled = "Yes"
+            uuid = "D7EF0767-F324-4CF4-8E4D-8EE7FA7B564C"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TravioProject/MainTabBarMenu/Map/AddNewPlace/AddNewPlaceVC.swift"
+            filePath = "TravioProject/MainTabBarMenu/Visits/PlaceDetail/PlaceDetailVM.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
-            landmarkName = "handleAddPlace()"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "postAVisit(placeId:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BBC29664-5528-440C-B1A8-8873178F4923"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TravioProject/MainTabBarMenu/Visits/PlaceDetail/PlaceDetailVM.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "postAVisit(placeId:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "9C7E3F40-432B-41A4-B7F3-485FCA69CA82 - 4208f380dc1af170"
-                  shouldBeEnabled = "Yes"
+                  uuid = "BBC29664-5528-440C-B1A8-8873178F4923 - 938e710b1bbb7de7"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #2 () -&gt; () in TravioProject.AddNewPlaceVC.handleAddPlace() -&gt; ()"
+                  symbolName = "TravioProject.PlaceDetailVM.postAVisit(placeId: Swift.String) -&gt; ()"
                   moduleName = "TravioProject"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/burakozer/TravioAppZiraat/TravioProject/TravioProject/MainTabBarMenu/Map/AddNewPlace/AddNewPlaceVC.swift"
+                  urlString = "file:///Users/burakozer/TravioAppZiraat/TravioProject/TravioProject/MainTabBarMenu/Visits/PlaceDetail/PlaceDetailVM.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "129"
-                  endingLineNumber = "129"
-                  offsetFromSymbolStart = "336">
+                  startingLineNumber = "115"
+                  endingLineNumber = "115"
+                  offsetFromSymbolStart = "344">
                </Location>
                <Location
-                  uuid = "9C7E3F40-432B-41A4-B7F3-485FCA69CA82 - 12b3997f8af54eb5"
-                  shouldBeEnabled = "Yes"
+                  uuid = "BBC29664-5528-440C-B1A8-8873178F4923 - c0c5b3544d751fd6"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String) -&gt; () in closure #2 () -&gt; () in TravioProject.AddNewPlaceVC.handleAddPlace() -&gt; ()"
+                  symbolName = "closure #1 (Swift.Result&lt;TravioProject.SuccessResponse, TravioProject.APIError&gt;) -&gt; () in TravioProject.PlaceDetailVM.postAVisit(placeId: Swift.String) -&gt; ()"
                   moduleName = "TravioProject"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/burakozer/TravioAppZiraat/TravioProject/TravioProject/MainTabBarMenu/Map/AddNewPlace/AddNewPlaceVC.swift"
+                  urlString = "file:///Users/burakozer/TravioAppZiraat/TravioProject/TravioProject/MainTabBarMenu/Visits/PlaceDetail/PlaceDetailVM.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "130"
-                  endingLineNumber = "130"
-                  offsetFromSymbolStart = "92">
+                  startingLineNumber = "117"
+                  endingLineNumber = "117"
+                  offsetFromSymbolStart = "204">
                </Location>
             </Locations>
          </BreakpointContent>

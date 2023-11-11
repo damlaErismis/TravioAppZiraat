@@ -10,16 +10,12 @@ import MapKit
 
 class PlaceAnnotation: MKPointAnnotation {
     
-    var mapItem:MKMapItem
-    let id = UUID()
+    var mapItem:MKMapItem?
+    var placeId: String?
     var visitDescription:String?
     var titlePlace:String?
     var image:String?
     var addedBy:String?
     var addedDate:String?
-    
-    init(mapItem: MKMapItem) {
-        self.mapItem = mapItem
-    }
 
 }

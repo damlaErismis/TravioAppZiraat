@@ -13,6 +13,10 @@ class SettingsVC: UIViewController {
     
     //MARK: -- Properties
     
+    private lazy var vm:SettingsVM = {
+        return SettingsVM()
+        
+    }()
     
     //MARK: -- Views
     
@@ -37,9 +41,12 @@ class SettingsVC: UIViewController {
         return btn
     }()
     
-    private lazy var imageTopVector:UIImageView = {
+    private lazy var imageLogout:UIImageView = {
         let img = UIImageView()
         img.image = UIImage(named: "vectorSetting")
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleLogout))
+        img.addGestureRecognizer(tap)
+        img.isUserInteractionEnabled = true
         return img
     }()
     
@@ -62,7 +69,6 @@ class SettingsVC: UIViewController {
     
     private lazy var labelNameSurname:UILabelCC = {
         let lbl = UILabelCC()
-        lbl.text = "David Lynch"
         lbl.font = UIFont(name: "Poppins-Medium", size: 16)
         return lbl
     }()
@@ -74,25 +80,67 @@ class SettingsVC: UIViewController {
         btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 12)
         return btn
     }()
-    
 
     //MARK: -- Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-       setupViews()
+        navigationController?.navigationBar.isHidden = true
+        initVC()
+        initVM()
     }
     
     //MARK: -- Component Actions
-    
+    @objc func handleLogout(){
+
+        let service = "com.travio"
+        let account = "travio"
+        KeychainHelper.shared.delete(service, account: account)
+        let vc = LoginVC()
+        self.navigationController?.pushViewController(vc, animated: true)
+        showAlert(title: "Ok", message: "Uygulamadan Çıkış Yapıldı")
+        
+        
+       
+    }
     
     //MARK: -- Private Methods
-    
+    private func showAlert(title:String, message:String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     
     //MARK: -- UI Methods
+    
+    func initVM(){
+        
+        vm.initFetch()
+        
+        vm.getUserProfileData = { [weak self] () in
+            
+            guard let userName = self?.vm.userProfileResponse?.full_name else {return}
+            self?.labelNameSurname.text = userName
+            guard let imageString = self?.vm.userProfileResponse?.pp_url else {return}
+            if let imageURL = URL(string: imageString) {
+                if let imageData = try? Data(contentsOf: imageURL) {
+                    if let image = UIImage(data: imageData) {
+                        self?.imageProfile.image = image
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    func initVC(){
+        
+        setupViews()
+    }
+    
     func setupViews() {
         // Add here the setup for the UI
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
-        self.view.addSubviews(viewMain, buttonSetting, imageTopVector)
+        self.view.addSubviews(viewMain, buttonSetting, imageLogout)
         self.viewMain.addSubviews(imageProfile, labelNameSurname, buttonEditProfile, collectionView)
         setupLayout()
     }
@@ -106,7 +154,7 @@ class SettingsVC: UIViewController {
             btn.height.equalTo(48)
             btn.width.equalTo(134)
         })
-        imageTopVector.snp.makeConstraints({img in
+        imageLogout.snp.makeConstraints({img in
             img.centerY.equalTo(buttonSetting.snp.centerY)
             img.trailing.equalTo(-30)
             img.height.equalTo(30)

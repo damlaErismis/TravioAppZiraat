@@ -32,7 +32,6 @@ class SignUpViewModel {
             
             switch result {
             case .success(let success):
-                print("eeeeeeeee")
                 self.processFetched(response: success)
                 self.signupResponse = success
                 self.alertMessage = self.signupResponse?.message

@@ -25,6 +25,8 @@ enum Router{
     case checkVisitByPlaceId(placeId:String)
     case postAPlace(params:Parameters)
     case postAGalleryImage(params:Parameters)
+    case getUserProfile
+    case changePassword(params:Parameters)
     
     var baseURL:String{
         return "https://ios-class-2f9672c5c549.herokuapp.com"
@@ -53,50 +55,59 @@ enum Router{
             return "/v1/places/\(placeId)"
         case .postAVisit:
             return "/v1/visits"
-        case .deleteAVisit(let placeId), .checkVisitByPlaceId(let placeId) :
+        case .deleteAVisit(let placeId) :
             return "/v1/visits/\(placeId)"
+        case .checkVisitByPlaceId(let placeId):
+            return "/v1/visits/user/\(placeId)"
         case .postAPlace:
             return "/v1/places"
         case .postAGalleryImage:
             return "/v1/galleries"
+        case .getUserProfile:
+            return "/v1/me"
+        case .changePassword:
+            return "v1/change-password"
         }
     }
     var method:HTTPMethod {
         switch self {
         case .signUp, .login, .postAVisit, .postAPlace, .postAGalleryImage:
             return .post
+<<<<<<< HEAD
         case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlacesWithLimit, .getLastPlaces, .getPopularPlaces:
+=======
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces, .checkVisitByPlaceId, .getUserProfile:
+>>>>>>> sprint3/customView
             return .get
-        case .deleteAVisit, .checkVisitByPlaceId:
+        case .deleteAVisit:
             return .delete
-        
+        case .changePassword:
+            return .put
         }}
     var headers:HTTPHeaders{
         switch self {
         case .signUp, .login, .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getPopularPlacesWithLimit, .getLastPlaces, .getAllPlacesForUser, .getPopularPlaces:
             return [:]
-        case .postAVisit, .deleteAVisit, .checkVisitByPlaceId, .postAPlace, .postAGalleryImage:
+        case .postAVisit, .deleteAVisit, .checkVisitByPlaceId, .postAPlace, .postAGalleryImage, .getUserProfile, .changePassword:
             return HTTPHeaders(["Authorization": "Bearer \(token)"])
 
         }}
     var param:Parameters? {
         switch self {
-        case .signUp(let params):
+        case .signUp(let params), .login(let params), .postAVisit(let params), .postAPlace(let params), .postAGalleryImage(let params), .changePassword(let params):
             return params
+<<<<<<< HEAD
         case .login(let params):
             return params
         case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .getPopularPlaces:
         case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .checkVisitByPlaceId:
+=======
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .checkVisitByPlaceId, .getUserProfile:
+>>>>>>> sprint3/customView
             return nil
         case .getPopularPlacesWithLimit(limit: let limit), .getLastPlaces(limit: let limit):
             let limited = min(limit, 20)
             return ["limit": limited]
-        case .postAVisit(let params):
-            return params
-        case .postAPlace(let params):
-            return params
-        case .postAGalleryImage(let params):
-            return params
         }}
 }
 
@@ -109,7 +120,7 @@ extension Router:URLRequestConvertible{
         urlComponent.headers = headers
         let encoding:ParameterEncoding = {
             switch method {
-            case .post:
+            case .post, .put:
                 return JSONEncoding.default
             default:
                 return URLEncoding.default

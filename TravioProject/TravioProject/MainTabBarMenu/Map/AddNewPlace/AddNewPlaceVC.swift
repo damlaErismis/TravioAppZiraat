@@ -21,7 +21,7 @@ class AddNewPlaceVC: UIViewController{
     
     func closePage() {
         self.dismiss(animated: true) {
-            self.delegate?.didDismissViewController()
+            self.delegate?.didDismissPlaceDetailVC()
         }
     }
     
@@ -29,7 +29,7 @@ class AddNewPlaceVC: UIViewController{
         closePage()
     }
     
-    var selectedPlace = PlaceAnnotation(mapItem: MKMapItem())
+    var selectedPlace = PlaceAnnotation()
     
     var vm:AddNewPlaceVM = {
         AddNewPlaceVM()
@@ -110,15 +110,15 @@ class AddNewPlaceVC: UIViewController{
         vm.addNewPlaceClosure = {
             
             guard let imageResponse = self.vm.imageUrls else {return }
-            guard let place = self.labelCountryCity.text else {return }
-            guard let placeTitle = self.textFieldPlaceName.text else {
+            guard let placeTitle = self.labelCountryCity.text else {return }
+            guard let place = self.textFieldPlaceName.text else {
                 return  }
             guard let placeDescription = self.textViewDescription.text else {
                 return  }
             let latitude = self.selectedPlace.coordinate.latitude
             let longitude = self.selectedPlace.coordinate.longitude
             
-            var addPlacerequest = AddPlaceRequest(place: place, title: placeTitle, description: placeDescription, cover_image_url: imageResponse[0], latitude: latitude, longitude: longitude)
+//            var addPlacerequest = AddPlaceRequest(place: place, title: placeTitle, description: placeDescription, cover_image_url: imageResponse[0], latitude: latitude, longitude: longitude)
             
             self.vm.addNewPlace( place: place, placeTitle: placeTitle, placeDescription: placeDescription, imageString: imageResponse[0], latitude: latitude, longitude: longitude)
         }
@@ -257,7 +257,9 @@ extension AddNewPlaceVC:UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndex = indexPath
-        self.imageTapped()
+        print(indexPath)
+        
+    
 
     }
     
