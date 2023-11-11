@@ -80,12 +80,11 @@ enum Router{
         switch self {
         case .signUp, .login, .postAVisit, .postAPlace, .postAGalleryImage:
             return .post
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces, .checkVisitByPlaceId, .getUserProfile,.getPopularPlaces, .getPersonalInfo, .getPopularPlacesWithLimit, .getLastPlacesWithLimit:
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces, .checkVisitByPlaceId, .getUserProfile, .getPersonalInfo, .getPopularPlacesWithLimit, .getLastPlacesWithLimit:
             return .get
         case .deleteAVisit:
             return .delete
-        case .deleteAVisit:
-            return .delete
+
         case .editProfile, .changePassword:
             return .put
         }}
