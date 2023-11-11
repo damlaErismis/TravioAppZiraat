@@ -59,7 +59,6 @@ enum Router{
             return "/v1/visits"
         case .deleteAVisit(let placeId) :
             return "/v1/visits/\(placeId)"
-<<<<<<< HEAD
         case .checkVisitByPlaceId(let placeId):
             return "/v1/visits/user/\(placeId)"
         case .postAPlace:
@@ -70,80 +69,42 @@ enum Router{
             return "/v1/me"
         case .changePassword:
             return "v1/change-password"
-=======
         case .editProfile:
             return "v1/edit-profile"
         case .getPersonalInfo:
             return "v1/me"
->>>>>>> sprint3/editProfilePage
+
         }
     }
     var method:HTTPMethod {
         switch self {
         case .signUp, .login, .postAVisit, .postAPlace, .postAGalleryImage:
             return .post
-<<<<<<< HEAD
-<<<<<<< HEAD
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlacesWithLimit, .getLastPlaces, .getPopularPlaces:
-=======
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces, .checkVisitByPlaceId, .getUserProfile:
->>>>>>> sprint3/customView
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces, .checkVisitByPlaceId, .getUserProfile,.getPopularPlaces, .getPersonalInfo, .getPopularPlacesWithLimit, .getLastPlacesWithLimit:
             return .get
         case .deleteAVisit:
             return .delete
-        case .changePassword:
-=======
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlacesWithLimit, .getLastPlacesWithLimit, .getPopularPlaces, .getLastPlaces, .getPersonalInfo:
-            return .get
         case .deleteAVisit:
             return .delete
-        case .editProfile:
->>>>>>> sprint3/editProfilePage
+        case .editProfile, .changePassword:
             return .put
         }}
     var headers:HTTPHeaders{
         switch self {
         case .signUp, .login, .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getPopularPlacesWithLimit, .getLastPlacesWithLimit, .getPopularPlaces, .getLastPlaces:
             return [:]
-<<<<<<< HEAD
-<<<<<<< HEAD
-        case .postAVisit, .deleteAVisit, .checkVisitByPlaceId, .postAPlace, .postAGalleryImage, .getUserProfile, .changePassword:
-=======
-        case .postAVisit, .deleteAVisit, .editProfile, .getPersonalInfo:
->>>>>>> sprint3/editProfilePage
-=======
-        case .postAVisit, .deleteAVisit, .editProfile, .getPersonalInfo, .getAllPlacesForUser:
->>>>>>> sprint3/homeCollectionVM
+        case .postAVisit, .deleteAVisit, .checkVisitByPlaceId, .postAPlace, .postAGalleryImage, .getUserProfile, .changePassword,.editProfile, .getPersonalInfo, .editProfile, .getAllPlacesForUser:
             return HTTPHeaders(["Authorization": "Bearer \(token)"])
-
         }}
     var param:Parameters? {
         switch self {
-        case .signUp(let params), .login(let params), .postAVisit(let params), .postAPlace(let params), .postAGalleryImage(let params), .changePassword(let params):
+        case .signUp(let params), .login(let params), .postAVisit(let params), .postAPlace(let params), .postAGalleryImage(let params), .changePassword(let params), .editProfile(let params):
             return params
-<<<<<<< HEAD
-        case .login(let params):
-            return params
-<<<<<<< HEAD
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .getPopularPlaces:
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .checkVisitByPlaceId:
-=======
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .checkVisitByPlaceId, .getUserProfile:
->>>>>>> sprint3/customView
-=======
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces, .getPersonalInfo:
->>>>>>> sprint3/editProfilePage
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces, .getPersonalInfo,  .checkVisitByPlaceId, .getUserProfile:
             return nil
         case .getPopularPlacesWithLimit(limit: let limit), .getLastPlacesWithLimit(limit: let limit):
             let limited = min(limit, 20)
             return ["limit": limited]
-<<<<<<< HEAD
-=======
-        case .postAVisit(let params):
-            return params
-        case .editProfile(let params):
-            return params
->>>>>>> sprint3/editProfilePage
         }}
 }
 
