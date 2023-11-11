@@ -20,7 +20,7 @@ struct HomePlaces: Codable {
     let updated_at: String
 }
 
-struct PlacesResponse: Codable {
+struct ResponsePlaces: Codable {
     let data: PlacesData
     let status: String
 }

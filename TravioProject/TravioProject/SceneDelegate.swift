@@ -23,6 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         let vc = PopularPlacesVC()
 =======
         let vc = LoginVC()
@@ -36,6 +37,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 =======
         let vc = HelpAndSupportVC()
 >>>>>>> sprint3/helpAndSupportUI
+=======
+        let vc = LoginVC()
+>>>>>>> sprint3/homeCollectionVM
         let rootViewController = UINavigationController(rootViewController: vc)
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()

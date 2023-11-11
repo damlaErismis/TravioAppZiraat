@@ -103,13 +103,17 @@ enum Router{
         }}
     var headers:HTTPHeaders{
         switch self {
-        case .signUp, .login, .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getPopularPlacesWithLimit, .getLastPlacesWithLimit, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces:
+        case .signUp, .login, .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getPopularPlacesWithLimit, .getLastPlacesWithLimit, .getPopularPlaces, .getLastPlaces:
             return [:]
+<<<<<<< HEAD
 <<<<<<< HEAD
         case .postAVisit, .deleteAVisit, .checkVisitByPlaceId, .postAPlace, .postAGalleryImage, .getUserProfile, .changePassword:
 =======
         case .postAVisit, .deleteAVisit, .editProfile, .getPersonalInfo:
 >>>>>>> sprint3/editProfilePage
+=======
+        case .postAVisit, .deleteAVisit, .editProfile, .getPersonalInfo, .getAllPlacesForUser:
+>>>>>>> sprint3/homeCollectionVM
             return HTTPHeaders(["Authorization": "Bearer \(token)"])
 
         }}

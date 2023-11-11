@@ -13,10 +13,9 @@ class HomeVC: UIViewController {
     
     
     //MARK: -- Properties
-    
+    var viewModel = HomeVM()
     
     //MARK: -- Views
-    
     private lazy var imageLogo:UIImageView = {
         let img = UIImageView()
         img.image = UIImage(named: "homeLogo")
@@ -35,24 +34,26 @@ class HomeVC: UIViewController {
         tv.separatorColor = .white
         tv.delegate = self
         tv.dataSource = self
+        tv.backgroundColor = UIColor(hexString: "F8F8F8")
+
         tv.register(HomeTableCell.self, forCellReuseIdentifier: "tableCell")
         tv.isPagingEnabled = true
-        tv.layer.cornerRadius = 50
+        tv.layer.cornerRadius = 75
         tv.layer.maskedCorners = [.topLeft]
         return tv
     }()
+    
     //MARK: -- Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        viewModel.delegate = self
         setupViews()
-        
+        viewModel.getPopularPlaces()
     }
+    
     
     //MARK: -- UI Methods
     func setupViews() {
-        // Add here the setup for the UI
-        
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
         self.view.addSubviews(imageLogo, viewMain)
         self.viewMain.addSubviews(tableView)
@@ -60,7 +61,7 @@ class HomeVC: UIViewController {
     }
     
     func setupLayout() {
-        
+                
         imageLogo.snp.makeConstraints({ img in
             img.bottom.equalTo(viewMain.snp.top).offset(-28)
             img.leading.equalToSuperview().offset(16)
@@ -75,7 +76,7 @@ class HomeVC: UIViewController {
         })
         
         tableView.snp.makeConstraints({cv in
-            cv.top.equalToSuperview().offset(30)
+            cv.top.equalToSuperview()
             cv.leading.equalToSuperview()
             cv.trailing.equalToSuperview()
             cv.bottom.equalToSuperview()
@@ -85,34 +86,45 @@ class HomeVC: UIViewController {
 extension HomeVC:UITableViewDelegate{
     
     internal func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
+        switch viewModel.tableSection[section] {
+        case .popularPlaces:
             return "Popular Places"
-        case 1:
+        case .newPlaces:
             return "New Places"
-        case 2:
+        case .myAddedPlaces:
             return "My Added Places"
-        default:
-            return nil
         }
     }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        
         let lbl = UILabel()
-        lbl.frame = CGRect(x: 25, y: 10, width: 180, height: 30)
         lbl.font = UIFont(name: "Poppins-Regular", size: 20)
         lbl.text = self.tableView(tableView, titleForHeaderInSection: section)
-        tableView.backgroundColor = UIColor(hexString: "F8F8F8")
-
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        
         let btn = UIButton()
         btn.setTitle("See All", for: .normal)
         btn.setTitleColor(UIColor(hexString: "#17C0EB"), for: .normal)
-        btn.frame = CGRect(x: view.frame.width - 120, y: 10, width: 149, height: 30)
         btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 14)
         btn.addTarget(self, action: #selector(btnSeeAllTapped), for: .touchUpInside)
         btn.tag = section
-
-        let headerView = UIView()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        
         headerView.addSubviews(lbl, btn)
+
+        lbl.snp.makeConstraints { make in
+            make.leading.equalTo(headerView).offset(25)
+            make.top.equalTo(headerView).offset(10)
+            make.bottom.equalTo(headerView).offset(-10)
+        }
+        
+        btn.snp.makeConstraints { make in
+            make.trailing.equalTo(headerView).offset(-20)
+            make.top.equalTo(headerView).offset(10)
+            make.bottom.equalTo(headerView).offset(-10)
+        }
 
         return headerView
     }
@@ -135,7 +147,10 @@ extension HomeVC:UITableViewDelegate{
 
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+        if section == 0 {
+            return 60
+        }else{ return 40 }
+       
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -147,30 +162,61 @@ extension HomeVC:UITableViewDelegate{
 extension HomeVC:UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return viewModel.tableSection.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        switch viewModel.tableSection[section] {
+        case .popularPlaces:
+            return 1
+        case .newPlaces:
+            return 1
+        case .myAddedPlaces:
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath) as! HomeTableCell
-//        self.tableView = UITableView(frame: CGRect.zero, style: .grouped)
-        cell.collectionView.reloadData()
-        
-        return cell
-        
+
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath) as? HomeTableCell {
+            switch viewModel.tableSection[indexPath.section] {
+            case .popularPlaces:
+                cell.prepareCategory(with: viewModel.popularPlaces)
+                return cell
+            case .newPlaces:
+                cell.prepareCategory(with: viewModel.newPlaces)
+                return cell
+            case .myAddedPlaces:
+                cell.prepareCategory(with: viewModel.myAddedPlaces)
+                return cell
+            }
+        }
+        return UITableViewCell()
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
-    }
+
     
 }
 
+extension HomeVC: HomeViewModelDelegate {
+    func reloadTableView() {
+        self.tableView.reloadData()
+    }
+}
 
-
+//extension UIApplication {
+//    public class func topViewController(base: UIViewController? =
+//        UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+//        if let nav = base as? UINavigationController {
+//            return topViewController(base: nav.visibleViewController)
+//        } else if let tab = base as? UITabBarController, let selected = tab.selectedViewController {
+//            return topViewController(base: selected)
+//        } else if let presented = base?.presentedViewController {
+//            return topViewController(base: presented)
+//        }
+//        return base
+//    }
+//}

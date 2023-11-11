@@ -14,6 +14,8 @@ class HomeTableCell: UITableViewCell {
 
     var viewModel = HomeVM()
     
+    private var popularPlaces: [PopularPlaces] = []
+    
     private lazy var labelSectionName:UILabel = {
         let lbl = UILabel()
         return lbl
@@ -34,16 +36,13 @@ class HomeTableCell: UITableViewCell {
  
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        initVM()
-        viewModel.popularPlacesChange = { [weak self] in
-            self?.collectionView.reloadData()
-        }
-
-        viewModel.getPopularPlacesWithLimit(){ result in
-        }
         setupViews()
     }
-
+    
+    func prepareCategory(with model: [PopularPlaces]) {
+        self.popularPlaces = model
+        collectionView.reloadData()
+    }
 
     func setupViews(){
         self.contentView.addSubviews(labelSectionName, collectionView)
@@ -56,20 +55,15 @@ class HomeTableCell: UITableViewCell {
             lbl.trailing.equalToSuperview()
             lbl.centerY.equalToSuperview()
         })
+        
         collectionView.edgesToSuperview()
-    }
-    
-    func initVM(){
-        viewModel.reloadCollectionView = { [weak self] () in
-            DispatchQueue.main.async {
-                self?.collectionView.reloadData()
-            }
-        }
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    var selectedIndex:IndexPath?
 }
 
 
@@ -89,14 +83,17 @@ extension HomeTableCell:UICollectionViewDataSource {
  
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.popularPlaces.count
+        return popularPlaces.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! HomeCollectionCell
         
-        cell.configurePopularPlaces(with: viewModel.popularPlaces[indexPath.item])
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as? HomeCollectionCell {
+            cell.configurePopularPlaces(with: self.popularPlaces[indexPath.row])
+            return cell
+            
+        }
         
-        return cell
+        return UICollectionViewCell()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -104,5 +101,6 @@ extension HomeTableCell:UICollectionViewDataSource {
 
      }
 }
+
 
 

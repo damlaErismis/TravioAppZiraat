@@ -134,15 +134,22 @@ extension HelpAndSupportVC: UITableViewDelegate, UITableViewDataSource {
         }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        print("asdasdasd")
         if let cell = tableView.cellForRow(at: indexPath) as? HelpAndSupportCell{
+            
             cell.isSelected.toggle()
+            
+            if selectedIndex == indexPath {
+                cell.updateChevronStatus(imageName: "chevronUp")
+                
+            } else {
+                cell.updateChevronStatus(imageName: "chevronDown")
+            }
+            
         }
         
         selectedIndex = indexPath
-        tableView.reloadRows(at: [selectedIndex], with: .none)
         tableView.beginUpdates()
-        
+        tableView.reloadRows(at: [selectedIndex], with: .none)
         tableView.endUpdates()
     }
     

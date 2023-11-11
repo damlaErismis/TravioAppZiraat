@@ -29,17 +29,17 @@ class NewPlacesVM {
         self.newPlaces = newPlaces
     }
     
-    func getNewPlacesWithLimit(completion: @escaping (Result<NewPlacesResponse, Error>) -> Void) {
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getLastPlacesWithLimit(limit: 20), callback: {(result: Result<NewPlacesResponse,APIError>) in
-            switch result {
-            case .success(let success):
-                self.newPlacesResponse = success
-                self.getNewPlacesData()
-            case .failure(let failure):
-                print(failure.message)
-            }
-        })
-    }
+//    func getNewPlacesWithLimit(completion: @escaping (Result<NewPlacesResponse, Error>) -> Void) {
+//        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getLastPlacesWithLimit(limit: 20), callback: {(result: Result<NewPlacesResponse,APIError>) in
+//            switch result {
+//            case .success(let success):
+//                self.newPlacesResponse = success
+//                self.getNewPlacesData()
+//            case .failure(let failure):
+//                print(failure.message)
+//            }
+//        })
+//    }
     func getNewPlaces(completion: @escaping (Result<NewPlacesResponse, Error>) -> Void) {
         GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getLastPlaces, callback: {(result: Result<NewPlacesResponse,APIError>) in
             switch result {

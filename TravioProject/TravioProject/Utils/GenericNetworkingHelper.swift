@@ -32,6 +32,7 @@ class GenericNetworkingHelper{
     }
     
 <<<<<<< HEAD
+<<<<<<< HEAD
     public func uploadImages<T: Codable>(images: [UIImage], url: String, headers: HTTPHeaders, callback: @escaping Callback<T>) {
         var imageDataArray: [Data] = []
         
@@ -96,6 +97,8 @@ class GenericNetworkingHelper{
                 }
             }
     }
+=======
+>>>>>>> sprint3/homeCollectionVM
     
 >>>>>>> sprint3/editProfilePage
 }

@@ -50,7 +50,6 @@ class NewPlacesCell:UICollectionViewCell {
                 imgNewPlace.kf.setImage(with: imageURL)
             }
         labelPlace.text = object.title
-        print(object.place)
         labelCity.text = object.place
     }
     override func layoutSubviews() {
