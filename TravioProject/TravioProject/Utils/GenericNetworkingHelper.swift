@@ -30,9 +30,7 @@ class GenericNetworkingHelper{
             }
         }
     }
-    
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     public func uploadImages<T: Codable>(images: [UIImage], url: String, headers: HTTPHeaders, callback: @escaping Callback<T>) {
         var imageDataArray: [Data] = []
         
@@ -68,38 +66,6 @@ class GenericNetworkingHelper{
             }
         }
     }
-=======
-    func getProfileInfoWithHeader<T: Codable>(urlRequest: Router, callback: @escaping Callback<T>) {
-        guard let token = KeychainHelper.shared.getToken() else {
-            let error = APIError(statusCode: -1, message: "Invalid or missing token")
-            callback(.failure(error))
-            return
-        }
-        
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(token)"
-        ]
-        
-        AF.request(urlRequest as! URLConvertible, headers: headers)
-            .validate()
-            .responseDecodable(of: T.self) { response in
-                switch response.result {
-                case .success(let success):
-                    callback(.success(success))
-                case .failure(let error):
-                    if let statusCode = response.response?.statusCode {
-                        let apiError = APIError(statusCode: statusCode, message: error.localizedDescription)
-                        callback(.failure(apiError))
-                    } else {
-                        let unknownError = APIError(statusCode: -1, message: "Unknown error occurred")
-                        callback(.failure(unknownError))
-                    }
-                }
-            }
-    }
-=======
->>>>>>> sprint3/homeCollectionVM
-    
->>>>>>> sprint3/editProfilePage
+
 }
 
