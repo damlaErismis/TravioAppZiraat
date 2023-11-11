@@ -79,14 +79,13 @@ enum Router{
         switch self {
         case .signUp, .login, .postAVisit, .postAPlace, .postAGalleryImage:
             return .post
-        case .getAllPlaces, .getAllGalleryByPlaceID,.getPersonalInfo, .getAPlaceById, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces, .checkVisitByPlaceId, .getUserProfile,  .getPopularPlacesWithLimit:
+        case .getAllPlaces, .getAllGalleryByPlaceID,.getPersonalInfo, .getAPlaceById, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces, .checkVisitByPlaceId, .getUserProfile,  .getPopularPlacesWithLimit, .getLastPlacesWithLimit:
             return .get
-        case .deleteAVisit:
-            return .delete
         case .deleteAVisit:
             return .delete
         case .editProfile, .changePassword:
             return .put
+
         }}
     var headers:HTTPHeaders{
         switch self {
