@@ -9,7 +9,7 @@ import UIKit
 
 class UIViewCC: UIView{
 
-    private lazy var label:UILabelCC = {
+    lazy var label:UILabelCC = {
         
         let lbl = UILabelCC()
         lbl.addFont = .poppinsRegular14
@@ -17,7 +17,7 @@ class UIViewCC: UIView{
         return lbl
     }()
     
-    private lazy var textField:UITextFieldCC = {
+    lazy var textField:UITextFieldCC = {
  
         let txt = UITextFieldCC()
         txt.addFont = .poppinsRegular16
