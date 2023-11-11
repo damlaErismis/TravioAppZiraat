@@ -19,27 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         let vc = PopularPlacesVC()
-=======
-        let vc = LoginVC()
->>>>>>> sprint3/customView
-=======
-        let vc = SecuritySettingsVC()
->>>>>>> sprint3/customViewInStackView
-=======
-        let vc = EditProfileVC()
->>>>>>> sprint3/editProfilePage
-=======
-        let vc = HelpAndSupportVC()
->>>>>>> sprint3/helpAndSupportUI
-=======
-        let vc = LoginVC()
->>>>>>> sprint3/homeCollectionVM
         let rootViewController = UINavigationController(rootViewController: vc)
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
