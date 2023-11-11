@@ -1,18 +1,18 @@
 //
-//  PopularPlacesCollectionCell.swift
+//  NewPlacesCell.swift
 //  TravioProject
 //
-//  Created by Damla Erişmiş on 1.11.2023.
+//  Created by Damla Erişmiş on 6.11.2023.
 //
 
-import UIKit
+import Kingfisher
 import SnapKit
 import TinyConstraints
-import Kingfisher
+import UIKit
 
-class PopularPlacesCell: UICollectionViewCell {
+class NewPlacesCell:UICollectionViewCell {
     
-    lazy var imgPopularPlace:UIImageView = {
+    lazy var imgNewPlace:UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
@@ -38,7 +38,6 @@ class PopularPlacesCell: UICollectionViewCell {
         img.image = UIImage(named: "blackPin")
         return img
     }()
-    
     private lazy var containerView:UIView = {
         let container = UIView()
         container.layer.masksToBounds = true
@@ -46,25 +45,22 @@ class PopularPlacesCell: UICollectionViewCell {
         container.backgroundColor = .white
         return container
     }()
-    
+    public func configureNewPlaces(with object:NewPlaces){
+        if let imageURL = URL(string: object.cover_image_url) {
+                imgNewPlace.kf.setImage(with: imageURL)
+            }
+        labelPlace.text = object.title
+        print(object.place)
+        labelCity.text = object.place
+    }
     override func layoutSubviews() {
         
-        imgPopularPlace.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner]
-        
+        imgNewPlace.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner]
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
-    }
-    
-    public func configure(with object:PopularPlaces){
-        if let imageURL = URL(string: object.cover_image_url) {
-                imgPopularPlace.kf.setImage(with: imageURL)
-            }
-        labelPlace.text = object.title
-        print(object.place)
-        labelCity.text = object.place
     }
     private func setupViews() {
         
@@ -72,7 +68,7 @@ class PopularPlacesCell: UICollectionViewCell {
         self.contentView.addSubview(containerView)
         self.contentView.backgroundColor = .clear
         self.contentView.addShadow(shadowColor: .black, offsetX: 0, offsetY: 0, shadowOpacity: 0.1, shadowRadius: 8)
-        containerView.addSubviews(imgPopularPlace, labelPlace,imageVector,labelCity)
+        containerView.addSubviews(imgNewPlace, labelPlace,imageVector,labelCity)
         setupLayout()
     }
     private func setupLayout() {
@@ -84,7 +80,7 @@ class PopularPlacesCell: UICollectionViewCell {
             container.bottom.equalToSuperview().offset(-6)
         })
         
-        imgPopularPlace.snp.makeConstraints({ image in
+        imgNewPlace.snp.makeConstraints({ image in
             image.leading.equalToSuperview()
             image.top.equalToSuperview()
             image.bottom.equalToSuperview()
@@ -92,19 +88,17 @@ class PopularPlacesCell: UICollectionViewCell {
         })
         
         labelPlace.snp.makeConstraints({ label in
-            label.leading.equalTo(imgPopularPlace.snp.trailing).offset(20)
-            label.top.equalTo(imgPopularPlace).offset(10)
+            label.leading.equalTo(imgNewPlace.snp.trailing).offset(20)
+            label.top.equalTo(imgNewPlace).offset(10)
         })
         imageVector.snp.makeConstraints({ img in
-            img.leading.equalTo(imgPopularPlace.snp.trailing).offset(20)
+            img.leading.equalTo(imgNewPlace.snp.trailing).offset(20)
             img.top.equalTo(labelPlace.snp.bottom)
         })
         labelCity.snp.makeConstraints({ label in
             label.leading.equalTo(imageVector.snp.trailing).offset(8)
             label.bottom.equalTo(imageVector.snp.bottom).offset(6)
         })
-        
-        
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

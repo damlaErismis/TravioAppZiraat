@@ -96,8 +96,6 @@ extension HomeTableCell:UICollectionViewDataSource {
         
         cell.configurePopularPlaces(with: viewModel.popularPlaces[indexPath.item])
         
-        cell.layer.cornerRadius = 20
-        cell.clipsToBounds = true
         return cell
     }
     

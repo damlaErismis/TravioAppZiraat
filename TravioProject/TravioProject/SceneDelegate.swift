@@ -21,6 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         let vc = PopularPlacesVC()
 =======
         let vc = LoginVC()
@@ -28,6 +29,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 =======
         let vc = SecuritySettingsVC()
 >>>>>>> sprint3/customViewInStackView
+=======
+        let vc = EditProfileVC()
+>>>>>>> sprint3/editProfilePage
         let rootViewController = UINavigationController(rootViewController: vc)
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()

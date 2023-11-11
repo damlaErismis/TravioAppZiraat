@@ -15,9 +15,11 @@ enum Router{
     case getAllPlacesForUser
     case getPopularPlaces
     case getPopularPlacesWithLimit(limit: Int)
-    case getLastPlaces(limit: Int)
-    
+    case getLastPlaces
+    case getLastPlacesWithLimit(limit: Int)
+    case editProfile(params:Parameters)
     case getAllPlaces
+    case getPersonalInfo
     case getAllGalleryByPlaceID(placeId:String)
     case getAPlaceById(placeId:String)
     case postAVisit(params:Parameters)
@@ -32,7 +34,7 @@ enum Router{
         return "https://ios-class-2f9672c5c549.herokuapp.com"
     }
     var token:String {
-        let token = KeychainHelper.shared.getToken()
+        guard let token = KeychainHelper.shared.getToken() else { return "" }
         return token
     }
     var path:String{
@@ -45,7 +47,7 @@ enum Router{
             return "/v1/places/user"
         case .getPopularPlacesWithLimit, .getPopularPlaces:
             return "/v1/places/popular"
-        case .getLastPlaces:
+        case .getLastPlacesWithLimit, .getLastPlaces:
             return "/v1/places/last"
         case .getAllPlaces:
             return "/v1/places"
@@ -57,6 +59,7 @@ enum Router{
             return "/v1/visits"
         case .deleteAVisit(let placeId) :
             return "/v1/visits/\(placeId)"
+<<<<<<< HEAD
         case .checkVisitByPlaceId(let placeId):
             return "/v1/visits/user/\(placeId)"
         case .postAPlace:
@@ -67,12 +70,19 @@ enum Router{
             return "/v1/me"
         case .changePassword:
             return "v1/change-password"
+=======
+        case .editProfile:
+            return "v1/edit-profile"
+        case .getPersonalInfo:
+            return "v1/me"
+>>>>>>> sprint3/editProfilePage
         }
     }
     var method:HTTPMethod {
         switch self {
         case .signUp, .login, .postAVisit, .postAPlace, .postAGalleryImage:
             return .post
+<<<<<<< HEAD
 <<<<<<< HEAD
         case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlacesWithLimit, .getLastPlaces, .getPopularPlaces:
 =======
@@ -82,13 +92,24 @@ enum Router{
         case .deleteAVisit:
             return .delete
         case .changePassword:
+=======
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlacesWithLimit, .getLastPlacesWithLimit, .getPopularPlaces, .getLastPlaces, .getPersonalInfo:
+            return .get
+        case .deleteAVisit:
+            return .delete
+        case .editProfile:
+>>>>>>> sprint3/editProfilePage
             return .put
         }}
     var headers:HTTPHeaders{
         switch self {
-        case .signUp, .login, .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getPopularPlacesWithLimit, .getLastPlaces, .getAllPlacesForUser, .getPopularPlaces:
+        case .signUp, .login, .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getPopularPlacesWithLimit, .getLastPlacesWithLimit, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces:
             return [:]
+<<<<<<< HEAD
         case .postAVisit, .deleteAVisit, .checkVisitByPlaceId, .postAPlace, .postAGalleryImage, .getUserProfile, .changePassword:
+=======
+        case .postAVisit, .deleteAVisit, .editProfile, .getPersonalInfo:
+>>>>>>> sprint3/editProfilePage
             return HTTPHeaders(["Authorization": "Bearer \(token)"])
 
         }}
@@ -99,15 +120,26 @@ enum Router{
 <<<<<<< HEAD
         case .login(let params):
             return params
+<<<<<<< HEAD
         case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .getPopularPlaces:
         case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .checkVisitByPlaceId:
 =======
         case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .checkVisitByPlaceId, .getUserProfile:
 >>>>>>> sprint3/customView
+=======
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces, .getPersonalInfo:
+>>>>>>> sprint3/editProfilePage
             return nil
-        case .getPopularPlacesWithLimit(limit: let limit), .getLastPlaces(limit: let limit):
+        case .getPopularPlacesWithLimit(limit: let limit), .getLastPlacesWithLimit(limit: let limit):
             let limited = min(limit, 20)
             return ["limit": limited]
+<<<<<<< HEAD
+=======
+        case .postAVisit(let params):
+            return params
+        case .editProfile(let params):
+            return params
+>>>>>>> sprint3/editProfilePage
         }}
 }
 
