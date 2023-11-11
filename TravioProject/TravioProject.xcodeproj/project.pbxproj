@@ -11,6 +11,9 @@
 		0062B3C62AEA5EF3000066E5 /* SignUpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0062B3C52AEA5EF3000066E5 /* SignUpResponse.swift */; };
 		00A47A6A2AFA5528001EDF1D /* EditProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A692AFA5528001EDF1D /* EditProfileVM.swift */; };
 		00A47A6C2AFA5710001EDF1D /* EditProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A6B2AFA5710001EDF1D /* EditProfileModel.swift */; };
+		00A47A6F2AFA6657001EDF1D /* HelpAndSupportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A6E2AFA6657001EDF1D /* HelpAndSupportVC.swift */; };
+		00A47A732AFA6D46001EDF1D /* HelpAndSupportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A722AFA6D46001EDF1D /* HelpAndSupportCell.swift */; };
+		00A47A792AFCB25E001EDF1D /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 00A47A782AFCB25E001EDF1D /* IQKeyboardManagerSwift */; };
 		00C8106C2AEBB79B0077E800 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106B2AEBB79B0077E800 /* MapVC.swift */; };
 		00C8106E2AEBB7A90077E800 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106D2AEBB7A90077E800 /* SettingsVC.swift */; };
 		00C810702AEBB7B70077E800 /* VisitsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106F2AEBB7B70077E800 /* VisitsVC.swift */; };
@@ -105,6 +108,8 @@
 		0062B3C52AEA5EF3000066E5 /* SignUpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponse.swift; sourceTree = "<group>"; };
 		00A47A692AFA5528001EDF1D /* EditProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVM.swift; sourceTree = "<group>"; };
 		00A47A6B2AFA5710001EDF1D /* EditProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileModel.swift; sourceTree = "<group>"; };
+		00A47A6E2AFA6657001EDF1D /* HelpAndSupportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpAndSupportVC.swift; sourceTree = "<group>"; };
+		00A47A722AFA6D46001EDF1D /* HelpAndSupportCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpAndSupportCell.swift; sourceTree = "<group>"; };
 		00C8106B2AEBB79B0077E800 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		00C8106D2AEBB7A90077E800 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		00C8106F2AEBB7B70077E800 /* VisitsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsVC.swift; sourceTree = "<group>"; };
@@ -200,7 +205,11 @@
 				00C8108F2AF0ED9F0077E800 /* (null) in Frameworks */,
 				00C810922AF0EDA70077E800 /* TinyConstraints in Frameworks */,
 				00C810B22AF8CC7C0077E800 /* SnapKit in Frameworks */,
+<<<<<<< HEAD
 				0C563C482AFCB2CC00A0F5F0 /* IQKeyboardManagerSwift in Frameworks */,
+=======
+				00A47A792AFCB25E001EDF1D /* IQKeyboardManagerSwift in Frameworks */,
+>>>>>>> sprint3/helpAndSupportUI
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +247,15 @@
 				0062B3C52AEA5EF3000066E5 /* SignUpResponse.swift */,
 			);
 			path = SignUpPage;
+			sourceTree = "<group>";
+		};
+		00A47A6D2AFA63E0001EDF1D /* HelpAndSupportPage */ = {
+			isa = PBXGroup;
+			children = (
+				00A47A6E2AFA6657001EDF1D /* HelpAndSupportVC.swift */,
+				00A47A722AFA6D46001EDF1D /* HelpAndSupportCell.swift */,
+			);
+			path = HelpAndSupportPage;
 			sourceTree = "<group>";
 		};
 		00C810662AEBB3430077E800 /* MainTabBarMenu */ = {
@@ -395,6 +413,7 @@
 		0CF741F32AD99AC7002B1389 /* TravioProject */ = {
 			isa = PBXGroup;
 			children = (
+				00A47A6D2AFA63E0001EDF1D /* HelpAndSupportPage */,
 				00C810CB2AF990330077E800 /* EditProfilePage */,
 				00C810C02AF950090077E800 /* NewPlacesPage */,
 				00C810BF2AF94FF40077E800 /* MyAddedPlacesPage */,
@@ -473,7 +492,11 @@
 				00C810942AF0EDAF0077E800 /* Alamofire */,
 				00C810AE2AF4D0700077E800 /* Kingfisher */,
 				00C810B12AF8CC7C0077E800 /* SnapKit */,
+<<<<<<< HEAD
 				0C563C472AFCB2CC00A0F5F0 /* IQKeyboardManagerSwift */,
+=======
+				00A47A782AFCB25E001EDF1D /* IQKeyboardManagerSwift */,
+>>>>>>> sprint3/helpAndSupportUI
 			);
 			productName = TravioProject;
 			productReference = 0CF741F12AD99AC7002B1389 /* TravioProject.app */;
@@ -508,7 +531,11 @@
 				00C810932AF0EDAF0077E800 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				00C810AD2AF4D0700077E800 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				00C810B02AF8CC7C0077E800 /* XCRemoteSwiftPackageReference "SnapKit" */,
+<<<<<<< HEAD
 				0C563C462AFCB2CC00A0F5F0 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+=======
+				00A47A772AFCB25E001EDF1D /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+>>>>>>> sprint3/helpAndSupportUI
 			);
 			productRefGroup = 0CF741F22AD99AC7002B1389 /* Products */;
 			projectDirPath = "";
@@ -592,6 +619,7 @@
 				00C8109D2AF169F50077E800 /* AddPlaceCollectionCell.swift in Sources */,
 				0062B3C42AEA4B7A000066E5 /* SignUpVM.swift in Sources */,
 				0C988ED62AF37EAC0090E85A /* Visit.swift in Sources */,
+				00A47A6F2AFA6657001EDF1D /* HelpAndSupportVC.swift in Sources */,
 				0C988EB42AF15F140090E85A /* Place.swift in Sources */,
 				0C563C4A2AFCF6E800A0F5F0 /* SettingsVM.swift in Sources */,
 				0C988ED22AF2C1460090E85A /* PlaceDetailVC.swift in Sources */,
@@ -622,6 +650,7 @@
 				0CF742642ADB3546002B1389 /* UITextFieldCC.swift in Sources */,
 				0062B3C62AEA5EF3000066E5 /* SignUpResponse.swift in Sources */,
 				00C810A42AF37BD80077E800 /* PopularPlacesModel.swift in Sources */,
+				00A47A732AFA6D46001EDF1D /* HelpAndSupportCell.swift in Sources */,
 				00C810822AF0EB8F0077E800 /* AddNewPlaceVC.swift in Sources */,
 				00C810CA2AF95D410077E800 /* NewPlacesModel.swift in Sources */,
 				0C04A77D2AE94147002972CF /* HomeVC.swift in Sources */,
@@ -835,6 +864,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		00A47A772AFCB25E001EDF1D /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.5.16;
+			};
+		};
 		00C810902AF0EDA70077E800 /* XCRemoteSwiftPackageReference "TinyConstraints" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/roberthein/TinyConstraints.git";
@@ -878,6 +915,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		00A47A782AFCB25E001EDF1D /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00A47A772AFCB25E001EDF1D /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
 		00C810912AF0EDA70077E800 /* TinyConstraints */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 00C810902AF0EDA70077E800 /* XCRemoteSwiftPackageReference "TinyConstraints" */;

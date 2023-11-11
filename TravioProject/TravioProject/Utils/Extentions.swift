@@ -22,6 +22,7 @@ enum FontStatus {
     case poppinsBold36
     case poppinsBold16
     case poppinsBold30
+    case poppinsBold24
     case poppinsMedium30
     
     var defineFont:UIFont? {
@@ -46,6 +47,8 @@ enum FontStatus {
             return UIFont(name: "Poppins-Medium", size: 30)
         case .poppinsRegular10:
             return UIFont(name: "Poppins-Regular", size: 10)
+        case .poppinsBold24:
+            return UIFont(name: "Poppins-Bold", size: 24)
         }
     
     }
