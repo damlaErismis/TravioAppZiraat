@@ -8,10 +8,17 @@
 //
 import UIKit
 import TinyConstraints
+import AVFoundation
+import CoreLocation
 
 
-class SecuritySettingsVC: UIViewController{
+class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
     
+    private lazy var vm:SecuritySettingsVM = {
+        return SecuritySettingsVM()
+    }()
+    
+    var locationManager = CLLocationManager()
     //MARK: -- Properties
     private var isFormComplete: Bool = false
     
@@ -68,8 +75,8 @@ class SecuritySettingsVC: UIViewController{
     private lazy var labelLocation = UILabelCC(labelText: "Location", font: .poppinsRegular14)
     private lazy var viewPassword:UIViewCC = {
         let view = UIViewCC(labeltext: "New Password", placeholderText: "***********")
+        view.textField.isSecureTextEntry = true
         view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        view.textField.autocapitalizationType = .none
         return view
     }()
     private lazy var viewPasswordConfirm:UIViewCC = {
@@ -95,7 +102,7 @@ class SecuritySettingsVC: UIViewController{
     }()
     private lazy var buttonSave:UIButton = {
         let btn = UIButton()
-        btn.setTitle("Login", for: .normal)
+        btn.setTitle("Save", for: .normal)
         btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 16)
         btn.setTitleColor(.white, for: .normal)
         btn.backgroundColor = UIColor(hexString: "#38ada9")
@@ -126,30 +133,128 @@ class SecuritySettingsVC: UIViewController{
     //MARK: -- Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationManager.delegate = self
         navigationController?.navigationBar.isHidden = true
-        setupViews()
+        initVC()
+        initVM()
     }
     
     //MARK: -- Component Actions
+    
+    func initVM(){
+
+    }
+    
+    
+    func initVC(){
+        
+        setupViews()
+    }
+    
+    
     @objc func handleBack(){
         
         navigationController?.popViewController(animated: true)
     }
     
-    @objc func toggleSwitcChangeForCamera(){
-        
-    }
-    @objc func toggleSwitcChangeForPhotoLibrary(){
-        
-    }
-    @objc func toggleSwitcChangeForLocation(){
-        
+    func permissionAlert(title:String, message:String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .authorizedWhenInUse, .authorizedAlways:
+            // İzin verildiyse, konum verilerini alma işlemlerini başlatabilirsiniz
+            startUpdatingLocation()
+        case .denied, .restricted:
+            
+            let title = "Konum İzni Gerekli"
+            let message = "Konum izni verilmedi. Ayarlara giderek izin verebilirsiniz."
+            permissionAlert(title: title, message: message)
+        case .notDetermined:
+            // İzin durumu belirsizse, bir şey yapmanıza gerek yok
+            break
+        @unknown default:
+            break
+        }
+    }
+    
+    func startUpdatingLocation() {
+        locationManager.startUpdatingLocation()
+    }
+
+    func hasCameraPermission() -> Bool {
+        return UIImagePickerController.isSourceTypeAvailable(.camera)
+    }
+
+    func saveCameraData() {
+        print("Kamera verileri kaydedildi")
+    }
+
+
+    func hasPhotoLibraryPermission() -> Bool {
+        return UIImagePickerController.isSourceTypeAvailable(.photoLibrary)
+    }
+
+    func savePhotoLibraryData() {
+        print("Fotoğraf kütüphanesi verileri kaydedildi")
+    }
+    
+    
+    @objc func toggleSwitcChangeForLocation() {
+        if toggleSwitchLocation.isOn {
+            requestLocationPermission()
+        } else {
+            stopUpdatingLocation()
+        }
+    }
+
+    func requestLocationPermission() {
+        locationManager.requestWhenInUseAuthorization()
+    }
+
+    func stopUpdatingLocation() {
+        locationManager.stopUpdatingLocation()
+    }
+    
+
+    @objc func toggleSwitcChangeForCamera() {
+        if toggleSwitchCamera.isOn {
+            if hasCameraPermission() {
+                saveCameraData()
+            } else {
+                let title = "Kamera İzni Gerekli"
+                let message = "Kamera izni verilmedi. Ayarlara giderek izin verebilirsiniz."
+                permissionAlert(title: title, message: message)
+            }
+        }
+    }
+
+    @objc func toggleSwitcChangeForPhotoLibrary() {
+        if toggleSwitchPhotoLibrary.isOn {
+            if hasPhotoLibraryPermission() {
+                savePhotoLibraryData()
+            } else {
+                let title = "Fotoğraf Kütüphanesi İzni Gerekli"
+                let message = "Fotoğraf kütüphanesi izni verilmedi. Ayarlara giderek izin verebilirsiniz"
+                permissionAlert(title: title, message: message)
+            }
+        }
+    }
     @objc func handleSave(){
         
+        vm.changePassword(newPassword: viewPassword.textField.text!)
+        vm.showAlertClosure = { [weak self] () in
+            DispatchQueue.main.async {
+                guard let message = self?.vm.successMessage else {
+                    return
+                }
+                self?.permissionAlert(title: "", message: message)
+            }
+        }
     }
-    
     @objc func textFieldDidChange(_ textField: UITextField) {
         
         if textField == viewPassword.textField || textField == viewPasswordConfirm.textField {

@@ -14,26 +14,28 @@ class SecuritySettingsVM {
         
     }()
     
-    var userProfileResponse:UserProfileResponse? {
-        didSet{
-            getUserProfileData?()
+    var successMessage: String? {
+        didSet {
+            self.showAlertClosure?()
         }
     }
-    var getUserProfileData: (()->())?
+    
+    var showAlertClosure: (()->())?
+    
+ 
+    func changePassword(newPassword:String){
 
-    func initFetch(){
-
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getUserProfile, callback: {(result: Result<UserProfileResponse,APIError>) in
+        let params = [
+            "new_password": newPassword
+        ]
+        
+        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .changePassword(params: params), callback: {(result: Result<SuccessResponse,APIError>) in
             switch result {
             case .success(let success):
-                self.userProfileResponse = success
+                self.successMessage = success.message
             case .failure(let failure):
                 print(failure.message)
             }
         })
     }
-    
-    
-    
-    
 }

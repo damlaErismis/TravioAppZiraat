@@ -37,11 +37,6 @@ class PlaceDetailVM {
         didSet{
         }
     }
-    var isLoading: Bool = false {
-        didSet {
-            //   self.updateLoadingStatus?()
-        }
-    }
     var successMessage: String? {
         didSet {
             self.showAlertClosure?()
