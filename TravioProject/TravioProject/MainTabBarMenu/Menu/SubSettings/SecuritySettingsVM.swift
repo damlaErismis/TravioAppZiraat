@@ -16,25 +16,42 @@ class SecuritySettingsVM {
     
     var successMessage: String? {
         didSet {
-            self.showAlertClosure?()
+            self.showSuccessAlertClosure?()
         }
     }
     
-    var showAlertClosure: (()->())?
-    
- 
+    var errorStatusMessage:ErrorResponse? {
+        didSet {
+            self.showErrorAlertClosure?()
+        }
+    }
+    var showSuccessAlertClosure: (()->())?
+    var showErrorAlertClosure: (()->())?
     func changePassword(newPassword:String){
-
         let params = [
             "new_password": newPassword
         ]
         
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .changePassword(params: params), callback: {(result: Result<SuccessResponse,APIError>) in
+        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .changePassword(params: params), callback: {(result: Result<SuccessResponse,APIErrorMessage>) in
             switch result {
             case .success(let success):
                 self.successMessage = success.message
             case .failure(let failure):
-                print(failure.message)
+                switch failure {
+                case .apiError(let status, _):
+                    switch status {
+                    case .unauthorized:
+                        self.errorStatusMessage = ErrorResponse(status: "Unauthorized", message: "Signature is invalid")
+                    case .forbidden:
+                        self.errorStatusMessage = ErrorResponse(status: "Forbidden", message: "Access to this resource is forbidden.")
+                    case .badRequest:
+                        self.errorStatusMessage = ErrorResponse(status: "Fail", message: "Too many characters for password")
+                    default:
+                        self.errorStatusMessage = ErrorResponse(status: "Unknown Error", message: "Unknown error occurred.")
+                    }
+                default:
+                    self.errorStatusMessage = ErrorResponse(status: "Error", message: failure.localizedDescription)
+                }
             }
         })
     }

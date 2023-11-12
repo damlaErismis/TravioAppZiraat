@@ -142,6 +142,26 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
     //MARK: -- Component Actions
     
     func initVM(){
+        
+        vm.showSuccessAlertClosure = { [weak self] () in
+            DispatchQueue.main.async {
+                guard let message = self?.vm.successMessage else {
+                    return
+                }
+                self?.showAlert(title: "Success", message: message)
+            }
+        }
+        
+        vm.showErrorAlertClosure = { [weak self] () in
+            DispatchQueue.main.async {
+                if let message = self?.vm.errorStatusMessage?.message, let title = self?.vm.errorStatusMessage?.status {
+                    self?.showAlert(title:title, message: message)
+                }
+            }
+        }
+        
+        
+        
 
     }
     
@@ -157,7 +177,7 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
         navigationController?.popViewController(animated: true)
     }
     
-    func permissionAlert(title:String, message:String) {
+    func showAlert(title:String, message:String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
@@ -172,7 +192,7 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
             
             let title = "Konum İzni Gerekli"
             let message = "Konum izni verilmedi. Ayarlara giderek izin verebilirsiniz."
-            permissionAlert(title: title, message: message)
+            showAlert(title: title, message: message)
         case .notDetermined:
             // İzin durumu belirsizse, bir şey yapmanıza gerek yok
             break
@@ -227,7 +247,7 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
             } else {
                 let title = "Kamera İzni Gerekli"
                 let message = "Kamera izni verilmedi. Ayarlara giderek izin verebilirsiniz."
-                permissionAlert(title: title, message: message)
+                showAlert(title: title, message: message)
             }
         }
     }
@@ -239,22 +259,17 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
             } else {
                 let title = "Fotoğraf Kütüphanesi İzni Gerekli"
                 let message = "Fotoğraf kütüphanesi izni verilmedi. Ayarlara giderek izin verebilirsiniz"
-                permissionAlert(title: title, message: message)
+                showAlert(title: title, message: message)
             }
         }
     }
     @objc func handleSave(){
         
         vm.changePassword(newPassword: viewPassword.textField.text!)
-        vm.showAlertClosure = { [weak self] () in
-            DispatchQueue.main.async {
-                guard let message = self?.vm.successMessage else {
-                    return
-                }
-                self?.permissionAlert(title: "", message: message)
-            }
-        }
     }
+    
+    
+    
     @objc func textFieldDidChange(_ textField: UITextField) {
         
         if textField == viewPassword.textField || textField == viewPasswordConfirm.textField {

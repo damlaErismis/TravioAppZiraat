@@ -64,7 +64,7 @@ class LoginVC: UIViewController {
     }()
     
     private lazy var labelPasswordControl:UILabelCC = {
-        let lbl = UILabelCC(labelText: "En az 6 karakter giriniz", font: .poppinsRegular14)
+        let lbl = UILabelCC(labelText: "Enter at least 6 characters", font: .poppinsRegular14)
         lbl.textColor = .red
         lbl.isHidden = true
         return lbl
@@ -114,8 +114,8 @@ class LoginVC: UIViewController {
     func initVM(){
         vm.showAlertClosure = { [weak self] () in
             DispatchQueue.main.async {
-                if let message = self?.vm.alertMessage {
-                    self?.showAlert(title: "Invalid Password/Email ", message: message)
+                if let message = self?.vm.errorStatusMessage?.message, let title = self?.vm.errorStatusMessage?.status {
+                    self?.showAlert(title:title, message: message)
                 }
             }
         }
@@ -167,7 +167,7 @@ class LoginVC: UIViewController {
     private func setupView(){
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
         self.view.addSubviews(viewMain, imageLogo)
-        viewMain.addSubviews(labelWelcome, stackView,  buttonLogin, stackViewSignUp/*, labelPasswordControl*/)
+        viewMain.addSubviews(labelWelcome, stackView,  buttonLogin, stackViewSignUp, labelPasswordControl)
         stackView.addArrangedSubviews(viewEmail, viewPassword)
         viewPassword.addSubviews(labelPasswordControl)
         stackViewSignUp.addArrangedSubviews(labelSuggestion, buttonSignUp)
@@ -216,7 +216,6 @@ class LoginVC: UIViewController {
         })
         
     }
-    
 }
 extension LoginVC:UITextFieldDelegate{
     

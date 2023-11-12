@@ -9,7 +9,15 @@ import Foundation
 
 // Bu sayfa geliştirilecek
 
+struct ErrorResponse {
+    
+    var status: String
+    var message: String
+}
+
+
 enum APIErrorStatus: Int {
+    case badRequest = 400
     case unauthorized = 401
     case forbidden = 403
     case notFound = 404
@@ -20,7 +28,11 @@ enum APIErrorMessage: Error {
     case networkError
     case invalidResponse
     case apiError(status: APIErrorStatus, message: String)
-
+    
+     init(status: APIErrorStatus, message: String) {
+         self = .apiError(status: status, message: message)
+     }
+    
     var localizedDescription: String {
         switch self {
         case .networkError:
@@ -32,39 +44,3 @@ enum APIErrorMessage: Error {
         }
     }
 }
-
-//
-//func initFetchImages() {
-//    let id = selectedID
-//    GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getAllGalleryByPlaceID(placeId: id), callback: {(result: Result<ImageData,APIError>) in
-//        switch result {
-//        case .success(let success):
-//            self.galleryData = success
-//        case .failure(let failure):
-//            var errorMessage: String
-//            switch failure {
-//            case .apiError(let status, _):
-//                // API hata durumlarına göre özel mesajları oluştur
-//                switch status {
-//                case .unauthorized:
-//                    errorMessage = "Unauthorized access. Please log in."
-//                case .forbidden:
-//                    errorMessage = "Access to this resource is forbidden."
-//                case .notFound:
-//                    errorMessage = "Resource not found."
-//                default:
-//                    errorMessage = "Unknown error occurred."
-//                }
-//            default:
-//                errorMessage = failure.localizedDescription
-//            }
-//            
-//            // Hata mesajını UIAlertController ile göster
-//            let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
-//            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-//            alertController.addAction(okAction)
-//            // ViewController içinde olduğunuzu varsayarak alertController'ı göster
-//            self.present(alertController, animated: true, completion: nil)
-//        }
-//    })
-//}
