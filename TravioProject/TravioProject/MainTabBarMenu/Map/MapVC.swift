@@ -140,7 +140,7 @@ class MapVC: UIViewController, ViewControllerDelegate{
                     if let city = placemark.locality, let country = placemark.country {
                         let place = "\(city), \(country)"
                         placesTVC.selectedPlace.coordinate = coordinate
-                        placesTVC.labelCountryCity.text = place
+                        placesTVC.viewCountryCity.textField.text = place
                     }
                 }
             }
@@ -157,6 +157,7 @@ class MapVC: UIViewController, ViewControllerDelegate{
         
 //        let allAnnotations = mapView.annotations
 //        mapView.removeAnnotations(allAnnotations)
+//        initVM()
     }
 
     //MARK: -- Private Methods
@@ -206,7 +207,10 @@ extension MapVC: MKMapViewDelegate {
   
 func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
     
-//    guard let unSelectedAnnotation = view.annotation as? PlaceAnnotation else {return}
+  
+    guard let unSelectedAnnotation = view.annotation as? PlaceAnnotation else {return}
+    
+    
     }
     
     func mapView(_ mapView: MKMapView, didSelect annotation: MKAnnotation) {

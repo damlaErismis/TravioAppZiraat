@@ -3,4 +3,102 @@
    uuid = "134E0691-08FA-4085-8A45-D66BA726EA06"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D4875518-3595-4371-B91D-F580917234E9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TravioProject/MainTabBarMenu/Map/MapVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
+            landmarkName = "mapView(_:didDeselect:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D4875518-3595-4371-B91D-F580917234E9 - d197181a09e7f817"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TravioProject.MapVC.mapView(_: __C.MKMapView, didDeselect: __C.MKAnnotationView) -&gt; ()"
+                  moduleName = "TravioProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/burakozer/TravioAppZiraat/TravioProject/TravioProject/MainTabBarMenu/Map/MapVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "214"
+                  endingLineNumber = "214"
+                  offsetFromSymbolStart = "200">
+               </Location>
+               <Location
+                  uuid = "D4875518-3595-4371-B91D-F580917234E9 - d197181a09e7f8b4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TravioProject.MapVC.mapView(_: __C.MKMapView, didDeselect: __C.MKAnnotationView) -&gt; ()"
+                  moduleName = "TravioProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/burakozer/TravioAppZiraat/TravioProject/TravioProject/MainTabBarMenu/Map/MapVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "211"
+                  endingLineNumber = "211"
+                  offsetFromSymbolStart = "56">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C551889C-FADE-47CC-921A-0A9B45E7316D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TravioProject/MainTabBarMenu/Map/AddNewPlace/AddNewPlaceVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "imageTapped()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C551889C-FADE-47CC-921A-0A9B45E7316D - 207085b58b254c56"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TravioProject.AddNewPlaceVC.showAlert(title: Swift.String, message: Swift.String) -&gt; ()"
+                  moduleName = "TravioProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/burakozer/TravioAppZiraat/TravioProject/TravioProject/MainTabBarMenu/Map/AddNewPlace/AddNewPlaceVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "153"
+                  endingLineNumber = "153"
+                  offsetFromSymbolStart = "260">
+               </Location>
+               <Location
+                  uuid = "C551889C-FADE-47CC-921A-0A9B45E7316D - 848aa5d2a3b38620"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TravioProject.AddNewPlaceVC.imageTapped() -&gt; ()"
+                  moduleName = "TravioProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/burakozer/TravioAppZiraat/TravioProject/TravioProject/MainTabBarMenu/Map/AddNewPlace/AddNewPlaceVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "154"
+                  endingLineNumber = "154"
+                  offsetFromSymbolStart = "40">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
