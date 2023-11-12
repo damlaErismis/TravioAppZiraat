@@ -13,7 +13,7 @@ struct UserProfileUpdateRequest: Encodable {
     let pp_url: String?
 }
 
-struct UserProfileUpdateResponse: Decodable {
+struct UserProfileUpdateResponse: Codable {
     let message: String?
     let status: String?
 }

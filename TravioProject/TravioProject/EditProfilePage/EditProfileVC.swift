@@ -9,9 +9,12 @@
 import UIKit
 import TinyConstraints
 import SnapKit
+import Kingfisher
 
 
 class EditProfileVC: UIViewController {
+    
+    private var viewModel = EditProfileVM()
     
     private lazy var viewMain:UIView = {
         let view = UIView()
@@ -20,6 +23,18 @@ class EditProfileVC: UIViewController {
         view.layer.maskedCorners = [.topLeft]
         return view
     }()
+    
+    private lazy var viewFullName:UIViewCC = {
+        let view = UIViewCC(labeltext: "Full Name", placeholderText: "bilge_adam")
+        view.textField.autocapitalizationType = .none
+        return view
+    }()
+    private lazy var viewEmail:UIViewCC = {
+        let view = UIViewCC(labeltext: "Email", placeholderText: "developer@bilgeadam.com")
+        view.textField.autocapitalizationType = .none
+        return view
+    }()
+    
     private lazy var labelEditProfile:UILabelCC = {
         let lbl = UILabelCC(labelText: "Edit Profile", font: .poppinsBold30)
         lbl.textColor = .white
@@ -38,25 +53,13 @@ class EditProfileVC: UIViewController {
     }()
     private lazy var viewCreatedAtTime = UIViewCC()
     private lazy var viewUserRole = UIViewCC()
-    private lazy var viewFullName = UIViewCC()
-    private lazy var viewEmail = UIViewCC()
+    
     
     private lazy var labelFullNameTitle = UILabelCC(labelText: "Bruce Willis", font: .poppinsRegular24)
+    
     private lazy var labelCreatedAtTime = UILabelCC(labelText: "Aug 30, 2023", font: .poppinsRegular14)
     private lazy var labelUserRole = UILabelCC(labelText: "Admin", font: .poppinsRegular14)
-    private lazy var labelFullName = UILabelCC(labelText: "Full Name", font: .poppinsRegular14)
-    private lazy var labelEmail = UILabelCC(labelText: "Email", font: .poppinsRegular14)
     
-    private lazy var textFieldFullName:UITextFieldCC = {
-        let txt = UITextFieldCC(placeholderText: "bilge_adam")
-        txt.autocapitalizationType = .none
-        return txt
-    }()
-    private lazy var textFieldEmail:UITextFieldCC = {
-        let txt = UITextFieldCC(placeholderText: "developer@bilgeadam.com")
-        txt.autocapitalizationType = .none
-        return txt
-    }()
     private lazy var imageCreatedAtTime:UIImageView = {
         let img = UIImageView()
         img.image = UIImage(named: "createdAtTime")
@@ -66,6 +69,14 @@ class EditProfileVC: UIViewController {
         let img = UIImageView()
         img.image = UIImage(named: "userRole")
         return img
+    }()
+    
+    private lazy var stackView:UIStackView = {
+        let sv = UIStackView()
+        sv.axis = .vertical
+        sv.spacing = 24
+        sv.distribution = .fillProportionally
+        return sv
     }()
     
     private lazy var buttonSave:UIButton = {
@@ -99,33 +110,57 @@ class EditProfileVC: UIViewController {
         let home = HomeVC()
         self.navigationController?.pushViewController(home, animated: true)
     }
-    @objc func btnSaveTapped(){
+    
+    var selectedImageURL: URL?
+    
+    @objc func btnSaveTapped() {
+        guard let fullName = viewFullName.textField.text else{return}
+        guard let email = viewEmail.textField.text else{return}
+        guard let pp_url = selectedImageURL?.absoluteString else{return}
         
+        viewModel.updateUserProfile(fullName: fullName, email: email, pp_url: pp_url)
     }
     
     @objc func btnChangePhotoTapped() {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: true, completion: nil)
-        
+        presentPhotoActionSheet()
     }
+    
+    private func bindViewModel() {
+        viewModel.userProfileDidChange = { [weak self] userProfile in
+            self?.labelFullNameTitle.text = userProfile.full_name
+            self?.labelUserRole.text = userProfile.role
+            self?.viewFullName.textField.text = userProfile.full_name
+            self?.viewEmail.textField.text = userProfile.email
+            
+            if let formattedDate = self?.viewModel.formatServerDate(dateString: userProfile.created_at) {
+                self?.labelCreatedAtTime.text = formattedDate
+                
+            } else {
+                self?.labelCreatedAtTime.text = userProfile.created_at
+            }
+            
+            if let imageURL = URL(string: userProfile.pp_url) {
+                self?.imgProfilePic.kf.setImage(with: imageURL)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel.getPersonalInfo()
+        bindViewModel()
         setupViews()
-        
     }
     
     func setupViews() {
         self.navigationItem.rightBarButtonItem = createCrossButton()
         self.view.addSubviews(viewMain, labelEditProfile)
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
-        viewMain.addSubviews(imgProfilePic, buttonChangePhoto ,buttonSave,viewCreatedAtTime,viewUserRole,viewFullName,viewEmail, labelFullNameTitle)
+        viewMain.addSubviews(imgProfilePic, buttonChangePhoto ,buttonSave,viewCreatedAtTime,viewUserRole,viewFullName,viewEmail, labelFullNameTitle, stackView)
         viewCreatedAtTime.addSubviews(imageCreatedAtTime, labelCreatedAtTime)
         viewUserRole.addSubviews(imageUserRole, labelUserRole)
-        viewFullName.addSubviews(labelFullName, textFieldFullName)
-        viewEmail.addSubviews(labelEmail, textFieldEmail)
+        stackView.addArrangedSubviews(viewFullName, viewEmail)
         setupLayout()
     }
     
@@ -189,45 +224,12 @@ class EditProfileVC: UIViewController {
             lbl.centerY.equalToSuperview()
             lbl.leading.equalTo(imageUserRole.snp.trailing).offset(13)
         })
-        viewFullName.snp.makeConstraints({ view in
-            view.top.equalTo(viewUserRole.snp.bottom).offset(24)
-            view.trailing.equalToSuperview().offset(-20)
-            view.leading.equalToSuperview().offset(20)
-            view.height.equalTo(74)
-            view.centerX.equalToSuperview()
-        })
-        labelFullName.snp.makeConstraints({ label in
-            label.top.equalToSuperview().offset(13)
-            label.leading.equalToSuperview().offset(13)
-            label.trailing.equalToSuperview().offset(-13)
-            label.bottom.equalTo(textFieldFullName.snp.top)
-        })
         
-        textFieldFullName.snp.makeConstraints({ txt in
-            txt.bottom.equalToSuperview().offset(-13)
-            txt.leading.equalToSuperview().offset(13)
-            txt.trailing.equalToSuperview().offset(-13)
-            txt.height.equalTo(30)
-        })
-        viewEmail.snp.makeConstraints({ view in
-            view.top.equalTo(viewFullName.snp.bottom).offset(24)
-            view.trailing.equalToSuperview().offset(-20)
-            view.leading.equalToSuperview().offset(20)
-            view.height.equalTo(74)
-            view.centerX.equalToSuperview()
-        })
-        labelEmail.snp.makeConstraints({ label in
-            label.top.equalToSuperview().offset(13)
-            label.leading.equalToSuperview().offset(13)
-            label.trailing.equalToSuperview().offset(-13)
-            label.bottom.equalTo(textFieldEmail.snp.top)
-        })
-        
-        textFieldEmail.snp.makeConstraints({ txt in
-            txt.bottom.equalToSuperview().offset(-13)
-            txt.leading.equalToSuperview().offset(13)
-            txt.trailing.equalToSuperview().offset(-13)
-            txt.height.equalTo(30)
+        stackView.snp.makeConstraints({ sv in
+            sv.top.equalTo(viewUserRole.snp.bottom).offset(24)
+            sv.trailing.equalToSuperview().offset(-20)
+            sv.leading.equalToSuperview().offset(20)
+            sv.centerX.equalToSuperview()
         })
         
         buttonSave.snp.makeConstraints({ btn in
@@ -240,6 +242,7 @@ class EditProfileVC: UIViewController {
     
 }
 extension EditProfileVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let selectedImage = info[.originalImage] as? UIImage {
             imgProfilePic.image = selectedImage
@@ -251,4 +254,29 @@ extension EditProfileVC: UIImagePickerControllerDelegate, UINavigationController
         picker.dismiss(animated: true, completion: nil)
     }
     
+    func presentPhotoActionSheet(){
+        let actionSheet = UIAlertController(title: "Profile Picture",
+                                            message: "How would you like to select a picture?",
+                                            preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Cancel",
+                                            style: .cancel,
+                                            handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "Take Photo",
+                                            style: .default,
+                                            handler: nil ))
+        actionSheet.addAction(UIAlertAction(title: "Choose Photo",
+                                            style: .default,
+                                            handler: { [weak self] _ in
+            self?.presentPhotoPicker()
+        }))
+        
+        present(actionSheet, animated: true)
+    }
+    
+    func presentPhotoPicker(){
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true, completion: nil)
+    }
 }

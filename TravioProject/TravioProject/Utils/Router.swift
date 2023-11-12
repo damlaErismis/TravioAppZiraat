@@ -92,7 +92,7 @@ enum Router{
         switch self {
         case .signUp, .login, .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getPopularPlacesWithLimit, .getLastPlacesWithLimit, .getPopularPlaces, .getLastPlaces:
             return [:]
-        case .postAVisit, .deleteAVisit, .checkVisitByPlaceId, .postAPlace, .postAGalleryImage, .getUserProfile, .changePassword,.editProfile, .getPersonalInfo, .editProfile, .getAllPlacesForUser:
+        case .postAVisit, .deleteAVisit, .checkVisitByPlaceId, .postAPlace, .postAGalleryImage, .getUserProfile, .changePassword,.editProfile, .getPersonalInfo, .getAllPlacesForUser:
             return HTTPHeaders(["Authorization": "Bearer \(token)"])
         }}
     var param:Parameters? {
