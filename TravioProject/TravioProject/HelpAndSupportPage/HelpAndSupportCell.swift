@@ -11,8 +11,6 @@ import TinyConstraints
 import Kingfisher
 
 
-
-
 class HelpAndSupportCell: UITableViewCell {
     
     var data: HelpAndSupportContent? {
@@ -23,18 +21,9 @@ class HelpAndSupportCell: UITableViewCell {
         }
     }
  
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        if selected {
-//            print("isSelected changed: \(isSelected)")
-//            imageChevron.image = UIImage(named: "chevronUp")
-//        } else {
-//            imageChevron.image = UIImage(named: "chevronDown")
-//        }
-//    }
-    
     private lazy var imageChevron: UIImageView = {
         let img = UIImageView()
-        img.image = UIImage(named: "chevronDown")
+        img.image = UIImage(named: "iconChevron")
         return img
     }()
     
@@ -61,20 +50,22 @@ class HelpAndSupportCell: UITableViewCell {
         return v
     }()
     
-    func updateChevronStatus(imageName: String){
-        
+    func updateChevronStatus(isExpanded: Bool){
+        let imageName = isExpanded ? "chevronUp" : "chevronDown"
         imageChevron.image = UIImage(named: imageName)
     }
+    
     func animate() {
-        UIView.animate(withDuration: 0.5, delay: 0.3, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
-            self.contentView.layoutIfNeeded()
-        })
+        UIView.animate(withDuration: 0.5) {
+            self.layoutIfNeeded()
+        }
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupViews()
+        updateChevronStatus(isExpanded: false)
     }
     
     private func setupViews(){

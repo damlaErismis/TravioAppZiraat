@@ -775,6 +775,9 @@
 				DEVELOPMENT_TEAM = 8RN557C642;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TravioProject/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Near me requires location so it can offer nearby points of interests.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Near me requires location so it can offer nearby points of interests.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Please allow access to select a photo for your profile.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -802,6 +805,9 @@
 				DEVELOPMENT_TEAM = 8RN557C642;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TravioProject/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Near me requires location so it can offer nearby points of interests.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Near me requires location so it can offer nearby points of interests.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Please allow access to select a photo for your profile.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

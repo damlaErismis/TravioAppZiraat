@@ -2,7 +2,7 @@
 //  SignUpVC.swift
 //  TravioProject
 //
-//  Created by Burak Özer on 15.10.2023.
+//  Created by Damla Erişmiş on 25.10.2023.
 //
 
 import UIKit
@@ -22,46 +22,50 @@ class SignUpVC: UIViewController {
         return view
     }()
     
+    private lazy var viewUserName:UIViewCC = {
+        let view = UIViewCC(labeltext: "Username", placeholderText: "bilge_adam")
+        view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        view.textField.autocapitalizationType = .none
+        return view
+    }()
+    
+    private lazy var viewEmail:UIViewCC = {
+        let view = UIViewCC(labeltext: "Email", placeholderText: "developer@bilgeadam.com")
+        view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        view.textField.autocapitalizationType = .none
+        return view
+        
+    }()
+    
+    private lazy var viewPassword:UIViewCC = {
+        let view = UIViewCC(labeltext: "Password", placeholderText: "********")
+        view.textField.isSecureTextEntry = true
+        view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        return view
+    }()
+    
+    private lazy var viewPasswordConfirm:UIViewCC = {
+        let view = UIViewCC(labeltext: "Password Confirm", placeholderText: "********")
+        view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        view.textField.autocapitalizationType = .none
+        view.textField.isSecureTextEntry = true
+        return view
+    }()
+    
+    private lazy var stackView:UIStackView = {
+        let sv = UIStackView()
+        sv.axis = .vertical
+        sv.spacing = 24
+        sv.distribution = .fillProportionally
+        return sv
+    }()
+    
     private lazy var labelSignUp:UILabelCC = {
         let lbl = UILabelCC(labelText: "Sign Up", font: .poppinsBold36)
         lbl.textColor = .white
         return lbl
     }()
-    
-    private lazy var labelUsername = UILabelCC(labelText: "Username", font: .poppinsRegular14)
-    private lazy var labelEmail = UILabelCC(labelText: "Email", font: .poppinsRegular14)
-    private lazy var labelPassword = UILabelCC(labelText: "Password", font: .poppinsRegular14)
-    private lazy var labelPasswordConfirm = UILabelCC(labelText: "Password Confirm", font: .poppinsRegular14)
-    
-    private lazy var viewEmail = UIViewCC()
-    private lazy var viewUsername = UIViewCC()
-    private lazy var viewPassword = UIViewCC()
-    private lazy var viewPasswordConfirm = UIViewCC()
-    
-    private lazy var textFieldUsername:UITextFieldCC = {
-        let txt = UITextFieldCC(placeholderText: "bilge_adam")
-        txt.autocapitalizationType = .none
-        return txt
-    }()
-    private lazy var textFieldEmail:UITextFieldCC = {
-        let txt = UITextFieldCC(placeholderText: "developer@bilgeadam.com")
-        txt.autocapitalizationType = .none
-        return txt
-    }()
-    private lazy var textFieldPassword:UITextFieldCC  = {
-        let txt = UITextFieldCC(placeholderText: "")
-        txt.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        txt.autocapitalizationType = .none
-        txt.isSecureTextEntry = true
-        return txt
-    }()
-    private lazy var textFieldPasswordConfirm:UITextFieldCC = {
-        let txt = UITextFieldCC(placeholderText: "")
-        txt.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        txt.autocapitalizationType = .none
-        txt.isSecureTextEntry = true
-        return txt
-    }()
+
     private lazy var buttonSignup:UIButton = {
         let btn = UIButton()
         btn.setTitle("Sign Up", for: .normal)
@@ -74,32 +78,36 @@ class SignUpVC: UIViewController {
     }()
     
     private lazy var labelPasswordMismatch:UILabelCC = {
-        let lbl = UILabelCC(labelText: "Şifreler uyuşmuyor", font: .poppinsRegular14)
+        let lbl = UILabelCC(labelText: "Passwords do not match", font: .poppinsRegular14)
         lbl.textColor = .red
         lbl.isHidden = true
         return lbl
     }()
     @objc func textFieldDidChange(_ textField: UITextField) {
-            if textField == textFieldPassword || textField == textFieldPasswordConfirm {
-                let usernameText = textFieldUsername.text ?? ""
-                let emailText = textFieldEmail.text ?? ""
-                let passwordText = textFieldPassword.text ?? ""
-                let passwordConfirmText = textFieldPasswordConfirm.text ?? ""
-                
-                let passwordsMatch = passwordText == passwordConfirmText
-                labelPasswordMismatch.isHidden = passwordsMatch
-                
-                isFormComplete = !usernameText.isEmpty && !emailText.isEmpty && !passwordText.isEmpty && !passwordConfirmText.isEmpty && passwordsMatch
-                
-                buttonSignup.isEnabled = isFormComplete
-                buttonSignup.backgroundColor = isFormComplete ? UIColor(hexString: "#38ada9") : .lightGray
-            }
+        if textField == viewPassword.textField || textField == viewPasswordConfirm.textField {
+            let usernameText = viewUserName.textField.text ?? ""
+            let emailText = viewEmail.textField.text ?? ""
+            let passwordText = viewPassword.textField.text ?? ""
+            let passwordConfirmText = viewPasswordConfirm.textField.text ?? ""
+            
+            let passwordsMatch = passwordText == passwordConfirmText
+            labelPasswordMismatch.isHidden = passwordsMatch
+            
+            isFormComplete = !usernameText.isEmpty && !emailText.isEmpty && !passwordText.isEmpty && !passwordConfirmText.isEmpty && passwordsMatch
+            
+            buttonSignup.isEnabled = isFormComplete
+            buttonSignup.backgroundColor = isFormComplete ? UIColor(hexString: "#38ada9") : .lightGray
         }
+    }
+    @objc func backButtonTapped(){
+        let login = LoginVC()
+        self.navigationController?.pushViewController(login, animated: true)
+    }
     
     @objc func btnSignUpTapped(){
-        guard let textUsername = textFieldUsername.text else{return}
-        guard let textEmail = textFieldEmail.text else{return}
-        guard let textPassword = textFieldPassword.text else{return}
+        guard let textUsername = viewUserName.textField.text else{return}
+        guard let textEmail = viewEmail.textField.text else{return}
+        guard let textPassword = viewPassword.textField.text else{return}
         viewModel.postSignUpData(userName: textUsername, email: textEmail, password: textPassword)
         
         viewModel.showAlertClosure = { [weak self] in
@@ -109,9 +117,15 @@ class SignUpVC: UIViewController {
         }
     }
     
-    @objc func backButtonTapped(){
-        let login = LoginVC()
-        self.navigationController?.pushViewController(login, animated: true)
+    func initVM(){
+        viewModel.showAlertClosure = { [weak self] () in
+            DispatchQueue.main.async {
+                if let message = self?.viewModel.alertMessage {
+                    self?.showAlert(title: "Sign Up Failed ", message: message)
+                }
+            }
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -127,38 +141,16 @@ class SignUpVC: UIViewController {
         
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
         self.view.addSubviews(viewMain, labelSignUp)
-        viewMain.addSubview(labelPasswordMismatch)
-        
-        viewMain.addSubviews(viewUsername, viewEmail, viewPassword, viewPasswordConfirm, buttonSignup)
-        viewUsername.addSubviews(labelUsername, textFieldUsername)
-        viewEmail.addSubviews(labelEmail, textFieldEmail)
-        viewPassword.addSubviews(labelPassword, textFieldPassword)
-        viewPasswordConfirm.addSubviews(labelPasswordConfirm, textFieldPasswordConfirm)
-        
+        viewMain.addSubviews(stackView, labelPasswordMismatch, buttonSignup)
+        stackView.addArrangedSubviews(viewUserName, viewEmail, viewPassword, viewPasswordConfirm)
         setupLayout()
     }
-    private func showAlert(title:String, message:String){
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
+
     
     func initView(){
         setupView()
     }
-    
-    func initVM(){
-        viewModel.showAlertClosure = { [weak self] () in
-            DispatchQueue.main.async {
-                if let message = self?.viewModel.alertMessage {
-                    self?.showAlert(title: "Sign Up Failed ", message: message)
-                }
-            }
-        }
-        
-    }
-    
+
     private func createLeftBarButton() -> UIBarButtonItem {
         let image = UIImage(named: "Vector")
         let leftBarButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(backButtonTapped))
@@ -167,6 +159,7 @@ class SignUpVC: UIViewController {
     }
     
     private func setupLayout() {
+        
         labelSignUp.snp.makeConstraints({ img in
             img.top.equalToSuperview().offset(55)
             img.centerX.equalToSuperview()
@@ -181,91 +174,10 @@ class SignUpVC: UIViewController {
             view.height.equalToSuperview().multipliedBy(0.80)
         })
         
-        viewUsername.snp.makeConstraints({ view in
-            view.top.equalToSuperview().offset(64)
-            view.centerX.equalToSuperview()
-            view.height.equalTo(74)
-            view.width.equalTo(342)
-        })
-        
-        labelUsername.snp.makeConstraints({ label in
-            label.top.equalToSuperview().offset(13)
-            label.leading.equalToSuperview().offset(13)
-            label.trailing.equalToSuperview().offset(-13)
-            label.bottom.equalTo(textFieldUsername.snp.top)
-        })
-        
-        textFieldUsername.snp.makeConstraints({ txt in
-            txt.bottom.equalToSuperview().offset(-13)
-            txt.leading.equalToSuperview().offset(13)
-            txt.trailing.equalToSuperview().offset(-13)
-            txt.height.equalTo(30)
-        })
-        
-        viewEmail.snp.makeConstraints({ view in
-            view.top.equalTo(viewUsername.snp.bottom).offset(24)
-            view.centerX.equalToSuperview()
-            view.height.equalTo(74)
-            view.width.equalTo(342)
-        })
-        
-        labelEmail.snp.makeConstraints({ label in
-            label.top.equalToSuperview().offset(13)
-            label.leading.equalToSuperview().offset(13)
-            label.trailing.equalToSuperview().offset(-13)
-            label.bottom.equalTo(textFieldEmail.snp.top)
-        })
-        
-        textFieldEmail.snp.makeConstraints({ txt in
-            txt.top.equalTo(labelEmail.snp.bottom)
-            txt.bottom.equalToSuperview().offset(-13)
-            txt.leading.equalToSuperview().offset(13)
-            txt.trailing.equalToSuperview().offset(-13)
-            txt.height.equalTo(30)
-        })
-        
-        viewPassword.snp.makeConstraints({ view in
-            view.top.equalTo(viewEmail.snp.bottom).offset(24)
-            view.centerX.equalToSuperview()
-            view.height.equalTo(74)
-            view.width.equalTo(342)
-        })
-        
-        labelPassword.snp.makeConstraints({ label in
-            label.top.equalToSuperview().offset(13)
-            label.leading.equalToSuperview().offset(13)
-            label.trailing.equalToSuperview().offset(-13)
-            label.bottom.equalTo(textFieldPassword.snp.top)
-        })
-        
-        textFieldPassword.snp.makeConstraints({ txt in
-            txt.top.equalTo(labelPassword.snp.bottom)
-            txt.bottom.equalToSuperview().offset(-13)
-            txt.leading.equalToSuperview().offset(13)
-            txt.trailing.equalToSuperview().offset(-13)
-            txt.height.equalTo(30)
-        })
-        
-        viewPasswordConfirm.snp.makeConstraints({ view in
-            view.top.equalTo(viewPassword.snp.bottom).offset(24)
-            view.centerX.equalToSuperview()
-            view.height.equalTo(74)
-            view.width.equalTo(342)
-        })
-        
-        labelPasswordConfirm.snp.makeConstraints({ label in
-            label.top.equalToSuperview().offset(13)
-            label.leading.equalToSuperview().offset(13)
-            label.trailing.equalToSuperview().offset(-13)
-            label.bottom.equalTo(textFieldPasswordConfirm.snp.top)
-        })
-        
-        textFieldPasswordConfirm.snp.makeConstraints({ txt in
-            txt.top.equalTo(labelPasswordConfirm.snp.bottom)
-            txt.bottom.equalToSuperview().offset(-13)
-            txt.leading.equalToSuperview().offset(13)
-            txt.trailing.equalToSuperview().offset(-13)
-            txt.height.equalTo(30)
+        stackView.snp.makeConstraints({ sv in
+            sv.top.equalToSuperview().offset(65)
+            sv.leading.equalToSuperview().offset(25)
+            sv.trailing.equalToSuperview().offset(-25)
         })
         
         buttonSignup.snp.makeConstraints({ btn in
@@ -277,22 +189,19 @@ class SignUpVC: UIViewController {
         
         labelPasswordMismatch.snp.makeConstraints({ label in
             label.top.equalTo(viewPasswordConfirm.snp.bottom).offset(8)
-            label.leading.equalTo(labelPasswordConfirm)
+            label.leading.equalTo(viewPasswordConfirm.label)
         })
     }
 }
 
-
-
-
-#if DEBUG
-import SwiftUI
-
-@available(iOS 13, *)
-struct SignUpVC_Preview: PreviewProvider {
-    static var previews: some View{
-        
-        SignUpVC().showPreview()
-    }
-}
-#endif
+//#if DEBUG
+//import SwiftUI
+//
+//@available(iOS 13, *)
+//struct SignUpVC_Preview: PreviewProvider {
+//    static var previews: some View{
+//        
+//        SignUpVC().showPreview()
+//    }
+//}
+//#endif

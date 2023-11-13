@@ -65,15 +65,12 @@ enum Router{
             return "/v1/places"
         case .postAGalleryImage:
             return "/v1/galleries"
-        case .getUserProfile:
+        case .getUserProfile, .getPersonalInfo:
             return "/v1/me"
         case .changePassword:
             return "v1/change-password"
         case .editProfile:
             return "v1/edit-profile"
-        case .getPersonalInfo:
-            return "v1/me"
-
         }
     }
     var method:HTTPMethod {
