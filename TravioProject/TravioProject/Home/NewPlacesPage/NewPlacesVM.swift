@@ -10,12 +10,12 @@ import Alamofire
 
 class NewPlacesVM {
     
-    var newPlacesResponse:NewPlacesResponse? {
+    var newPlacesResponse:PlaceResponse? {
         didSet {
             newPlacesChange?()
         }
     }
-    var newPlaces:[NewPlaces] = [] {
+    var newPlaces:[Place] = [] {
         didSet {
             self.reloadCollectionViewForNewPlaces?()
         }
@@ -40,8 +40,8 @@ class NewPlacesVM {
 //            }
 //        })
 //    }
-    func getNewPlaces(completion: @escaping (Result<NewPlacesResponse, Error>) -> Void) {
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getLastPlaces, callback: {(result: Result<NewPlacesResponse,APIError>) in
+    func getNewPlaces(completion: @escaping (Result<PlaceResponse, Error>) -> Void) {
+        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getLastPlaces, callback: {(result: Result<PlaceResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.newPlacesResponse = success

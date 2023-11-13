@@ -11,7 +11,7 @@ import Alamofire
 
 class SignUpViewModel {
     
-    var signupResponse:SignUpResponse?
+    var signupResponse:SuccessResponse?
     
     var alertMessage: String? {
         didSet {
@@ -28,7 +28,7 @@ class SignUpViewModel {
             "email": email,
             "password":password
         ]
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .signUp(params: params as Parameters), callback: { (result: Result<SignUpResponse,APIError>) in
+        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .signUp(params: params as Parameters), callback: { (result: Result<SuccessResponse,APIError>) in
             
             switch result {
             case .success(let success):
@@ -42,7 +42,7 @@ class SignUpViewModel {
         })
     }
     
-    private func processFetched(response: SignUpResponse) {
+    private func processFetched(response: SuccessResponse) {
         if response.status == "success" {
             self.alertMessage = response.message
         } else {

@@ -20,9 +20,9 @@ final class HomeVM {
         case newPlaces
         case myAddedPlaces
     }
-    var popularPlaces:[PopularPlaces] = []
-    var newPlaces: [PopularPlaces] = []
-    var myAddedPlaces: [PopularPlaces] = []
+    var popularPlaces:[Place] = []
+    var newPlaces: [Place] = []
+    var myAddedPlaces: [Place] = []
     
     weak var delegate: HomeViewModelDelegate?
     var tableSection: [TableViewSection] = []
@@ -51,7 +51,7 @@ final class HomeVM {
 //    }
     
     func getPopularPlaces() {
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getPopularPlaces, callback: {(result: Result<PopularPlacesResponse,APIError>) in
+        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getPopularPlaces, callback: {(result: Result<PlaceResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.tableSection.append(.popularPlaces)
@@ -65,7 +65,7 @@ final class HomeVM {
     }
     
     func getNewPlaces() {
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getLastPlaces, callback: {(result: Result<PopularPlacesResponse,APIError>) in
+        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getLastPlaces, callback: {(result: Result<PlaceResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.tableSection.append(.newPlaces)
@@ -79,7 +79,7 @@ final class HomeVM {
     }
    
     func getMyAddedPlaces() {
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getAllPlacesForUser, callback: {(result: Result<PopularPlacesResponse,APIError>) in
+        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getAllPlacesForUser, callback: {(result: Result<PlaceResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.tableSection.append(.myAddedPlaces)

@@ -10,7 +10,7 @@ import SnapKit
 import TinyConstraints
 import MapKit
 
-class AddNewPlaceVC: UIViewController{
+class AddNewPlaceVC: UIViewController, UITextFieldDelegate{
     
     weak var delegate: ViewControllerDelegate?
     
@@ -29,7 +29,7 @@ class AddNewPlaceVC: UIViewController{
         closePage()
     }
     
-    var selectedPlace = PlaceAnnotation()
+    var selectedPlace = CustomAnnotation()
     
     var vm:AddNewPlaceVM = {
         AddNewPlaceVM()

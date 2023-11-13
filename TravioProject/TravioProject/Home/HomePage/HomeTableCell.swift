@@ -14,7 +14,7 @@ class HomeTableCell: UITableViewCell {
 
     var viewModel = HomeVM()
     
-    private var popularPlaces: [PopularPlaces] = []
+    private var popularPlaces: [Place] = []
     
     private lazy var labelSectionName:UILabel = {
         let lbl = UILabel()
@@ -39,7 +39,7 @@ class HomeTableCell: UITableViewCell {
         setupViews()
     }
     
-    func prepareCategory(with model: [PopularPlaces]) {
+    func prepareCategory(with model: [Place]) {
         self.popularPlaces = model
         collectionView.reloadData()
     }

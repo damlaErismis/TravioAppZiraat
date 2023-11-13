@@ -13,7 +13,7 @@ struct Place: Codable {
     let place: String
     let title: String
     let description: String
-    let cover_image_url: URL
+    let cover_image_url: String
     let latitude: Double
     let longitude: Double
     let created_at: String

@@ -159,9 +159,6 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
                 }
             }
         }
-        
-        
-        
 
     }
     
@@ -177,11 +174,6 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
         navigationController?.popViewController(animated: true)
     }
     
-    func showAlert(title:String, message:String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {

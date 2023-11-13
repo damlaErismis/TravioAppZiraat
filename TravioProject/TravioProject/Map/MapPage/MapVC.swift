@@ -101,14 +101,14 @@ class MapVC: UIViewController, ViewControllerDelegate{
             let placeTitle = place.title
             let placeId = place.id
             
-            let pin = PlaceAnnotation()
+            let pin = CustomAnnotation()
             pin.coordinate = CLLocationCoordinate2D(
                 latitude: latitude, longitude: longitude)
             pin.title = placeTitle
             pin.placeId = placeId
             
             pin.visitDescription = place.description
-            pin.image = place.cover_image_url.absoluteString
+            pin.image = place.cover_image_url
             pin.addedBy = place.creator
             pin.addedDate = place.updated_at
             mapView.addAnnotation(pin)
@@ -127,7 +127,7 @@ class MapVC: UIViewController, ViewControllerDelegate{
             let coordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
             let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
             let geocoder = CLGeocoder()
-            let place = PlaceAnnotation()
+            let place = CustomAnnotation()
             place.coordinate = coordinate
             mapView.addAnnotation(place)
             let placesTVC = AddNewPlaceVC()
@@ -209,7 +209,7 @@ extension MapVC: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect annotation: MKAnnotation) {
         
         
-        guard let selectedAnnotation = annotation as? PlaceAnnotation else {return}
+        guard let selectedAnnotation = annotation as? CustomAnnotation else {return}
         
         let location = CLLocation(latitude: selectedAnnotation.coordinate.latitude, longitude: selectedAnnotation.coordinate.longitude)
         let zoomRadius: CLLocationDistance = 5000
@@ -226,7 +226,7 @@ extension MapVC: MKMapViewDelegate {
     }
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        guard let annotation = annotation as? PlaceAnnotation else {
+        guard let annotation = annotation as? CustomAnnotation else {
             return nil
         }
         let identifier = "customPin"
@@ -282,10 +282,13 @@ extension MapVC:UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCellMap", for: indexPath) as! MapImageCollectionCell
-        
-        
-        let url = vm.places[indexPath.row].cover_image_url
-        cell.imagePlace.kf.setImage(with: url)
+
+        if let url = URL(string: vm.places[indexPath.row].cover_image_url) {
+            cell.imagePlace.kf.setImage(with: url)
+        } else {
+            print("Invalid URL")
+        }
+
         
         cell.labelCity.text = vm.places[indexPath.row].place
         cell.labelPlace.text = vm.places[indexPath.row].title

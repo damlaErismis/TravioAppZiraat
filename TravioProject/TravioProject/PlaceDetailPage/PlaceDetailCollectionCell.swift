@@ -61,7 +61,7 @@ class PlaceDetailCollectionCell: UICollectionViewCell,MKMapViewDelegate {
         let longitude: CLLocationDegrees = data.longitude ?? 0
         let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         let locationCoordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        let annotation = PlaceAnnotation()
+        let annotation = CustomAnnotation()
         annotation.coordinate = locationCoordinate
 //        annotation.customImage = UIImage(named: "mapPin")
         mapView.addAnnotation(annotation)
@@ -75,7 +75,7 @@ class PlaceDetailCollectionCell: UICollectionViewCell,MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        guard let annotation = annotation as? PlaceAnnotation else {
+        guard let annotation = annotation as? CustomAnnotation else {
             return nil
         }
         let identifier = "customPin"
