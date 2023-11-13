@@ -88,6 +88,23 @@ class PlaceDetailVM {
             }
         })
     }
+    
+    func formatServerDate(dateString: String) -> String {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSX"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+
+        if let date = dateFormatter.date(from: dateString) {
+            dateFormatter.dateFormat = "MMM dd, yyyy"
+            return dateFormatter.string(from: date)
+        }else{
+            return ""
+        }
+        
+    }
+    
     func dateFormatter()->String{
         let currentDate = Date()
         
@@ -99,9 +116,12 @@ class PlaceDetailVM {
         return formattedDate
     }
     
+
+    
     func postAVisit(placeId:String){
         
         let visitedAt = dateFormatter()
+       
         
         let params = [
             "place_id": placeId,

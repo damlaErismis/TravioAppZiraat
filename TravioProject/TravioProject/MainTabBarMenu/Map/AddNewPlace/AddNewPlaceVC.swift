@@ -140,8 +140,6 @@ class AddNewPlaceVC: UIViewController, UITextFieldDelegate{
        
     }
     
-    
-    
     @objc func handleAddPlace(){
         
         uploadImages()

@@ -238,11 +238,12 @@ extension PlaceDetailVC: UICollectionViewDataSource {
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCellBottom", for: indexPath) as! PlaceDetailCollectionCell
             let placeDetailData = vm.place
+
             var placeDetailInfo = PlaceDetailCellInfo()
+            let updateDate =  self.vm.formatServerDate(dateString: placeDetailData?.updated_at ?? "")
             placeDetailInfo.labelAddedByText = placeDetailData?.creator
             placeDetailInfo.labelCityText = placeDetailData?.place
-//            placeDetailInfo.labelTitleText = placeDetailData?.title
-            placeDetailInfo.labelDateText = placeDetailData?.updated_at
+            placeDetailInfo.labelDateText = updateDate
             placeDetailInfo.labelDescriptionText = placeDetailData?.description
             placeDetailInfo.latitude = placeDetailData?.latitude
             placeDetailInfo.longitude = placeDetailData?.longitude
