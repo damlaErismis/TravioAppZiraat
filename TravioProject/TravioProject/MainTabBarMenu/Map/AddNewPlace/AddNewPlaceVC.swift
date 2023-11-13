@@ -140,8 +140,6 @@ class AddNewPlaceVC: UIViewController{
        
     }
     
-    
-    
     @objc func handleAddPlace(){
         
         uploadImages()
