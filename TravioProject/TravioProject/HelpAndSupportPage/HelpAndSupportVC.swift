@@ -16,8 +16,8 @@ struct  HelpAndSupportContent {
 }
 
 class HelpAndSupportVC: UIViewController {
-
-   
+    
+    
     private let data: [HelpAndSupportContent] = [
         HelpAndSupportContent(question: "How can I create a new account on Travio?", answer: "her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem "),
         HelpAndSupportContent(question: "How can I save a visit?", answer: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.")
@@ -33,7 +33,7 @@ class HelpAndSupportVC: UIViewController {
         tv.dataSource = self
         return tv
     }()
-
+    
     private lazy var viewMain:UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hexString: "F8F8F8")
@@ -55,42 +55,50 @@ class HelpAndSupportVC: UIViewController {
         lbl.adjustsFontSizeToFitWidth = true
         return lbl
     }()
-    private func createLeftBarButton() -> UIBarButtonItem {
-        let image = UIImage(named: "Vector")
-        let leftBarButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(backButtonTapped))
-        leftBarButton.tintColor = .white
-        return leftBarButton
-    }
-    //setting sayfasına gidecek.
+    
+    private lazy var btnBack: UIButton = {
+        let image = UIImage(named: "btnBack")
+        let btn = UIButton()
+        btn.setImage(image, for: .normal)
+        btn.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        return btn
+    }()
+    
     @objc func backButtonTapped(){
-        let home = HomeVC()
-        self.navigationController?.pushViewController(home, animated: true)
+        let settings = SettingsVC()
+        self.navigationController?.pushViewController(settings, animated: true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupViews()
-        
     }
     
     func setupViews() {
-        self.navigationItem.leftBarButtonItem = createLeftBarButton()
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
-        self.view.addSubviews(viewMain, labelHelpAndSupport)
+        navigationController?.navigationBar.isHidden = true
+        self.view.addSubviews(viewMain, labelHelpAndSupport, btnBack)
         viewMain.addSubviews(labelFAQ, tableView)
         setupLayout()
     }
     
-    
     func setupLayout() {
+        
+        btnBack.snp.makeConstraints({ btn in
+            btn.top.equalTo(labelHelpAndSupport).offset(15)
+            btn.leading.equalToSuperview().offset(25)
+            btn.width.equalTo(25)
+            btn.height.equalTo(25)
+        })
+        
         labelHelpAndSupport.snp.makeConstraints ({ img in
             img.top.equalToSuperview().offset(50)
             img.centerX.equalToSuperview()
+            img.leading.equalTo(btnBack.snp.trailing).offset(30)
             img.height.equalTo(52)
             img.width.equalTo(250)
         })
-
+        
         viewMain.snp.makeConstraints ({ view in
             view.bottom.equalToSuperview()
             view.leading.equalToSuperview()
@@ -109,49 +117,52 @@ class HelpAndSupportVC: UIViewController {
             lbl.trailing.equalToSuperview().offset(-20)
         })
         
-
+        
     }
-    var selectedIndex: IndexPath = IndexPath(row: 0, section: 0)
-    
+    var selectedIndex: IndexPath = IndexPath(row: -1, section: 0)
 }
 
 extension HelpAndSupportVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            if selectedIndex == indexPath { return 200 }
-            return 80
-        }
-        
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return data.count
-        }
+        if selectedIndex == indexPath { return 200 }
+        return 80
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return data.count
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! HelpAndSupportCell
-            cell.data = data[indexPath.row]
-            cell.selectionStyle = .none
-            cell.animate()
-            return cell
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! HelpAndSupportCell
+        cell.data = data[indexPath.row]
+        cell.selectionStyle = .none
+        cell.animate()
+        
+        return cell
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if let cell = tableView.cellForRow(at: indexPath) as? HelpAndSupportCell{
-            
-            cell.isSelected.toggle()
-            
-            if selectedIndex == indexPath {
-                cell.updateChevronStatus(imageName: "chevronUp")
-                
-            } else {
-                cell.updateChevronStatus(imageName: "chevronDown")
-            }
-            
+        let isExpanded = selectedIndex == indexPath
+        let previousSelectedIndex = selectedIndex
+
+        if isExpanded {
+            selectedIndex = IndexPath(row: -1, section: 0)
+        } else {
+            selectedIndex = indexPath
         }
-        
-        selectedIndex = indexPath
+
         tableView.beginUpdates()
-        tableView.reloadRows(at: [selectedIndex], with: .none)
+        if let previousCell = tableView.cellForRow(at: previousSelectedIndex) as? HelpAndSupportCell {
+            previousCell.updateChevronStatus(isExpanded: false)
+            previousCell.animate()
+        }
+        if let cell = tableView.cellForRow(at: indexPath) as? HelpAndSupportCell {
+            cell.updateChevronStatus(isExpanded: !isExpanded)
+            cell.animate()
+        }
         tableView.endUpdates()
     }
+
+
     
     
 }

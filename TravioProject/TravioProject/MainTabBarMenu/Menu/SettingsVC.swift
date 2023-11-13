@@ -78,6 +78,7 @@ class SettingsVC: UIViewController {
         btn.setTitle("Edit Profile", for: .normal)
         btn.setTitleColor(UIColor(hexString: "#17C0EB"), for: .normal)
         btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 12)
+        btn.addTarget(self, action: #selector(buttonEditProfileTapped), for: .touchUpInside)
         return btn
     }()
 
@@ -98,17 +99,15 @@ class SettingsVC: UIViewController {
         let vc = LoginVC()
         self.navigationController?.pushViewController(vc, animated: true)
         showAlert(title: "Ok", message: "Uygulamadan Çıkış Yapıldı")
-        
-        
-       
+    }
+    
+    @objc func buttonEditProfileTapped(){
+        let editProfile = EditProfileVC()
+        self.navigationController?.pushViewController(editProfile, animated: true)
     }
     
     //MARK: -- Private Methods
-    private func showAlert(title:String, message:String){
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
+
     
     //MARK: -- UI Methods
     
@@ -202,7 +201,9 @@ extension SettingsVC:UICollectionViewDelegateFlowLayout {
         case 0:
             let vc = SecuritySettingsVC()
             self.navigationController?.pushViewController(vc, animated: true)
- 
+        case 3:
+            let vc = HelpAndSupportVC()
+            self.navigationController?.pushViewController(vc, animated: true)
         default:
             print("Diğer alt settingler gelecek")
         }

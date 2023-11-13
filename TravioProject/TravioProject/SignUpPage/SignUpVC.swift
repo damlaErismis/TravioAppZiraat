@@ -99,6 +99,10 @@ class SignUpVC: UIViewController {
             buttonSignup.backgroundColor = isFormComplete ? UIColor(hexString: "#38ada9") : .lightGray
         }
     }
+    @objc func backButtonTapped(){
+        let login = LoginVC()
+        self.navigationController?.pushViewController(login, animated: true)
+    }
     
     @objc func btnSignUpTapped(){
         guard let textUsername = viewUserName.textField.text else{return}
@@ -113,9 +117,15 @@ class SignUpVC: UIViewController {
         }
     }
     
-    @objc func backButtonTapped(){
-        let login = LoginVC()
-        self.navigationController?.pushViewController(login, animated: true)
+    func initVM(){
+        viewModel.showAlertClosure = { [weak self] () in
+            DispatchQueue.main.async {
+                if let message = self?.viewModel.alertMessage {
+                    self?.showAlert(title: "Sign Up Failed ", message: message)
+                }
+            }
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -135,28 +145,12 @@ class SignUpVC: UIViewController {
         stackView.addArrangedSubviews(viewUserName, viewEmail, viewPassword, viewPasswordConfirm)
         setupLayout()
     }
-    private func showAlert(title:String, message:String){
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
+
     
     func initView(){
         setupView()
     }
-    
-    func initVM(){
-        viewModel.showAlertClosure = { [weak self] () in
-            DispatchQueue.main.async {
-                if let message = self?.viewModel.alertMessage {
-                    self?.showAlert(title: "Sign Up Failed ", message: message)
-                }
-            }
-        }
-        
-    }
-    
+
     private func createLeftBarButton() -> UIBarButtonItem {
         let image = UIImage(named: "Vector")
         let leftBarButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(backButtonTapped))

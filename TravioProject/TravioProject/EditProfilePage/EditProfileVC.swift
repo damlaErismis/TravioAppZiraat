@@ -99,16 +99,19 @@ class EditProfileVC: UIViewController {
         return btn
         
     }()
-    private func createCrossButton() -> UIBarButtonItem {
-        let image = UIImage(named: "cross")
-        let rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(crossButtonTapped))
-        rightBarButtonItem.tintColor = .white
-        return rightBarButtonItem
-    }
     
-    @objc func crossButtonTapped(){
-        let home = HomeVC()
-        self.navigationController?.pushViewController(home, animated: true)
+    private lazy var btnCross: UIButton = {
+        let image = UIImage(named: "cross")
+        let btn = UIButton()
+        btn.setImage(image, for: .normal) 
+        btn.addTarget(self, action: #selector(btnCrossTapped), for: .touchUpInside)
+        return btn
+    }()
+
+    
+    @objc func btnCrossTapped(){
+        let settings = SettingsVC()
+        self.navigationController?.pushViewController(settings, animated: true)
     }
     
     var selectedImageURL: URL?
@@ -147,6 +150,7 @@ class EditProfileVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
         
         viewModel.getPersonalInfo()
         bindViewModel()
@@ -154,8 +158,7 @@ class EditProfileVC: UIViewController {
     }
     
     func setupViews() {
-        self.navigationItem.rightBarButtonItem = createCrossButton()
-        self.view.addSubviews(viewMain, labelEditProfile)
+        self.view.addSubviews(viewMain, btnCross, labelEditProfile)
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
         viewMain.addSubviews(imgProfilePic, buttonChangePhoto ,buttonSave,viewCreatedAtTime,viewUserRole,viewFullName,viewEmail, labelFullNameTitle, stackView)
         viewCreatedAtTime.addSubviews(imageCreatedAtTime, labelCreatedAtTime)
@@ -165,11 +168,19 @@ class EditProfileVC: UIViewController {
     }
     
     func setupLayout() {
+
         labelEditProfile.snp.makeConstraints({ img in
             img.top.equalToSuperview().offset(50)
-            img.leading.equalToSuperview().offset(30)
+            img.leading.equalToSuperview().offset(50)
             img.height.equalTo(52)
             img.width.equalTo(250)
+        })
+        
+        btnCross.snp.makeConstraints({ btn in
+            btn.top.equalTo(labelEditProfile).offset(15)
+            btn.trailing.equalToSuperview().offset(-25)
+            btn.width.equalTo(25)
+            btn.height.equalTo(25)
         })
         
         viewMain.snp.makeConstraints({ view in
