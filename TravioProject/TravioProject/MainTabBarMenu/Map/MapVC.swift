@@ -19,14 +19,14 @@ protocol ViewControllerDelegate: AnyObject {
 
 class MapVC: UIViewController, ViewControllerDelegate{
     
-
+    
     //MARK: -- Properties
     
     lazy var vm: MapVM = {
         
         return MapVM()
     }()
-
+    
     var locationManager:CLLocationManager?
     
     
@@ -58,7 +58,7 @@ class MapVC: UIViewController, ViewControllerDelegate{
         cv.delegate = self
         return cv
     }()
-
+    
     
     //MARK: -- Life Cycles
     override func viewDidLoad() {
@@ -83,7 +83,7 @@ class MapVC: UIViewController, ViewControllerDelegate{
         self.navigationController?.navigationBar.isHidden = true
         setupViews()
     }
-
+    
     func initVM(){
         
         vm.initFetch()
@@ -92,7 +92,7 @@ class MapVC: UIViewController, ViewControllerDelegate{
             self.addPins()
             self.reloadCollectionView()
         }
-
+        
     }
     func addPins(){
         vm.getData?.data.places.forEach({ place in
@@ -116,10 +116,10 @@ class MapVC: UIViewController, ViewControllerDelegate{
     }
     
     func reloadCollectionView() {
-         DispatchQueue.main.async {
-             self.collectionView.reloadData()
-         }
-     }
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
     @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
         
         if gesture.state == .began {
@@ -152,14 +152,14 @@ class MapVC: UIViewController, ViewControllerDelegate{
             }
         }
     }
-        
+    
     @objc func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
         
-//        let allAnnotations = mapView.annotations
-//        mapView.removeAnnotations(allAnnotations)
-//        initVM()
+        //        let allAnnotations = mapView.annotations
+        //        mapView.removeAnnotations(allAnnotations)
+        //        initVM()
     }
-
+    
     //MARK: -- Private Methods
     private func checkLocationAuthorization(){
         
@@ -204,57 +204,27 @@ class MapVC: UIViewController, ViewControllerDelegate{
 }
 
 extension MapVC: MKMapViewDelegate {
-  
-func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
     
-  
-    guard let unSelectedAnnotation = view.annotation as? PlaceAnnotation else {return}
-    
-    
-    }
     
     func mapView(_ mapView: MKMapView, didSelect annotation: MKAnnotation) {
         
         
         guard let selectedAnnotation = annotation as? PlaceAnnotation else {return}
         
-//        if let annotation = view.annotation as? PlaceAnnotation {
-            
+        let location = CLLocation(latitude: selectedAnnotation.coordinate.latitude, longitude: selectedAnnotation.coordinate.longitude)
+        let zoomRadius: CLLocationDistance = 5000
         
-            let location = CLLocation(latitude: selectedAnnotation.coordinate.latitude, longitude: selectedAnnotation.coordinate.longitude)
-            let zoomRadius: CLLocationDistance = 400
-        
-            let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: zoomRadius, longitudinalMeters: zoomRadius)
+        let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: zoomRadius, longitudinalMeters: zoomRadius)
         
         let places = vm.places
-            let index = places.firstIndex(where: { $0.latitude == selectedAnnotation.coordinate.latitude && $0.longitude == selectedAnnotation.coordinate.longitude })
+        let index = places.firstIndex(where: { $0.latitude == selectedAnnotation.coordinate.latitude && $0.longitude == selectedAnnotation.coordinate.longitude })
         
-            let indexPath = IndexPath(item: index!, section: 0)
-                collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-            mapView.setRegion(region, animated: true)
-            
-//            }
-        
-        
-//        guard let selectedAnnotation = annotation as? PlaceAnnotation else {return}
-//        
-//        let places = vm.places
-//        places.enumerated().forEach({ placeIndex, place in
-//            if place.latitude == selectedAnnotation.coordinate.latitude && place.longitude == selectedAnnotation.coordinate.longitude {
-//              
-//                let temp = self.vm.places[0]
-//                self.vm.places[0] = self.vm.places[placeIndex]
-//                self.vm.places[placeIndex]  = temp
-//            }
-//        })
-//        reloadCollectionView()
-//        
-//        var selectedItemIndex = vm.getData?.data.places.filter({place in
-//           place.title == selectedAnnotation.titlePlace
-//        })
+        let indexPath = IndexPath(item: index!, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        mapView.setRegion(region, animated: true)
         
     }
-func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         guard let annotation = annotation as? PlaceAnnotation else {
             return nil
@@ -269,7 +239,7 @@ func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnota
             
             let pinImage = UIImage(named: "mapPin")
             annotationView.image = pinImage
-
+            
             let detailLabel = UILabel()
             detailLabel.numberOfLines = 0
             detailLabel.text = "\(annotation.titlePlace ?? "")"
@@ -299,14 +269,14 @@ extension MapVC:UICollectionViewDelegateFlowLayout {
         let vc = PlaceDetailVC()
         vc.selectedID = selectedID
         self.navigationController?.pushViewController(vc, animated: true)
-
+        
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 310, height: 180 )
     }
 }
 extension MapVC:UICollectionViewDataSource {
- 
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return vm.places.count
     }
@@ -314,27 +284,12 @@ extension MapVC:UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCellMap", for: indexPath) as! MapImageCollectionCell
         
         
-       let url = vm.places[indexPath.row].cover_image_url
+        let url = vm.places[indexPath.row].cover_image_url
         cell.imagePlace.kf.setImage(with: url)
         
         cell.labelCity.text = vm.places[indexPath.row].place
         cell.labelPlace.text = vm.places[indexPath.row].title
         return cell
     }
-    
-    
-    
-//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-//            if let annotation = view.annotation as? CustomAnnotation {
-//                let location = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
-//                let zoomRadius: CLLocationDistance = 400
-//                let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: zoomRadius, longitudinalMeters: zoomRadius)
-//                let index = mapAllPlaces.firstIndex(where: { $0.latitude == annotation.coordinate.latitude && $0.longitude == annotation.coordinate.longitude })
-//                let indexPath = IndexPath(item: index!, section: 0)
-//                    collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-//                mapView.setRegion(region, animated: true)
-//                
-//                }
-//            }
 }
 

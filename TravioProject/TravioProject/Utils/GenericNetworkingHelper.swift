@@ -30,8 +30,7 @@ class GenericNetworkingHelper{
             }
         }
     }
-    
-    
+
  
     typealias Callback<T: Codable> = (Result<T, APIErrorMessage>) -> Void
   
@@ -62,7 +61,7 @@ class GenericNetworkingHelper{
         var imageDataArray: [Data] = []
         
         for image in images {
-            if let imageData = image.jpegData(compressionQuality: 0.5) {
+            if let imageData = image.jpegData(compressionQuality: 1) {
                 imageDataArray.append(imageData)
             } else {
                 //callback(.failure(APIError(statusCode: 500, message: "Invalid Image Data")))

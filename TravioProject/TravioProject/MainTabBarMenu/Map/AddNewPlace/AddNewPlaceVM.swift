@@ -30,13 +30,27 @@ class AddNewPlaceVM {
     
     var  galleryResponse:SuccessResponse?{
         didSet{
-            
+            showSuccessAlertClosure?()
+        }
+    }
+    
+    var errorStatusMessage: ErrorResponse? {
+        didSet {
+            self.showErrorAlertClosure?()
         }
     }
 
+    var errorGalleryErrorResponse: ErrorResponse? {
+        didSet {
+            self.showErrorGalleryAlertClosure?()
+        }
+    }
    
     var addNewPlaceClosure : (()->())?
     var addGalleriesClosure : (()->())?
+    var showErrorAlertClosure: (()->())?
+    var showSuccessAlertClosure: (()->())?
+    var showErrorGalleryAlertClosure: (()->())?
 
     
     public func addNewPlace(place:String, placeTitle:String, placeDescription:String, imageString:String, latitude:Double, longitude:Double){
@@ -52,13 +66,26 @@ class AddNewPlaceVM {
             "longitude": longitude
         ] as [String : Any]
         
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .postAPlace(params: params), callback: {(result: Result<SuccessResponse,APIError>) in
+        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .postAPlace(params: params), callback: {(result: Result<SuccessResponse,APIErrorMessage>) in
             switch result {
             case .success(let success):
                 self.placeResponse = success
      
             case .failure(let failure):
-                print(failure.message)
+                switch failure {
+                case .apiError(let status, _):
+                    switch status {
+                    case .unauthorized:
+                        self.errorGalleryErrorResponse = ErrorResponse(status: "Unauthorized", message: "Invalid credenials")
+                    case .forbidden:
+                        self.errorGalleryErrorResponse = ErrorResponse(status: "Forbidden", message: "Access to this resource is forbidden.")
+                    default:
+                        self.errorGalleryErrorResponse = ErrorResponse(status: "Unknown Error", message: "Unknown error occurred.")
+                    }
+                default:
+                    self.errorGalleryErrorResponse = ErrorResponse(status: "Error", message: failure.localizedDescription)
+                }
+                
             }
         })
     }
@@ -68,12 +95,24 @@ class AddNewPlaceVM {
             "place_id": placeId,
             "image_url": imageURL
         ]
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .postAGalleryImage(params: params), callback: {(result: Result<SuccessResponse,APIError>) in
+        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .postAGalleryImage(params: params), callback: {(result: Result<SuccessResponse, APIErrorMessage>) in
             switch result {
             case .success(let success):
                 self.galleryResponse = success
             case .failure(let failure):
-                print(failure.message)
+                switch failure {
+                case .apiError(let status, _):
+                    switch status {
+                    case .unauthorized:
+                        self.errorStatusMessage = ErrorResponse(status: "Unauthorized", message: "Invalid credenials")
+                    case .forbidden:
+                        self.errorStatusMessage = ErrorResponse(status: "Forbidden", message: "Access to this resource is forbidden.")
+                    default:
+                        self.errorStatusMessage = ErrorResponse(status: "Unknown Error", message: "Unknown error occurred.")
+                    }
+                default:
+                    self.errorStatusMessage = ErrorResponse(status: "Error", message: failure.localizedDescription)
+                }
             }
         })
     }

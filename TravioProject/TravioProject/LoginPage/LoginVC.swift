@@ -121,6 +121,8 @@ class LoginVC: UIViewController {
         }
     }
     
+
+    
     //MARK: -- Component Actions
     @objc func handleSignUp(){
         let vc = SignUpVC()

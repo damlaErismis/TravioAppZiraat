@@ -10,12 +10,12 @@ import SnapKit
 import TinyConstraints
 import MapKit
 
-class AddNewPlaceVC: UIViewController{
+class AddNewPlaceVC: UIViewController, UITextFieldDelegate{
     
     weak var delegate: ViewControllerDelegate?
     
     var selectedIndex:IndexPath?
-    
+    private var isFormComplete: Bool = false
     var imagesFromLibrary:[UIImage] = []
     var newPlaceId:String?
     
@@ -60,16 +60,16 @@ class AddNewPlaceVC: UIViewController{
     }()
     private lazy var viewPlaceName:UIViewCC = {
         let view = UIViewCC(labeltext: "Place Name", placeholderText: "Please write a place name")
-//        view.textField.delegate = self
-//        view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        view.textField.delegate = self
+        view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         view.textField.autocapitalizationType = .none
         return view
         
     }()
    lazy var viewCountryCity:UIViewCC = {
         let view = UIViewCC(labeltext: "Country, City", placeholderText: "France, Paris")
-//        view.textField.delegate = self
-//        view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        view.textField.delegate = self
+        view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         view.textField.autocapitalizationType = .none
         return view
         
@@ -82,6 +82,7 @@ class AddNewPlaceVC: UIViewController{
         btn.backgroundColor = UIColor(hexString: "#38ada9")
         btn.layer.cornerRadius = 12
         btn.addTarget(self, action: #selector(handleAddPlace), for: .touchUpInside)
+        
         return btn
     }()
     
@@ -106,6 +107,40 @@ class AddNewPlaceVC: UIViewController{
         initView()
         initVM()
     }
+    
+    func initView(){
+        self.navigationController?.navigationBar.isHidden = true
+        setupViews()
+    }
+
+    func initVM(){
+        
+        vm.showErrorAlertClosure = { [weak self] () in
+            DispatchQueue.main.async {
+                if let message = self?.vm.errorStatusMessage?.message, let title = self?.vm.errorStatusMessage?.status {
+                    self?.showAlert(title:title, message: message)
+                }
+            }
+        }
+        vm.showSuccessAlertClosure = { [weak self] () in
+            DispatchQueue.main.async {
+                if let message = self?.vm.galleryResponse?.message, let title = self?.vm.galleryResponse?.status {
+                    self?.showAlert(title:title, message: message)
+                }
+            }
+        }
+        
+        vm.showErrorGalleryAlertClosure = { [weak self] () in
+            DispatchQueue.main.async {
+                if let message = self?.vm.galleryResponse?.message, let title = self?.vm.galleryResponse?.status {
+                    self?.showAlert(title:title, message: message)
+                }
+            }
+        }
+       
+    }
+    
+    
     
     @objc func handleAddPlace(){
         
@@ -137,11 +172,10 @@ class AddNewPlaceVC: UIViewController{
         if images.count >= 2 {
             vm.uploadImage(images: images)
         }else{
-            self.showAlert(title: "Alert", message: "En az 2 fotoğraf ekleyiniz'")
+            self.showAlert(title: "Alert", message: "Please add at least 2 photos")
             return
         }
     }
-    
     
    func showAlert(title:String, message:String){
         
@@ -156,23 +190,25 @@ class AddNewPlaceVC: UIViewController{
              imagePicker.sourceType = .photoLibrary
              present(imagePicker, animated: true, completion: nil)
      }
+    
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        
+        if textField == viewPlaceName.textField || textField == viewCountryCity.textField{
+            let placeTitle = viewPlaceName.textField.text ?? ""
+            let placeLocation = viewCountryCity.textField.text ?? ""
+            isFormComplete = !placeTitle.isEmpty && !placeLocation.isEmpty
+            btnAddPlace.isEnabled = isFormComplete
+            btnAddPlace.backgroundColor = isFormComplete ? UIColor(hexString: "#38ada9") : .lightGray
+        }
+    }
  
-    func initView(){
-        self.navigationController?.navigationBar.isHidden = true
-        setupViews()
-    }
-
-    func initVM(){
-       
-    }
 
     func setupViews() {
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
         self.view.addSubview(viewMain)
         viewMain.addSubviews(viewPlaceName, viewDescription, viewCountryCity, collectionView, btnAddPlace)
         viewDescription.addSubviews(labelDescription, textViewDescription)
-
-        
         setupLayout()
     }
     
@@ -275,3 +311,4 @@ extension AddNewPlaceVC: UIImagePickerControllerDelegate, UINavigationController
         picker.dismiss(animated: true, completion: nil)
     }
 }
+
