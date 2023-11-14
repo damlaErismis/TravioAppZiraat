@@ -13,6 +13,8 @@
 		00A47A6F2AFA6657001EDF1D /* HelpAndSupportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A6E2AFA6657001EDF1D /* HelpAndSupportVC.swift */; };
 		00A47A732AFA6D46001EDF1D /* HelpAndSupportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A722AFA6D46001EDF1D /* HelpAndSupportCell.swift */; };
 		00A47A7F2AFFD257001EDF1D /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 00A47A7E2AFFD257001EDF1D /* IQKeyboardManagerSwift */; };
+		00A47A8B2B0401F7001EDF1D /* MyAddedPlacesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A8A2B0401F7001EDF1D /* MyAddedPlacesCell.swift */; };
+		00A47A8D2B0403A4001EDF1D /* MyAddedPlacesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A8C2B0403A4001EDF1D /* MyAddedPlacesVM.swift */; };
 		00C8106C2AEBB79B0077E800 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106B2AEBB79B0077E800 /* MapVC.swift */; };
 		00C8106E2AEBB7A90077E800 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106D2AEBB7A90077E800 /* SettingsVC.swift */; };
 		00C810702AEBB7B70077E800 /* VisitsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106F2AEBB7B70077E800 /* VisitsVC.swift */; };
@@ -103,6 +105,8 @@
 		00A47A6B2AFA5710001EDF1D /* EditProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileModel.swift; sourceTree = "<group>"; };
 		00A47A6E2AFA6657001EDF1D /* HelpAndSupportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpAndSupportVC.swift; sourceTree = "<group>"; };
 		00A47A722AFA6D46001EDF1D /* HelpAndSupportCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpAndSupportCell.swift; sourceTree = "<group>"; };
+		00A47A8A2B0401F7001EDF1D /* MyAddedPlacesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAddedPlacesCell.swift; sourceTree = "<group>"; };
+		00A47A8C2B0403A4001EDF1D /* MyAddedPlacesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAddedPlacesVM.swift; sourceTree = "<group>"; };
 		00C8106B2AEBB79B0077E800 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		00C8106D2AEBB7A90077E800 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		00C8106F2AEBB7B70077E800 /* VisitsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsVC.swift; sourceTree = "<group>"; };
@@ -336,6 +340,8 @@
 			isa = PBXGroup;
 			children = (
 				00C810C32AF950520077E800 /* MyAddedPlacesVC.swift */,
+				00A47A8A2B0401F7001EDF1D /* MyAddedPlacesCell.swift */,
+				00A47A8C2B0403A4001EDF1D /* MyAddedPlacesVM.swift */,
 			);
 			path = MyAddedPlacesPage;
 			sourceTree = "<group>";
@@ -621,8 +627,10 @@
 				00C8109D2AF169F50077E800 /* AddPlaceCollectionCell.swift in Sources */,
 				0062B3C42AEA4B7A000066E5 /* SignUpVM.swift in Sources */,
 				0C988ED62AF37EAC0090E85A /* Visit.swift in Sources */,
+				00A47A8B2B0401F7001EDF1D /* MyAddedPlacesCell.swift in Sources */,
 				00A47A6F2AFA6657001EDF1D /* HelpAndSupportVC.swift in Sources */,
 				0C988EB42AF15F140090E85A /* Place.swift in Sources */,
+				00A47A8D2B0403A4001EDF1D /* MyAddedPlacesVM.swift in Sources */,
 				0C563C4A2AFCF6E800A0F5F0 /* SettingsVM.swift in Sources */,
 				0C988ED22AF2C1460090E85A /* PlaceDetailVC.swift in Sources */,
 				0C988ED42AF2C15A0090E85A /* PlaceDetailCollectionCell.swift in Sources */,
