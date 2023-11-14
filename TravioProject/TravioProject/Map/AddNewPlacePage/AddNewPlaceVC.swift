@@ -26,6 +26,7 @@ class AddNewPlaceVC: UIViewController, UITextFieldDelegate{
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        
         closePage()
     }
     

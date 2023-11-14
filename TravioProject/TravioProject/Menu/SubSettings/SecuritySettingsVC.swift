@@ -10,17 +10,21 @@ import UIKit
 import TinyConstraints
 import AVFoundation
 import CoreLocation
+import Photos
+
+
 
 
 class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
     
+
     private lazy var vm:SecuritySettingsVM = {
         return SecuritySettingsVM()
     }()
     
-    var locationManager = CLLocationManager()
     //MARK: -- Properties
     private var isFormComplete: Bool = false
+    let locationManager = CLLocationManager()
     
     //MARK: -- Views
     
@@ -65,6 +69,7 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
     private lazy var viewCamera = UIViewCC()
     private lazy var viewPhotoLibrary = UIViewCC()
     private lazy var viewLocation = UIViewCC()
+    
     private lazy var labelSecuritySetting:UILabelCC = {
         let lbl =  UILabelCC(labelText: "Security Setting", font: .poppinsMedium30)
         lbl.textColor = .white
@@ -85,10 +90,17 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
         view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         return view
     }()
+    private lazy var scrollViewPrivacy:UIScrollView = {
+        let sv = UIScrollView()
+        sv.isScrollEnabled = true
+        sv.backgroundColor = .clear
+        return sv
+    }()
     
     private lazy var stackViewTop:UIStackView = {
         let sv = UIStackView()
         sv.axis = .vertical
+
         sv.spacing = 12
         sv.distribution = .fillProportionally
         return sv
@@ -96,8 +108,11 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
     private lazy var stackViewBottom:UIStackView = {
         let sv = UIStackView()
         sv.axis = .vertical
+        sv.backgroundColor = UIColor(hexString: "F8F8F8")
+//        sv.backgroundColor = .clear
         sv.spacing = 12
         sv.distribution = .fillProportionally
+  
         return sv
     }()
     private lazy var buttonSave:UIButton = {
@@ -128,13 +143,143 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
         s.addTarget(self, action: #selector(toggleSwitcChangeForLocation), for: .valueChanged)
         return s
     }()
+    
+    
+    @objc func toggleSwitcChangeForLocation() {
+        if toggleSwitchLocation.isOn {
+            requestLocationPermission()
+        }
+    }
+    
+    
+    @objc func toggleSwitcChangeForCamera() {
+        if toggleSwitchCamera.isOn {
+            requestCameraPermission()
+        }
+    }
+    
+    @objc func toggleSwitcChangeForPhotoLibrary() {
+        if toggleSwitchPhotoLibrary.isOn {
+            requestPhotoLibraryPermission()
+        }
+    }
+    
+    
+    func requestCameraPermission() {
+        let status = AVCaptureDevice.authorizationStatus(for: .video)
+
+        switch status {
+        case .authorized:
+            DispatchQueue.main.async {
+                self.toggleSwitchCamera.isOn = true
+            }
+        case .denied, .restricted:
+            DispatchQueue.main.async {
+                self.showPermissionPopup(permissionType: "Camera", toggleSwitch: self.toggleSwitchCamera)
+            }
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { [weak self] (granted) in
+                if granted {
+                    DispatchQueue.main.async {
+                        self?.toggleSwitchCamera.isOn = true
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self?.showPermissionPopup(permissionType: "Camera", toggleSwitch: self?.toggleSwitchCamera)
+                    }
+                }
+            }
+        @unknown default:
+            break
+        }
+    }
+
+    func requestLocationPermission() {
+        let locationManager = CLLocationManager()
+        switch locationManager.authorizationStatus {
+        case .authorizedWhenInUse, .authorizedAlways:
+            DispatchQueue.main.async {
+                self.toggleSwitchLocation.isOn = true
+            }
+        case .denied, .restricted:
+            DispatchQueue.main.async {
+                self.showPermissionPopup(permissionType: "Location", toggleSwitch: self.toggleSwitchLocation)
+            }
+        case .notDetermined:
+            locationManager.delegate = self
+            locationManager.requestWhenInUseAuthorization()
+        @unknown default:
+            break
+        }
+    }
+
+    func requestPhotoLibraryPermission() {
+        let status = PHPhotoLibrary.authorizationStatus()
+        switch status {
+        case .authorized:
+            
+            DispatchQueue.main.async {
+                self.toggleSwitchCamera.isOn = true
+            }
+        case .denied, .restricted:
+  
+            DispatchQueue.main.async {
+                self.showPermissionPopup(permissionType: "Photo Library", toggleSwitch: self.toggleSwitchPhotoLibrary)
+            }
+            
+        case .notDetermined:
+            
+            PHPhotoLibrary.requestAuthorization { [weak self] (newStatus) in
+                if newStatus == .authorized {
+                    
+                    DispatchQueue.main.async {
+                        self?.toggleSwitchPhotoLibrary.isOn = true
+                    }
+                } else {
+
+                    DispatchQueue.main.async {
+                        self?.showPermissionPopup(permissionType: "Photo Library", toggleSwitch: self?.toggleSwitchPhotoLibrary)
+                    }
+                }
+            }
+        case .limited:
+            print("???????????")
+        @unknown default:
+            print("***********")
+        }
+    }
+
+
+    func showPermissionPopup(permissionType: String, toggleSwitch: UISwitch?) {
+        let alertController = UIAlertController(title: "Permission Denied",
+                                                message: "\(permissionType) permission denied. You can enable it in Settings.",
+                                                preferredStyle: .alert)
+
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(settingsURL)
+            }
+        }
+
+        alertController.addAction(settingsAction)
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+            toggleSwitch?.isOn = false
+        }
+        alertController.addAction(cancelAction)
+
+        present(alertController, animated: true, completion: nil)
+    }
+   
 
     
     //MARK: -- Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationManager.delegate = self
         navigationController?.navigationBar.isHidden = true
+        
+        locationManager.delegate = self
+        
         initVC()
         initVM()
     }
@@ -173,112 +318,30 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
         
         navigationController?.popViewController(animated: true)
     }
-    
-    
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        switch manager.authorizationStatus {
-        case .authorizedWhenInUse, .authorizedAlways:
-            // İzin verildiyse, konum verilerini alma işlemlerini başlatabilirsiniz
-            startUpdatingLocation()
-        case .denied, .restricted:
-            
-            let title = "Konum İzni Gerekli"
-            let message = "Konum izni verilmedi. Ayarlara giderek izin verebilirsiniz."
-            showAlert(title: title, message: message)
-        case .notDetermined:
-            // İzin durumu belirsizse, bir şey yapmanıza gerek yok
-            break
-        @unknown default:
-            break
-        }
-    }
-    
-    func startUpdatingLocation() {
-        locationManager.startUpdatingLocation()
-    }
-
-    func hasCameraPermission() -> Bool {
-        return UIImagePickerController.isSourceTypeAvailable(.camera)
-    }
-
-    func saveCameraData() {
-        print("Kamera verileri kaydedildi")
-    }
 
 
-    func hasPhotoLibraryPermission() -> Bool {
-        return UIImagePickerController.isSourceTypeAvailable(.photoLibrary)
-    }
-
-    func savePhotoLibraryData() {
-        print("Fotoğraf kütüphanesi verileri kaydedildi")
-    }
-    
-    
-    @objc func toggleSwitcChangeForLocation() {
-        if toggleSwitchLocation.isOn {
-            requestLocationPermission()
-        } else {
-            stopUpdatingLocation()
-        }
-    }
-
-    func requestLocationPermission() {
-        locationManager.requestWhenInUseAuthorization()
-    }
-
-    func stopUpdatingLocation() {
-        locationManager.stopUpdatingLocation()
-    }
-    
-
-    @objc func toggleSwitcChangeForCamera() {
-        if toggleSwitchCamera.isOn {
-            if hasCameraPermission() {
-                saveCameraData()
-            } else {
-                let title = "Kamera İzni Gerekli"
-                let message = "Kamera izni verilmedi. Ayarlara giderek izin verebilirsiniz."
-                showAlert(title: title, message: message)
-            }
-        }
-    }
-
-    @objc func toggleSwitcChangeForPhotoLibrary() {
-        if toggleSwitchPhotoLibrary.isOn {
-            if hasPhotoLibraryPermission() {
-                savePhotoLibraryData()
-            } else {
-                let title = "Fotoğraf Kütüphanesi İzni Gerekli"
-                let message = "Fotoğraf kütüphanesi izni verilmedi. Ayarlara giderek izin verebilirsiniz"
-                showAlert(title: title, message: message)
-            }
-        }
-    }
     @objc func handleSave(){
-        
         vm.changePassword(newPassword: viewPassword.textField.text!)
     }
-    
     
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         
         if textField == viewPassword.textField || textField == viewPasswordConfirm.textField {
-            
+
             let passwordText = viewPassword.textField.text ?? ""
             let passwordConfirmText = viewPasswordConfirm.textField.text ?? ""
-            let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmText.count > 6
+            let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmText.count >= 6
             labelPasswordMismatch.isHidden = passwordsMatch
-            let passwordLenght = passwordText.count > 6
+            let passwordLenght = passwordText.count >= 6
             labelPasswordControl.isHidden = passwordLenght
-            isFormComplete = passwordText.count > 6 && passwordsMatch
+            isFormComplete = passwordText.count >= 6 && passwordsMatch
             buttonSave.isEnabled = isFormComplete
             buttonSave.backgroundColor = isFormComplete ? UIColor(hexString: "#38ada9") : .lightGray
         }
         if textField == viewPassword.textField{
             let passwordText = viewPassword.textField.text ?? ""
-            let passwordChracterCountControl = passwordText.count > 6
+            let passwordChracterCountControl = passwordText.count >= 6
             labelPasswordControl.isHidden = passwordChracterCountControl
         }
     }
@@ -291,9 +354,12 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
         // Add here the setup for the UI
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
         self.view.addSubviews(imageBack, labelSecuritySetting, viewMain)
-        self.viewMain.addSubviews(labelChangePassword,stackViewTop,labelPrivacy, stackViewBottom, buttonSave)
+        self.viewMain.addSubviews(labelChangePassword,stackViewTop, scrollViewPrivacy)
  
         stackViewTop.addArrangedSubviews(viewPassword,viewPasswordConfirm)
+        
+        scrollViewPrivacy.addSubviews(labelPrivacy, stackViewBottom, buttonSave)
+        
         viewPassword.addSubviews(labelPasswordControl)
         viewPasswordConfirm.addSubviews(labelPasswordMismatch)
         stackViewBottom.addArrangedSubviews(viewCamera,viewPhotoLibrary,viewLocation)
@@ -305,7 +371,7 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
     func setupLayout() {
         // Add here the setup for layout
         imageBack.snp.makeConstraints({img in
-            img.top.equalToSuperview().offset(60)
+            img.top.equalToSuperview().offset(100)
             img.leading.equalToSuperview().offset(25)
             img.width.equalTo(24)
             img.height.equalTo(21)
@@ -338,14 +404,15 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
             sv.trailing.equalToSuperview().offset(-25)
         })
         labelPrivacy.snp.makeConstraints({lbl in
-            lbl.top.equalTo(viewPasswordConfirm.snp.bottom).offset(25)
-            lbl.leading.equalToSuperview().offset(25)
+            lbl.top.equalToSuperview().offset(12)
+            lbl.leading.equalToSuperview()
         })
         stackViewBottom.snp.makeConstraints({sv in
-            sv.top.equalTo(labelPrivacy.snp.bottom).offset(8)
-            sv.leading.equalToSuperview().offset(25)
-            sv.trailing.equalToSuperview().offset(-25)
+            sv.top.equalTo(labelPrivacy.snp.bottom).offset(12)
+            sv.width.equalTo(342)
+            sv.centerX.equalToSuperview()
         })
+        
         labelCamera.snp.makeConstraints({lbl in
             lbl.leading.equalTo(15)
             lbl.centerY.equalToSuperview()
@@ -376,12 +443,19 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
             ts.height.equalTo(30)
             ts.width.equalTo(50)
         })
+        scrollViewPrivacy.snp.makeConstraints({sv in
+            sv.top.equalTo(stackViewTop.snp.bottom).offset(12)
+            sv.leading.equalToSuperview().offset(24)
+            sv.trailing.equalToSuperview().offset(-24)
+            sv.bottom.equalToSuperview().offset(-10)
+        })
         buttonSave.snp.makeConstraints({ btn in
-            btn.bottom.equalToSuperview().offset(-50)
-            btn.centerX.equalToSuperview()
-            btn.height.equalTo(54)
+            btn.top.equalTo(stackViewBottom.snp.bottom).offset(50)
             btn.width.equalTo(342)
+            btn.height.equalTo(54)
+            btn.bottom.equalToSuperview().offset(-10)
         })
     }
 }
+
 

@@ -24,7 +24,7 @@ class SettingsVC: UIViewController {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 15
+        layout.minimumLineSpacing = 24
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         cv.register(SettingCollectionCell.self, forCellWithReuseIdentifier: "cell")
@@ -61,7 +61,6 @@ class SettingsVC: UIViewController {
     private lazy var imageProfile:UIImageView = {
         let img = UIImageView()
         img.layer.cornerRadius = 60
-        img.image = UIImage(named: "davidLynch")
         img.clipsToBounds = true
         
         return img

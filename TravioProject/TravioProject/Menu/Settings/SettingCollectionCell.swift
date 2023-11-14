@@ -77,10 +77,6 @@ class SettingCollectionCell: UICollectionViewCell {
     func setupLayout() {
         // Add here the setup for layout
         viewItem.snp.makeConstraints({ view in
-//            view.top.equalToSuperview()
-//            view.leading.equalToSuperview()
-//            view.trailing.equalToSuperview()
-//            view.bottom.equalToSuperview()
             view.height.equalTo(54)
             view.width.equalTo(358)
         })
