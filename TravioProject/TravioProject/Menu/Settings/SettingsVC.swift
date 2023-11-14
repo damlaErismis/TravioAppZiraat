@@ -91,15 +91,26 @@ class SettingsVC: UIViewController {
     }
     
     //MARK: -- Component Actions
-    @objc func handleLogout(){
-
+    @objc func handleLogout() {
         let service = "com.travio"
         let account = "travio"
         KeychainHelper.shared.delete(service, account: account)
-        let vc = LoginVC()
-        self.navigationController?.pushViewController(vc, animated: true)
-        showAlert(title: "Ok", message: "Uygulamadan Çıkış Yapıldı")
+        
+        let alert = UIAlertController(title: "Alert!", message: "You have been logged out.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok.", style: .default, handler: { _ in
+            self.switchToLoginVC()
+        }))
+        present(alert, animated: true)
     }
+    
+    func switchToLoginVC() {
+        let loginVC = LoginVC()
+        let rootViewController = UINavigationController(rootViewController: loginVC)
+        UIApplication.shared.windows.first?.rootViewController = rootViewController
+        UIApplication.shared.windows.first?.makeKeyAndVisible()
+    }
+
+
     
     @objc func buttonEditProfileTapped(){
         let editProfile = EditProfileVC()
@@ -158,7 +169,7 @@ class SettingsVC: UIViewController {
         // Add here the setup for layout
         
         buttonSetting.snp.makeConstraints({btn in
-            btn.top.equalToSuperview().offset(40)
+            btn.top.equalToSuperview().offset(70)
             btn.leading.equalToSuperview().offset(20)
             btn.height.equalTo(48)
             btn.width.equalTo(134)

@@ -53,8 +53,8 @@ class NewPlacesVC: UIViewController {
     }
 
     override func viewDidLoad() {
-        self.view.backgroundColor = .red
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
         initVM()
         bindViewModel()
         setupViews()

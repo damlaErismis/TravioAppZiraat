@@ -104,6 +104,7 @@ class LoginVC: UIViewController {
     //MARK: -- Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
         initView()
         initVM()
     }
@@ -134,7 +135,7 @@ class LoginVC: UIViewController {
         guard let textPassword = viewPassword.textField.text else{return}
         vm.postLoginData(email:textEmail , password: textPassword)
         vm.makeLogin = { [weak self] () in
-                let vc = HomeVC()
+                let vc = MainTabBar()
                 self?.navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -145,7 +146,7 @@ class LoginVC: UIViewController {
             let emailText = viewEmail.textField.text ?? ""
             let passwordText = viewPassword.textField.text ?? ""
             
-            isFormComplete = (passwordText.count > 6) && emailText.isValidEmail
+            isFormComplete = (passwordText.count >= 6) && emailText.isValidEmail
             buttonLogin.isEnabled = isFormComplete
             buttonLogin.backgroundColor = isFormComplete ? UIColor(hexString: "#38ada9") : .lightGray
         }

@@ -68,6 +68,7 @@ class PopularPlacesVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
         initVM()
         bindViewModel()
         setupViews()

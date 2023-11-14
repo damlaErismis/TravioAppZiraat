@@ -46,6 +46,7 @@ class HomeVC: UIViewController {
     //MARK: -- Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
         viewModel.delegate = self
         setupViews()
         viewModel.getPopularPlaces()

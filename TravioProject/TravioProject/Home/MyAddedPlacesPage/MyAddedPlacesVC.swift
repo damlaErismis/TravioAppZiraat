@@ -21,6 +21,8 @@ class MyAddedPlacesVC: UIViewController {
     override func viewDidLoad() {
         self.view.backgroundColor = .blue
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
+
         
        setupViews()
        
