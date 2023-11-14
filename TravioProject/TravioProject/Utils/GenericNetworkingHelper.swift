@@ -31,12 +31,12 @@ class GenericNetworkingHelper{
         }
     }
     
-
-
-
- 
+    
+    
+    
+    
     typealias Callback<T: Codable> = (Result<T, APIErrorMessage>) -> Void
-  
+    
     
     public func getDataFromRemotee<T: Codable>(urlRequest: Router, callback: @escaping Callback<T>) {
         AF.request(urlRequest).validate().responseDecodable(of: T.self) { response in
@@ -59,7 +59,7 @@ class GenericNetworkingHelper{
     
     
     
-
+    
     public func uploadImages<T: Codable>(images: [UIImage], url: String, headers: HTTPHeaders, callback: @escaping Callbackk<T>) {
         var imageDataArray: [Data] = []
         
@@ -95,6 +95,6 @@ class GenericNetworkingHelper{
             }
         }
     }
-    }
+}
 
 

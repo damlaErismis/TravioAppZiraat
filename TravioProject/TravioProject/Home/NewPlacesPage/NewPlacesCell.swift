@@ -96,7 +96,7 @@ class NewPlacesCell:UICollectionViewCell {
         })
         labelCity.snp.makeConstraints({ label in
             label.leading.equalTo(imageVector.snp.trailing).offset(8)
-            label.bottom.equalTo(imageVector.snp.bottom).offset(6)
+            label.bottom.equalTo(imageVector.snp.bottom).offset(4)
         })
     }
     required init?(coder: NSCoder) {

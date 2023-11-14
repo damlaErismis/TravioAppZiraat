@@ -15,36 +15,32 @@ class MainTabBar: UITabBarController {
         self.tabBar.unselectedItemTintColor = .lightGray
         self.viewControllers = setupControllers()
         self.tabBar.isTranslucent = false
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     private func setupControllers()->[UIViewController] {
         
         let homeVC = HomeVC()
-        let homeNC = UINavigationController(rootViewController: homeVC)
-        let homeImage = UIImage(named: "Home")
-        let selectedImageHome = UIImage(systemName: "Home")
-        homeNC.tabBarItem = UITabBarItem(title: "Home", image: homeImage, selectedImage: selectedImageHome )
+        let homeNC = createNavController(vc: homeVC, title: "Home", image: "Home")
         
         let visitsVC = VisitsVC()
-        let visitsNC = UINavigationController(rootViewController: visitsVC)
-        let visitsImage = UIImage(named: "Visits")
-        let selectedImageVisits = UIImage(systemName: "Visits")
-        visitsNC.tabBarItem = UITabBarItem(title: "Visits", image: visitsImage, selectedImage: selectedImageVisits )
+        let visitsNC = createNavController(vc: visitsVC, title: "Visits", image: "Visits")
         
         let mapVC = MapVC()
-        let mapNC = UINavigationController(rootViewController: mapVC)
-        let mapImage = UIImage(named: "Map")
-        let selectedImageMap = UIImage(systemName: "Map")
-        mapNC.tabBarItem = UITabBarItem(title: "Map", image: mapImage, selectedImage: selectedImageMap )
+        let mapNC = createNavController(vc: mapVC, title: "Map", image: "Map")
         
         let menuVC = SettingsVC()
-        let menuNC = UINavigationController(rootViewController: menuVC)
-        let menuImage = UIImage(named: "Menu")
-        let selectedImageMenu = UIImage(systemName: "Menu")
-        menuNC.tabBarItem = UITabBarItem(title: "Menu", image: menuImage, selectedImage: selectedImageMenu )
-        
+        let menuNC = createNavController(vc: menuVC, title: "Menu", image: "Menu")
         
         return [homeNC, visitsNC, mapNC, menuNC]
+    }
+
+    private func createNavController(vc: UIViewController, title: String, image: String) -> UINavigationController {
+        let navController = UINavigationController(rootViewController: vc)
+        navController.tabBarItem.title = title
+        navController.tabBarItem.image = UIImage(named: image)
+        navController.navigationBar.isHidden = true 
+        return navController
     }
     
 }

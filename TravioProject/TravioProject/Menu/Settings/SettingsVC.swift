@@ -61,7 +61,7 @@ class SettingsVC: UIViewController {
     private lazy var imageProfile:UIImageView = {
         let img = UIImageView()
         img.layer.cornerRadius = 60
-        img.image = UIImage(named: "davidLynch")
+        img.contentMode = .scaleAspectFill
         img.clipsToBounds = true
         
         return img
@@ -85,7 +85,7 @@ class SettingsVC: UIViewController {
     //MARK: -- Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         initVC()
         initVM()
     }
@@ -103,34 +103,44 @@ class SettingsVC: UIViewController {
     
     @objc func buttonEditProfileTapped(){
         let editProfile = EditProfileVC()
-        self.navigationController?.pushViewController(editProfile, animated: true)
+        present(editProfile, animated: true)
     }
     
     //MARK: -- Private Methods
 
     
     //MARK: -- UI Methods
-    
-    func initVM(){
-        
-        vm.initFetch()
-        
-        vm.getUserProfileData = { [weak self] () in
-            
-            guard let userName = self?.vm.userProfileResponse?.full_name else {return}
-            self?.labelNameSurname.text = userName
-            guard let imageString = self?.vm.userProfileResponse?.pp_url else {return}
-            if let imageURL = URL(string: imageString) {
-                if let imageData = try? Data(contentsOf: imageURL) {
-                    if let image = UIImage(data: imageData) {
-                        self?.imageProfile.image = image
-                    }
+    func loadImageAsync(from url: URL, completion: @escaping (UIImage?) -> Void) {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil, let image = UIImage(data: data) else {
+                DispatchQueue.main.async {
+                    completion(nil)
                 }
+                return
             }
+            DispatchQueue.main.async {
+                completion(image)
+            }
+        }.resume()
+    }
+
+    func initVM() {
+        vm.initFetch()
+
+        vm.getUserProfileData = { [weak self] () in
+            guard let self = self,
+                  let imageString = self.vm.userProfileResponse?.pp_url,
+                  let imageURL = URL(string: imageString) else { return }
+
+            self.loadImageAsync(from: imageURL) { image in
+                self.imageProfile.image = image
+            }
+
+            guard let userName = self.vm.userProfileResponse?.full_name else { return }
+            self.labelNameSurname.text = userName
         }
     }
-    
-    
+
     func initVC(){
         
         setupViews()

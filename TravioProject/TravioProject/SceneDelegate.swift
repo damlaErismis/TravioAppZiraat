@@ -13,22 +13,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        
-        let window = UIWindow(windowScene: windowScene)
-        let vc = MainTabBar()
-        let rootViewController = UINavigationController(rootViewController: vc)
-        window.rootViewController = rootViewController
-        window.makeKeyAndVisible()
-        self.window = window
-    }
+           // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
+           // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
+           // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+           guard let windowScene = (scene as? UIWindowScene) else { return }
+           
+           let window = UIWindow(windowScene: windowScene)
+           let vc = MainTabBar()
+           let rootViewController = UINavigationController(rootViewController: vc)
+           window.rootViewController = vc
+           window.makeKeyAndVisible()
+           self.window = window
+       }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
-        // This occurs shortly after the scene enters the background, or when its session is discarded.
+        // This occurs shortly after the scene enters the background, or when its session is discard.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
         // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
     }

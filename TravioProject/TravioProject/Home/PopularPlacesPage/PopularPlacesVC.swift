@@ -14,7 +14,7 @@ import Kingfisher
 
 class PopularPlacesVC: UIViewController {
     
-    var viewModel = HomeVM()
+    var viewModel = PopularPlacesVM()
 
     lazy var collectionView:UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -45,12 +45,12 @@ class PopularPlacesVC: UIViewController {
         return lbl
     }()
     
-    private lazy var imgOrderAZ:UIImage = {
+    private lazy var imgOrderAscending:UIImage = {
         let img = UIImage(named: "orderAZ")
         return img!
     }()
     
-    private lazy var imgOrderZA:UIImage = {
+    private lazy var imgOrderDescending:UIImage = {
         let img = UIImage(named: "orderZA")
         return img!
     }()
@@ -61,14 +61,33 @@ class PopularPlacesVC: UIViewController {
         leftBarButton.tintColor = .white
         return leftBarButton
     }
+    
     @objc func backButtonTapped(){
     self.navigationController?.popViewController(animated: true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initVM()
+        bindViewModel()
         setupViews()
     }
+    
+    private func bindViewModel() {
+        viewModel.popularPlacesChange = { [weak self] in
+            self?.collectionView.reloadData()
+        }
+        viewModel.getPopularPlaces() { result in
+        }
+    }
+    private func initVM(){
+        viewModel.reloadCollectionViewForPopularPlaces = { [weak self] () in
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
+        }
+    }
+    
     func setupViews() {
         
         self.navigationItem.leftBarButtonItem = createLeftBarButton()

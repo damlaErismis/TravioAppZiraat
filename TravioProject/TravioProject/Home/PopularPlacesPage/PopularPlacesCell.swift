@@ -63,7 +63,6 @@ class PopularPlacesCell: UICollectionViewCell {
                 imgPopularPlace.kf.setImage(with: imageURL)
             }
         labelPlace.text = object.title
-        print(object.place)
         labelCity.text = object.place
     }
     private func setupViews() {
@@ -101,7 +100,7 @@ class PopularPlacesCell: UICollectionViewCell {
         })
         labelCity.snp.makeConstraints({ label in
             label.leading.equalTo(imageVector.snp.trailing).offset(8)
-            label.bottom.equalTo(imageVector.snp.bottom).offset(6)
+            label.bottom.equalTo(imageVector.snp.bottom).offset(4)
         })
         
         

@@ -7,8 +7,13 @@
 
 import Foundation
 import Alamofire
+import UIKit
 
 class EditProfileVM {
+    
+
+    var imageURLs: (([String]) -> Void)?
+    
     
     var userProfileDidChange: ((UserProfile) -> Void)?
     
@@ -58,13 +63,27 @@ class EditProfileVM {
         GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .editProfile(params: parameters)) { (result: Result<UserProfileUpdateResponse, APIError>) in
             switch result {
             case .success(let success):
-                self.updateProfileResponse = success
+                print(success)
             case .failure(let error):
                 print("Profil güncellemesi başarısız: \(error.message)")
             }
         }
     }
 
-
+    public func uploadImage(images: [UIImage], completion: @escaping ([String]) -> Void) {
+        let url = "https://ios-class-2f9672c5c549.herokuapp.com/upload"
+        let headers = HTTPHeaders(["Content-Type": "multipart/form-data"])
+        
+        GenericNetworkingHelper.shared.uploadImages(images: images, url: url, headers: headers) { (result: Result<UploadResponse, APIError>) in
+            switch result {
+            case .success(let success):
+                completion(success.urls)
+            case .failure(let failure):
+                print(failure.message)
+                completion([])
+            }
+        }
+    }
     
+
 }

@@ -65,8 +65,7 @@ class HelpAndSupportVC: UIViewController {
     }()
     
     @objc func backButtonTapped(){
-        let settings = SettingsVC()
-        self.navigationController?.pushViewController(settings, animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     override func viewDidLoad() {

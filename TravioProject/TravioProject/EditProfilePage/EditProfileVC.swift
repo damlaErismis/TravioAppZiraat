@@ -45,7 +45,6 @@ class EditProfileVC: UIViewController {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
-        //        iv.image = UIImage(named: "bruce")
         iv.isUserInteractionEnabled = true
         iv.layer.cornerRadius = 60
         iv.layer.masksToBounds = true
@@ -55,7 +54,7 @@ class EditProfileVC: UIViewController {
     private lazy var viewUserRole = UIViewCC()
     
     
-    private lazy var labelFullNameTitle = UILabelCC(labelText: "Bruce Willis", font: .poppinsRegular24)
+    private lazy var labelFullNameTitle = UILabelCC(labelText: " ", font: .poppinsRegular24)
     
     private lazy var labelCreatedAtTime = UILabelCC(labelText: "Aug 30, 2023", font: .poppinsRegular14)
     private lazy var labelUserRole = UILabelCC(labelText: "Admin", font: .poppinsRegular14)
@@ -103,26 +102,28 @@ class EditProfileVC: UIViewController {
     private lazy var btnCross: UIButton = {
         let image = UIImage(named: "cross")
         let btn = UIButton()
-        btn.setImage(image, for: .normal) 
+        btn.setImage(image, for: .normal)
         btn.addTarget(self, action: #selector(btnCrossTapped), for: .touchUpInside)
         return btn
     }()
+    
+    @objc func btnCrossTapped() {
+        self.dismiss(animated: true, completion: nil)
+    }
 
-    
-    @objc func btnCrossTapped(){
-        let settings = SettingsVC()
-        self.navigationController?.pushViewController(settings, animated: true)
-    }
-    
     var selectedImageURL: URL?
-    
+
     @objc func btnSaveTapped() {
-        guard let fullName = viewFullName.textField.text else{return}
-        guard let email = viewEmail.textField.text else{return}
-        guard let pp_url = selectedImageURL?.absoluteString else{return}
-        
-        viewModel.updateUserProfile(fullName: fullName, email: email, pp_url: pp_url)
+        guard let fullName = viewFullName.textField.text,
+              let email = viewEmail.textField.text else { return }
+
+        viewModel.uploadImage(images: [imgProfilePic.image].compactMap { $0 }) { [weak self] urls in
+            guard let self = self else { return }
+            let pp_url = urls.first ?? ""
+            self.viewModel.updateUserProfile(fullName: fullName, email: email, pp_url: pp_url)
+        }
     }
+    
     
     @objc func btnChangePhotoTapped() {
         presentPhotoActionSheet()
@@ -144,17 +145,30 @@ class EditProfileVC: UIViewController {
             
             if let imageURL = URL(string: userProfile.pp_url) {
                 self?.imgProfilePic.kf.setImage(with: imageURL)
+                print(imageURL)
             }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
-        
         viewModel.getPersonalInfo()
         bindViewModel()
         setupViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tabBarController?.tabBar.isHidden = false
     }
     
     func setupViews() {
@@ -168,9 +182,9 @@ class EditProfileVC: UIViewController {
     }
     
     func setupLayout() {
-
+        
         labelEditProfile.snp.makeConstraints({ img in
-            img.top.equalToSuperview().offset(50)
+            img.top.equalToSuperview().offset(25)
             img.leading.equalToSuperview().offset(50)
             img.height.equalTo(52)
             img.width.equalTo(250)
@@ -257,6 +271,7 @@ extension EditProfileVC: UIImagePickerControllerDelegate, UINavigationController
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let selectedImage = info[.originalImage] as? UIImage {
             imgProfilePic.image = selectedImage
+            viewModel.uploadImage(images: [selectedImage], completion: {result in})
         }
         picker.dismiss(animated: true, completion: nil)
     }

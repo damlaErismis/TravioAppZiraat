@@ -60,14 +60,14 @@ class NewPlacesVC: UIViewController {
         setupViews()
        
     }
-    func bindViewModel() {
+    private func bindViewModel() {
         viewModel.newPlacesChange = { [weak self] in
             self?.collectionView.reloadData()
         }
         viewModel.getNewPlaces() { result in
         }
     }
-    func initVM(){
+    private func initVM(){
         viewModel.reloadCollectionViewForNewPlaces = { [weak self] () in
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
