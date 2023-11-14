@@ -44,13 +44,13 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
         return view
     }()
     private lazy var labelPasswordControl:UILabelCC = {
-        let lbl = UILabelCC(labelText: "En az 6 karakter giriniz", font: .poppinsRegular14)
+        let lbl = UILabelCC(labelText: "Enter at least 6 characters", font: .poppinsRegular14)
         lbl.textColor = .red
         lbl.isHidden = true
         return lbl
     }()
     private lazy var labelPasswordMismatch:UILabelCC = {
-        let lbl = UILabelCC(labelText: "Parola Eşleşmiyor", font: .poppinsRegular14)
+        let lbl = UILabelCC(labelText: "Password does not match", font: .poppinsRegular14)
         lbl.textColor = .red
         lbl.isHidden = true
         return lbl
@@ -78,6 +78,7 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
     private lazy var labelCamera = UILabelCC(labelText: "Camera", font: .poppinsRegular14)
     private lazy var labelPhotoLibrary = UILabelCC(labelText: "Photo Library", font: .poppinsRegular14)
     private lazy var labelLocation = UILabelCC(labelText: "Location", font: .poppinsRegular14)
+    
     private lazy var viewPassword:UIViewCC = {
         let view = UIViewCC(labeltext: "New Password", placeholderText: "***********")
         view.textField.isSecureTextEntry = true
@@ -100,7 +101,6 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
     private lazy var stackViewTop:UIStackView = {
         let sv = UIStackView()
         sv.axis = .vertical
-
         sv.spacing = 12
         sv.distribution = .fillProportionally
         return sv
@@ -109,7 +109,6 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
         let sv = UIStackView()
         sv.axis = .vertical
         sv.backgroundColor = UIColor(hexString: "F8F8F8")
-//        sv.backgroundColor = .clear
         sv.spacing = 12
         sv.distribution = .fillProportionally
   
@@ -127,7 +126,7 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
         
         return btn
     }()
-
+    
     private lazy var toggleSwitchCamera = {
         let s = UISwitch()
         s.addTarget(self, action: #selector(toggleSwitcChangeForCamera), for: .valueChanged)
@@ -143,142 +142,17 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
         s.addTarget(self, action: #selector(toggleSwitcChangeForLocation), for: .valueChanged)
         return s
     }()
-    
-    
-    @objc func toggleSwitcChangeForLocation() {
-        if toggleSwitchLocation.isOn {
-            requestLocationPermission()
-        }
-    }
-    
-    
-    @objc func toggleSwitcChangeForCamera() {
-        if toggleSwitchCamera.isOn {
-            requestCameraPermission()
-        }
-    }
-    
-    @objc func toggleSwitcChangeForPhotoLibrary() {
-        if toggleSwitchPhotoLibrary.isOn {
-            requestPhotoLibraryPermission()
-        }
-    }
-    
-    
-    func requestCameraPermission() {
-        let status = AVCaptureDevice.authorizationStatus(for: .video)
 
-        switch status {
-        case .authorized:
-            DispatchQueue.main.async {
-                self.toggleSwitchCamera.isOn = true
-            }
-        case .denied, .restricted:
-            DispatchQueue.main.async {
-                self.showPermissionPopup(permissionType: "Camera", toggleSwitch: self.toggleSwitchCamera)
-            }
-        case .notDetermined:
-            AVCaptureDevice.requestAccess(for: .video) { [weak self] (granted) in
-                if granted {
-                    DispatchQueue.main.async {
-                        self?.toggleSwitchCamera.isOn = true
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self?.showPermissionPopup(permissionType: "Camera", toggleSwitch: self?.toggleSwitchCamera)
-                    }
-                }
-            }
-        @unknown default:
-            break
-        }
-    }
-
-    func requestLocationPermission() {
-        let locationManager = CLLocationManager()
-        switch locationManager.authorizationStatus {
-        case .authorizedWhenInUse, .authorizedAlways:
-            DispatchQueue.main.async {
-                self.toggleSwitchLocation.isOn = true
-            }
-        case .denied, .restricted:
-            DispatchQueue.main.async {
-                self.showPermissionPopup(permissionType: "Location", toggleSwitch: self.toggleSwitchLocation)
-            }
-        case .notDetermined:
-            locationManager.delegate = self
-            locationManager.requestWhenInUseAuthorization()
-        @unknown default:
-            break
-        }
-    }
-
-    func requestPhotoLibraryPermission() {
-        let status = PHPhotoLibrary.authorizationStatus()
-        switch status {
-        case .authorized:
-            
-            DispatchQueue.main.async {
-                self.toggleSwitchCamera.isOn = true
-            }
-        case .denied, .restricted:
   
-            DispatchQueue.main.async {
-                self.showPermissionPopup(permissionType: "Photo Library", toggleSwitch: self.toggleSwitchPhotoLibrary)
-            }
-            
-        case .notDetermined:
-            
-            PHPhotoLibrary.requestAuthorization { [weak self] (newStatus) in
-                if newStatus == .authorized {
-                    
-                    DispatchQueue.main.async {
-                        self?.toggleSwitchPhotoLibrary.isOn = true
-                    }
-                } else {
-
-                    DispatchQueue.main.async {
-                        self?.showPermissionPopup(permissionType: "Photo Library", toggleSwitch: self?.toggleSwitchPhotoLibrary)
-                    }
-                }
-            }
-        case .limited:
-            print("???????????")
-        @unknown default:
-            print("***********")
-        }
-    }
-
-
-    func showPermissionPopup(permissionType: String, toggleSwitch: UISwitch?) {
-        let alertController = UIAlertController(title: "Permission Denied",
-                                                message: "\(permissionType) permission denied. You can enable it in Settings.",
-                                                preferredStyle: .alert)
-
-        let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
-            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
-                UIApplication.shared.open(settingsURL)
-            }
-        }
-
-        alertController.addAction(settingsAction)
-
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
-            toggleSwitch?.isOn = false
-        }
-        alertController.addAction(cancelAction)
-
-        present(alertController, animated: true, completion: nil)
-    }
-   
-
     
     //MARK: -- Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         
-        locationManager.delegate = self
+        toggleSwitchCamera.isOn = checkCameraPermission()
+        toggleSwitchLocation.isOn = checkLocationPermission()
+        toggleSwitchPhotoLibrary.isOn = checkPhotoLibraryPermission()
         
         initVC()
         initVM()
@@ -296,7 +170,6 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
                 self?.showAlert(title: "Success", message: message)
             }
         }
-        
         vm.showErrorAlertClosure = { [weak self] () in
             DispatchQueue.main.async {
                 if let message = self?.vm.errorStatusMessage?.message, let title = self?.vm.errorStatusMessage?.status {
@@ -304,21 +177,16 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
                 }
             }
         }
-
     }
     
-    
     func initVC(){
-        
         setupViews()
     }
     
     
     @objc func handleBack(){
-        
         navigationController?.popViewController(animated: true)
     }
-
 
     @objc func handleSave(){
         vm.changePassword(newPassword: viewPassword.textField.text!)
@@ -328,7 +196,6 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
     @objc func textFieldDidChange(_ textField: UITextField) {
         
         if textField == viewPassword.textField || textField == viewPasswordConfirm.textField {
-
             let passwordText = viewPassword.textField.text ?? ""
             let passwordConfirmText = viewPasswordConfirm.textField.text ?? ""
             let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmText.count >= 6
@@ -456,6 +323,133 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
             btn.bottom.equalToSuperview().offset(-10)
         })
     }
+}
+
+extension SecuritySettingsVC {
+    
+
+    @objc func toggleSwitcChangeForLocation() {
+        if toggleSwitchLocation.isOn {
+            requestLocationPermission()
+        }
+    }
+    @objc func toggleSwitcChangeForCamera() {
+        if toggleSwitchCamera.isOn {
+            requestCameraPermission()
+        }
+    }
+    @objc func toggleSwitcChangeForPhotoLibrary() {
+        if toggleSwitchPhotoLibrary.isOn {
+            requestPhotoLibraryPermission()
+        }
+    }
+    
+    
+    func requestCameraPermission() {
+        let status = AVCaptureDevice.authorizationStatus(for: .video)
+        switch status {
+        case .authorized:
+            DispatchQueue.main.async {
+                self.toggleSwitchCamera.isOn = true
+            }
+        case .denied, .restricted:
+            DispatchQueue.main.async {
+                self.showPermissionPopup(permissionType: "Camera", toggleSwitch: self.toggleSwitchCamera)
+            }
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { [weak self] (granted) in
+                if granted {
+                    DispatchQueue.main.async {
+                        self?.toggleSwitchCamera.isOn = true
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self?.showPermissionPopup(permissionType: "Camera", toggleSwitch: self?.toggleSwitchCamera)
+                    }
+                }
+            }
+        @unknown default:
+            break
+        }
+    }
+
+    func requestLocationPermission() {
+        let locationManager = CLLocationManager()
+        switch locationManager.authorizationStatus {
+        case .authorizedWhenInUse, .authorizedAlways:
+            DispatchQueue.main.async {
+                self.toggleSwitchLocation.isOn = true
+            }
+        case .denied, .restricted:
+            DispatchQueue.main.async {
+                self.showPermissionPopup(permissionType: "Location", toggleSwitch: self.toggleSwitchLocation)
+            }
+        case .notDetermined:
+            locationManager.delegate = self
+            locationManager.requestWhenInUseAuthorization()
+        @unknown default:
+            break
+        }
+    }
+
+    func requestPhotoLibraryPermission() {
+        let status = PHPhotoLibrary.authorizationStatus()
+        switch status {
+        case .authorized:
+            DispatchQueue.main.async {
+                self.toggleSwitchCamera.isOn = true
+            }
+        case .denied, .restricted:
+            DispatchQueue.main.async {
+                self.showPermissionPopup(permissionType: "Photo Library", toggleSwitch: self.toggleSwitchPhotoLibrary)
+            }
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization { [weak self] (newStatus) in
+                if newStatus == .authorized {
+                    
+                    DispatchQueue.main.async {
+                        self?.toggleSwitchPhotoLibrary.isOn = true
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self?.showPermissionPopup(permissionType: "Photo Library", toggleSwitch: self?.toggleSwitchPhotoLibrary)
+                    }
+                }
+            }
+        case .limited:
+            print("???????????")
+        @unknown default:
+            print("***********")
+        }
+    }
+
+    func showPermissionPopup(permissionType: String, toggleSwitch: UISwitch?) {
+        let alertController = UIAlertController(title: "Permission Denied",
+                                                message: "\(permissionType) permission denied. You can enable it in Settings.",
+                                                preferredStyle: .alert)
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(settingsURL)
+            }
+        }
+        alertController.addAction(settingsAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+            toggleSwitch?.isOn = false
+        }
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    func checkCameraPermission() -> Bool {
+        return AVCaptureDevice.authorizationStatus(for: .video) == .authorized
+    }
+    func checkLocationPermission() -> Bool {
+        return CLLocationManager.authorizationStatus() == .authorizedWhenInUse || CLLocationManager.authorizationStatus() == .authorizedAlways
+    }
+    func checkPhotoLibraryPermission() -> Bool {
+        return PHPhotoLibrary.authorizationStatus() == .authorized
+    }
+   
+
 }
 
 

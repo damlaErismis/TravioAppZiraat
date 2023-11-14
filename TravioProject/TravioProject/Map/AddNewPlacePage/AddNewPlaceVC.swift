@@ -264,7 +264,6 @@ extension AddNewPlaceVC:UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndex = indexPath
         self.imageTapped()
-        print(indexPath)
 
     }
     

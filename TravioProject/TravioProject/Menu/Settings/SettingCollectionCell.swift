@@ -36,7 +36,7 @@ class SettingCollectionCell: UICollectionViewCell {
     
     private lazy var labelItem:UILabelCC = {
         let lbl = UILabelCC()
-        lbl.font = UIFont(name:"Poppins-Thin", size: 14)
+        lbl.font = UIFont(name:"Poppins-ExtraLight", size: 12)
         
         return lbl
     }()
