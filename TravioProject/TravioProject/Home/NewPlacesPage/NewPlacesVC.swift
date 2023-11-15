@@ -124,6 +124,10 @@ extension NewPlacesVC:UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath)
+        let selectedID = viewModel.newPlaces[indexPath.row].id
+        let vc = PlaceDetailVC()
+        vc.selectedID = selectedID
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

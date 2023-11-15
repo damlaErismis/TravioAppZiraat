@@ -222,6 +222,9 @@ extension SettingsVC:UICollectionViewDelegateFlowLayout {
         case 0:
             let vc = SecuritySettingsVC()
             self.navigationController?.pushViewController(vc, animated: true)
+        case 2:
+            let vc = MyAddedPlacesVC()
+            self.navigationController?.pushViewController(vc, animated: true)
         case 3:
             let vc = HelpAndSupportVC()
             self.navigationController?.pushViewController(vc, animated: true)
