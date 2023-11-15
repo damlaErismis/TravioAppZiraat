@@ -20,43 +20,34 @@ class AddNewPlaceVM {
             addNewPlaceClosure?()
         }
     }
-    
     var  placeResponse:SuccessResponse?{
         didSet{
             placeId = placeResponse?.message
             addGalleriesClosure?()
         }
     }
-    
     var  galleryResponse:SuccessResponse?{
         didSet{
             showSuccessAlertClosure?()
         }
     }
-    
     var errorStatusMessage: ErrorResponse? {
         didSet {
             self.showErrorAlertClosure?()
         }
     }
-
     var errorGalleryErrorResponse: ErrorResponse? {
         didSet {
             self.showErrorGalleryAlertClosure?()
         }
     }
-   
     var addNewPlaceClosure : (()->())?
     var addGalleriesClosure : (()->())?
     var showErrorAlertClosure: (()->())?
     var showSuccessAlertClosure: (()->())?
     var showErrorGalleryAlertClosure: (()->())?
-
     
     public func addNewPlace(place:String, placeTitle:String, placeDescription:String, imageString:String, latitude:Double, longitude:Double){
-        
-//        let imageURL = URL(string: imageString)
-
         let params = [
             "place": place,
             "title": placeTitle,
@@ -65,12 +56,10 @@ class AddNewPlaceVM {
             "latitude": latitude,
             "longitude": longitude
         ] as [String : Any]
-        
         GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .postAPlace(params: params), callback: {(result: Result<SuccessResponse,APIErrorMessage>) in
             switch result {
             case .success(let success):
                 self.placeResponse = success
-     
             case .failure(let failure):
                 switch failure {
                 case .apiError(let status, _):
@@ -85,7 +74,6 @@ class AddNewPlaceVM {
                 default:
                     self.errorGalleryErrorResponse = ErrorResponse(status: "Error", message: failure.localizedDescription)
                 }
-                
             }
         })
     }
@@ -118,11 +106,7 @@ class AddNewPlaceVM {
     }
     
     public func uploadImage(images: [UIImage]){
-        
-        let url = "https://ios-class-2f9672c5c549.herokuapp.com/upload"
-        let headers = HTTPHeaders(["Content-Type": "multipart/form-data"])
-        
-        GenericNetworkingHelper.shared.uploadImages(images: images, url: url, headers: headers, callback: {(result: Result<UploadResponse,APIError>) in
+        GenericNetworkingHelper.shared.uploadImagess(urlRequest: .uploadImages(images: images),  callback: {(result: Result<UploadResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.uploadResponse = success
@@ -131,6 +115,4 @@ class AddNewPlaceVM {
             }
         })
     }
-    
-    
 }
