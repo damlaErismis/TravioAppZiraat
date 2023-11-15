@@ -66,6 +66,8 @@
 		0C988EE22AF51EAD0090E85A /* PlaceDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988EE12AF51EAD0090E85A /* PlaceDetailVM.swift */; };
 		0C988EE42AF527F80090E85A /* PlaceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988EE32AF527F80090E85A /* PlaceDetail.swift */; };
 		0C988EE62AF679B30090E85A /* SuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988EE52AF679B30090E85A /* SuccessResponse.swift */; };
+		0CD1F37E2B0400B3002B4486 /* AboutUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD1F37D2B0400B3002B4486 /* AboutUsVC.swift */; };
+		0CD1F3802B040891002B4486 /* UICustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD1F37F2B040891002B4486 /* UICustomViewController.swift */; };
 		0CF741F52AD99AC7002B1389 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF741F42AD99AC7002B1389 /* AppDelegate.swift */; };
 		0CF741F72AD99AC7002B1389 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF741F62AD99AC7002B1389 /* SceneDelegate.swift */; };
 		0CF741FE2AD99AC9002B1389 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CF741FD2AD99AC9002B1389 /* Assets.xcassets */; };
@@ -151,7 +153,8 @@
 		0C988EE12AF51EAD0090E85A /* PlaceDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailVM.swift; sourceTree = "<group>"; };
 		0C988EE32AF527F80090E85A /* PlaceDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetail.swift; sourceTree = "<group>"; };
 		0C988EE52AF679B30090E85A /* SuccessResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessResponse.swift; sourceTree = "<group>"; };
-		0CD1F37B2B03FF5B002B4486 /* TravioProject.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = TravioProject.entitlements; sourceTree = "<group>"; };
+		0CD1F37D2B0400B3002B4486 /* AboutUsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsVC.swift; sourceTree = "<group>"; };
+		0CD1F37F2B040891002B4486 /* UICustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICustomViewController.swift; sourceTree = "<group>"; };
 		0CF741F12AD99AC7002B1389 /* TravioProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravioProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CF741F42AD99AC7002B1389 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0CF741F62AD99AC7002B1389 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -373,8 +376,8 @@
 		0C499D162AF9478D00A7C916 /* SubSettings */ = {
 			isa = PBXGroup;
 			children = (
-				0C499D172AF9481500A7C916 /* SecuritySettingsVC.swift */,
-				0C563C4F2AFE1C4A00A0F5F0 /* SecuritySettingsVM.swift */,
+				0CD1F37C2B04006A002B4486 /* SecuritySettings */,
+				0CD1F37D2B0400B3002B4486 /* AboutUsVC.swift */,
 			);
 			path = SubSettings;
 			sourceTree = "<group>";
@@ -404,6 +407,15 @@
 			path = PlaceDetailPage;
 			sourceTree = "<group>";
 		};
+		0CD1F37C2B04006A002B4486 /* SecuritySettings */ = {
+			isa = PBXGroup;
+			children = (
+				0C499D172AF9481500A7C916 /* SecuritySettingsVC.swift */,
+				0C563C4F2AFE1C4A00A0F5F0 /* SecuritySettingsVM.swift */,
+			);
+			path = SecuritySettings;
+			sourceTree = "<group>";
+		};
 		0CF741E82AD99AC7002B1389 = {
 			isa = PBXGroup;
 			children = (
@@ -423,7 +435,6 @@
 		0CF741F32AD99AC7002B1389 /* TravioProject */ = {
 			isa = PBXGroup;
 			children = (
-				0CD1F37B2B03FF5B002B4486 /* TravioProject.entitlements */,
 				0CF741F42AD99AC7002B1389 /* AppDelegate.swift */,
 				0CF741F62AD99AC7002B1389 /* SceneDelegate.swift */,
 				0062B3C12AE910B0000066E5 /* LoginPage */,
@@ -479,6 +490,7 @@
 				0CF742632ADB3546002B1389 /* UITextFieldCC.swift */,
 				0CF742612ADB3474002B1389 /* UIViewCC.swift */,
 				0CF742652ADB47B2002B1389 /* UILabelCC.swift */,
+				0CD1F37F2B040891002B4486 /* UICustomViewController.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -601,6 +613,7 @@
 				0C2ECEE32AF1231B0013F6C5 /* CustomAnnotation.swift in Sources */,
 				0C2ECEE72AF1239C0013F6C5 /* MapImageCollectionCell.swift in Sources */,
 				00C810A62AF37BEE0077E800 /* PopularPlacesVM.swift in Sources */,
+				0CD1F3802B040891002B4486 /* UICustomViewController.swift in Sources */,
 				00C810C42AF950520077E800 /* MyAddedPlacesVC.swift in Sources */,
 				0CF741F52AD99AC7002B1389 /* AppDelegate.swift in Sources */,
 				0C988ED02AF2C11C0090E85A /* PlaceDetailLayout.swift in Sources */,
@@ -630,6 +643,7 @@
 				0CF742112AD99FE8002B1389 /* Extentions.swift in Sources */,
 				0C04A7852AEA817B002972CF /* LoginSuccessResponse.swift in Sources */,
 				0C988EE62AF679B30090E85A /* SuccessResponse.swift in Sources */,
+				0CD1F37E2B0400B3002B4486 /* AboutUsVC.swift in Sources */,
 				0C988EE62AF679B30090E85A /* SuccessResponse.swift in Sources */,
 				00A47A6C2AFA5710001EDF1D /* EditProfileModel.swift in Sources */,
 				0C04A78B2AEAB8EA002972CF /* HomeCollectionCell.swift in Sources */,
@@ -784,7 +798,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = TravioProject/TravioProject.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -818,7 +831,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = TravioProject/TravioProject.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

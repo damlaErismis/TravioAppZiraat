@@ -6,14 +6,12 @@
 //  Created by Burak Özer on 6.11.2023.
 //
 //
+
 import UIKit
 import TinyConstraints
 import AVFoundation
 import CoreLocation
 import Photos
-
-
-
 
 class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
     
@@ -148,7 +146,6 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
     //MARK: -- Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
         
         toggleSwitchCamera.isOn = checkCameraPermission()
         toggleSwitchLocation.isOn = checkLocationPermission()
@@ -180,6 +177,7 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
     }
     
     func initVC(){
+        tabBarController?.tabBar.isHidden  = true
         setupViews()
     }
     
@@ -439,6 +437,8 @@ extension SecuritySettingsVC {
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
     }
+   
+
     func checkCameraPermission() -> Bool {
         return AVCaptureDevice.authorizationStatus(for: .video) == .authorized
     }
@@ -448,8 +448,8 @@ extension SecuritySettingsVC {
     func checkPhotoLibraryPermission() -> Bool {
         return PHPhotoLibrary.authorizationStatus() == .authorized
     }
-   
-
 }
+
+
 
 
