@@ -56,18 +56,17 @@ class GenericNetworkingHelper{
     }
     
     
-    public func uploadImagess<T: Codable>(urlRequest: Router, callback: @escaping Callbackk<T>) {
-
+    public func uploadImagess<T: Codable>(urlRequest: Router, callback: @escaping Callback<T>) {
         AF.upload(multipartFormData: urlRequest.multipartFormData, with: urlRequest).validate().responseDecodable(of: T.self) { response in
             switch response.result {
             case .success(let success):
                 callback(.success(success))
             case .failure(let error):
                 if let statusCode = response.response?.statusCode {
-                    let apiError = APIError(statusCode: statusCode, message: error.localizedDescription)
+                    let apiError = APIErrorMessage(status: APIErrorStatus(rawValue: statusCode)!, message: error.localizedDescription)
                     callback(.failure(apiError))
                 } else {
-                    let unknownError = APIError(statusCode: -1, message: "Unknown error occurred")
+                    let unknownError = APIErrorMessage(status: APIErrorStatus(rawValue: -1)!, message: error.localizedDescription)
                     callback(.failure(unknownError))
                 }
             }

@@ -105,13 +105,26 @@ class AddNewPlaceVM {
         })
     }
     
-    public func uploadImage(images: [UIImage]){
-        GenericNetworkingHelper.shared.uploadImagess(urlRequest: .uploadImages(images: images),  callback: {(result: Result<UploadResponse,APIError>) in
+    public func uploadImages(images: [UIImage]){
+        GenericNetworkingHelper.shared.uploadImagess(urlRequest: .uploadImages(images: images),  callback: {(result: Result<UploadResponse,APIErrorMessage>) in
             switch result {
             case .success(let success):
                 self.uploadResponse = success
             case .failure(let failure):
-                print(failure.message)
+                switch failure {
+                case .apiError(let status, _):
+                    switch status {
+                    case .unauthorized:
+                        self.errorStatusMessage = ErrorResponse(status: "Unauthorized", message: "Invalid credenials")
+                    case .forbidden:
+                        self.errorStatusMessage = ErrorResponse(status: "Forbidden", message: "Access to this resource is forbidden.")
+                    default:
+                        self.errorStatusMessage = ErrorResponse(status: "Unknown Error", message: "Unknown error occurred.")
+                    }
+                default:
+                    self.errorStatusMessage = ErrorResponse(status: "Error", message: failure.localizedDescription)
+                }
+
             }
         })
     }

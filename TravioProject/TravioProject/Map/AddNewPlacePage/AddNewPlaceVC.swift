@@ -134,7 +134,6 @@ class AddNewPlaceVC: UIViewController, UITextFieldDelegate{
     }
     
     @objc func handleAddPlace(){
-        
         uploadImages()
         vm.addNewPlaceClosure = {
             guard let imageResponse = self.vm.imageUrls else {return }
@@ -158,13 +157,13 @@ class AddNewPlaceVC: UIViewController, UITextFieldDelegate{
     func uploadImages(){
         let images = imagesFromLibrary
         if images.count >= 2 {
-            vm.uploadImage(images: images)
+            vm.uploadImages(images: images)
         }else{
             self.showAlert(title: "Alert", message: "Please add at least 2 photos")
             return
         }
     }
-    
+
     func imageTapped() {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -237,7 +236,7 @@ class AddNewPlaceVC: UIViewController, UITextFieldDelegate{
             btn.height.equalTo(54)
             btn.leading.equalToSuperview().offset(24)
             btn.trailing.equalToSuperview().offset(-24)
-            btn.bottom.equalToSuperview().offset(-30)
+            btn.bottom.equalToSuperview().offset(-50)
         })
     }
 }
