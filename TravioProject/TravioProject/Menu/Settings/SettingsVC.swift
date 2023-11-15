@@ -114,6 +114,7 @@ class SettingsVC: UIViewController {
     
     @objc func buttonEditProfileTapped(){
         let editProfile = EditProfileVC()
+        editProfile.delegate = self
         present(editProfile, animated: true)
     }
     
@@ -273,5 +274,11 @@ extension SettingsVC:UICollectionViewDataSource {
     
 }
 
+extension SettingsVC: EditProfileVCDelegate {
+    func profilePhotoDidUpdate(_ newPhoto: UIImage) {
+        imageProfile.image = newPhoto
+    }
+
+}
 
 
