@@ -55,15 +55,16 @@ class PopularPlacesVC: UIViewController {
         return img!
     }()
     
-    private func createLeftBarButton() -> UIBarButtonItem {
-        let image = UIImage(named: "Vector")
-        let leftBarButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(backButtonTapped))
-        leftBarButton.tintColor = .white
-        return leftBarButton
-    }
+    private lazy var btnBack: UIButton = {
+        let image = UIImage(named: "btnBack")
+        let btn = UIButton()
+        btn.setImage(image, for: .normal)
+        btn.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        return btn
+    }()
     
     @objc func backButtonTapped(){
-    self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     override func viewDidLoad() {
@@ -91,8 +92,7 @@ class PopularPlacesVC: UIViewController {
     
     func setupViews() {
         
-        self.navigationItem.leftBarButtonItem = createLeftBarButton()
-        self.view.addSubviews(viewMain, labelPopularPlaces)
+        self.view.addSubviews(viewMain, labelPopularPlaces, btnBack)
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
         viewMain.addSubview(collectionView)
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -103,9 +103,17 @@ class PopularPlacesVC: UIViewController {
     
     func setupLayout() {
         
+        btnBack.snp.makeConstraints({ btn in
+            btn.top.equalTo(labelPopularPlaces).offset(15)
+            btn.leading.equalToSuperview().offset(25)
+            btn.width.equalTo(25)
+            btn.height.equalTo(25)
+        })
+        
         labelPopularPlaces.snp.makeConstraints({ img in
             img.top.equalToSuperview().offset(50)
             img.centerX.equalToSuperview()
+            img.leading.equalTo(btnBack.snp.trailing).offset(30)
             img.height.equalTo(52)
             img.width.equalTo(250)
         })

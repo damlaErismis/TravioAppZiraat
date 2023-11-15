@@ -59,6 +59,17 @@ class SignUpVC: UIViewController {
         sv.distribution = .fillProportionally
         return sv
     }()
+    private lazy var btnBack: UIButton = {
+        let image = UIImage(named: "btnBack")
+        let btn = UIButton()
+        btn.setImage(image, for: .normal)
+        btn.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        return btn
+    }()
+    
+    @objc func backButtonTapped(){
+        self.navigationController?.popViewController(animated: true)
+    }
     
     private lazy var labelSignUp:UILabelCC = {
         let lbl = UILabelCC(labelText: "Sign Up", font: .poppinsBold36)
@@ -99,10 +110,6 @@ class SignUpVC: UIViewController {
             buttonSignup.backgroundColor = isFormComplete ? UIColor(hexString: "#38ada9") : .lightGray
         }
     }
-    @objc func backButtonTapped(){
-        let login = LoginVC()
-        self.navigationController?.pushViewController(login, animated: true)
-    }
     
     @objc func btnSignUpTapped(){
         guard let textUsername = viewUserName.textField.text else{return}
@@ -141,7 +148,7 @@ class SignUpVC: UIViewController {
         self.navigationItem.leftBarButtonItem = createLeftBarButton()
         
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
-        self.view.addSubviews(viewMain, labelSignUp)
+        self.view.addSubviews(viewMain, labelSignUp, btnBack)
         viewMain.addSubviews(stackView, labelPasswordMismatch, buttonSignup)
         stackView.addArrangedSubviews(viewUserName, viewEmail, viewPassword, viewPasswordConfirm)
         setupLayout()
@@ -160,10 +167,17 @@ class SignUpVC: UIViewController {
     }
     
     private func setupLayout() {
+        btnBack.snp.makeConstraints({ btn in
+            btn.top.equalTo(labelSignUp).offset(15)
+            btn.leading.equalToSuperview().offset(25)
+            btn.width.equalTo(25)
+            btn.height.equalTo(25)
+        })
         
         labelSignUp.snp.makeConstraints({ img in
             img.top.equalToSuperview().offset(55)
             img.centerX.equalToSuperview()
+            img.leading.equalTo(btnBack.snp.trailing).offset(30)
             img.height.equalTo(52)
             img.width.equalTo(150)
         })

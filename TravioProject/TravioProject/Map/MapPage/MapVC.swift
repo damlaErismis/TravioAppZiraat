@@ -195,7 +195,7 @@ class MapVC: UIViewController, ViewControllerDelegate{
             mv.bottom.equalToSuperview()
         })
         collectionView.snp.makeConstraints({cv in
-            cv.bottom.equalToSuperview().offset(-60)
+            cv.bottom.equalToSuperview().offset(-20)
             cv.leading.equalToSuperview()
             cv.trailing.equalToSuperview()
             cv.height.equalTo(200)

@@ -40,7 +40,7 @@ class LoginVC: UIViewController {
         btn.setTitle("Login", for: .normal)
         btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 16)
         btn.setTitleColor(.white, for: .normal)
-        btn.backgroundColor = UIColor(hexString: "#38ada9")
+        btn.backgroundColor = .lightGray
         btn.layer.cornerRadius = 12
         btn.isEnabled = false
         btn.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
