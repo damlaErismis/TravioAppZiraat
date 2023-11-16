@@ -17,10 +17,9 @@ struct  HelpAndSupportContent {
 
 class HelpAndSupportVC: UIViewController {
     
-    
     private let data: [HelpAndSupportContent] = [
-        HelpAndSupportContent(question: "How can I create a new account on Travio?", answer: "her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem "),
-        HelpAndSupportContent(question: "How can I save a visit?", answer: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.")
+        HelpAndSupportContent(question: "How can I create a new account on Travio?", answer: "her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem"),
+        HelpAndSupportContent(question: "How can I save a visit?", answer: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ")
     ]
     
     private lazy var tableView:UITableView = {
@@ -89,7 +88,6 @@ class HelpAndSupportVC: UIViewController {
             btn.width.equalTo(25)
             btn.height.equalTo(25)
         })
-        
         labelHelpAndSupport.snp.makeConstraints ({ img in
             img.top.equalToSuperview().offset(50)
             img.centerX.equalToSuperview()
@@ -97,7 +95,6 @@ class HelpAndSupportVC: UIViewController {
             img.height.equalTo(52)
             img.width.equalTo(250)
         })
-        
         viewMain.snp.makeConstraints ({ view in
             view.bottom.equalToSuperview()
             view.leading.equalToSuperview()
@@ -115,8 +112,6 @@ class HelpAndSupportVC: UIViewController {
             lbl.leading.equalToSuperview().offset(30)
             lbl.trailing.equalToSuperview().offset(-20)
         })
-        
-        
     }
     var selectedIndex: IndexPath = IndexPath(row: -1, section: 0)
 }
@@ -124,10 +119,9 @@ class HelpAndSupportVC: UIViewController {
 extension HelpAndSupportVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if selectedIndex == indexPath { return 200 }
+        if selectedIndex == indexPath { return UITableView.automaticDimension }
         return 80
     }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
     }
@@ -148,7 +142,6 @@ extension HelpAndSupportVC: UITableViewDelegate, UITableViewDataSource {
         } else {
             selectedIndex = indexPath
         }
-
         tableView.beginUpdates()
         if let previousCell = tableView.cellForRow(at: previousSelectedIndex) as? HelpAndSupportCell {
             previousCell.updateChevronStatus(isExpanded: false)
@@ -161,7 +154,4 @@ extension HelpAndSupportVC: UITableViewDelegate, UITableViewDataSource {
         tableView.endUpdates()
     }
 
-
-    
-    
 }

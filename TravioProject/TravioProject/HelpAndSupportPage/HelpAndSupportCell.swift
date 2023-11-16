@@ -27,16 +27,20 @@ class HelpAndSupportCell: UITableViewCell {
         return img
     }()
     
-    private lazy var lblQuestion:UILabelCC = {
-        let lbl = UILabelCC(labelText: " ", font: .poppinsBold16)
-        lbl.numberOfLines = -1
+    private lazy var lblQuestion:UILabel = {
+        let lbl = UILabel()
+        lbl.font = UIFont(name: "Poppins-Medium", size: 14)
+        lbl.numberOfLines = 0
+        lbl.textColor = UIColor(hexString: "#3D3D3D")
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
     
-    private lazy var lblAnswer:UILabelCC = {
-        let lbl = UILabelCC(labelText: " ", font: .poppinsRegular16)
-        lbl.numberOfLines = -1
+    private lazy var lblAnswer:UILabel = {
+        let lbl = UILabel()
+        lbl.numberOfLines = 0
+        lbl.font = UIFont(name: "Poppins-Medium", size: 10)
+        lbl.textColor = UIColor(hexString: "#3D3D3D")
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
@@ -60,18 +64,27 @@ class HelpAndSupportCell: UITableViewCell {
             self.layoutIfNeeded()
         }
     }
+    func addShadow(to view: UIView) {
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOffset = CGSize(width: 0, height: 1)
+        view.layer.shadowOpacity = 0.1
+        view.layer.shadowRadius = 4
+        view.layer.masksToBounds = false
+        view.layer.shouldRasterize = true
+        view.layer.rasterizationScale = UIScreen.main.scale
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupViews()
         updateChevronStatus(isExpanded: false)
+        addShadow(to: container)
     }
     
     private func setupViews(){
         self.contentView.addSubview(container)
         self.contentView.backgroundColor = UIColor(hexString: "F8F8F8")
-        
         container.addSubviews(lblQuestion, lblAnswer)
         lblQuestion.addSubview(imageChevron)
         setupLayout()
@@ -84,11 +97,11 @@ class HelpAndSupportCell: UITableViewCell {
             make.trailing.equalTo(contentView.snp.trailing).offset(-4)
             make.bottom.equalTo(contentView.snp.bottom).offset(-4)
         })
-        lblQuestion.snp.makeConstraints ({ make in
-            make.top.equalTo(container.snp.top)
-            make.leading.equalTo(container.snp.leading).offset(4)
-            make.trailing.equalTo(container.snp.trailing).offset(-4)
-            make.height.equalTo(60)
+        lblQuestion.snp.makeConstraints ({ lbl in
+            lbl.top.equalTo(container.snp.top)
+            lbl.leading.equalTo(container.snp.leading).offset(10)
+            lbl.trailing.equalTo(container.snp.trailing).offset(-4)
+            lbl.height.equalTo(60)
         })
         
         imageChevron.snp.makeConstraints({ img in
@@ -98,14 +111,12 @@ class HelpAndSupportCell: UITableViewCell {
             img.height.equalTo(13)
         })
         
-        lblAnswer.snp.makeConstraints ({ make in
-            make.top.equalTo(lblQuestion.snp.bottom).offset(10)
-            make.leading.equalTo(container.snp.leading).offset(4)
-            make.trailing.equalTo(container.snp.trailing).offset(-4)
-            make.height.equalTo(140)
+        lblAnswer.snp.makeConstraints ({ lbl in
+            lbl.top.equalTo(lblQuestion.snp.bottom).offset(10)
+            lbl.leading.equalTo(container.snp.leading).offset(10)
+            lbl.trailing.equalTo(container.snp.trailing).offset(-10)
+            lbl.bottom.equalTo(container.snp.bottom).offset(-10)
         })
-        
-        
     }
     
     required init?(coder: NSCoder) {
