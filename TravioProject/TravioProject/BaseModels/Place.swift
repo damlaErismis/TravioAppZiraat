@@ -30,8 +30,6 @@ struct PlaceData: Codable {
     let places: [Place]
 }
 
-
-
 struct PlaceIdData: Codable {
     let data: PlaceIdResponse
     let status: String

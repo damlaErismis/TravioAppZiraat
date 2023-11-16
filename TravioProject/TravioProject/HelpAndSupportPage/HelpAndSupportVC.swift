@@ -136,7 +136,7 @@ extension HelpAndSupportVC: UITableViewDelegate, UITableViewDataSource {
         cell.data = data[indexPath.row]
         cell.selectionStyle = .none
         cell.animate()
-        
+
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
