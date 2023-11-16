@@ -75,7 +75,6 @@ class HomeVC: UIViewController {
             view.trailing.equalToSuperview()
             view.height.equalToSuperview().multipliedBy(0.80)
         })
-        
         tableView.snp.makeConstraints({cv in
             cv.top.equalToSuperview()
             cv.leading.equalToSuperview()
@@ -114,17 +113,17 @@ extension HomeVC:UITableViewDelegate{
         btn.translatesAutoresizingMaskIntoConstraints = false
         
         headerView.addSubviews(lbl, btn)
-
+        
         lbl.snp.makeConstraints { make in
             make.leading.equalTo(headerView).offset(25)
-            make.top.equalTo(headerView).offset(10)
-            make.bottom.equalTo(headerView).offset(-10)
+            make.top.equalTo(headerView).offset(15)
+            make.bottom.equalTo(headerView)
         }
         
         btn.snp.makeConstraints { make in
             make.trailing.equalTo(headerView).offset(-20)
             make.top.equalTo(headerView).offset(10)
-            make.bottom.equalTo(headerView).offset(-10)
+            make.bottom.equalTo(headerView)
         }
 
         return headerView
@@ -146,18 +145,17 @@ extension HomeVC:UITableViewDelegate{
         }
     }
 
-    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return 60
-        }else{ return 40 }
-       
+        if section==0{
+            return 50
+        }else{
+            return 40
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        return 180
     }
-    
 }
 
 extension HomeVC:UITableViewDataSource{
@@ -197,9 +195,7 @@ extension HomeVC:UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
-    
 
-    
 }
 
 extension HomeVC: HomeViewModelDelegate {

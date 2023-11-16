@@ -64,7 +64,7 @@ class HelpAndSupportCell: UITableViewCell {
             self.layoutIfNeeded()
         }
     }
-    func addShadow(to view: UIView) {
+    public func addShadow(to view: UIView) {
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOffset = CGSize(width: 0, height: 1)
         view.layer.shadowOpacity = 0.1

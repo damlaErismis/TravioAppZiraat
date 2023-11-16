@@ -19,7 +19,7 @@ class PopularPlacesCell: UICollectionViewCell {
         return iv
     }()
     
-    private lazy var labelPlace:UILabelCC = {
+     lazy var labelPlace:UILabelCC = {
         let lbl = UILabelCC()
         lbl.textColor = .black
         lbl.addFont = .poppinsRegular24

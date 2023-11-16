@@ -12,6 +12,12 @@ import SnapKit
 
 class MyAddedPlacesVC: UIViewController {
     
+    enum OrderState {
+        case ascending
+        case descending
+    }
+    var currentOrderState: OrderState = .ascending
+    
     var viewModel = MyAddedPlacesVM()
 
     lazy var collectionView:UICollectionView = {
@@ -42,15 +48,13 @@ class MyAddedPlacesVC: UIViewController {
         lbl.adjustsFontSizeToFitWidth = true
         return lbl
     }()
-    
-    private lazy var imgOrderAscending:UIImage = {
-        let img = UIImage(named: "orderAZ")
-        return img!
-    }()
-    
-    private lazy var imgOrderDescending:UIImage = {
-        let img = UIImage(named: "orderZA")
-        return img!
+
+    private lazy var btnOrder: UIButton = {
+        let image = UIImage(named: "orderAZ")
+        let btn = UIButton()
+        btn.setImage(image, for: .normal)
+        btn.addTarget(self, action: #selector(btnOrderTapped), for: .touchUpInside)
+        return btn
     }()
     
     private lazy var btnBack: UIButton = {
@@ -64,7 +68,17 @@ class MyAddedPlacesVC: UIViewController {
     @objc func backButtonTapped(){
         self.navigationController?.popViewController(animated: true)
     }
-    
+    @objc func btnOrderTapped() {
+        let newImageName = (currentOrderState == .ascending) ? "orderZA" : "orderAZ"
+        btnOrder.setImage(UIImage(named: newImageName), for: .normal)
+        currentOrderState = (currentOrderState == .ascending) ? .descending : .ascending
+        if currentOrderState == .ascending {
+            viewModel.myAddedPlaces.sort { $0.title < $1.title }
+        } else {
+            viewModel.myAddedPlaces.sort { $0.title > $1.title }
+        }
+        collectionView.reloadData()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
@@ -92,7 +106,7 @@ class MyAddedPlacesVC: UIViewController {
         
         self.view.addSubviews(viewMain, labelMyAddedPlaces, btnBack)
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
-        viewMain.addSubview(collectionView)
+        viewMain.addSubviews(collectionView, btnOrder)
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
@@ -122,7 +136,11 @@ class MyAddedPlacesVC: UIViewController {
             view.trailing.equalToSuperview()
             view.height.equalToSuperview().multipliedBy(0.80)
         })
-
+        
+        btnOrder.snp.makeConstraints({ btn in
+            btn.top.equalToSuperview().offset(20)
+            btn.trailing.equalToSuperview().offset(-25)
+        })
         collectionView.snp.makeConstraints({view in
             view.bottom.equalToSuperview()
             view.top.equalToSuperview().offset(60)

@@ -39,17 +39,26 @@ class HomeCollectionCell: UICollectionViewCell {
         img.image = UIImage(named: "visitLogo")
         return img
     }()
-    
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupShadow()
         setupViews()
+    }
+    private func setupShadow() {
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOpacity = 0.1
+        self.layer.shadowOffset = CGSize(width: 0, height: 0)
+        self.layer.shadowRadius = 4
+        self.layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = UIScreen.main.scale
     }
     
     public func configurePopularPlaces(with object:Place){
         if let imageURL = URL(string: object.cover_image_url) {
             imagePlace.kf.setImage(with: imageURL)
-            }
+        }
         labelPlace.text = object.title
         labelCity.text = object.place
     }

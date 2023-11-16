@@ -13,6 +13,12 @@ import Kingfisher
 
 class NewPlacesVC: UIViewController {
     
+    enum OrderState {
+        case ascending
+        case descending
+    }
+    var currentOrderState: OrderState = .ascending
+    
     var viewModel = NewPlacesVM()
     
     lazy var collectionView:UICollectionView = {
@@ -49,7 +55,24 @@ class NewPlacesVC: UIViewController {
         btn.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         return btn
     }()
-    
+    private lazy var btnOrder: UIButton = {
+        let image = UIImage(named: "orderAZ")
+        let btn = UIButton()
+        btn.setImage(image, for: .normal)
+        btn.addTarget(self, action: #selector(btnOrderTapped), for: .touchUpInside)
+        return btn
+    }()
+    @objc func btnOrderTapped() {
+        let newImageName = (currentOrderState == .ascending) ? "orderZA" : "orderAZ"
+        btnOrder.setImage(UIImage(named: newImageName), for: .normal)
+        currentOrderState = (currentOrderState == .ascending) ? .descending : .ascending
+        if currentOrderState == .ascending {
+            viewModel.newPlaces.sort { $0.title < $1.title }
+        } else {
+            viewModel.newPlaces.sort { $0.title > $1.title }
+        }
+        collectionView.reloadData()
+    }
     @objc func backButtonTapped(){
         self.navigationController?.popViewController(animated: true)
     }
@@ -79,7 +102,7 @@ class NewPlacesVC: UIViewController {
     func setupViews() {
         self.view.addSubviews(viewMain, labelNewPlaces, btnBack)
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
-        viewMain.addSubview(collectionView)
+        viewMain.addSubviews(collectionView, btnOrder)
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
@@ -109,10 +132,15 @@ class NewPlacesVC: UIViewController {
             view.trailing.equalToSuperview()
             view.height.equalToSuperview().multipliedBy(0.80)
         })
+        
+        btnOrder.snp.makeConstraints({ btn in
+            btn.top.equalToSuperview().offset(20)
+            btn.trailing.equalToSuperview().offset(-25)
+        })
 
         collectionView.snp.makeConstraints({view in
             view.bottom.equalToSuperview()
-            view.top.equalToSuperview().offset(60)
+            view.top.equalToSuperview().offset(50)
             view.leading.equalToSuperview()
             view.trailing.equalToSuperview()
         })
