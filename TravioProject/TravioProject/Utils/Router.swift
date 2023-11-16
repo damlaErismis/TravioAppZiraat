@@ -29,6 +29,7 @@ enum Router{
     case postAGalleryImage(params:Parameters)
     case getUserProfile
     case changePassword(params:Parameters)
+    case getAllVisits
     
     var baseURL:String{
         return "https://ios-class-2f9672c5c549.herokuapp.com"
@@ -55,7 +56,7 @@ enum Router{
             return "/v1/galleries/\(placeId)"
         case .getAPlaceById(let placeId):
             return "/v1/places/\(placeId)"
-        case .postAVisit:
+        case .postAVisit, .getAllVisits:
             return "/v1/visits"
         case .deleteAVisit(let placeId) :
             return "/v1/visits/\(placeId)"
@@ -77,7 +78,7 @@ enum Router{
         switch self {
         case .signUp, .login, .postAVisit, .postAPlace, .postAGalleryImage:
             return .post
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces, .checkVisitByPlaceId, .getUserProfile, .getPersonalInfo, .getPopularPlacesWithLimit, .getLastPlacesWithLimit:
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces, .checkVisitByPlaceId, .getUserProfile, .getPersonalInfo, .getPopularPlacesWithLimit, .getLastPlacesWithLimit, .getAllVisits:
             return .get
         case .deleteAVisit:
             return .delete
@@ -89,14 +90,14 @@ enum Router{
         switch self {
         case .signUp, .login, .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .getPopularPlacesWithLimit, .getLastPlacesWithLimit, .getPopularPlaces, .getLastPlaces:
             return [:]
-        case .postAVisit, .deleteAVisit, .checkVisitByPlaceId, .postAPlace, .postAGalleryImage, .getUserProfile, .changePassword,.editProfile, .getPersonalInfo, .getAllPlacesForUser:
+        case .postAVisit, .deleteAVisit, .checkVisitByPlaceId, .postAPlace, .postAGalleryImage, .getUserProfile, .changePassword,.editProfile, .getPersonalInfo, .getAllPlacesForUser, .getAllVisits:
             return HTTPHeaders(["Authorization": "Bearer \(token)"])
         }}
     var param:Parameters? {
         switch self {
         case .signUp(let params), .login(let params), .postAVisit(let params), .postAPlace(let params), .postAGalleryImage(let params), .changePassword(let params), .editProfile(let params):
             return params
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces, .getPersonalInfo,  .checkVisitByPlaceId, .getUserProfile:
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces, .getPersonalInfo,  .checkVisitByPlaceId, .getUserProfile, .getAllVisits:
             return nil
         case .getPopularPlacesWithLimit(limit: let limit), .getLastPlacesWithLimit(limit: let limit):
             let limited = min(limit, 20)

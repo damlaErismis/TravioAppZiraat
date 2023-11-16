@@ -114,6 +114,7 @@ class SettingsVC: UIViewController {
     
     @objc func buttonEditProfileTapped(){
         let editProfile = EditProfileVC()
+        editProfile.delegate = self
         present(editProfile, animated: true)
     }
     
@@ -222,6 +223,9 @@ extension SettingsVC:UICollectionViewDelegateFlowLayout {
         case 0:
             let vc = SecuritySettingsVC()
             self.navigationController?.pushViewController(vc, animated: true)
+        case 2:
+            let vc = MyAddedPlacesVC()
+            self.navigationController?.pushViewController(vc, animated: true)
         case 3:
             let vc = HelpAndSupportVC()
             self.navigationController?.pushViewController(vc, animated: true)
@@ -270,5 +274,11 @@ extension SettingsVC:UICollectionViewDataSource {
     
 }
 
+extension SettingsVC: EditProfileVCDelegate {
+    func profilePhotoDidUpdate(_ newPhoto: UIImage) {
+        imageProfile.image = newPhoto
+    }
+
+}
 
 

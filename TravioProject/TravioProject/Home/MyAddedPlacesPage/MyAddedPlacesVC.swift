@@ -43,7 +43,7 @@ class MyAddedPlacesVC: UIViewController {
     }()
     
     private lazy var labelMyAddedPlaces:UILabelCC = {
-        let lbl = UILabelCC(labelText: "Popular Places", font: .poppinsBold30)
+        let lbl = UILabelCC(labelText: "My Added Places", font: .poppinsBold30)
         lbl.textColor = .white
         lbl.adjustsFontSizeToFitWidth = true
         return lbl
@@ -155,6 +155,10 @@ extension MyAddedPlacesVC:UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath)
+        let selectedID = viewModel.myAddedPlaces[indexPath.row].id
+        let vc = PlaceDetailVC()
+        vc.selectedID = selectedID
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

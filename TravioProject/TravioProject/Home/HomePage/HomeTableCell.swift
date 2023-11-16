@@ -11,6 +11,9 @@ import TinyConstraints
 import Kingfisher
 
 class HomeTableCell: UITableViewCell {
+    
+    var onItemSelect: ((IndexPath) -> Void)?
+
 
     var viewModel = HomeVM()
     
@@ -71,6 +74,8 @@ extension HomeTableCell:UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath)
+        onItemSelect?(indexPath)
+
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

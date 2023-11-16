@@ -35,7 +35,7 @@ class HomeVC: UIViewController {
         tv.delegate = self
         tv.dataSource = self
         tv.backgroundColor = UIColor(hexString: "F8F8F8")
-
+        
         tv.register(HomeTableCell.self, forCellReuseIdentifier: "tableCell")
         tv.isPagingEnabled = true
         tv.layer.cornerRadius = 75
@@ -62,7 +62,7 @@ class HomeVC: UIViewController {
     }
     
     func setupLayout() {
-                
+        
         imageLogo.snp.makeConstraints({ img in
             img.bottom.equalTo(viewMain.snp.top).offset(-28)
             img.leading.equalToSuperview().offset(16)
@@ -125,10 +125,10 @@ extension HomeVC:UITableViewDelegate{
             make.top.equalTo(headerView).offset(10)
             make.bottom.equalTo(headerView)
         }
-
+        
         return headerView
     }
-
+    
     @objc func btnSeeAllTapped(sender: UIButton) {
         switch sender.tag {
         case 0:
@@ -175,22 +175,51 @@ extension HomeVC:UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         if let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath) as? HomeTableCell {
+            
             switch viewModel.tableSection[indexPath.section] {
             case .popularPlaces:
                 cell.prepareCategory(with: viewModel.popularPlaces)
-                return cell
             case .newPlaces:
                 cell.prepareCategory(with: viewModel.newPlaces)
-                return cell
             case .myAddedPlaces:
                 cell.prepareCategory(with: viewModel.myAddedPlaces)
-                return cell
             }
+            
+            cell.onItemSelect = { [weak self] itemIndexPath in
+                guard let strongSelf = self else { return }
+                var selectedID: String?
+                cell.onItemSelect = { [weak self] itemIndexPath in
+                    guard let strongSelf = self else { return }
+                    var selectedID: String?
+                    switch strongSelf.viewModel.tableSection[indexPath.section] {
+                    case .popularPlaces:
+                        selectedID = strongSelf.viewModel.popularPlaces[itemIndexPath.row].id
+                    case .newPlaces:
+                        selectedID = strongSelf.viewModel.newPlaces[itemIndexPath.row].id
+                    case .myAddedPlaces:
+                        selectedID = strongSelf.viewModel.myAddedPlaces[itemIndexPath.row].id
+                    }
+                    
+                    if let id = selectedID {
+                        let vc = PlaceDetailVC()
+                        vc.selectedID = id
+                        strongSelf.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
+                
+                if let id = selectedID {
+                    let vc = PlaceDetailVC()
+                    vc.selectedID = id
+                    strongSelf.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+            
+            return cell
         }
         return UITableViewCell()
     }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         

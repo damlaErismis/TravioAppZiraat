@@ -15,11 +15,12 @@
 		00A47A7F2AFFD257001EDF1D /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 00A47A7E2AFFD257001EDF1D /* IQKeyboardManagerSwift */; };
 		00A47A8B2B0401F7001EDF1D /* MyAddedPlacesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A8A2B0401F7001EDF1D /* MyAddedPlacesCell.swift */; };
 		00A47A8D2B0403A4001EDF1D /* MyAddedPlacesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A8C2B0403A4001EDF1D /* MyAddedPlacesVM.swift */; };
+		00A47A8F2B04E21C001EDF1D /* MyVisitsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A8E2B04E21C001EDF1D /* MyVisitsVM.swift */; };
 		00C8106C2AEBB79B0077E800 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106B2AEBB79B0077E800 /* MapVC.swift */; };
 		00C8106E2AEBB7A90077E800 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106D2AEBB7A90077E800 /* SettingsVC.swift */; };
 		00C810702AEBB7B70077E800 /* VisitsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106F2AEBB7B70077E800 /* VisitsVC.swift */; };
 		00C810722AEBB7DF0077E800 /* MainTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810712AEBB7DF0077E800 /* MainTabBar.swift */; };
-		00C810742AEBD5320077E800 /* VisitsCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810732AEBD5320077E800 /* VisitsCustomCell.swift */; };
+		00C810742AEBD5320077E800 /* VisitsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810732AEBD5320077E800 /* VisitsCell.swift */; };
 		00C810822AF0EB8F0077E800 /* AddNewPlaceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C810812AF0EB8F0077E800 /* AddNewPlaceVC.swift */; };
 		00C810922AF0EDA70077E800 /* TinyConstraints in Frameworks */ = {isa = PBXBuildFile; productRef = 00C810912AF0EDA70077E800 /* TinyConstraints */; };
 		00C810952AF0EDAF0077E800 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 00C810942AF0EDAF0077E800 /* Alamofire */; };
@@ -107,11 +108,12 @@
 		00A47A722AFA6D46001EDF1D /* HelpAndSupportCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpAndSupportCell.swift; sourceTree = "<group>"; };
 		00A47A8A2B0401F7001EDF1D /* MyAddedPlacesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAddedPlacesCell.swift; sourceTree = "<group>"; };
 		00A47A8C2B0403A4001EDF1D /* MyAddedPlacesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAddedPlacesVM.swift; sourceTree = "<group>"; };
+		00A47A8E2B04E21C001EDF1D /* MyVisitsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVisitsVM.swift; sourceTree = "<group>"; };
 		00C8106B2AEBB79B0077E800 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		00C8106D2AEBB7A90077E800 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		00C8106F2AEBB7B70077E800 /* VisitsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsVC.swift; sourceTree = "<group>"; };
 		00C810712AEBB7DF0077E800 /* MainTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBar.swift; sourceTree = "<group>"; };
-		00C810732AEBD5320077E800 /* VisitsCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsCustomCell.swift; sourceTree = "<group>"; };
+		00C810732AEBD5320077E800 /* VisitsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsCell.swift; sourceTree = "<group>"; };
 		00C810812AF0EB8F0077E800 /* AddNewPlaceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPlaceVC.swift; sourceTree = "<group>"; };
 		00C8109C2AF169F50077E800 /* AddPlaceCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlaceCollectionCell.swift; sourceTree = "<group>"; };
 		00C8109F2AF223740077E800 /* PopularPlacesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularPlacesVC.swift; sourceTree = "<group>"; };
@@ -302,8 +304,9 @@
 			isa = PBXGroup;
 			children = (
 				00C8106F2AEBB7B70077E800 /* VisitsVC.swift */,
-				00C810732AEBD5320077E800 /* VisitsCustomCell.swift */,
+				00C810732AEBD5320077E800 /* VisitsCell.swift */,
 				0C988ED52AF37EAC0090E85A /* Visit.swift */,
+				00A47A8E2B04E21C001EDF1D /* MyVisitsVM.swift */,
 			);
 			path = MyVisitsPage;
 			sourceTree = "<group>";
@@ -619,12 +622,13 @@
 				00C810702AEBB7B70077E800 /* VisitsVC.swift in Sources */,
 				00C810C22AF9502A0077E800 /* NewPlacesVC.swift in Sources */,
 				00C810A02AF223740077E800 /* PopularPlacesVC.swift in Sources */,
-				00C810742AEBD5320077E800 /* VisitsCustomCell.swift in Sources */,
+				00C810742AEBD5320077E800 /* VisitsCell.swift in Sources */,
 				00C810722AEBB7DF0077E800 /* MainTabBar.swift in Sources */,
 				0C499D1A2AF97E4700A7C916 /* AddNewPlaceVM.swift in Sources */,
 				00A47A6A2AFA5528001EDF1D /* EditProfileVM.swift in Sources */,
 				0C04A7712AE92CA5002972CF /* Router.swift in Sources */,
 				00C8109D2AF169F50077E800 /* AddPlaceCollectionCell.swift in Sources */,
+				00A47A8F2B04E21C001EDF1D /* MyVisitsVM.swift in Sources */,
 				0062B3C42AEA4B7A000066E5 /* SignUpVM.swift in Sources */,
 				0C988ED62AF37EAC0090E85A /* Visit.swift in Sources */,
 				00A47A8B2B0401F7001EDF1D /* MyAddedPlacesCell.swift in Sources */,

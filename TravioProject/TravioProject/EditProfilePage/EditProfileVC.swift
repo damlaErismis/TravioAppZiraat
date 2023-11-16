@@ -11,8 +11,13 @@ import TinyConstraints
 import SnapKit
 import Kingfisher
 
+protocol EditProfileVCDelegate: AnyObject {
+    func profilePhotoDidUpdate(_ newPhoto: UIImage)
+}
 
 class EditProfileVC: UIViewController {
+    
+    weak var delegate: EditProfileVCDelegate?
     
     private var viewModel = EditProfileVM()
     
@@ -122,6 +127,8 @@ class EditProfileVC: UIViewController {
             let pp_url = urls.first ?? ""
             self.viewModel.updateUserProfile(fullName: fullName, email: email, pp_url: pp_url)
         }
+        delegate?.profilePhotoDidUpdate(imgProfilePic.image!)
+
     }
     
     
