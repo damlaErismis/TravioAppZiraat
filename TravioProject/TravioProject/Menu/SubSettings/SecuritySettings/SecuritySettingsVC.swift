@@ -89,10 +89,11 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
         view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         return view
     }()
-    private lazy var scrollViewPrivacy:UIScrollView = {
+    private lazy var scrollViewAll:UIScrollView = {
         let sv = UIScrollView()
         sv.isScrollEnabled = true
-        sv.backgroundColor = .clear
+        sv.layer.cornerRadius = 75
+        sv.layer.maskedCorners = [.topLeft]
         return sv
     }()
     
@@ -177,10 +178,8 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
     }
     
     func initVC(){
-//        tabBarController?.tabBar.isHidden  = true
         setupViews()
     }
-    
     
     @objc func handleBack(){
         navigationController?.popViewController(animated: true)
@@ -219,18 +218,22 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
         // Add here the setup for the UI
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
         self.view.addSubviews(imageBack, labelSecuritySetting, viewMain)
-        self.viewMain.addSubviews(labelChangePassword,stackViewTop, scrollViewPrivacy)
- 
+        
+        self.viewMain.addSubviews(scrollViewAll)
+        
+        scrollViewAll.addSubviews(labelChangePassword, stackViewTop, labelPrivacy, stackViewBottom, buttonSave)
         stackViewTop.addArrangedSubviews(viewPassword,viewPasswordConfirm)
-        
-        scrollViewPrivacy.addSubviews(labelPrivacy, stackViewBottom, buttonSave)
-        
+
+    
         viewPassword.addSubviews(labelPasswordControl)
         viewPasswordConfirm.addSubviews(labelPasswordMismatch)
+        
         stackViewBottom.addArrangedSubviews(viewCamera,viewPhotoLibrary,viewLocation)
+        
         viewCamera.addSubviews(labelCamera, toggleSwitchCamera)
         viewPhotoLibrary.addSubviews(labelPhotoLibrary, toggleSwitchPhotoLibrary)
         viewLocation.addSubviews(labelLocation, toggleSwitchLocation)
+        
         setupLayout()
     }
     func setupLayout() {
@@ -251,9 +254,17 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
             view.trailing.equalToSuperview()
             view.height.equalToSuperview().multipliedBy(0.80)
         })
+        
+        scrollViewAll.snp.makeConstraints({sv in
+            sv.top.equalToSuperview()
+            sv.leading.equalToSuperview().offset(10)
+            sv.trailing.equalToSuperview().offset(-10)
+            sv.bottom.equalToSuperview()
+        })
+        
         labelChangePassword.snp.makeConstraints({lbl in
-            lbl.top.equalToSuperview().offset(45)
-            lbl.leading.equalToSuperview().offset(25)
+            lbl.top.equalToSuperview().offset(50)
+            lbl.leading.equalToSuperview().offset(14)
         })
         labelPasswordControl.snp.makeConstraints({lbl in
             lbl.bottom.equalToSuperview()
@@ -263,20 +274,24 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
             lbl.bottom.equalToSuperview()
             lbl.leading.equalToSuperview().offset(12)
         })
+        
         stackViewTop.snp.makeConstraints({sv in
             sv.top.equalTo(labelChangePassword.snp.bottom).offset(8)
-            sv.leading.equalToSuperview().offset(25)
-            sv.trailing.equalToSuperview().offset(-25)
+            sv.leading.equalToSuperview().offset(14)
+            sv.trailing.equalToSuperview().offset(-14)
+            sv.width.equalToSuperview().multipliedBy(0.95)
         })
+        
         labelPrivacy.snp.makeConstraints({lbl in
-            lbl.top.equalToSuperview().offset(12)
-            lbl.leading.equalToSuperview()
+            lbl.top.equalTo(stackViewTop.snp.bottom).offset(50)
+            lbl.leading.equalToSuperview().offset(14)
         })
         stackViewBottom.snp.makeConstraints({sv in
-            sv.top.equalTo(labelPrivacy.snp.bottom).offset(12)
-            sv.width.equalTo(342)
-            sv.centerX.equalToSuperview()
+            sv.top.equalTo(labelPrivacy.snp.bottom).offset(8)
+            sv.leading.equalToSuperview().offset(14)
+            sv.trailing.equalToSuperview().offset(-14)
         })
+        
         
         labelCamera.snp.makeConstraints({lbl in
             lbl.leading.equalTo(15)
@@ -308,17 +323,12 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
             ts.height.equalTo(30)
             ts.width.equalTo(50)
         })
-        scrollViewPrivacy.snp.makeConstraints({sv in
-            sv.top.equalTo(stackViewTop.snp.bottom).offset(12)
-            sv.leading.equalToSuperview().offset(24)
-            sv.trailing.equalToSuperview().offset(-24)
-            sv.bottom.equalToSuperview().offset(-10)
-        })
         buttonSave.snp.makeConstraints({ btn in
-            btn.top.equalTo(stackViewBottom.snp.bottom).offset(200)
-            btn.width.equalTo(342)
+            btn.top.equalTo(stackViewBottom.snp.bottom).offset(50)
+            btn.leading.equalToSuperview().offset(14)
+            btn.trailing.equalToSuperview().offset(-14)
             btn.height.equalTo(54)
-            btn.bottom.equalToSuperview().offset(-10)
+            btn.bottom.equalToSuperview()
         })
     }
 }

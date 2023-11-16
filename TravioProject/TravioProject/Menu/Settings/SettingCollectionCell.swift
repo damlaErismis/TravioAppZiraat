@@ -16,12 +16,9 @@ class SettingCollectionCell: UICollectionViewCell {
     
     //MARK: -- Views
     
-    
-    
     private lazy var viewItem:UIViewCC = {
         let view = UIViewCC()
         return view
-        
     }()
     
     private lazy var imageIcon:UIImageView = {
@@ -37,16 +34,13 @@ class SettingCollectionCell: UICollectionViewCell {
     private lazy var labelItem:UILabelCC = {
         let lbl = UILabelCC()
         lbl.font = UIFont(name:"Poppins-ExtraLight", size: 12)
-        
         return lbl
     }()
     
     public func getSettingCollectionData(imageIconString:String, imageDirectionString:String, itemString: String){
-        
         imageIcon.image = UIImage(named: imageIconString)
         imageDirection.image = UIImage(named: imageDirectionString)
         labelItem.text = itemString
-        
     }
     
     
@@ -75,32 +69,24 @@ class SettingCollectionCell: UICollectionViewCell {
     }
     
     func setupLayout() {
-        // Add here the setup for layout
         viewItem.snp.makeConstraints({ view in
-            view.height.equalTo(54)
-            view.width.equalTo(358)
+            view.edges.equalToSuperview()
         })
-        
         imageIcon.snp.makeConstraints({img in
             img.centerY.equalTo(viewItem.snp.centerY)
             img.leading.equalToSuperview().offset(17)
             img.height.equalTo(20)
             img.width.equalTo(20)
         })
-        
         labelItem.snp.makeConstraints({lbl in
             lbl.centerY.equalTo(viewItem.snp.centerY)
-            lbl.leading.equalTo(imageIcon.snp.trailing).offset(8)
+            lbl.leading.equalTo(imageIcon.snp.trailing).offset(10)
         })
-        
         imageDirection.snp.makeConstraints({img in
             img.centerY.equalTo(viewItem.snp.centerY)
-            img.trailing.equalToSuperview().offset(-17)
+            img.trailing.equalToSuperview().offset(-30)
             img.height.equalTo(15)
             img.width.equalTo(10)
         })
-        
-       
     }
-  
 }
