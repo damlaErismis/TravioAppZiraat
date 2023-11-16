@@ -71,7 +71,7 @@ class PlaceDetailVC: UIViewController {
             vm.postAVisit(placeId: selectedID)
             vm.showAlertClosure = { [weak self] () in
                 DispatchQueue.main.async {
-                    self?.showAlert(title: "", message: "Favorilere eklendi")
+                    self?.showAlert(title: "Success", message: "Visit successfully added your visits")
                     self?.imageFavorite.image = UIImage(named: "fullyFavorite")
                 }
             }
@@ -80,7 +80,7 @@ class PlaceDetailVC: UIViewController {
             vm.showAlertClosure = { [weak self] () in
                 DispatchQueue.main.async {
                     if let message = self?.vm.successMessage {
-                        self?.showAlert(title: "", message: message)
+                        self?.showAlert(title: "Success", message: message)
                         self?.imageFavorite.image = UIImage(named: "emptyFavorite")
                     }
                 }

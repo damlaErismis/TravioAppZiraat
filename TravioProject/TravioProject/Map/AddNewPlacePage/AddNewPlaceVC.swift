@@ -159,11 +159,11 @@ class AddNewPlaceVC: UIViewController, UITextFieldDelegate{
         if images.count >= 2 {
             vm.uploadImages(images: images)
         }else{
-            self.showAlert(title: "Alert", message: "Please add at least 2 photos")
+            self.showAlert(title: "Error", message: "Please add at least 2 photos")
             return
         }
     }
-
+    
     func imageTapped() {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
