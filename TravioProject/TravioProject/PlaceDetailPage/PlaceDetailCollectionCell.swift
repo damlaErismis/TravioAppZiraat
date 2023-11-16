@@ -114,31 +114,41 @@ class PlaceDetailCollectionCell: UICollectionViewCell,MKMapViewDelegate {
         
         labelCity.snp.makeConstraints({lbl in
             lbl.top.equalToSuperview().offset(20)
-            lbl.leading.equalToSuperview().offset(20)
+            lbl.height.equalTo(40)
+            lbl.leading.equalToSuperview()
+            lbl.trailing.equalToSuperview()
+            lbl.bottom.equalTo(labelDate.snp.top).offset(-10)
         })
         
         labelDate.snp.makeConstraints({lbl in
-            lbl.top.equalTo(labelCity.snp.bottom).offset(7)
-            lbl.leading.equalTo(labelCity.snp.leading)
+            lbl.top.equalTo(labelCity.snp.bottom).offset(10)
+            lbl.height.equalTo(20)
+            lbl.leading.equalToSuperview()
+            lbl.trailing.equalToSuperview()
+            lbl.bottom.equalTo(labelAddedBy.snp.top).offset(-10)
         })
         
         labelAddedBy.snp.makeConstraints({lbl in
             lbl.top.equalTo(labelDate.snp.bottom).offset(5)
             lbl.leading.equalTo(labelCity.snp.leading)
-        })
-        
-        labelDescription.snp.makeConstraints({lbl in
-            lbl.top.equalTo(mapView.snp.bottom).offset(20)
-            lbl.leading.equalTo(labelCity.snp.leading)
-            lbl.trailing.equalToSuperview().offset(-20)
-            lbl.bottom.equalToSuperview()
+            lbl.height.equalTo(20)
+            lbl.trailing.equalToSuperview()
+            lbl.bottom.equalTo(mapView.snp.top).offset(-10)
         })
         mapView.snp.makeConstraints({mv in
             mv.top.equalTo(labelAddedBy.snp.bottom).offset(20)
-            mv.leading.equalTo(labelCity.snp.leading).offset(-10)
-            mv.height.equalTo(230)
-            mv.width.equalTo(360)
+            mv.leading.equalToSuperview()
+            mv.trailing.equalToSuperview()
+            mv.bottom.equalTo(labelDescription.snp.top).offset(-10)
+            mv.height.equalToSuperview().multipliedBy(0.3)
+           
         })
+        labelDescription.snp.makeConstraints({lbl in
+            lbl.top.equalTo(mapView.snp.bottom).offset(20)
+            lbl.leading.equalTo(labelCity.snp.leading)
+            lbl.trailing.equalToSuperview()
+        })
+
 
     }
     required init?(coder: NSCoder) {

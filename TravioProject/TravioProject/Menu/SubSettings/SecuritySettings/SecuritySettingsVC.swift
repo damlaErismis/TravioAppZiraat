@@ -177,7 +177,7 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
     }
     
     func initVC(){
-        tabBarController?.tabBar.isHidden  = true
+//        tabBarController?.tabBar.isHidden  = true
         setupViews()
     }
     
@@ -315,7 +315,7 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
             sv.bottom.equalToSuperview().offset(-10)
         })
         buttonSave.snp.makeConstraints({ btn in
-            btn.top.equalTo(stackViewBottom.snp.bottom).offset(50)
+            btn.top.equalTo(stackViewBottom.snp.bottom).offset(200)
             btn.width.equalTo(342)
             btn.height.equalTo(54)
             btn.bottom.equalToSuperview().offset(-10)
