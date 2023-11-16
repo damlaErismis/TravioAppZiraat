@@ -42,14 +42,14 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
         return view
     }()
     private lazy var labelPasswordControl:UILabelCC = {
-        let lbl = UILabelCC(labelText: "Enter at least 6 characters", font: .poppinsRegular14)
-        lbl.textColor = .red
+        let lbl = UILabelCC(labelText: "Enter at least 6 characters", font: .poppinsRegular10)
+        lbl.textColor = .systemGray2
         lbl.isHidden = true
         return lbl
     }()
     private lazy var labelPasswordMismatch:UILabelCC = {
-        let lbl = UILabelCC(labelText: "Password does not match", font: .poppinsRegular14)
-        lbl.textColor = .red
+        let lbl = UILabelCC(labelText: "Password does not match", font: .poppinsRegular10)
+        lbl.textColor = .systemGray2
         lbl.isHidden = true
         return lbl
     }()

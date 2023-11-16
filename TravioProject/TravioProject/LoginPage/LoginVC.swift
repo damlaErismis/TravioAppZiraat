@@ -64,8 +64,8 @@ class LoginVC: UIViewController {
     }()
     
     private lazy var labelPasswordControl:UILabelCC = {
-        let lbl = UILabelCC(labelText: "Enter at least 6 characters", font: .poppinsRegular14)
-        lbl.textColor = .red
+        let lbl = UILabelCC(labelText: "Enter at least 6 characters", font: .poppinsRegular10)
+        lbl.textColor = .systemGray2
         lbl.isHidden = true
         return lbl
     }()
@@ -140,12 +140,11 @@ class LoginVC: UIViewController {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        
         if textField == viewEmail.textField || textField == viewPassword.textField {
             let emailText = viewEmail.textField.text ?? ""
             let passwordText = viewPassword.textField.text ?? ""
             
-            isFormComplete = (passwordText.count > 6) && emailText.isValidEmail
+            isFormComplete = (passwordText.count > 6) && emailText.isValidEmail && !passwordText.isEmpty && !emailText.isEmpty
             buttonLogin.isEnabled = isFormComplete
             buttonLogin.backgroundColor = isFormComplete ? UIColor(hexString: "#38ada9") : .lightGray
         }
@@ -187,9 +186,7 @@ class LoginVC: UIViewController {
             lbl.top.equalToSuperview().offset(64)
             lbl.centerX.equalToSuperview()
             lbl.height.equalTo(36)
-            lbl.width.equalTo(226)
         })
-        
         labelPasswordControl.snp.makeConstraints({lbl in
             lbl.bottom.equalToSuperview()
             lbl.leading.equalToSuperview().offset(12)
@@ -201,9 +198,9 @@ class LoginVC: UIViewController {
         })
         buttonLogin.snp.makeConstraints({ btn in
             btn.top.equalTo(viewPassword.snp.bottom).offset(48)
-            btn.centerX.equalTo(labelWelcome.snp.centerX)
+            btn.leading.equalToSuperview().offset(25)
+            btn.trailing.equalToSuperview().offset(-25)
             btn.height.equalTo(54)
-            btn.width.equalTo(342)
         })
         stackViewSignUp.snp.makeConstraints({sv in
             sv.bottom.equalToSuperview().offset(-27)

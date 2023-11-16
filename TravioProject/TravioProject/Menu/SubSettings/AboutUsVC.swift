@@ -15,16 +15,15 @@ class AboutUsVC: UICustomViewController {
     
     private lazy var webView:WKWebView = {
         let wb = WKWebView()
-        wb.backgroundColor = .red
         wb.layer.cornerRadius = 75
         wb.layer.maskedCorners = [.topLeft]
+        wb.layer.masksToBounds = true
         return wb
         
     }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let url = URL(string: "https://iosclass.ams3.digitaloceanspaces.com/1631234567890.jpg") {
+        if let url = URL(string: "https://myaccount.google.com/profile?pli=1") {
             let request = URLRequest(url: url)
             webView.load(request)
         }
@@ -46,10 +45,7 @@ class AboutUsVC: UICustomViewController {
     }
     func setupLayouts() {
         webView.snp.makeConstraints({wb in
-            wb.top.equalToSuperview().offset(100)
-            wb.trailing.equalToSuperview()
-            wb.leading.equalToSuperview()
-            wb.bottom.equalToSuperview()
+            wb.edges.equalToSuperview()
         })
     }
 }
