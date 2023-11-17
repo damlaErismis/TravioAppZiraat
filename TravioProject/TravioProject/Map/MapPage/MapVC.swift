@@ -174,14 +174,10 @@ class MapVC: UIViewController, ViewControllerDelegate{
             mv.bottom.equalToSuperview()
         })
         collectionView.snp.makeConstraints({cv in
-<<<<<<< HEAD
             cv.bottom.equalToSuperview().offset(-20)
-=======
->>>>>>> sprint4/customColors
             cv.leading.equalToSuperview()
             cv.trailing.equalToSuperview()
             cv.height.equalToSuperview().multipliedBy(0.27)
-            cv.bottom.equalToSuperview().offset(-30)
         })
     }
 }
