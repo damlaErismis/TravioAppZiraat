@@ -30,11 +30,7 @@ class GenericNetworkingHelper{
             }
         }
     }
-    
-    
-    
-    
-    
+
     typealias Callback<T: Codable> = (Result<T, APIErrorMessage>) -> Void
     
     
@@ -72,13 +68,7 @@ class GenericNetworkingHelper{
             }
         }
     }
-    
-    
-    
-<<<<<<< HEAD
-    
-=======
->>>>>>> sprint4/customColors
+
     public func uploadImages<T: Codable>(images: [UIImage], url: String, headers: HTTPHeaders, callback: @escaping Callbackk<T>) {
         var imageDataArray: [Data] = []
         
