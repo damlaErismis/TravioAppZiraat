@@ -9,7 +9,6 @@ import Foundation
 import MapKit
 
 class CustomAnnotation: MKPointAnnotation {
-    
     var mapItem:MKMapItem?
     var placeId: String?
     var visitDescription:String?
@@ -17,5 +16,4 @@ class CustomAnnotation: MKPointAnnotation {
     var image:String?
     var addedBy:String?
     var addedDate:String?
-
 }

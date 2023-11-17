@@ -11,15 +11,10 @@ import Alamofire
 
 class MapVM {
     
-
     var getData:PlaceResponse? {
         didSet{
-            
         }
     }
-
-
-    
     var places:[Place] = [] {
         didSet{
             addPins?()
@@ -31,21 +26,16 @@ class MapVM {
         }
         self.places = places
     }
-    
-    
     var addPins: (()->())?
-
-    
     
     func initFetch(){
-
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getAllPlaces, callback: {(result: Result<PlaceResponse,APIError>) in
+        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .getAllPlaces, callback: {(result: Result<PlaceResponse,APIErrorMessage>) in
             switch result {
             case .success(let success):
                 self.getData = success
                 self.getPlacesData()
             case .failure(let failure):
-                print(failure.message)
+                print(failure.localizedDescription)
             }
         })
     }

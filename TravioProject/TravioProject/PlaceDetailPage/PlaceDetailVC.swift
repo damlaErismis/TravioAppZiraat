@@ -71,7 +71,7 @@ class PlaceDetailVC: UIViewController {
             vm.postAVisit(placeId: selectedID)
             vm.showAlertClosure = { [weak self] () in
                 DispatchQueue.main.async {
-                    self?.showAlert(title: "", message: "Favorilere eklendi")
+                    self?.showAlert(title: "Success", message: "Visit successfully added your visits")
                     self?.imageFavorite.image = UIImage(named: "fullyFavorite")
                 }
             }
@@ -80,7 +80,7 @@ class PlaceDetailVC: UIViewController {
             vm.showAlertClosure = { [weak self] () in
                 DispatchQueue.main.async {
                     if let message = self?.vm.successMessage {
-                        self?.showAlert(title: "", message: message)
+                        self?.showAlert(title: "Success", message: message)
                         self?.imageFavorite.image = UIImage(named: "emptyFavorite")
                     }
                 }
@@ -126,9 +126,7 @@ class PlaceDetailVC: UIViewController {
         vm.successCheckId = { [weak self] () in
          self?.imageFavorite.image = UIImage(named: "fullyFavorite")
         }
-        
 
-        
         vm.reloadCompositionalLayoutClosure = { [weak self] () in
             DispatchQueue.main.async {
                 self?.collectionTopView.reloadData()
@@ -153,6 +151,7 @@ class PlaceDetailVC: UIViewController {
         // Add here the setup for the UI
         self.view.backgroundColor = .white
         self.view.addSubviews(collectionBottomView, collectionTopView, imageBack, imageFavorite, pageControl)
+        self.view.bringSubviewToFront(pageControl)
         setupLayout()
     }
     func setupLayout() {
@@ -160,10 +159,10 @@ class PlaceDetailVC: UIViewController {
             pc.centerX.equalToSuperview()
             pc.height.equalTo(44)
             pc.width.equalTo(200)
-            pc.bottom.equalTo(collectionTopView.snp.bottom)
+            pc.bottom.equalTo(collectionTopView.snp.bottom).offset(-10)
         })
         imageFavorite.snp.makeConstraints({img in
-            img.top.equalTo(self.view.safeAreaLayoutGuide)
+            img.top.equalToSuperview().offset(70)
             img.trailing.equalToSuperview().offset(-15)
             img.height.equalTo(50)
             img.width.equalTo(50)
@@ -175,15 +174,15 @@ class PlaceDetailVC: UIViewController {
             img.width.equalTo(40)
         })
         collectionTopView.snp.makeConstraints({ cv in
-            cv.top.equalTo(self.view.safeAreaLayoutGuide)
+            cv.top.equalToSuperview()
             cv.leading.equalToSuperview()
             cv.trailing.equalToSuperview()
             cv.height.equalTo(250)
         })
         collectionBottomView.snp.makeConstraints({ cv in
             cv.top.equalTo(collectionTopView.snp.bottom)
-            cv.leading.equalToSuperview()
-            cv.trailing.equalToSuperview()
+            cv.leading.equalToSuperview().offset(12)
+            cv.trailing.equalToSuperview().offset(-12)
             cv.bottom.equalToSuperview()
         })
         
@@ -192,10 +191,10 @@ class PlaceDetailVC: UIViewController {
 extension PlaceDetailVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == collectionBottomView {
-            return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+            return CGSize(width: collectionView.frame.width, height: collectionView.frame.height + 500)
         }
         else{
-            return CGSize(width: collectionView.frame.width-100, height: collectionView.frame.height-100)
+            return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
         }
     }
 }
@@ -236,7 +235,7 @@ extension PlaceDetailVC: UICollectionViewDataSource {
 
             var placeDetailInfo = PlaceDetailCellInfo()
             let updateDate =  self.vm.formatServerDate(dateString: placeDetailData?.updated_at ?? "")
-            placeDetailInfo.labelAddedByText = placeDetailData?.creator
+            placeDetailInfo.labelAddedByText = "addedby " + (placeDetailData?.creator ?? "")
             placeDetailInfo.labelCityText = placeDetailData?.place
             placeDetailInfo.labelDateText = updateDate
             placeDetailInfo.labelDescriptionText = placeDetailData?.description

@@ -42,7 +42,7 @@ class UIViewCC: UIView{
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor(hexString: "FFFFFF")
+        self.backgroundColor = .white
         self.layer.cornerRadius = 16
         self.addShadow(shadowColor: UIColor(hexString: "#000000"), offsetX: 0, offsetY: 0, shadowOpacity: 0.1, shadowRadius: 10.0)
         self.height(74)
@@ -53,7 +53,6 @@ class UIViewCC: UIView{
         
         self.init(frame: .zero)
         self.labelText = labeltext
-        
         self.placeholder = placeholderText
     }
     
@@ -67,13 +66,11 @@ class UIViewCC: UIView{
     }
     
     func setupLayout(){
-        
         label.snp.makeConstraints({ lbl in
             lbl.top.equalToSuperview().offset(8)
             lbl.leading.equalToSuperview().offset(12)
             
         })
-        
         textField.snp.makeConstraints({ txt in
             txt.top.equalTo(label.snp.bottom).offset(8)
             txt.leading.equalToSuperview().offset(12)

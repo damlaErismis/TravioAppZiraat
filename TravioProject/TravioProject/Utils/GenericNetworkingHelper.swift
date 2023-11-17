@@ -56,10 +56,29 @@ class GenericNetworkingHelper{
     }
     
     
+    public func uploadImagess<T: Codable>(urlRequest: Router, callback: @escaping Callback<T>) {
+        AF.upload(multipartFormData: urlRequest.multipartFormData, with: urlRequest).validate().responseDecodable(of: T.self) { response in
+            switch response.result {
+            case .success(let success):
+                callback(.success(success))
+            case .failure(let error):
+                if let statusCode = response.response?.statusCode {
+                    let apiError = APIErrorMessage(status: APIErrorStatus(rawValue: statusCode)!, message: error.localizedDescription)
+                    callback(.failure(apiError))
+                } else {
+                    let unknownError = APIErrorMessage(status: APIErrorStatus(rawValue: -1)!, message: error.localizedDescription)
+                    callback(.failure(unknownError))
+                }
+            }
+        }
+    }
     
     
     
+<<<<<<< HEAD
     
+=======
+>>>>>>> sprint4/customColors
     public func uploadImages<T: Codable>(images: [UIImage], url: String, headers: HTTPHeaders, callback: @escaping Callbackk<T>) {
         var imageDataArray: [Data] = []
         

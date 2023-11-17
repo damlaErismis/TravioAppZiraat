@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import TinyConstraints
 import SnapKit
 
 class AddPlaceCollectionCell: UICollectionViewCell {
@@ -20,26 +19,26 @@ class AddPlaceCollectionCell: UICollectionViewCell {
         img.isUserInteractionEnabled = true
         return img
     }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     func setupViews(){
-        
         self.contentView.addSubviews(imgNewPlace)
-//        self.layer.masksToBounds = false
-//        self.addShadow(shadowColor: .black, offsetX: 0, offsetY: 0, shadowOpacity: 0.2, shadowRadius: 10)
         setupLayout()
     }
     func setupLayout(){
         
-        imgNewPlace.edgesToSuperview()
+        imgNewPlace.snp.makeConstraints({img in
+            img.top.equalToSuperview()
+            img.leading.equalToSuperview()
+            img.trailing.equalToSuperview()
+            img.bottom.equalToSuperview()
+        })
 
     }
 }
