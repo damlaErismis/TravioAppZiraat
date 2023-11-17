@@ -89,11 +89,7 @@ class SettingsVC: UIViewController {
     }
     
     //MARK: -- Component Actions
-<<<<<<< HEAD
-    @objc func handleLogout() {
-=======
     @objc func handleLogout(){
->>>>>>> sprint4/customColors
         let service = "com.travio"
         let account = "travio"
         KeychainHelper.shared.delete(service, account: account)
@@ -124,27 +120,11 @@ class SettingsVC: UIViewController {
     
     
     //MARK: -- UI Methods
-<<<<<<< HEAD
     func loadImageAsync(from url: URL, completion: @escaping (UIImage?) -> Void) {
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data, error == nil, let image = UIImage(data: data) else {
                 DispatchQueue.main.async {
                     completion(nil)
-=======
-    
-    func initVM(){
-        vm.initFetch()
-        vm.getUserProfileData = { [weak self] () in
-            
-            guard let userName = self?.vm.userProfileResponse?.full_name else {return}
-            self?.labelNameSurname.text = userName
-            guard let imageString = self?.vm.userProfileResponse?.pp_url else {return}
-            if let imageURL = URL(string: imageString) {
-                if let imageData = try? Data(contentsOf: imageURL) {
-                    if let image = UIImage(data: imageData) {
-                        self?.imageProfile.image = image
-                    }
->>>>>>> sprint4/customColors
                 }
                 return
             }
@@ -170,11 +150,7 @@ class SettingsVC: UIViewController {
             self.labelNameSurname.text = userName
         }
     }
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> sprint4/customColors
     func initVC(){
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
         setupViews()
