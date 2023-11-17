@@ -195,7 +195,6 @@ extension SettingsVC:UICollectionViewDelegateFlowLayout {
         case 4:
             let vc = AboutUsVC()
             vc.hidesBottomBarWhenPushed = true
-            vc.navigationController?.isNavigationBarHidden = true
             self.navigationController?.pushViewController(vc, animated: true)
         default:
             print("Diğer alt settingler gelecek")

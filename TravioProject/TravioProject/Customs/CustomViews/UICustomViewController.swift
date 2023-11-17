@@ -18,7 +18,7 @@ class UICustomViewController: UIViewController {
     
     lazy var viewMain: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hexString: "F8F8F8")
+        view.backgroundColor = ThemeColor.viewColor.uiColor
         view.layer.cornerRadius = 75
         view.layer.maskedCorners = [.topLeft]
         return view
@@ -46,7 +46,7 @@ class UICustomViewController: UIViewController {
     
     func setupView() {
 
-        self.view.backgroundColor = UIColor(hexString: "#38ada9")
+        self.view.backgroundColor = ThemeColor.mainColor.uiColor
         self.view.addSubviews(viewMain, labelTitle, imageBack)
         viewMain.addSubview(buttonAction)
         setupLayout()
@@ -62,7 +62,7 @@ class UICustomViewController: UIViewController {
         })
         
         labelTitle.snp.makeConstraints({ img in
-            img.top.equalToSuperview().offset(100)
+            img.top.equalToSuperview().offset(50)
             img.centerX.equalToSuperview()
         })
         viewMain.snp.makeConstraints({ view in
@@ -72,9 +72,9 @@ class UICustomViewController: UIViewController {
             view.height.equalToSuperview().multipliedBy(0.80)
         })
         buttonAction.snp.makeConstraints({ btn in
-            btn.centerX.equalToSuperview()
+            btn.leading.equalToSuperview()
+            btn.trailing.equalToSuperview()
             btn.height.equalTo(54)
-            btn.width.equalTo(342)
             btn.bottom.equalToSuperview().offset(-30)
         })
     }

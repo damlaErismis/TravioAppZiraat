@@ -27,6 +27,11 @@ class AboutUsVC: UICustomViewController {
             let request = URLRequest(url: url)
             webView.load(request)
         }
+        
+        self.navigationController?.navigationBar.subviews.forEach { subview in
+            subview.removeFromSuperview()
+        }
+        
         labelTitle.text = "About Us"
         imageBack.image = UIImage(named: "Vector")
         buttonAction.isHidden = true
