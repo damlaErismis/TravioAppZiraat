@@ -50,7 +50,7 @@ class HelpAndSupportVC: UIViewController {
     
     private lazy var labelFAQ:UILabelCC = {
         let lbl = UILabelCC(labelText: "FAQ", font: .poppinsBold24)
-        lbl.textColor = UIColor(hexString: "#38ada9")
+        lbl.textColor = .mainColor
         lbl.adjustsFontSizeToFitWidth = true
         return lbl
     }()
@@ -73,7 +73,7 @@ class HelpAndSupportVC: UIViewController {
     }
     
     func setupViews() {
-        self.view.backgroundColor = UIColor(hexString: "#38ada9")
+        self.view.backgroundColor = .mainColor
         navigationController?.navigationBar.isHidden = true
         self.view.addSubviews(viewMain, labelHelpAndSupport, btnBack)
         viewMain.addSubviews(labelFAQ, tableView)

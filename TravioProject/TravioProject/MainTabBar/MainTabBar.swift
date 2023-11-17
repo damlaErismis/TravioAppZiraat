@@ -11,7 +11,7 @@ class MainTabBar: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBar.backgroundColor = UIColor(hexString: "#F8f8F8")
+        self.tabBar.backgroundColor = .viewColor
         self.tabBar.unselectedItemTintColor = .lightGray
         self.viewControllers = setupControllers()
         self.tabBar.isTranslucent = false

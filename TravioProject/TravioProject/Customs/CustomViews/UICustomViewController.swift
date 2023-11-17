@@ -18,7 +18,7 @@ class UICustomViewController: UIViewController {
     
     lazy var viewMain: UIView = {
         let view = UIView()
-        view.backgroundColor = ThemeColor.viewColor.uiColor
+        view.backgroundColor = .viewColor
         view.layer.cornerRadius = 75
         view.layer.maskedCorners = [.topLeft]
         return view
@@ -46,7 +46,7 @@ class UICustomViewController: UIViewController {
     
     func setupView() {
 
-        self.view.backgroundColor = ThemeColor.mainColor.uiColor
+        self.view.backgroundColor = .mainColor
         self.view.addSubviews(viewMain, labelTitle, imageBack)
         viewMain.addSubview(buttonAction)
         setupLayout()

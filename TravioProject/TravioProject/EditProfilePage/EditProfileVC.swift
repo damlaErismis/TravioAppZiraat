@@ -90,7 +90,7 @@ class EditProfileVC: UIViewController {
         btn.setTitle("Save", for: .normal)
         btn.titleLabel?.font = UIFont(name: "Poppins-Bold", size: 16)
         btn.setTitleColor(.white, for: .normal)
-        btn.backgroundColor = UIColor(hexString: "#38ada9")
+        btn.backgroundColor = .mainColor
         btn.layer.cornerRadius = 12
         btn.addTarget(self, action: #selector(btnSaveTapped), for: .touchUpInside)
         return btn
@@ -98,7 +98,7 @@ class EditProfileVC: UIViewController {
     private lazy var buttonChangePhoto:UIButton = {
         let btn = UIButton()
         btn.setTitle("Change Photo", for: .normal)
-        btn.setTitleColor(UIColor(hexString: "#17C0EB"), for: .normal)
+        btn.setTitleColor(.textButtonColor, for: .normal)
         btn.frame = CGRect(x: view.frame.width - 120, y: 10, width: 149, height: 30)
         btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 14)
         btn.addTarget(self, action: #selector(btnChangePhotoTapped), for: .touchUpInside)
@@ -187,7 +187,7 @@ class EditProfileVC: UIViewController {
     
     func setupViews() {
         self.view.addSubviews(viewMain, btnCross, labelEditProfile)
-        self.view.backgroundColor = UIColor(hexString: "#38ada9")
+        self.view.backgroundColor = .mainColor
         viewMain.addSubviews(imgProfilePic, buttonChangePhoto ,buttonSave,viewCreatedAtTime,viewUserRole,viewFullName,viewEmail, labelFullNameTitle, stackView)
         viewCreatedAtTime.addSubviews(imageCreatedAtTime, labelCreatedAtTime)
         viewUserRole.addSubviews(imageUserRole, labelUserRole)

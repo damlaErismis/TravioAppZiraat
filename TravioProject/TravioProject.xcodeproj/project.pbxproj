@@ -48,7 +48,6 @@
 		0C2ECED62AF0D6AA0013F6C5 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2ECED52AF0D6AA0013F6C5 /* KeychainHelper.swift */; };
 		0C2ECEE32AF1231B0013F6C5 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2ECEE22AF1231B0013F6C5 /* CustomAnnotation.swift */; };
 		0C2ECEE72AF1239C0013F6C5 /* MapImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2ECEE62AF1239C0013F6C5 /* MapImageCollectionCell.swift */; };
-		0C32DE7F2B06A2F400D873C8 /* TravioColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C32DE7E2B06A2F400D873C8 /* TravioColor.swift */; };
 		0C499D0D2AF6DD5F00A7C916 /* ApiErrorStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C499D0C2AF6DD5F00A7C916 /* ApiErrorStatus.swift */; };
 		0C499D0F2AF6E9A400A7C916 /* PlaceDetailCellInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C499D0E2AF6E9A400A7C916 /* PlaceDetailCellInfo.swift */; };
 		0C499D152AF917BE00A7C916 /* SettingCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C499D142AF917BE00A7C916 /* SettingCollectionCell.swift */; };
@@ -138,7 +137,6 @@
 		0C2ECED52AF0D6AA0013F6C5 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		0C2ECEE22AF1231B0013F6C5 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		0C2ECEE62AF1239C0013F6C5 /* MapImageCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapImageCollectionCell.swift; sourceTree = "<group>"; };
-		0C32DE7E2B06A2F400D873C8 /* TravioColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravioColor.swift; sourceTree = "<group>"; };
 		0C499D0C2AF6DD5F00A7C916 /* ApiErrorStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorStatus.swift; sourceTree = "<group>"; };
 		0C499D0E2AF6E9A400A7C916 /* PlaceDetailCellInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailCellInfo.swift; sourceTree = "<group>"; };
 		0C499D142AF917BE00A7C916 /* SettingCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCollectionCell.swift; sourceTree = "<group>"; };
@@ -392,14 +390,6 @@
 			path = CustomViews;
 			sourceTree = "<group>";
 		};
-		0C32DE7D2B06A2D300D873C8 /* CustomColor */ = {
-			isa = PBXGroup;
-			children = (
-				0C32DE7E2B06A2F400D873C8 /* TravioColor.swift */,
-			);
-			path = CustomColor;
-			sourceTree = "<group>";
-		};
 		0C499D162AF9478D00A7C916 /* SubSettings */ = {
 			isa = PBXGroup;
 			children = (
@@ -514,7 +504,6 @@
 		0CF742602ADB33AB002B1389 /* Customs */ = {
 			isa = PBXGroup;
 			children = (
-				0C32DE7D2B06A2D300D873C8 /* CustomColor */,
 				0C32DE7C2B06A2B300D873C8 /* CustomViews */,
 			);
 			path = Customs;
@@ -656,7 +645,6 @@
 				0C04A7712AE92CA5002972CF /* Router.swift in Sources */,
 				00C8109D2AF169F50077E800 /* AddPlaceCollectionCell.swift in Sources */,
 				00A47A8F2B04E21C001EDF1D /* MyVisitsVM.swift in Sources */,
-				0C32DE7F2B06A2F400D873C8 /* TravioColor.swift in Sources */,
 				0062B3C42AEA4B7A000066E5 /* SignUpVM.swift in Sources */,
 				0C988ED62AF37EAC0090E85A /* Visit.swift in Sources */,
 				00A47A8B2B0401F7001EDF1D /* MyAddedPlacesCell.swift in Sources */,

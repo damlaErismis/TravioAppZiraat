@@ -146,7 +146,7 @@ class LoginVC: UIViewController {
             let passwordText = viewPassword.textField.text ?? ""
             isFormComplete = (passwordText.count >= 6) && emailText.isValidEmail && !passwordText.isEmpty && !emailText.isEmpty
             buttonLogin.isEnabled = isFormComplete
-            buttonLogin.backgroundColor = isFormComplete ? UIColor(hexString: "#38ada9") : .lightGray
+            buttonLogin.backgroundColor = isFormComplete ? .mainColor : .lightGray
         }
         if textField == viewPassword.textField{
             let passwordText = viewPassword.textField.text ?? ""
@@ -160,7 +160,7 @@ class LoginVC: UIViewController {
     
     //MARK: -- UI Methods
     private func setupView(){
-        self.view.backgroundColor = UIColor(hexString: "#38ada9")
+        self.view.backgroundColor = .mainColor
         self.view.addSubviews(viewMain, imageLogo)
         viewMain.addSubviews(labelWelcome, stackView,  buttonLogin, stackViewSignUp, labelPasswordControl)
         stackView.addArrangedSubviews(viewEmail, viewPassword)

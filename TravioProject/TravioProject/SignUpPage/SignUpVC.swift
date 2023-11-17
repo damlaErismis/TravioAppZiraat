@@ -107,7 +107,7 @@ class SignUpVC: UIViewController {
             isFormComplete = !usernameText.isEmpty && !emailText.isEmpty && !passwordText.isEmpty && !passwordConfirmText.isEmpty && passwordsMatch
             
             buttonSignup.isEnabled = isFormComplete
-            buttonSignup.backgroundColor = isFormComplete ? UIColor(hexString: "#38ada9") : .lightGray
+            buttonSignup.backgroundColor = isFormComplete ?.mainColor : .lightGray
         }
     }
     
@@ -147,7 +147,7 @@ class SignUpVC: UIViewController {
         
         self.navigationItem.leftBarButtonItem = createLeftBarButton()
         
-        self.view.backgroundColor = UIColor(hexString: "#38ada9")
+        self.view.backgroundColor = .mainColor
         self.view.addSubviews(viewMain, labelSignUp, btnBack)
         viewMain.addSubviews(stackView, labelPasswordMismatch, buttonSignup)
         stackView.addArrangedSubviews(viewUserName, viewEmail, viewPassword, viewPasswordConfirm)

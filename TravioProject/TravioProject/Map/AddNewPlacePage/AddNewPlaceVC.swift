@@ -77,7 +77,7 @@ class AddNewPlaceVC: UIViewController, UITextFieldDelegate{
         btn.setTitle("Add Place", for: .normal)
         btn.titleLabel?.font = UIFont(name: "Poppins-Bold", size: 16)
         btn.setTitleColor(.white, for: .normal)
-        btn.backgroundColor = UIColor(hexString: "#38ada9")
+        btn.backgroundColor = .mainColor
         btn.layer.cornerRadius = 12
         btn.addTarget(self, action: #selector(handleAddPlace), for: .touchUpInside)
         return btn
@@ -177,12 +177,12 @@ class AddNewPlaceVC: UIViewController, UITextFieldDelegate{
             let placeLocation = viewCountryCity.textField.text ?? ""
             isFormComplete = !placeTitle.isEmpty && !placeLocation.isEmpty
             btnAddPlace.isEnabled = isFormComplete
-            btnAddPlace.backgroundColor = isFormComplete ? UIColor(hexString: "#38ada9") : .lightGray
+            btnAddPlace.backgroundColor = isFormComplete ? .mainColor : .lightGray
         }
     }
     
     func setupViews() {
-        self.view.backgroundColor = UIColor(hexString: "#38ada9")
+        self.view.backgroundColor = .mainColor
         self.view.addSubview(viewMain)
         viewMain.addSubviews(viewPlaceName, viewDescription, viewCountryCity, collectionView, btnAddPlace)
         viewDescription.addSubviews(labelDescription, textViewDescription)

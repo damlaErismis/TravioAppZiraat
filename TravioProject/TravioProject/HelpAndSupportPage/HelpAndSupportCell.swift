@@ -31,7 +31,7 @@ class HelpAndSupportCell: UITableViewCell {
         let lbl = UILabel()
         lbl.font = UIFont(name: "Poppins-Medium", size: 14)
         lbl.numberOfLines = 0
-        lbl.textColor = UIColor(hexString: "#3D3D3D")
+        lbl.textColor = .fontColor
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
@@ -40,7 +40,7 @@ class HelpAndSupportCell: UITableViewCell {
         let lbl = UILabel()
         lbl.numberOfLines = 0
         lbl.font = UIFont(name: "Poppins-Medium", size: 10)
-        lbl.textColor = UIColor(hexString: "#3D3D3D")
+        lbl.textColor = .fontColor
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()

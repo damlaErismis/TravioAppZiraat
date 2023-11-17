@@ -74,7 +74,7 @@ class SettingsVC: UIViewController {
     private lazy var buttonEditProfile:UIButton = {
         let btn = UIButton()
         btn.setTitle("Edit Profile", for: .normal)
-        btn.setTitleColor(UIColor(hexString: "#17C0EB"), for: .normal)
+        btn.setTitleColor(.textButtonColor, for: .normal)
         btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 12)
         btn.addTarget(self, action: #selector(buttonEditProfileTapped), for: .touchUpInside)
         return btn
@@ -152,7 +152,7 @@ class SettingsVC: UIViewController {
     }
 
     func initVC(){
-        self.view.backgroundColor = UIColor(hexString: "#38ada9")
+        self.view.backgroundColor = .mainColor
         setupViews()
     }
     

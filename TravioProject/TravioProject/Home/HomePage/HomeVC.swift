@@ -56,7 +56,7 @@ class HomeVC: UIViewController {
     
     //MARK: -- UI Methods
     func setupViews() {
-        self.view.backgroundColor = UIColor(hexString: "#38ada9")
+        self.view.backgroundColor = .mainColor
         self.view.addSubviews(imageLogo, viewMain)
         self.viewMain.addSubviews(tableView)
         setupLayout()
@@ -110,7 +110,7 @@ extension HomeVC:UITableViewDelegate{
         btn.titleLabel?.numberOfLines = 2
         btn.titleLabel?.lineBreakMode = .byWordWrapping
         btn.contentVerticalAlignment = .bottom
-        btn.setTitleColor(UIColor(hexString: "#17C0EB"), for: .normal)
+        btn.setTitleColor(.textButtonColor, for: .normal)
         btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 14)
         btn.addTarget(self, action: #selector(btnSeeAllTapped), for: .touchUpInside)
         btn.tag = section

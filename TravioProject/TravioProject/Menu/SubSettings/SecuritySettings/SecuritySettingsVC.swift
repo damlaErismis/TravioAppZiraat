@@ -55,12 +55,12 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
     }()
     private lazy var labelPrivacy:UILabelCC = {
         let lbl = UILabelCC(labelText: "Privacy", font: .poppinsRegular20)
-        lbl.textColor =  UIColor(hexString: "#38ADA9")
+        lbl.textColor =  .mainColor
         return lbl
     }()
     private lazy var labelChangePassword:UILabelCC = {
         let lbl = UILabelCC(labelText: "Change Password", font: .poppinsRegular20)
-        lbl.textColor =  UIColor(hexString: "#38ADA9")
+        lbl.textColor = .mainColor
         return lbl
     }()
     
@@ -118,7 +118,7 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
         btn.setTitle("Save", for: .normal)
         btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 16)
         btn.setTitleColor(.white, for: .normal)
-        btn.backgroundColor = UIColor(hexString: "#38ada9")
+        btn.backgroundColor = .mainColor
         btn.layer.cornerRadius = 12
         btn.isEnabled = false
         btn.addTarget(self, action: #selector(handleSave), for: .touchUpInside)
@@ -202,7 +202,7 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
             labelPasswordControl.isHidden = passwordLenght
             isFormComplete = passwordText.count >= 6 && passwordsMatch && !passwordText.isEmpty && !passwordConfirmText.isEmpty
             buttonSave.isEnabled = isFormComplete
-            buttonSave.backgroundColor = isFormComplete ? UIColor(hexString: "#38ada9") : .lightGray
+            buttonSave.backgroundColor = isFormComplete ? .mainColor : .lightGray
         }
         if textField == viewPassword.textField{
             let passwordText = viewPassword.textField.text ?? ""
@@ -224,7 +224,7 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
     //MARK: -- UI Methods
     func setupViews() {
         // Add here the setup for the UI
-        self.view.backgroundColor = UIColor(hexString: "#38ada9")
+        self.view.backgroundColor = .mainColor
         self.view.addSubviews(imageBack, labelSecuritySetting, viewMain)
         
         self.viewMain.addSubviews(scrollViewAll)

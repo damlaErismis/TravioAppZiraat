@@ -69,7 +69,7 @@ class VisitsVC: UIViewController {
     private func setupViews(){
         
         self.view.addSubviews(viewMain, labelMyVisits)
-        self.view.backgroundColor = UIColor(hexString: "#38ada9")
+        self.view.backgroundColor = .mainColor
         viewMain.addSubview(collectionView)
         setupLayout()
     }

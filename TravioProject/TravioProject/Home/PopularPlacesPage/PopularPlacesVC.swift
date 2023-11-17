@@ -110,7 +110,7 @@ class PopularPlacesVC: UIViewController {
     func setupViews() {
         
         self.view.addSubviews(viewMain, labelPopularPlaces, btnBack)
-        self.view.backgroundColor = UIColor(hexString: "#38ada9")
+        self.view.backgroundColor = .mainColor
         viewMain.addSubviews(collectionView, btnOrder)
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
