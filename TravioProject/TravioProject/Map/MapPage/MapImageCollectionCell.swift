@@ -11,8 +11,6 @@ class MapImageCollectionCell:UICollectionViewCell{
     lazy var imagePlace:UIImageView = {
         let img = UIImageView()
         img.contentMode = .scaleAspectFill
-        img.layer.cornerRadius = 20
-        img.clipsToBounds = true
         return img
     }()
     lazy var labelPlace:UILabelCC = {

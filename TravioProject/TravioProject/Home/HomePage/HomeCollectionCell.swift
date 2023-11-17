@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import TinyConstraints
 import Kingfisher
 
 class HomeCollectionCell: UICollectionViewCell {
@@ -15,8 +14,6 @@ class HomeCollectionCell: UICollectionViewCell {
     lazy var imagePlace:UIImageView = {
         let img = UIImageView()
         img.contentMode = .scaleAspectFill
-        img.layer.cornerRadius = 20
-        img.clipsToBounds = true
         return img
     }()
     
@@ -70,19 +67,20 @@ class HomeCollectionCell: UICollectionViewCell {
     }
     func setupLayout(){
         
-        imagePlace.edgesToSuperview()
+        imagePlace.snp.makeConstraints({image in
+            image.edges.equalToSuperview()
+        })
+        
         imageVektor.snp.makeConstraints({ image in
             image.leading.equalToSuperview().offset(15)
             image.bottom.equalToSuperview().offset(-10)
             image.width.equalTo(9)
             image.height.equalTo(12)
         })
-        
         labelCity.snp.makeConstraints({lbl in
             lbl.bottom.equalTo(imageVektor)
             lbl.leading.equalTo(imageVektor.snp.leading).offset(15)
             lbl.centerY.equalTo(imageVektor)
-            
         })
         
         labelPlace.snp.makeConstraints({ lbl in
@@ -93,7 +91,6 @@ class HomeCollectionCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-
 }
+
 

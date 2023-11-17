@@ -164,7 +164,7 @@ class SettingsVC: UIViewController {
     
     func setupLayout() {
         buttonSetting.snp.makeConstraints({btn in
-            btn.top.equalToSuperview().offset(70)
+            btn.top.equalToSuperview().offset(40)
             btn.leading.equalToSuperview().offset(20)
             btn.height.equalTo(48)
             btn.width.equalTo(134)
@@ -179,7 +179,7 @@ class SettingsVC: UIViewController {
             view.bottom.equalToSuperview()
             view.leading.equalToSuperview()
             view.trailing.equalToSuperview()
-            view.height.equalToSuperview().multipliedBy(0.85)
+            view.height.equalToSuperview().multipliedBy(0.82)
         })
         imageProfile.snp.makeConstraints({img in
             img.top.equalToSuperview().offset(25)

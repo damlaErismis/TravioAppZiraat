@@ -69,7 +69,7 @@ class UICustomViewController: UIViewController {
             view.bottom.equalToSuperview()
             view.leading.equalToSuperview()
             view.trailing.equalToSuperview()
-            view.height.equalToSuperview().multipliedBy(0.80)
+            view.height.equalToSuperview().multipliedBy(0.82)
         })
         buttonAction.snp.makeConstraints({ btn in
             btn.leading.equalToSuperview()

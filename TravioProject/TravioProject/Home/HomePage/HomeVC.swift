@@ -29,17 +29,18 @@ class HomeVC: UIViewController {
         view.layer.maskedCorners = [.topLeft]
         return view
     }()
+    
     private lazy var tableView:UITableView = {
         let tv = UITableView(frame: .zero, style: .grouped)
         tv.separatorColor = .white
         tv.delegate = self
         tv.dataSource = self
         tv.backgroundColor = UIColor(hexString: "F8F8F8")
-        
         tv.register(HomeTableCell.self, forCellReuseIdentifier: "tableCell")
         tv.isPagingEnabled = true
         tv.layer.cornerRadius = 75
         tv.layer.maskedCorners = [.topLeft]
+        tv.layer.addShadow(color: UIColor(hexString: "#ff2400"), opacity: 0.8, offset: CGSize(width: 5, height: 5), radius: 5)
         return tv
     }()
     
@@ -99,27 +100,27 @@ extension HomeVC:UITableViewDelegate{
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         
-        let lbl = UILabel()
+        let lbl = VerticalAlignedLabel()
+        lbl.contentMode = .bottom
         lbl.font = UIFont(name: "Poppins-Regular", size: 20)
         lbl.text = self.tableView(tableView, titleForHeaderInSection: section)
-        lbl.translatesAutoresizingMaskIntoConstraints = false
         
-        let btn = UIButton()
+        let btn = UIButton(type: .system)
         btn.setTitle("See All", for: .normal)
+        btn.titleLabel?.numberOfLines = 2
+        btn.titleLabel?.lineBreakMode = .byWordWrapping
+        btn.contentVerticalAlignment = .bottom
         btn.setTitleColor(UIColor(hexString: "#17C0EB"), for: .normal)
         btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 14)
         btn.addTarget(self, action: #selector(btnSeeAllTapped), for: .touchUpInside)
         btn.tag = section
-        btn.translatesAutoresizingMaskIntoConstraints = false
         
         headerView.addSubviews(lbl, btn)
-        
         lbl.snp.makeConstraints { make in
             make.leading.equalTo(headerView).offset(25)
             make.top.equalTo(headerView).offset(15)
             make.bottom.equalTo(headerView)
         }
-        
         btn.snp.makeConstraints { make in
             make.trailing.equalTo(headerView).offset(-20)
             make.top.equalTo(headerView).offset(10)
@@ -144,17 +145,16 @@ extension HomeVC:UITableViewDelegate{
             break
         }
     }
-
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section==0{
-            return 50
+            return 80
         }else{
             return 40
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 180
+        return 200
     }
 }
 

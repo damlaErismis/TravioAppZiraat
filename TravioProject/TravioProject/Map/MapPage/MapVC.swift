@@ -43,6 +43,7 @@ class MapVC: UIViewController, ViewControllerDelegate{
         cv.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 10)
         cv.backgroundColor = .clear
         cv.register(MapImageCollectionCell.self, forCellWithReuseIdentifier: "collectionCellMap")
+        cv.layer.addShadow(color: UIColor(hexString: "#000000"), opacity: 0.3, offset: CGSize(width: 5, height: 5), radius: 7)
         cv.dataSource = self
         cv.delegate = self
         return cv
@@ -174,10 +175,10 @@ class MapVC: UIViewController, ViewControllerDelegate{
             mv.bottom.equalToSuperview()
         })
         collectionView.snp.makeConstraints({cv in
-            cv.bottom.equalToSuperview().offset(-20)
             cv.leading.equalToSuperview()
             cv.trailing.equalToSuperview()
-            cv.height.equalToSuperview().multipliedBy(0.27)
+            cv.height.equalToSuperview().multipliedBy(0.26)
+            cv.bottom.equalToSuperview().offset(-30)
         })
     }
 }
@@ -209,10 +210,6 @@ extension MapVC: MKMapViewDelegate {
             annotationView.canShowCallout = true
             let pinImage = UIImage(named: "mapPin")
             annotationView.image = pinImage
-//            let detailLabel = UILabel()
-//            detailLabel.numberOfLines = 0
-//            detailLabel.text = "\(annotation.titlePlace ?? "")"
-//            annotationView.detailCalloutAccessoryView = detailLabel
         }
         return annotationView
     }
@@ -237,7 +234,7 @@ extension MapVC:UICollectionViewDelegateFlowLayout {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width * 0.8, height: collectionView.frame.height)
+        return CGSize(width: collectionView.frame.width * 0.7, height: collectionView.frame.height - 30)
     }
 }
 
@@ -253,6 +250,9 @@ extension MapVC:UICollectionViewDataSource {
         }
         cell.labelCity.text = vm.places[indexPath.row].place
         cell.labelPlace.text = vm.places[indexPath.row].title
+        cell.roundAllCorners(radius: 20)
+                
+//                    cell.layer.addShadow(color: UIColor(hexString: "#ff2400"), opacity: 0.6, offset: CGSize(width: 10, height: 10), radius: 20)
         return cell
     }
 }

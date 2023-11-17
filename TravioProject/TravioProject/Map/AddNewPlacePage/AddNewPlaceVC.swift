@@ -118,16 +118,16 @@ class AddNewPlaceVC: UIViewController, UITextFieldDelegate{
         }
         vm.showSuccessAlertClosure = { [weak self] () in
             DispatchQueue.main.async {
-                if let message = self?.vm.galleryResponse?.message, let title = self?.vm.galleryResponse?.status {
-                    self?.showAlert(title:title, message: message)
+                if let message = self?.vm.galleryResponse?.message {
+                    self?.showAlert(title: "Success", message: message)
                 }
             }
         }
         
         vm.showErrorGalleryAlertClosure = { [weak self] () in
             DispatchQueue.main.async {
-                if let message = self?.vm.galleryResponse?.message, let title = self?.vm.galleryResponse?.status {
-                    self?.showAlert(title:title, message: message)
+                if let message = self?.vm.galleryResponse?.message {
+                    self?.showAlert(title: "Error", message: message)
                 }
             }
         }

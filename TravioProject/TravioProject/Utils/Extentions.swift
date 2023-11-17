@@ -50,9 +50,7 @@ enum FontStatus {
         case .poppinsBold24:
             return UIFont(name: "Poppins-Bold", size: 24)
         }
-    
     }
-    
 }
 
 // MARK: Corner Mask
@@ -631,3 +629,32 @@ extension UIWindow {
         }
     }
 }
+
+extension CALayer {
+    func addShadow(color: UIColor, opacity: Float, offset: CGSize, radius: CGFloat) {
+        self.shadowColor = color.cgColor
+        self.shadowOpacity = opacity
+        self.shadowOffset = offset
+        self.shadowRadius = radius
+    }
+}
+
+class VerticalAlignedLabel: UILabel {
+    
+    override func drawText(in rect: CGRect) {
+        var newRect = rect
+        switch contentMode {
+        case .top:
+            newRect.size.height = sizeThatFits(rect.size).height
+        case .bottom:
+            let height = sizeThatFits(rect.size).height
+            newRect.origin.y += rect.size.height - height
+            newRect.size.height = height
+        default:
+            ()
+        }
+        
+        super.drawText(in: newRect)
+    }
+}
+
