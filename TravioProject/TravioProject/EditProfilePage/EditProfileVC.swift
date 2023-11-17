@@ -13,6 +13,7 @@ import Kingfisher
 
 protocol EditProfileVCDelegate: AnyObject {
     func profilePhotoDidUpdate(_ newPhoto: UIImage)
+    func fullNameDidUpdate(_ newName: String)
 }
 
 class EditProfileVC: UIViewController {
@@ -20,6 +21,7 @@ class EditProfileVC: UIViewController {
     weak var delegate: EditProfileVCDelegate?
     
     private var viewModel = EditProfileVM()
+    var imagesFromLibrary:[UIImage] = []
     
     private lazy var viewMain:UIView = {
         let view = UIView()
@@ -120,17 +122,19 @@ class EditProfileVC: UIViewController {
 
     @objc func btnSaveTapped() {
         guard let fullName = viewFullName.textField.text,
-              let email = viewEmail.textField.text else { return }
+              let email = viewEmail.textField.text else {return }
+        let pp_url = self.viewModel.imageUrls?.first ?? self.viewModel.userProfile?.pp_url ?? ""
 
-        viewModel.uploadImage(images: [imgProfilePic.image].compactMap { $0 }) { [weak self] urls in
-            guard let self = self else { return }
-            let pp_url = urls.first ?? ""
-            self.viewModel.updateUserProfile(fullName: fullName, email: email, pp_url: pp_url)
+        self.viewModel.updateUserProfile(fullName: fullName, email: email, pp_url: pp_url)
+        
+        viewModel.showAlertClosure = { [weak self] in
+            if let message = self?.viewModel.alertMessage {
+                self?.showAlert(title: "Success!", message: message)
+            }
         }
         delegate?.profilePhotoDidUpdate(imgProfilePic.image!)
-
+        delegate?.fullNameDidUpdate(viewFullName.textField.text ?? "")
     }
-    
     
     @objc func btnChangePhotoTapped() {
         presentPhotoActionSheet()
@@ -152,9 +156,12 @@ class EditProfileVC: UIViewController {
             
             if let imageURL = URL(string: userProfile.pp_url) {
                 self?.imgProfilePic.kf.setImage(with: imageURL)
-                print(imageURL)
             }
         }
+    }
+    func uploadImages(){
+        let images = imagesFromLibrary
+        viewModel.uploadImages(images: images)
     }
     
     override func viewDidLoad() {
@@ -278,7 +285,7 @@ extension EditProfileVC: UIImagePickerControllerDelegate, UINavigationController
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let selectedImage = info[.originalImage] as? UIImage {
             imgProfilePic.image = selectedImage
-            viewModel.uploadImage(images: [selectedImage], completion: {result in})
+            viewModel.uploadImages(images: [selectedImage])
         }
         picker.dismiss(animated: true, completion: nil)
     }

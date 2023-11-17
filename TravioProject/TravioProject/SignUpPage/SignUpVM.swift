@@ -46,7 +46,7 @@ class SignUpViewModel {
         if response.status == "success" {
             self.alertMessage = response.message
         } else {
-            self.alertMessage = "Registration Failed: " + (response.message ?? "")
+            self.alertMessage = "Registration Failed: " + (response.message )
         }
     }
     

@@ -73,6 +73,13 @@ extension UIView {
     }
 }
 
+extension UIColor {
+    static let viewColor = UIColor(hexString: "#F8F8F8")
+    static let fontColor = UIColor(hexString: "#3d3d3d")
+    static let mainColor = UIColor(hexString: "#38ada9")
+    static let textButtonColor = UIColor(hexString: "#17C0EB")
+}
+
 // MARK: UIColor
 extension UIColor {
     

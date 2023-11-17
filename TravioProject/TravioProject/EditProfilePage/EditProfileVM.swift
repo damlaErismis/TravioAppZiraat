@@ -12,10 +12,15 @@ import UIKit
 class EditProfileVM {
     
 
-    var imageURLs: (([String]) -> Void)?
-    
-    
+//    var imageURLs: (([String]) -> Void)?
+    var imageUrls:[String]?
     var userProfileDidChange: ((UserProfile) -> Void)?
+    
+    var uploadResponse:UploadResponse?{
+        didSet{
+            imageUrls = uploadResponse?.urls
+        }
+    }
     
     var userProfile: UserProfile? {
         didSet {
@@ -23,10 +28,26 @@ class EditProfileVM {
             userProfileDidChange?(userProfile)
         }
     }
-    
+    var alertMessage: String? {
+        didSet {
+            self.showAlertClosure?()
+        }
+    }
+    var errorStatusMessage: ErrorResponse? {
+        didSet {
+            self.showErrorAlertClosure?()
+        }
+    }
+    var errorGalleryErrorResponse: ErrorResponse? {
+        didSet {
+            self.showErrorGalleryAlertClosure?()
+        }
+    }
+    var showErrorAlertClosure: (()->())?
+    var showErrorGalleryAlertClosure: (()->())?
+    var showAlertClosure: (()->())?
     var updateProfileResponse:UserProfileUpdateResponse?
     
-
     func formatServerDate(dateString: String) -> String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSX"
@@ -64,26 +85,43 @@ class EditProfileVM {
             switch result {
             case .success(let success):
                 print(success)
+                self.processFetched(response: success)
+                self.alertMessage = self.updateProfileResponse?.message
             case .failure(let error):
                 print("Profil güncellemesi başarısız: \(error.message)")
             }
         }
     }
 
-    public func uploadImage(images: [UIImage], completion: @escaping ([String]) -> Void) {
-        let url = "https://ios-class-2f9672c5c549.herokuapp.com/upload"
-        let headers = HTTPHeaders(["Content-Type": "multipart/form-data"])
-        
-        GenericNetworkingHelper.shared.uploadImages(images: images, url: url, headers: headers) { (result: Result<UploadResponse, APIError>) in
+    public func uploadImages(images: [UIImage]){
+        GenericNetworkingHelper.shared.uploadImagess(urlRequest: .uploadImages(images: images),  callback: {(result: Result<UploadResponse,APIErrorMessage>) in
             switch result {
             case .success(let success):
-                completion(success.urls)
+                self.uploadResponse = success
             case .failure(let failure):
-                print(failure.message)
-                completion([])
+                switch failure {
+                case .apiError(let status, _):
+                    switch status {
+                    case .unauthorized:
+                        self.errorStatusMessage = ErrorResponse(status: "Unauthorized", message: "Invalid credenials")
+                    case .forbidden:
+                        self.errorStatusMessage = ErrorResponse(status: "Forbidden", message: "Access to this resource is forbidden.")
+                    default:
+                        self.errorStatusMessage = ErrorResponse(status: "Unknown Error", message: "Unknown error occurred.")
+                    }
+                default:
+                    self.errorStatusMessage = ErrorResponse(status: "Error", message: failure.localizedDescription)
+                }
+
             }
-        }
+        })
     }
     
-
+    private func processFetched(response: UserProfileUpdateResponse) {
+        if response.status == "success" {
+            self.alertMessage = response.message
+        } else {
+            self.alertMessage = "" + (response.message ?? "" )
+        }
+    }
 }

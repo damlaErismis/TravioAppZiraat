@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class UIViewCC: UIView{
 
@@ -30,11 +31,11 @@ class UIViewCC: UIView{
     }
     
     var placeholder: String? {
-            get { return textField.placeholder }
-            set {
-                textField.attributedPlaceholder = NSAttributedString(string: newValue ?? "", attributes: [NSAttributedString.Key.font: UIFont(name: "Poppins-Thin", size: 12)!, NSAttributedString.Key.foregroundColor: UIColor.black])
-            }
+        get { return textField.placeholder }
+        set {
+            textField.attributedPlaceholder = NSAttributedString(string: newValue ?? "", attributes: [NSAttributedString.Key.font: UIFont(name: "Poppins-Thin", size: 12)!, NSAttributedString.Key.foregroundColor: UIColor.black])
         }
+    }
     var text: String?{
         get {return textField.text}
         set { textField.text = newValue}

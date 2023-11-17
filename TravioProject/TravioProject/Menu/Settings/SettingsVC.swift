@@ -267,7 +267,9 @@ extension SettingsVC: EditProfileVCDelegate {
     func profilePhotoDidUpdate(_ newPhoto: UIImage) {
         imageProfile.image = newPhoto
     }
-
+    func fullNameDidUpdate(_ newName: String) {
+        labelNameSurname.text = newName
+    }
 }
 
 
