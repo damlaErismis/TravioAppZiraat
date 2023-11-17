@@ -17,6 +17,7 @@ struct ErrorResponse {
 
 
 enum APIErrorStatus: Int {
+    case internalServerError = 500
     case badRequest = 400
     case unauthorized = 401
     case forbidden = 403
