@@ -30,11 +30,8 @@ enum Router{
     case postAGalleryImage(params:Parameters)
     case getUserProfile
     case changePassword(params:Parameters)
-<<<<<<< HEAD
     case getAllVisits
-=======
     case uploadImages(images:[UIImage])
->>>>>>> sprint4/customColors
     
     var baseURL:String{
         return "https://ios-class-2f9672c5c549.herokuapp.com"
@@ -105,11 +102,7 @@ enum Router{
         switch self {
         case .signUp(let params), .login(let params), .postAVisit(let params), .postAPlace(let params), .postAGalleryImage(let params), .changePassword(let params), .editProfile(let params):
             return params
-<<<<<<< HEAD
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces, .getPersonalInfo,  .checkVisitByPlaceId, .getUserProfile, .getAllVisits:
-=======
-        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces, .getPersonalInfo,  .checkVisitByPlaceId, .getUserProfile, .uploadImages:
->>>>>>> sprint4/customColors
+        case .getAllPlaces, .getAllGalleryByPlaceID, .getAPlaceById, .deleteAVisit, .getAllPlacesForUser, .getPopularPlaces, .getLastPlaces, .getPersonalInfo,  .checkVisitByPlaceId, .getUserProfile, .uploadImages, .getAllVisits:
             return nil
         case .getPopularPlacesWithLimit(limit: let limit), .getLastPlacesWithLimit(limit: let limit):
             let limited = min(limit, 20)
