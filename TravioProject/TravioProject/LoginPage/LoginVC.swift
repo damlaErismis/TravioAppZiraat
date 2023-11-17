@@ -144,18 +144,13 @@ class LoginVC: UIViewController {
         if textField == viewEmail.textField || textField == viewPassword.textField {
             let emailText = viewEmail.textField.text ?? ""
             let passwordText = viewPassword.textField.text ?? ""
-            
-<<<<<<< HEAD
-            isFormComplete = (passwordText.count >= 6) && emailText.isValidEmail
-=======
-            isFormComplete = (passwordText.count > 6) && emailText.isValidEmail && !passwordText.isEmpty && !emailText.isEmpty
->>>>>>> sprint4/customColors
+            isFormComplete = (passwordText.count >= 6) && emailText.isValidEmail && !passwordText.isEmpty && !emailText.isEmpty
             buttonLogin.isEnabled = isFormComplete
             buttonLogin.backgroundColor = isFormComplete ? UIColor(hexString: "#38ada9") : .lightGray
         }
         if textField == viewPassword.textField{
             let passwordText = viewPassword.textField.text ?? ""
-            let passwordChracterCountControl = passwordText.count > 6
+            let passwordChracterCountControl = passwordText.count >= 6
             labelPasswordControl.isHidden = passwordChracterCountControl
         }
     }
