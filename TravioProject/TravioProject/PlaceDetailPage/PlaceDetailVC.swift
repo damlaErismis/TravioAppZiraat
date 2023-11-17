@@ -110,6 +110,7 @@ class PlaceDetailVC: UIViewController {
     
     func initView(){
         self.navigationController?.navigationBar.isHidden = true
+        
         setupViews()
     }
     
@@ -162,7 +163,7 @@ class PlaceDetailVC: UIViewController {
             pc.bottom.equalTo(collectionTopView.snp.bottom).offset(-10)
         })
         imageFavorite.snp.makeConstraints({img in
-            img.top.equalToSuperview().offset(70)
+            img.top.equalToSuperview().offset(40)
             img.trailing.equalToSuperview().offset(-15)
             img.height.equalTo(50)
             img.width.equalTo(50)

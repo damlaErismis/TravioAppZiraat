@@ -192,14 +192,15 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         
+        let passwordText = viewPassword.textField.text ?? ""
+        let passwordConfirmText = viewPasswordConfirm.textField.text ?? ""
+        
         if textField == viewPassword.textField || textField == viewPasswordConfirm.textField {
-            let passwordText = viewPassword.textField.text ?? ""
-            let passwordConfirmText = viewPasswordConfirm.textField.text ?? ""
+
             let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmText.count >= 6
-            labelPasswordMismatch.isHidden = passwordsMatch
             let passwordLenght = passwordText.count >= 6
             labelPasswordControl.isHidden = passwordLenght
-            isFormComplete = passwordText.count >= 6 && passwordsMatch
+            isFormComplete = passwordText.count >= 6 && passwordsMatch && !passwordText.isEmpty && !passwordConfirmText.isEmpty
             buttonSave.isEnabled = isFormComplete
             buttonSave.backgroundColor = isFormComplete ? UIColor(hexString: "#38ada9") : .lightGray
         }
@@ -207,6 +208,13 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
             let passwordText = viewPassword.textField.text ?? ""
             let passwordChracterCountControl = passwordText.count >= 6
             labelPasswordControl.isHidden = passwordChracterCountControl
+        }
+        
+        if textField == viewPasswordConfirm.textField{
+            
+            let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmText.count >= 6
+            
+            labelPasswordMismatch.isHidden = passwordsMatch
         }
     }
 
@@ -239,7 +247,7 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
     func setupLayout() {
         // Add here the setup for layout
         imageBack.snp.makeConstraints({img in
-            img.top.equalToSuperview().offset(100)
+            img.top.equalToSuperview().offset(60)
             img.leading.equalToSuperview().offset(25)
             img.width.equalTo(24)
             img.height.equalTo(21)
@@ -252,7 +260,7 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
             view.bottom.equalToSuperview()
             view.leading.equalToSuperview()
             view.trailing.equalToSuperview()
-            view.height.equalToSuperview().multipliedBy(0.80)
+            view.height.equalToSuperview().multipliedBy(0.82)
         })
         
         scrollViewAll.snp.makeConstraints({sv in
