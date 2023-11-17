@@ -25,7 +25,7 @@ class CompositionalLayoutCell: UICollectionViewCell {
     lazy var imagePlace:UIImageView = {
         let img = UIImageView()
         img.contentMode = .scaleToFill
-//        img.addBlackGradientLayerInBackground(frame: CGRect(x: 0, y: 140, width: frame.width, height: 110), colors:[.clear, .white])
+        img.addBlackGradientLayerInBackground(frame: CGRect(x: 0, y: 140, width: frame.width, height: 110), colors:[.clear, .white])
         return img
     }()
     

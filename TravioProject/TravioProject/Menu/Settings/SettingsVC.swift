@@ -23,7 +23,7 @@ class SettingsVC: UIViewController {
     private lazy var collectionView:UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 18
+        layout.minimumLineSpacing = 10
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         cv.register(SettingCollectionCell.self, forCellWithReuseIdentifier: "cell")
@@ -153,7 +153,7 @@ class SettingsVC: UIViewController {
             view.bottom.equalToSuperview()
             view.leading.equalToSuperview()
             view.trailing.equalToSuperview()
-            view.height.equalToSuperview().multipliedBy(0.80)
+            view.height.equalToSuperview().multipliedBy(0.85)
         })
         imageProfile.snp.makeConstraints({img in
             img.top.equalToSuperview().offset(25)
@@ -202,7 +202,7 @@ extension SettingsVC:UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (collectionView.frame.width - 20), height: (collectionView.frame.height-10) * 0.1)
+        return CGSize(width: (collectionView.frame.width - 20), height: (collectionView.frame.height-10) * 0.13)
     }
 }
 
