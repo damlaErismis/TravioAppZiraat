@@ -40,7 +40,7 @@ class HomeVC: UIViewController {
         tv.isPagingEnabled = true
         tv.layer.cornerRadius = 75
         tv.layer.maskedCorners = [.topLeft]
-        tv.layer.addShadow(color: UIColor(hexString: "#ff2400"), opacity: 0.8, offset: CGSize(width: 5, height: 5), radius: 5)
+//        tv.layer.addShadow(color: UIColor(hexString: "#ff2400"), opacity: 0.8, offset: CGSize(width: 5, height: 5), radius: 5)
         return tv
     }()
     
@@ -116,6 +116,7 @@ extension HomeVC:UITableViewDelegate{
         btn.tag = section
         
         headerView.addSubviews(lbl, btn)
+        
         lbl.snp.makeConstraints { make in
             make.leading.equalTo(headerView).offset(25)
             make.top.equalTo(headerView).offset(15)
@@ -123,8 +124,9 @@ extension HomeVC:UITableViewDelegate{
         }
         btn.snp.makeConstraints { make in
             make.trailing.equalTo(headerView).offset(-20)
+            make.centerY.equalTo(lbl.snp.centerY)
             make.top.equalTo(headerView).offset(10)
-            make.bottom.equalTo(headerView)
+
         }
         
         return headerView

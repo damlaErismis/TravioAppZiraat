@@ -25,18 +25,9 @@ class UICustomViewController: UIViewController {
     }()
 
     lazy var labelTitle: UILabelCC = {
-        let lbl = UILabelCC(labelText: "Label", font: .poppinsBold36)
+        let lbl = UILabelCC(labelText: "Label", font: .poppinsBold30)
         lbl.textColor = .white
         return lbl
-    }()
-    
-    lazy var buttonAction: UIButton = {
-        let btn = UIButton()
-        btn.setTitle("", for: .normal)
-        btn.titleLabel?.font = UIFont(name: "Poppins-Bold", size: 16)
-        btn.setTitleColor(.white, for: .normal)
-        btn.layer.cornerRadius = 12
-        return btn
     }()
     
     override func viewDidLoad() {
@@ -45,10 +36,8 @@ class UICustomViewController: UIViewController {
     }
     
     func setupView() {
-
         self.view.backgroundColor = .mainColor
         self.view.addSubviews(viewMain, labelTitle, imageBack)
-        viewMain.addSubview(buttonAction)
         setupLayout()
     }
 
@@ -70,12 +59,6 @@ class UICustomViewController: UIViewController {
             view.leading.equalToSuperview()
             view.trailing.equalToSuperview()
             view.height.equalToSuperview().multipliedBy(0.82)
-        })
-        buttonAction.snp.makeConstraints({ btn in
-            btn.leading.equalToSuperview()
-            btn.trailing.equalToSuperview()
-            btn.height.equalTo(54)
-            btn.bottom.equalToSuperview().offset(-30)
         })
     }
 }

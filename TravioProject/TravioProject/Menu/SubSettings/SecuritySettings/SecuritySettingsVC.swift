@@ -8,13 +8,12 @@
 //
 
 import UIKit
-import TinyConstraints
+import SnapKit
 import AVFoundation
 import CoreLocation
 import Photos
 
-class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
-    
+class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
 
     private lazy var vm:SecuritySettingsVM = {
         return SecuritySettingsVM()
@@ -26,21 +25,6 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
     
     //MARK: -- Views
     
-    private lazy var imageBack:UIImageView = {
-        let img = UIImageView()
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleBack))
-        img.addGestureRecognizer(tap)
-        img.isUserInteractionEnabled = true
-        img.image = UIImage(named: "Vector")
-        return img
-    }()
-    private lazy var viewMain:UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hexString: "F8F8F8")
-        view.layer.cornerRadius = 75
-        view.layer.maskedCorners = [.topLeft]
-        return view
-    }()
     private lazy var labelPasswordControl:UILabelCC = {
         let lbl = UILabelCC(labelText: "Enter at least 6 characters", font: .poppinsRegular10)
         lbl.textColor = .systemGray2
@@ -63,11 +47,9 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
         lbl.textColor = .mainColor
         return lbl
     }()
-    
     private lazy var viewCamera = UIViewCC()
     private lazy var viewPhotoLibrary = UIViewCC()
     private lazy var viewLocation = UIViewCC()
-    
     private lazy var labelSecuritySetting:UILabelCC = {
         let lbl =  UILabelCC(labelText: "Security Setting", font: .poppinsMedium30)
         lbl.textColor = .white
@@ -142,8 +124,6 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
         return s
     }()
 
-  
-    
     //MARK: -- Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,6 +131,13 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
         toggleSwitchCamera.isOn = checkCameraPermission()
         toggleSwitchLocation.isOn = checkLocationPermission()
         toggleSwitchPhotoLibrary.isOn = checkPhotoLibraryPermission()
+        
+        
+        labelTitle.text = "Security Settings"
+        imageBack.image = UIImage(named: "btnBack")
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleBack))
+        imageBack.addGestureRecognizer(tap)
         
         initVC()
         initVM()
@@ -189,14 +176,11 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
         vm.changePassword(newPassword: viewPassword.textField.text!)
     }
     
-    
     @objc func textFieldDidChange(_ textField: UITextField) {
         
         let passwordText = viewPassword.textField.text ?? ""
         let passwordConfirmText = viewPasswordConfirm.textField.text ?? ""
-        
         if textField == viewPassword.textField || textField == viewPasswordConfirm.textField {
-
             let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmText.count >= 6
             let passwordLenght = passwordText.count >= 6
             labelPasswordControl.isHidden = passwordLenght
@@ -211,9 +195,7 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
         }
         
         if textField == viewPasswordConfirm.textField{
-            
             let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmText.count >= 6
-            
             labelPasswordMismatch.isHidden = passwordsMatch
         }
     }
@@ -225,51 +207,27 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
     func setupViews() {
         // Add here the setup for the UI
         self.view.backgroundColor = .mainColor
-        self.view.addSubviews(imageBack, labelSecuritySetting, viewMain)
-        
         self.viewMain.addSubviews(scrollViewAll)
         
         scrollViewAll.addSubviews(labelChangePassword, stackViewTop, labelPrivacy, stackViewBottom, buttonSave)
         stackViewTop.addArrangedSubviews(viewPassword,viewPasswordConfirm)
-
-    
         viewPassword.addSubviews(labelPasswordControl)
         viewPasswordConfirm.addSubviews(labelPasswordMismatch)
-        
         stackViewBottom.addArrangedSubviews(viewCamera,viewPhotoLibrary,viewLocation)
-        
         viewCamera.addSubviews(labelCamera, toggleSwitchCamera)
         viewPhotoLibrary.addSubviews(labelPhotoLibrary, toggleSwitchPhotoLibrary)
         viewLocation.addSubviews(labelLocation, toggleSwitchLocation)
         
-        setupLayout()
+        setupLayouts()
     }
-    func setupLayout() {
-        // Add here the setup for layout
-        imageBack.snp.makeConstraints({img in
-            img.top.equalToSuperview().offset(60)
-            img.leading.equalToSuperview().offset(25)
-            img.width.equalTo(24)
-            img.height.equalTo(21)
-        })
-        labelSecuritySetting.snp.makeConstraints({lbl in
-            lbl.centerY.equalTo(imageBack.snp.centerY)
-            lbl.centerX.equalToSuperview()
-        })
-        viewMain.snp.makeConstraints({ view in
-            view.bottom.equalToSuperview()
-            view.leading.equalToSuperview()
-            view.trailing.equalToSuperview()
-            view.height.equalToSuperview().multipliedBy(0.82)
-        })
-        
+    func setupLayouts() {
+
         scrollViewAll.snp.makeConstraints({sv in
             sv.top.equalToSuperview()
             sv.leading.equalToSuperview().offset(10)
             sv.trailing.equalToSuperview().offset(-10)
-            sv.bottom.equalToSuperview()
+            sv.bottom.equalToSuperview().offset(-10)
         })
-        
         labelChangePassword.snp.makeConstraints({lbl in
             lbl.top.equalToSuperview().offset(50)
             lbl.leading.equalToSuperview().offset(14)
@@ -282,14 +240,12 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
             lbl.bottom.equalToSuperview()
             lbl.leading.equalToSuperview().offset(12)
         })
-        
         stackViewTop.snp.makeConstraints({sv in
             sv.top.equalTo(labelChangePassword.snp.bottom).offset(8)
             sv.leading.equalToSuperview().offset(14)
             sv.trailing.equalToSuperview().offset(-14)
             sv.width.equalToSuperview().multipliedBy(0.95)
         })
-        
         labelPrivacy.snp.makeConstraints({lbl in
             lbl.top.equalTo(stackViewTop.snp.bottom).offset(50)
             lbl.leading.equalToSuperview().offset(14)
@@ -299,8 +255,7 @@ class SecuritySettingsVC: UIViewController, CLLocationManagerDelegate {
             sv.leading.equalToSuperview().offset(14)
             sv.trailing.equalToSuperview().offset(-14)
         })
-        
-        
+
         labelCamera.snp.makeConstraints({lbl in
             lbl.leading.equalTo(15)
             lbl.centerY.equalToSuperview()
@@ -359,7 +314,6 @@ extension SecuritySettingsVC {
             requestPhotoLibraryPermission()
         }
     }
-    
     
     func requestCameraPermission() {
         let status = AVCaptureDevice.authorizationStatus(for: .video)
@@ -455,8 +409,6 @@ extension SecuritySettingsVC {
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
     }
-   
-
     func checkCameraPermission() -> Bool {
         return AVCaptureDevice.authorizationStatus(for: .video) == .authorized
     }

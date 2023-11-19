@@ -10,21 +10,20 @@ import SnapKit
 import MapKit
 class PlaceDetailCollectionCell: UICollectionViewCell,MKMapViewDelegate {
     
-    
     private lazy var viewBottom: UIView = {
         let backView = UIView()
         backView.clipsToBounds = true
         backView.layer.cornerRadius = 16
+        backView.addShadow(shadowColor: .black, offsetX: 0, offsetY: 0, shadowOpacity: 0.2, shadowRadius: 10.0)
         return backView
     }()
-
+    
     private lazy var mapView:MKMapView = {
-        
         let map = MKMapView()
         map.showsUserLocation = true
-        map.clipsToBounds = true
-        map.layer.cornerRadius = 16
         map.delegate = self
+        map.layer.cornerRadius = 16
+        map.clipsToBounds = true
         return map
     }()
     private lazy var labelCity:UILabelCC = {
@@ -107,8 +106,8 @@ class PlaceDetailCollectionCell: UICollectionViewCell,MKMapViewDelegate {
    
         viewBottom.snp.makeConstraints({ vb in
             vb.top.equalToSuperview()
-            vb.leading.equalToSuperview()
-            vb.trailing.equalToSuperview()
+            vb.leading.equalToSuperview().offset(10)
+            vb.trailing.equalToSuperview().offset(-20)
             vb.bottom.equalToSuperview()
         })
         
@@ -140,7 +139,7 @@ class PlaceDetailCollectionCell: UICollectionViewCell,MKMapViewDelegate {
             mv.leading.equalToSuperview()
             mv.trailing.equalToSuperview()
             mv.bottom.equalTo(labelDescription.snp.top).offset(-10)
-            mv.height.equalToSuperview().multipliedBy(0.3)
+            mv.height.equalToSuperview().multipliedBy(0.24)
            
         })
         labelDescription.snp.makeConstraints({lbl in
