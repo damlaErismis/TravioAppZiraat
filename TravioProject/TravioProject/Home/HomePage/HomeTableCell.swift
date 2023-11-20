@@ -68,7 +68,6 @@ class HomeTableCell: UITableViewCell {
 extension HomeTableCell:UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
         onItemSelect?(indexPath)
     }
 

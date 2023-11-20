@@ -40,7 +40,6 @@ class HomeVC: UIViewController {
         tv.isPagingEnabled = true
         tv.layer.cornerRadius = 75
         tv.layer.maskedCorners = [.topLeft]
-//        tv.layer.addShadow(color: UIColor(hexString: "#ff2400"), opacity: 0.8, offset: CGSize(width: 5, height: 5), radius: 5)
         return tv
     }()
     
@@ -189,7 +188,7 @@ extension HomeVC:UITableViewDataSource{
             
             cell.onItemSelect = { [weak self] itemIndexPath in
                 guard let strongSelf = self else { return }
-                var selectedID: String?
+                let selectedID: String?
                 cell.onItemSelect = { [weak self] itemIndexPath in
                     guard let strongSelf = self else { return }
                     var selectedID: String?
@@ -220,11 +219,6 @@ extension HomeVC:UITableViewDataSource{
         }
         return UITableViewCell()
     }
-    
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
 
 }
 
@@ -233,17 +227,3 @@ extension HomeVC: HomeViewModelDelegate {
         self.tableView.reloadData()
     }
 }
-
-//extension UIApplication {
-//    public class func topViewController(base: UIViewController? =
-//        UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
-//        if let nav = base as? UINavigationController {
-//            return topViewController(base: nav.visibleViewController)
-//        } else if let tab = base as? UITabBarController, let selected = tab.selectedViewController {
-//            return topViewController(base: selected)
-//        } else if let presented = base?.presentedViewController {
-//            return topViewController(base: presented)
-//        }
-//        return base
-//    }
-//}

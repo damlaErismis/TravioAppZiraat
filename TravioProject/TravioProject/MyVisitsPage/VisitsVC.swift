@@ -123,7 +123,7 @@ extension VisitsVC:UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! VisitsCell
         cell.configure(with: vm.visits[indexPath.item])
-        cell.addShadow(shadowColor: .black, offsetX: 0, offsetY: 0, shadowOpacity: 0.2, shadowRadius: 10)
+        cell.addShadow(shadowColor: .black, offsetX: 0, offsetY: 0, shadowOpacity: 0.3, shadowRadius: 10)
         return cell
     }
 }
