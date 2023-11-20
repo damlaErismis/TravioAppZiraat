@@ -45,7 +45,7 @@ class SignUpVC: UIViewController {
     }()
     
     private lazy var viewPasswordConfirm:UIViewCC = {
-        let view = UIViewCC(labeltext: "Password Confirm", placeholderText: "********")
+        let view = UIViewCC(labeltext: "Password Confirm", placeholderText: "********", isStatusImageViewVisible: true)
         view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         view.textField.autocapitalizationType = .none
         view.textField.isSecureTextEntry = true
@@ -88,12 +88,6 @@ class SignUpVC: UIViewController {
         return btn
     }()
     
-    private lazy var labelPasswordMismatch:UILabelCC = {
-        let lbl = UILabelCC(labelText: "Passwords do not match", font: .poppinsRegular14)
-        lbl.textColor = .red
-        lbl.isHidden = true
-        return lbl
-    }()
     @objc func textFieldDidChange(_ textField: UITextField) {
         if textField == viewPassword.textField || textField == viewPasswordConfirm.textField {
             let usernameText = viewUserName.textField.text ?? ""
@@ -101,11 +95,15 @@ class SignUpVC: UIViewController {
             let passwordText = viewPassword.textField.text ?? ""
             let passwordConfirmText = viewPasswordConfirm.textField.text ?? ""
             
+            if textField == viewPasswordConfirm.textField{
+                let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmText.count >= 6
+                viewPasswordConfirm.showPasswordMatched(passwordsMatch)
+            }
             let passwordsMatch = passwordText == passwordConfirmText
-            labelPasswordMismatch.isHidden = passwordsMatch
             
             isFormComplete = !usernameText.isEmpty && !emailText.isEmpty && !passwordText.isEmpty && !passwordConfirmText.isEmpty && passwordsMatch
             
+
             buttonSignup.isEnabled = isFormComplete
             buttonSignup.backgroundColor = isFormComplete ?.mainColor : .lightGray
         }
@@ -149,7 +147,7 @@ class SignUpVC: UIViewController {
         
         self.view.backgroundColor = .mainColor
         self.view.addSubviews(viewMain, labelSignUp, btnBack)
-        viewMain.addSubviews(stackView, labelPasswordMismatch, buttonSignup)
+        viewMain.addSubviews(stackView, buttonSignup)
         stackView.addArrangedSubviews(viewUserName, viewEmail, viewPassword, viewPasswordConfirm)
         setupLayout()
     }
@@ -201,11 +199,7 @@ class SignUpVC: UIViewController {
             btn.width.equalTo(342)
             btn.bottom.equalToSuperview().offset(-30)
         })
-        
-        labelPasswordMismatch.snp.makeConstraints({ label in
-            label.top.equalTo(viewPasswordConfirm.snp.bottom).offset(8)
-            label.leading.equalTo(viewPasswordConfirm.label)
-        })
+
     }
 }
 

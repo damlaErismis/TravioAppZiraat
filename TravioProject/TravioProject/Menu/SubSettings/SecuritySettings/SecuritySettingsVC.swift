@@ -49,15 +49,15 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
     private lazy var labelPhotoLibrary = UILabelCC(labelText: "Photo Library", font: .poppinsRegular14)
     private lazy var labelLocation = UILabelCC(labelText: "Location", font: .poppinsRegular14)
     
-    private lazy var viewPassword: UIViewAlertCC = {
-        let view = UIViewAlertCC(labeltext: "New Password", placeholderText: "***********")
+    private lazy var viewPassword: UIViewCC = {
+        let view = UIViewCC(labeltext: "New Password", placeholderText: "***********")
         view.textField.isSecureTextEntry = true
         view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         return view
     }()
 
-    private lazy var viewPasswordConfirm: UIViewAlertCC = {
-        let view = UIViewAlertCC(labeltext: "New Password Confirm", placeholderText: "***********", isStatusImageViewVisible: true)
+    private lazy var viewPasswordConfirm: UIViewCC = {
+        let view = UIViewCC(labeltext: "New Password Confirm", placeholderText: "***********", isStatusImageViewVisible: true)
         view.textField.isSecureTextEntry = true
         view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         return view
@@ -295,11 +295,6 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
             isFormComplete = passwordText.count >= 6 && passwordsMatch && !passwordText.isEmpty && !passwordConfirmText.isEmpty
             buttonSave.isEnabled = isFormComplete
             buttonSave.backgroundColor = isFormComplete ? .mainColor : .lightGray
-        }
-        if textField == viewPassword.textField{
-            let passwordText = viewPassword.textField.text ?? ""
-            let passwordChracterCountControl = passwordText.count >= 6
-            viewPassword.showPasswordMatched(passwordChracterCountControl)
         }
         
         if textField == viewPasswordConfirm.textField{
