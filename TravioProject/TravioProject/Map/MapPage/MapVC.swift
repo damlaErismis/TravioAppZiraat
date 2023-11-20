@@ -119,7 +119,7 @@ class MapVC: UIViewController, ViewControllerDelegate{
             let placesTVC = AddNewPlaceVC()
             placesTVC.delegate = self
             geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
-                if let error = error {
+                if error != nil {
                     return
                 }
                 if let placemark = placemarks?.first {

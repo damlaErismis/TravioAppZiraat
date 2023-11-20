@@ -8,7 +8,6 @@
 import Foundation
 
 struct APIError: Error {
-    
     let statusCode: Int
     let message: String
 }

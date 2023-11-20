@@ -51,7 +51,7 @@ final class HomeVM {
 //    }
     
     func getPopularPlaces() {
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getPopularPlaces, callback: {(result: Result<PlaceResponse,APIError>) in
+        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .getPopularPlaces, callback: {(result: Result<PlaceResponse,APIErrorMessage>) in
             switch result {
             case .success(let success):
                 self.tableSection.append(.popularPlaces)
@@ -59,13 +59,13 @@ final class HomeVM {
                 self.delegate?.reloadTableView()
                 self.getNewPlaces()
             case .failure(let failure):
-                print(failure.message)
+                print(failure.localizedDescription)
             }
         })
     }
     
     func getNewPlaces() {
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getLastPlaces, callback: {(result: Result<PlaceResponse,APIError>) in
+        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .getLastPlaces, callback: {(result: Result<PlaceResponse,APIErrorMessage>) in
             switch result {
             case .success(let success):
                 self.tableSection.append(.newPlaces)
@@ -73,20 +73,20 @@ final class HomeVM {
                 self.delegate?.reloadTableView()
                 self.getMyAddedPlaces()
             case .failure(let failure):
-                print(failure.message)
+                print(failure.localizedDescription)
             }
         })
     }
    
     func getMyAddedPlaces() {
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getAllPlacesForUser, callback: {(result: Result<PlaceResponse,APIError>) in
+        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .getAllPlacesForUser, callback: {(result: Result<PlaceResponse,APIErrorMessage>) in
             switch result {
             case .success(let success):
                 self.tableSection.append(.myAddedPlaces)
                 self.myAddedPlaces = success.data.places
                 self.delegate?.reloadTableView()
             case .failure(let failure):
-                print(failure.message)
+                print(failure.localizedDescription)
             }
         })
     }

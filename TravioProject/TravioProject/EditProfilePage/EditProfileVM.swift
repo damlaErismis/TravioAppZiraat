@@ -11,8 +11,6 @@ import UIKit
 
 class EditProfileVM {
     
-
-//    var imageURLs: (([String]) -> Void)?
     var imageUrls:[String]?
     var userProfileDidChange: ((UserProfile) -> Void)?
     
@@ -63,12 +61,12 @@ class EditProfileVM {
     }
 
     func getPersonalInfo() {
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getPersonalInfo, callback: {(result: Result<UserProfile, APIError>) in
+        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .getPersonalInfo, callback: {(result: Result<UserProfile, APIErrorMessage>) in
             switch result {
             case .success(let userProfile):
                 self.userProfile = userProfile
             case .failure(let failure):
-                print(failure.message)
+                print(failure.localizedDescription)
                 
             }
         })
@@ -81,14 +79,14 @@ class EditProfileVM {
             "pp_url": pp_url
         ] as [String : Any]
         
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .editProfile(params: parameters)) { (result: Result<UserProfileUpdateResponse, APIError>) in
+        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .editProfile(params: parameters)) { (result: Result<UserProfileUpdateResponse, APIErrorMessage>) in
             switch result {
             case .success(let success):
                 print(success)
                 self.processFetched(response: success)
                 self.alertMessage = self.updateProfileResponse?.message
             case .failure(let error):
-                print("Profil güncellemesi başarısız: \(error.message)")
+                print("Profil güncellemesi başarısız: \(error.localizedDescription)")
             }
         }
     }

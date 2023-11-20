@@ -41,13 +41,13 @@ class NewPlacesVM {
 //        })
 //    }
     func getNewPlaces(completion: @escaping (Result<PlaceResponse, Error>) -> Void) {
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getLastPlaces, callback: {(result: Result<PlaceResponse,APIError>) in
+        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .getLastPlaces, callback: {(result: Result<PlaceResponse,APIErrorMessage>) in
             switch result {
             case .success(let success):
                 self.newPlacesResponse = success
                 self.getNewPlacesData()
             case .failure(let failure):
-                print(failure.message)
+                print(failure.localizedDescription)
             }
         })
     }

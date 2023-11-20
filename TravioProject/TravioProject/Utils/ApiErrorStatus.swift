@@ -9,12 +9,10 @@ import Foundation
 
 // Bu sayfa geliştirilecek
 
-struct ErrorResponse {
-    
+struct ErrorResponse: Error{
     var status: String
     var message: String
 }
-
 
 enum APIErrorStatus: Int {
     case internalServerError = 500

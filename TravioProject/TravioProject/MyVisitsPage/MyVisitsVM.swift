@@ -31,13 +31,13 @@ class MyVisitsVM {
     }
     
     func getMyVisits(){
-        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getAllVisits, callback: {(result: Result<DataResponse,APIError>) in
+        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .getAllVisits, callback: {(result: Result<DataResponse,APIErrorMessage>) in
             switch result {
             case .success(let success):
                 self.getData = success
                 self.getPlacesData()
             case .failure(let failure):
-                print(failure.message)
+                print(failure.localizedDescription)
             }
         })
     }
