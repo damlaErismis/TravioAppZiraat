@@ -52,7 +52,6 @@ class GenericNetworkingHelper{
         }
     }
     
-    
     public func uploadImagess<T: Codable>(urlRequest: Router, callback: @escaping Callback<T>) {
         AF.upload(multipartFormData: urlRequest.multipartFormData, with: urlRequest).validate().responseDecodable(of: T.self) { response in
             switch response.result {

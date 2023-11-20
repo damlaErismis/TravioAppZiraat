@@ -1,5 +1,4 @@
-//
-//  
+ 
 //  AboutUsVCVC.swift
 //  TravioProject
 //
@@ -15,11 +14,10 @@ class AboutUsVC: UICustomViewController {
     
     private lazy var webView:WKWebView = {
         let wb = WKWebView()
-//        wb.layer.cornerRadius = 75
-//        wb.layer.maskedCorners = [.topLeft]
+        wb.layer.cornerRadius = 75
+        wb.layer.maskedCorners = [.topLeft]
         wb.layer.masksToBounds = true
         return wb
-        
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +32,7 @@ class AboutUsVC: UICustomViewController {
         
         labelTitle.text = "About Us"
         imageBack.image = UIImage(named: "Vector")
-        self.viewMain.backgroundColor = .white
-        buttonAction.isHidden = true
+        self.viewMain.backgroundColor = .viewColor
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleBack))
         imageBack.addGestureRecognizer(tap)
         setupViews()
@@ -50,6 +47,13 @@ class AboutUsVC: UICustomViewController {
         setupLayouts()
     }
     func setupLayouts() {
+        webView.snp.makeConstraints({ wb in
+            wb.top.equalToSuperview()/*.offset(30)*/
+            wb.leading.equalToSuperview()
+            wb.trailing.equalToSuperview()
+            wb.bottom.equalToSuperview()
+            
+        })
        
     }
 }

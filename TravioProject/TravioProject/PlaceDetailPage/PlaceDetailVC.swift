@@ -182,8 +182,8 @@ class PlaceDetailVC: UIViewController {
         })
         collectionBottomView.snp.makeConstraints({ cv in
             cv.top.equalTo(collectionTopView.snp.bottom)
-            cv.leading.equalToSuperview().offset(12)
-            cv.trailing.equalToSuperview().offset(-12)
+            cv.leading.equalToSuperview()
+            cv.trailing.equalToSuperview()
             cv.bottom.equalToSuperview()
         })
         

@@ -62,7 +62,7 @@ class CompositionalLayoutCell: UICollectionViewCell {
             view.height.equalTo(250)
         })
         imagePlace.snp.makeConstraints({ view in
-            view.top.equalToSuperview().offset(-100)
+            view.top.equalToSuperview().offset(-60)
             view.leading.equalToSuperview()
             view.trailing.equalToSuperview()
             view.height.equalTo(250)
