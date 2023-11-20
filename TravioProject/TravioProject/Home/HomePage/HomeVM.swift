@@ -12,7 +12,6 @@ protocol HomeViewModelDelegate: AnyObject {
     func reloadTableView()
 }
 
-
 final class HomeVM {
     
     enum TableViewSection {
@@ -26,71 +25,62 @@ final class HomeVM {
     
     weak var delegate: HomeViewModelDelegate?
     var tableSection: [TableViewSection] = []
-
-    func getToken()-> String{
+    
+    let dispatchGroup = DispatchGroup()
+    
+    func fetchData() {
+        dispatchGroup.enter()
+        getPopularPlaces()
         
-        let service = "com.travio"
-        let account = "travio"
-        guard let storedTokenData = KeychainHelper.shared.read(service: service, account: account),
-              let storedToken = String(data: storedTokenData, encoding: .utf8) else{
-            return "Token okunamadı veya bulunamadı."
+        dispatchGroup.enter()
+        getNewPlaces()
+        
+        dispatchGroup.enter()
+        getMyAddedPlaces()
+        
+        dispatchGroup.notify(queue: .main) {
+            self.delegate?.reloadTableView()
         }
-        return storedToken
     }
-    
-    
-//    func getPopularPlacesWithLimit(completion: @escaping (Result<PopularPlacesResponse, Error>) -> Void) {
-//        GenericNetworkingHelper.shared.getDataFromRemote(urlRequest: .getPopularPlacesWithLimit(limit: 20), callback: {(result: Result<PopularPlacesResponse,APIError>) in
-//            switch result {
-//            case .success(let success):
-//                self.popularPlaces = success.data.places
-//            case .failure(let failure):
-//                print(failure.message)
-//            }
-//        })
-//    }
-    
-    func getPopularPlaces() {
-        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .getPopularPlaces, callback: {(result: Result<PlaceResponse,APIErrorMessage>) in
+    private func getPopularPlaces() {
+        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .getPopularPlacesWithLimit(limit: 5), callback: {(result: Result<PlaceResponse,APIErrorMessage>) in
             switch result {
             case .success(let success):
                 self.tableSection.append(.popularPlaces)
                 self.popularPlaces = success.data.places
-                self.delegate?.reloadTableView()
-                self.getNewPlaces()
             case .failure(let failure):
                 print(failure.localizedDescription)
             }
+            self.dispatchGroup.leave()
         })
     }
     
-    func getNewPlaces() {
-        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .getLastPlaces, callback: {(result: Result<PlaceResponse,APIErrorMessage>) in
+    private func getNewPlaces() {
+        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .getLastPlacesWithLimit(limit: 5), callback: {(result: Result<PlaceResponse,APIErrorMessage>) in
             switch result {
             case .success(let success):
                 self.tableSection.append(.newPlaces)
                 self.newPlaces = success.data.places
-                self.delegate?.reloadTableView()
-                self.getMyAddedPlaces()
             case .failure(let failure):
                 print(failure.localizedDescription)
             }
+            self.dispatchGroup.leave()
         })
     }
-   
-    func getMyAddedPlaces() {
+    
+    private func getMyAddedPlaces() {
         GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .getAllPlacesForUser, callback: {(result: Result<PlaceResponse,APIErrorMessage>) in
             switch result {
             case .success(let success):
                 self.tableSection.append(.myAddedPlaces)
                 self.myAddedPlaces = success.data.places
-                self.delegate?.reloadTableView()
             case .failure(let failure):
                 print(failure.localizedDescription)
             }
+            self.dispatchGroup.leave()
         })
     }
-
+    
 }
 
 

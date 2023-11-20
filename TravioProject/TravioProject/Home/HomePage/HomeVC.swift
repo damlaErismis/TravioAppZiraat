@@ -50,7 +50,7 @@ class HomeVC: UIViewController {
         navigationController?.navigationBar.isHidden = true
         viewModel.delegate = self
         setupViews()
-        viewModel.getPopularPlaces()
+        viewModel.fetchData()
     }
     
     
