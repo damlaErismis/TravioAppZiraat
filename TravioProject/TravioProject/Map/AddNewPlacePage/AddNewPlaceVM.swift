@@ -11,6 +11,8 @@ import UIKit
 
 class AddNewPlaceVM {
     
+    
+    let dispatchGroup = DispatchGroup()
     var imageUrls:[String]?
     var placeId:String?
     
@@ -31,16 +33,17 @@ class AddNewPlaceVM {
             showSuccessAlertClosure?()
         }
     }
-    var errorStatusMessage: ErrorResponse? {
+    var errorStatusMessage: ErrorResponse?{
         didSet {
             self.showErrorAlertClosure?()
         }
     }
-    var errorGalleryErrorResponse: ErrorResponse? {
+    var errorGalleryErrorResponse: ErrorResponse?{
         didSet {
             self.showErrorGalleryAlertClosure?()
         }
     }
+    
     var addNewPlaceClosure : (()->())?
     var addGalleriesClosure : (()->())?
     var showErrorAlertClosure: (()->())?
@@ -56,6 +59,8 @@ class AddNewPlaceVM {
             "latitude": latitude,
             "longitude": longitude
         ] as [String : Any]
+        
+        dispatchGroup.enter()
         GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .postAPlace(params: params), callback: {(result: Result<SuccessResponse,APIErrorMessage>) in
             switch result {
             case .success(let success):
@@ -75,6 +80,7 @@ class AddNewPlaceVM {
                     self.errorGalleryErrorResponse = ErrorResponse(status: "Error", message: failure.localizedDescription)
                 }
             }
+            self.dispatchGroup.leave()
         })
     }
     
@@ -83,6 +89,7 @@ class AddNewPlaceVM {
             "place_id": placeId,
             "image_url": imageURL
         ]
+        dispatchGroup.enter()
         GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .postAGalleryImage(params: params), callback: {(result: Result<SuccessResponse, APIErrorMessage>) in
             switch result {
             case .success(let success):
@@ -102,10 +109,12 @@ class AddNewPlaceVM {
                     self.errorStatusMessage = ErrorResponse(status: "Error", message: failure.localizedDescription)
                 }
             }
+            self.dispatchGroup.leave()
         })
     }
     
     public func uploadImages(images: [UIImage]){
+        dispatchGroup.enter()
         GenericNetworkingHelper.shared.uploadImagess(urlRequest: .uploadImages(images: images),  callback: {(result: Result<UploadResponse,APIErrorMessage>) in
             switch result {
             case .success(let success):
@@ -124,8 +133,8 @@ class AddNewPlaceVM {
                 default:
                     self.errorStatusMessage = ErrorResponse(status: "Error", message: failure.localizedDescription)
                 }
-
             }
+            self.dispatchGroup.leave()
         })
     }
 }

@@ -123,7 +123,6 @@ class AddNewPlaceVC: UIViewController, UITextFieldDelegate{
                 }
             }
         }
-        
         vm.showErrorGalleryAlertClosure = { [weak self] () in
             DispatchQueue.main.async {
                 if let message = self?.vm.galleryResponse?.message {
@@ -132,28 +131,27 @@ class AddNewPlaceVC: UIViewController, UITextFieldDelegate{
             }
         }
     }
-    
     @objc func handleAddPlace(){
         uploadImages()
         vm.addNewPlaceClosure = {
-            guard let imageResponse = self.vm.imageUrls else {return }
-            guard let placeTitle = self.viewPlaceName.textField.text else {return }
-            guard let place = self.viewCountryCity.textField.text else {
-                return  }
-            guard let placeDescription = self.textViewDescription.text else {
+            guard let imageResponse = self.vm.imageUrls,
+                  let placeTitle = self.viewPlaceName.textField.text,
+                  let place = self.viewCountryCity.textField.text,
+                  let placeDescription = self.textViewDescription.text else {
                 return  }
             let latitude = self.selectedPlace.coordinate.latitude
             let longitude = self.selectedPlace.coordinate.longitude
             self.vm.addNewPlace( place: place, placeTitle: placeTitle, placeDescription: placeDescription, imageString: imageResponse[0], latitude: latitude, longitude: longitude)
         }
         vm.addGalleriesClosure = {
-            guard let imageResponse = self.vm.imageUrls else {return }
-            guard let placeId = self.vm.placeId else {return}
+            guard let imageResponse = self.vm.imageUrls,
+                  let placeId = self.vm.placeId else {return}
             imageResponse.forEach({ imageURL in
                 self.vm.createGalleryImage(placeId: placeId, imageURL: imageURL)
             })
         }
     }
+    
     func uploadImages(){
         let images = imagesFromLibrary
         if images.count >= 2 {
@@ -262,7 +260,7 @@ extension AddNewPlaceVC:UICollectionViewDataSource {
         cell.imgNewPlace.image = UIImage(named: "addPhoto")
         cell.layer.cornerRadius = 20
         cell.clipsToBounds = true
-        cell.addShadow(shadowColor: UIColor(hexString: "#000000"), offsetX: 0, offsetY: 0, shadowOpacity: 0.1, shadowRadius: 10.0)
+        cell.addShadow(shadowColor: .black, offsetX: 0, offsetY: 0, shadowOpacity: 0.1, shadowRadius: 10.0)
         return cell
     }
 }
