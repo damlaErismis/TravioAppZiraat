@@ -63,15 +63,15 @@ class LoginVC: UIViewController {
         return view
     }()
     
-    private lazy var viewEmail:UIViewAlertCC = {
-        let view = UIViewAlertCC(labeltext: "Email", placeholderText: "developer@bilgeadam.com")
+    private lazy var viewEmail:UIViewCC = {
+        let view = UIViewCC(labeltext: "Email", placeholderText: "developer@bilgeadam.com")
         view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         view.textField.autocapitalizationType = .none
         return view
         
     }()
-    private lazy var viewPassword:UIViewAlertCC = {
-        let view = UIViewAlertCC(labeltext: "Password", placeholderText: "***************")
+    private lazy var viewPassword:UIViewCC = {
+        let view = UIViewCC(labeltext: "Password", placeholderText: "***************")
         view.textField.isSecureTextEntry = true
         view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         return view
