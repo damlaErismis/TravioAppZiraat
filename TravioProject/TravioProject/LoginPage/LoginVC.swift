@@ -63,24 +63,15 @@ class LoginVC: UIViewController {
         return view
     }()
     
-    private lazy var labelPasswordControl:UILabelCC = {
-        let lbl = UILabelCC(labelText: "Enter at least 6 characters", font: .poppinsRegular10)
-        lbl.textColor = .systemGray2
-        lbl.isHidden = true
-        return lbl
-    }()
-
-    private lazy var viewEmail:UIViewCC = {
-        let view = UIViewCC(labeltext: "Email", placeholderText: "developer@bilgeadam.com")
-        view.textField.delegate = self
+    private lazy var viewEmail:UIViewAlertCC = {
+        let view = UIViewAlertCC(labeltext: "Email", placeholderText: "developer@bilgeadam.com")
         view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         view.textField.autocapitalizationType = .none
         return view
         
     }()
-    private lazy var viewPassword:UIViewCC = {
-        let view = UIViewCC(labeltext: "Password", placeholderText: "***************")
-        view.textField.delegate = self
+    private lazy var viewPassword:UIViewAlertCC = {
+        let view = UIViewAlertCC(labeltext: "Password", placeholderText: "***************")
         view.textField.isSecureTextEntry = true
         view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         return view
@@ -148,11 +139,6 @@ class LoginVC: UIViewController {
             buttonLogin.isEnabled = isFormComplete
             buttonLogin.backgroundColor = isFormComplete ? UIColor(hexString: "#38ada9") : .lightGray
         }
-        if textField == viewPassword.textField{
-            let passwordText = viewPassword.textField.text ?? ""
-            let passwordChracterCountControl = passwordText.count >= 6
-            labelPasswordControl.isHidden = passwordChracterCountControl
-        }
     }
     
     //MARK: -- Private Methods
@@ -162,9 +148,9 @@ class LoginVC: UIViewController {
     private func setupView(){
         self.view.backgroundColor = UIColor(hexString: "#38ada9")
         self.view.addSubviews(viewMain, imageLogo)
-        viewMain.addSubviews(labelWelcome, stackView,  buttonLogin, stackViewSignUp, labelPasswordControl)
+        viewMain.addSubviews(labelWelcome, stackView,  buttonLogin, stackViewSignUp)
         stackView.addArrangedSubviews(viewEmail, viewPassword)
-        viewPassword.addSubviews(labelPasswordControl)
+
         stackViewSignUp.addArrangedSubviews(labelSuggestion, buttonSignUp)
         setupLayout()
     }
@@ -187,10 +173,7 @@ class LoginVC: UIViewController {
             lbl.centerX.equalToSuperview()
             lbl.height.equalTo(36)
         })
-        labelPasswordControl.snp.makeConstraints({lbl in
-            lbl.bottom.equalToSuperview()
-            lbl.leading.equalToSuperview().offset(12)
-        })
+        
         stackView.snp.makeConstraints({ sv in
             sv.top.equalTo(labelWelcome.snp.bottom).offset(45)
             sv.leading.equalToSuperview().offset(25)
@@ -209,35 +192,4 @@ class LoginVC: UIViewController {
         })
         
     }
-}
-extension LoginVC:UITextFieldDelegate{
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        guard let textPassword = viewPassword.textField.text else{
-            return false
-        }
-        guard let textEmail = viewEmail.textField.text else{
-            return false
-        }
-        if textField == viewPassword.textField {
-            buttonLogin.isEnabled = true
-            if textPassword.count < 6{
-                buttonLogin.isEnabled = false
-            }else{
-                buttonLogin.isEnabled = true
-            }
-        }
-        if textField == viewEmail.textField{
-            buttonLogin.isEnabled = true
-            if textEmail.isValidEmail {
-                buttonLogin.isEnabled = true
-            }else{
-                buttonLogin.isEnabled = false
-            }
-        }
-        return true
-    }
-    
-    
 }
