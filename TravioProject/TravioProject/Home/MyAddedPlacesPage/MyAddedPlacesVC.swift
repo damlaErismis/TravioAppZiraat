@@ -10,7 +10,7 @@ import UIKit
 import TinyConstraints
 import SnapKit
 
-class MyAddedPlacesVC: UIViewController {
+class MyAddedPlacesVC: UICustomViewController {
     
     enum OrderState {
         case ascending
@@ -33,35 +33,12 @@ class MyAddedPlacesVC: UIViewController {
         cv.delegate = self
         return cv
     }()
-    
-    private lazy var viewMain:UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hexString: "F8F8F8")
-        view.layer.cornerRadius = 75
-        view.layer.maskedCorners = [.topLeft]
-        return view
-    }()
-    
-    private lazy var labelMyAddedPlaces:UILabelCC = {
-        let lbl = UILabelCC(labelText: "My Added Places", font: .poppinsBold30)
-        lbl.textColor = .white
-        lbl.adjustsFontSizeToFitWidth = true
-        return lbl
-    }()
 
     private lazy var btnOrder: UIButton = {
         let image = UIImage(named: "orderAZ")
         let btn = UIButton()
         btn.setImage(image, for: .normal)
         btn.addTarget(self, action: #selector(btnOrderTapped), for: .touchUpInside)
-        return btn
-    }()
-    
-    private lazy var btnBack: UIButton = {
-        let image = UIImage(named: "btnBack")
-        let btn = UIButton()
-        btn.setImage(image, for: .normal)
-        btn.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         return btn
     }()
     
@@ -101,41 +78,24 @@ class MyAddedPlacesVC: UIViewController {
             }
         }
     }
-    
+    func configureView(){
+        labelTitle.text = "My Added Places"
+        imageBack.image = UIImage(named: "Vector")
+        self.viewMain.backgroundColor = .viewColor
+        let tap = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
+        imageBack.addGestureRecognizer(tap)
+    }
     func setupViews() {
-        
-        self.view.addSubviews(viewMain, labelMyAddedPlaces, btnBack)
-        self.view.backgroundColor = .mainColor
+
         viewMain.addSubviews(collectionView, btnOrder)
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
-        setupLayout()
+        configureView()
+        setupLayouts()
     }
     
-    func setupLayout() {
-        
-        btnBack.snp.makeConstraints({ btn in
-            btn.top.equalTo(labelMyAddedPlaces).offset(15)
-            btn.leading.equalToSuperview().offset(25)
-            btn.width.equalTo(25)
-            btn.height.equalTo(25)
-        })
-        
-        labelMyAddedPlaces.snp.makeConstraints({ img in
-            img.top.equalToSuperview().offset(50)
-            img.centerX.equalToSuperview()
-            img.leading.equalTo(btnBack.snp.trailing).offset(30)
-            img.height.equalTo(52)
-            img.width.equalTo(250)
-        })
-        
-        viewMain.snp.makeConstraints({ view in
-            view.bottom.equalToSuperview()
-            view.leading.equalToSuperview()
-            view.trailing.equalToSuperview()
-            view.height.equalToSuperview().multipliedBy(0.80)
-        })
+    func setupLayouts() {
         
         btnOrder.snp.makeConstraints({ btn in
             btn.top.equalToSuperview().offset(20)
@@ -148,8 +108,6 @@ class MyAddedPlacesVC: UIViewController {
             view.trailing.equalToSuperview()
         })
     }
-    
-  
 }
 extension MyAddedPlacesVC:UICollectionViewDelegateFlowLayout {
     

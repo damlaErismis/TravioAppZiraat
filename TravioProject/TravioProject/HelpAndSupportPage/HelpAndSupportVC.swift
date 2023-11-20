@@ -15,7 +15,7 @@ struct  HelpAndSupportContent {
     var answer: String?
 }
 
-class HelpAndSupportVC: UIViewController {
+class HelpAndSupportVC: UICustomViewController {
     
     private let data: [HelpAndSupportContent] = [
         HelpAndSupportContent(question: "How can I create a new account on Travio?", answer: "her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem"),
@@ -33,74 +33,38 @@ class HelpAndSupportVC: UIViewController {
         return tv
     }()
     
-    private lazy var viewMain:UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hexString: "F8F8F8")
-        view.layer.cornerRadius = 75
-        view.layer.maskedCorners = [.topLeft]
-        return view
-    }()
-    
-    private lazy var labelHelpAndSupport:UILabelCC = {
-        let lbl = UILabelCC(labelText: "Help&Support", font: .poppinsBold30)
-        lbl.textColor = .white
-        lbl.adjustsFontSizeToFitWidth = true
-        return lbl
-    }()
-    
     private lazy var labelFAQ:UILabelCC = {
         let lbl = UILabelCC(labelText: "FAQ", font: .poppinsBold24)
         lbl.textColor = .mainColor
         lbl.adjustsFontSizeToFitWidth = true
         return lbl
     }()
+
+    func configureView(){
+        labelTitle.text = "Help And Support"
+        imageBack.image = UIImage(named: "Vector")
+        self.viewMain.backgroundColor = .viewColor
+        let tap = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
+        imageBack.addGestureRecognizer(tap)
+    }
     
-    private lazy var btnBack: UIButton = {
-        let image = UIImage(named: "btnBack")
-        let btn = UIButton()
-        btn.setImage(image, for: .normal)
-        btn.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        return btn
-    }()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureView()
+        setupViews()
+    }
     
     @objc func backButtonTapped(){
         self.navigationController?.popViewController(animated: true)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupViews()
-    }
-    
     func setupViews() {
-        self.view.backgroundColor = .mainColor
         navigationController?.navigationBar.isHidden = true
-        self.view.addSubviews(viewMain, labelHelpAndSupport, btnBack)
         viewMain.addSubviews(labelFAQ, tableView)
-        setupLayout()
+        setupLayouts()
     }
     
-    func setupLayout() {
-        
-        btnBack.snp.makeConstraints({ btn in
-            btn.top.equalTo(labelHelpAndSupport).offset(15)
-            btn.leading.equalToSuperview().offset(25)
-            btn.width.equalTo(25)
-            btn.height.equalTo(25)
-        })
-        labelHelpAndSupport.snp.makeConstraints ({ img in
-            img.top.equalToSuperview().offset(50)
-            img.centerX.equalToSuperview()
-            img.leading.equalTo(btnBack.snp.trailing).offset(30)
-            img.height.equalTo(52)
-            img.width.equalTo(250)
-        })
-        viewMain.snp.makeConstraints ({ view in
-            view.bottom.equalToSuperview()
-            view.leading.equalToSuperview()
-            view.trailing.equalToSuperview()
-            view.height.equalToSuperview().multipliedBy(0.80)
-        })
+    func setupLayouts() {
         tableView.snp.makeConstraints ({ make in
             make.top.equalToSuperview().offset(70)
             make.leading.equalToSuperview().offset(20)

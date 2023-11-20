@@ -20,7 +20,7 @@ class GenericNetworkingHelper{
     
     public func getDataFromRemotee<T: Codable>(urlRequest: Router, callback: @escaping Callback<T>) {
         
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .utility).async {
             AF.request(urlRequest).validate().responseDecodable(of: T.self) { response in
                 switch response.result {
                 case .success(let success):

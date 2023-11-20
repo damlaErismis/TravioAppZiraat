@@ -188,7 +188,7 @@ extension HomeVC:UITableViewDataSource{
             
             cell.onItemSelect = { [weak self] itemIndexPath in
                 guard let strongSelf = self else { return }
-                let selectedID: String?
+                var selectedID: String?
                 cell.onItemSelect = { [weak self] itemIndexPath in
                     guard let strongSelf = self else { return }
                     var selectedID: String?

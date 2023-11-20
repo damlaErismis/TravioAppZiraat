@@ -13,7 +13,7 @@ import Kingfisher
 
 
 
-class PopularPlacesVC: UIViewController {
+class PopularPlacesVC: UICustomViewController {
     
     enum OrderState {
         case ascending
@@ -38,21 +38,6 @@ class PopularPlacesVC: UIViewController {
         return cv
     }()
     
-    private lazy var viewMain:UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hexString: "F8F8F8")
-        view.layer.cornerRadius = 75
-        view.layer.maskedCorners = [.topLeft]
-        return view
-    }()
-    
-    private lazy var labelPopularPlaces:UILabelCC = {
-        let lbl = UILabelCC(labelText: "Popular Places", font: .poppinsBold30)
-        lbl.textColor = .white
-        lbl.adjustsFontSizeToFitWidth = true
-        return lbl
-    }()
-    
     private lazy var btnOrder: UIButton = {
         let image = UIImage(named: "orderAZ")
         let btn = UIButton()
@@ -61,13 +46,13 @@ class PopularPlacesVC: UIViewController {
         return btn
     }()
     
-    private lazy var btnBack: UIButton = {
-        let image = UIImage(named: "btnBack")
-        let btn = UIButton()
-        btn.setImage(image, for: .normal)
-        btn.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        return btn
-    }()
+    func configureView(){
+        labelTitle.text = "Popular Places"
+        imageBack.image = UIImage(named: "Vector")
+        self.viewMain.backgroundColor = .viewColor
+        let tap = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
+        imageBack.addGestureRecognizer(tap)
+    }
     
     @objc func backButtonTapped(){
         self.navigationController?.popViewController(animated: true)
@@ -87,6 +72,7 @@ class PopularPlacesVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
+        configureView()
         initVM()
         bindViewModel()
         setupViews()
@@ -108,39 +94,14 @@ class PopularPlacesVC: UIViewController {
     }
     
     func setupViews() {
-        
-        self.view.addSubviews(viewMain, labelPopularPlaces, btnBack)
-        self.view.backgroundColor = .mainColor
         viewMain.addSubviews(collectionView, btnOrder)
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
-        setupLayout()
+        setupLayouts()
     }
     
-    func setupLayout() {
-        
-        btnBack.snp.makeConstraints({ btn in
-            btn.top.equalTo(labelPopularPlaces).offset(15)
-            btn.leading.equalToSuperview().offset(25)
-            btn.width.equalTo(25)
-            btn.height.equalTo(25)
-        })
-        
-        labelPopularPlaces.snp.makeConstraints({ img in
-            img.top.equalToSuperview().offset(50)
-            img.centerX.equalToSuperview()
-            img.leading.equalTo(btnBack.snp.trailing).offset(30)
-            img.height.equalTo(52)
-            img.width.equalTo(250)
-        })
-        
-        viewMain.snp.makeConstraints({ view in
-            view.bottom.equalToSuperview()
-            view.leading.equalToSuperview()
-            view.trailing.equalToSuperview()
-            view.height.equalToSuperview().multipliedBy(0.80)
-        })
+    func setupLayouts() {
         
         btnOrder.snp.makeConstraints({ btn in
             btn.top.equalToSuperview().offset(20)
