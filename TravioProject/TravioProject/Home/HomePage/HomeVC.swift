@@ -126,7 +126,6 @@ extension HomeVC:UITableViewDelegate{
             make.trailing.equalTo(headerView).offset(-20)
             make.centerY.equalTo(lbl.snp.centerY)
             make.top.equalTo(headerView).offset(10)
-
         }
         
         return headerView

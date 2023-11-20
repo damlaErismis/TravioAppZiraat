@@ -12,8 +12,9 @@ import SwiftUI
 
 // MARK: Font Status
 enum FontStatus {
-
+    
     case poppinsRegular14
+    case poppinsRegular12
     case poppinsRegular10
     case poppinsRegular16
     case poppinsRegular20
@@ -27,6 +28,8 @@ enum FontStatus {
     
     var defineFont:UIFont? {
         switch self {
+        case .poppinsRegular12:
+            return UIFont(name: "Poppins-Regular", size: 12)
         case .poppinsRegular14:
             return UIFont(name: "Poppins-Regular", size: 14)
         case .poppinsRegular16:
@@ -49,6 +52,7 @@ enum FontStatus {
             return UIFont(name: "Poppins-Regular", size: 10)
         case .poppinsBold24:
             return UIFont(name: "Poppins-Bold", size: 24)
+            
         }
     }
 }

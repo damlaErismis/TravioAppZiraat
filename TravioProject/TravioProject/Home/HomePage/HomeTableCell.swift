@@ -85,8 +85,8 @@ extension HomeTableCell:UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as? HomeCollectionCell {
             cell.configurePopularPlaces(with: self.popularPlaces[indexPath.row])
-            cell.roundAllCorners(radius: 20)
-//            cell.addShadow(shadowColor: UIColor(hexString: "#000000"), offsetX: 0, offsetY: 0, shadowOpacity: 0.8, shadowRadius: 10.0)
+            cell.roundAllCorners(radius: 16)
+            cell.addShadow(shadowColor: .black, offsetX: 0, offsetY: 0, shadowOpacity: 0.1, shadowRadius: 10.0)
             return cell
         }
         return UICollectionViewCell()
