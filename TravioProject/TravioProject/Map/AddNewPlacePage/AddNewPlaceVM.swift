@@ -60,7 +60,7 @@ class AddNewPlaceVM {
             "longitude": longitude
         ] as [String : Any]
         GenericNetworkingHelper.shared.fetchData(urlRequest: .postAPlace(params: params), callback: {(result: Result<SuccessResponse,APIError>) in
-        dispatchGroup.enter()
+            self.dispatchGroup.enter()
             switch result {
             case .success(let success):
                 self.placeResponse = success
@@ -89,7 +89,7 @@ class AddNewPlaceVM {
             "image_url": imageURL
         ]
         GenericNetworkingHelper.shared.fetchData(urlRequest: .postAGalleryImage(params: params), callback: {(result: Result<SuccessResponse, APIError>) in
-        dispatchGroup.enter()
+            self.dispatchGroup.enter()
 
             switch result {
             case .success(let success):
@@ -116,7 +116,7 @@ class AddNewPlaceVM {
     public func uploadImages(images: [UIImage]){
 
         GenericNetworkingHelper.shared.uploadImagess(urlRequest: .uploadImages(images: images),  callback: {(result: Result<UploadResponse,APIError>) in
-        dispatchGroup.enter()
+            self.dispatchGroup.enter()
 
             switch result {
             case .success(let success):

@@ -16,7 +16,6 @@
 		00A47A8B2B0401F7001EDF1D /* MyAddedPlacesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A8A2B0401F7001EDF1D /* MyAddedPlacesCell.swift */; };
 		00A47A8D2B0403A4001EDF1D /* MyAddedPlacesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A8C2B0403A4001EDF1D /* MyAddedPlacesVM.swift */; };
 		00A47A8F2B04E21C001EDF1D /* MyVisitsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A8E2B04E21C001EDF1D /* MyVisitsVM.swift */; };
-		00A47A912B0C925E001EDF1D /* TermsOfUseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A902B0C925E001EDF1D /* TermsOfUseVC.swift */; };
 		00C8106C2AEBB79B0077E800 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106B2AEBB79B0077E800 /* MapVC.swift */; };
 		00C8106E2AEBB7A90077E800 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106D2AEBB7A90077E800 /* SettingsVC.swift */; };
 		00C810702AEBB7B70077E800 /* VisitsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106F2AEBB7B70077E800 /* VisitsVC.swift */; };
@@ -109,7 +108,6 @@
 		00A47A8A2B0401F7001EDF1D /* MyAddedPlacesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAddedPlacesCell.swift; sourceTree = "<group>"; };
 		00A47A8C2B0403A4001EDF1D /* MyAddedPlacesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAddedPlacesVM.swift; sourceTree = "<group>"; };
 		00A47A8E2B04E21C001EDF1D /* MyVisitsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVisitsVM.swift; sourceTree = "<group>"; };
-		00A47A902B0C925E001EDF1D /* TermsOfUseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseVC.swift; sourceTree = "<group>"; };
 		00C8106B2AEBB79B0077E800 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		00C8106D2AEBB7A90077E800 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		00C8106F2AEBB7B70077E800 /* VisitsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsVC.swift; sourceTree = "<group>"; };
@@ -619,7 +617,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00A47A912B0C925E001EDF1D /* TermsOfUseVC.swift in Sources */,
 				00C810CD2AF9904D0077E800 /* EditProfileVC.swift in Sources */,
 				0C04A7812AEA4B5D002972CF /* LoginVM.swift in Sources */,
 				0C499D182AF9481500A7C916 /* SecuritySettingsVC.swift in Sources */,
@@ -841,7 +838,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.burakozer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.burakozer.TravioProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -875,7 +872,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.burakozer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.burakozer.TravioProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

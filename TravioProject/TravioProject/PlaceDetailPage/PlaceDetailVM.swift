@@ -69,7 +69,7 @@ class PlaceDetailVM {
         
         let id = selectedID
         GenericNetworkingHelper.shared.fetchData(urlRequest: .getAllGalleryByPlaceID(placeId: id), callback: {(result: Result<ImageData,APIError>) in
-        dispatchGroup.enter()
+            self.dispatchGroup.enter()
             switch result {
             case .success(let success):
                 self.galleryData = success
@@ -82,7 +82,7 @@ class PlaceDetailVM {
     func initFetchLayersAndMap(){
         let id = selectedID
         GenericNetworkingHelper.shared.fetchData(urlRequest: .getAPlaceById(placeId: id), callback: {(result: Result<PlaceIdData,APIError>) in
-        dispatchGroup.enter()
+            self.dispatchGroup.enter()
 
             switch result {
             case .success(let success):
@@ -127,7 +127,7 @@ class PlaceDetailVM {
             "visited_at": visitedAt
         ]
         GenericNetworkingHelper.shared.fetchData(urlRequest: .postAVisit(params: params), callback: {(result: Result<SuccessResponse,APIError>) in
-        dispatchGroup.enter()
+            self.dispatchGroup.enter()
             switch result {
             case .success(let success):
                 self.successMessage = success.message
@@ -139,7 +139,7 @@ class PlaceDetailVM {
     }
     func deleteAVisit(placeId:String){
         GenericNetworkingHelper.shared.fetchData(urlRequest: .deleteAVisit(placeId: placeId), callback: {(result: Result<SuccessResponse,APIError>) in
-        dispatchGroup.leave()
+            self.dispatchGroup.enter()
             switch result {
             case .success(let success):
                 self.successMessage = success.message
@@ -151,7 +151,7 @@ class PlaceDetailVM {
     }
     func checkVisit(placeId:String){
         GenericNetworkingHelper.shared.fetchData(urlRequest: .checkVisitByPlaceId(placeId: placeId), callback: {(result: Result<SuccessResponse,APIError>) in
-        dispatchGroup.enter()
+            self.dispatchGroup.enter()
             switch result {
             case .success(let success):
                 self.successCheckIdResponse = success.message

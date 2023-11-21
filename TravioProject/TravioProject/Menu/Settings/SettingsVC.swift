@@ -226,9 +226,10 @@ extension SettingsVC:UICollectionViewDelegateFlowLayout {
             vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
         default:
-            let vc = TermsOfUseVC()
-            vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
+            print("")
+//            let vc = TermsOfUseVC()
+//            vc.hidesBottomBarWhenPushed = true
+//            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
