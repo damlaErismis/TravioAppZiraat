@@ -239,13 +239,13 @@
 			path = SignUpPage;
 			sourceTree = "<group>";
 		};
-		00A47A6D2AFA63E0001EDF1D /* HelpAndSupportPage */ = {
+		00A47A6D2AFA63E0001EDF1D /* Help&SupportPage */ = {
 			isa = PBXGroup;
 			children = (
 				00A47A6E2AFA6657001EDF1D /* HelpAndSupportVC.swift */,
 				00A47A722AFA6D46001EDF1D /* HelpAndSupportCell.swift */,
 			);
-			path = HelpAndSupportPage;
+			path = "Help&SupportPage";
 			sourceTree = "<group>";
 		};
 		00A47A822B024C55001EDF1D /* HomePage */ = {
@@ -393,8 +393,9 @@
 		0C499D162AF9478D00A7C916 /* SubSettings */ = {
 			isa = PBXGroup;
 			children = (
+				00A47A6D2AFA63E0001EDF1D /* Help&SupportPage */,
 				0CD1F37C2B04006A002B4486 /* SecuritySettings */,
-				0CD1F37D2B0400B3002B4486 /* AboutUsVC.swift */,
+				0CE644B42B0CC4EC00127F78 /* About&Terms */,
 			);
 			path = SubSettings;
 			sourceTree = "<group>";
@@ -433,6 +434,14 @@
 			path = SecuritySettings;
 			sourceTree = "<group>";
 		};
+		0CE644B42B0CC4EC00127F78 /* About&Terms */ = {
+			isa = PBXGroup;
+			children = (
+				0CD1F37D2B0400B3002B4486 /* AboutUsVC.swift */,
+			);
+			path = "About&Terms";
+			sourceTree = "<group>";
+		};
 		0CF741E82AD99AC7002B1389 = {
 			isa = PBXGroup;
 			children = (
@@ -457,7 +466,6 @@
 				0062B3C12AE910B0000066E5 /* LoginPage */,
 				0062B3C22AE910E5000066E5 /* SignUpPage */,
 				0C04A77B2AE94111002972CF /* Home */,
-				00A47A6D2AFA63E0001EDF1D /* HelpAndSupportPage */,
 				00C810CB2AF990330077E800 /* EditProfilePage */,
 				0C988ECC2AF2C08B0090E85A /* PlaceDetailPage */,
 				00C810682AEBB63F0077E800 /* MyVisitsPage */,

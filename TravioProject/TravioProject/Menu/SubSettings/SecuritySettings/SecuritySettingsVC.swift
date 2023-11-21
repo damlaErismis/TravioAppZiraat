@@ -67,6 +67,7 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
         sv.isScrollEnabled = true
         sv.layer.cornerRadius = 75
         sv.layer.maskedCorners = [.topLeft]
+//        sv.isDirectionalLockEnabled = true
         return sv
     }()
     

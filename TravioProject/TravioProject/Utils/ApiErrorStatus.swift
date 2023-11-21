@@ -7,7 +7,6 @@
 
 import Foundation
 
-// Bu sayfa geliştirilecek
 
 struct ErrorResponse: Error{
     var status: String

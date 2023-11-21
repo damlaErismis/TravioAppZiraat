@@ -1,4 +1,4 @@
- 
+
 //  AboutUsVCVC.swift
 //  TravioProject
 //
@@ -10,27 +10,28 @@ import UIKit
 import SnapKit
 import WebKit
 
-class AboutUsVC: UICustomViewController, WKUIDelegate {
+class AboutUsVC: UICustomViewController{
     
     private lazy var webView:WKWebView = {
         let wb = WKWebView()
         wb.layer.cornerRadius = 75
         wb.layer.maskedCorners = [.topLeft]
         wb.layer.masksToBounds = true
-        wb.uiDelegate = self
+        wb.navigationDelegate = self
         return wb
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        initView()
+
+    }
+    
+    func initView(){
         if let url = URL(string: "https://api.iosclass.live/about") {
             let request = URLRequest(url: url)
             webView.load(request)
         }
-        
-        self.navigationController?.navigationBar.subviews.forEach { subview in
-            subview.removeFromSuperview()
-        }
-        
         labelTitle.text = "About Us"
         imageBack.image = UIImage(named: "Vector")
         self.viewMain.backgroundColor = .viewColor
@@ -55,6 +56,37 @@ class AboutUsVC: UICustomViewController, WKUIDelegate {
             wb.bottom.equalToSuperview()
             
         })
-       
+    }
+}
+
+extension AboutUsVC: WKNavigationDelegate{
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        increaseFontSizeForAllH1()
+        injectFontStyle()
+    }
+    
+    func increaseFontSizeForAllH1() {
+        let fontName = "Poppins-Bold"
+        let h1FontSize = 36
+        let jsCode = """
+             var h1Basliklar = document.getElementsByTagName('h1');
+             for (var i = 0; i < h1Basliklar.length; i++) {
+             h1Basliklar[i].style.fontSize = '\(h1FontSize)px';
+             h1Basliklar[i].style.fontFamily = '\(fontName)';
+        }
+        """
+        webView.evaluateJavaScript(jsCode)
+    }
+    
+    func injectFontStyle() {
+        let fontName = "Poppins-Regular"
+        let fontSize = 18
+        let jsCode = """
+             var style = document.createElement('style');
+             style.innerHTML = 'body, p, li { font-family: \(fontName), sans-serif !important; font-size: \(fontSize)px !important; }';
+             document.head.appendChild(style);
+         """
+        webView.evaluateJavaScript(jsCode)
     }
 }
