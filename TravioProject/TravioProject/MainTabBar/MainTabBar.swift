@@ -21,16 +21,16 @@ class MainTabBar: UITabBarController {
     private func setupControllers()->[UIViewController] {
         
         let homeVC = HomeVC()
-        let homeNC = createNavController(vc: homeVC, title: "Home", image: "Home")
+        let homeNC = createNavController(vc: homeVC, title: "home", image: "home")
         
         let visitsVC = VisitsVC()
-        let visitsNC = createNavController(vc: visitsVC, title: "Visits", image: "Visits")
+        let visitsNC = createNavController(vc: visitsVC, title: "visits", image: "visits")
         
         let mapVC = MapVC()
-        let mapNC = createNavController(vc: mapVC, title: "Map", image: "Map")
+        let mapNC = createNavController(vc: mapVC, title: "map", image: "map")
         
         let menuVC = SettingsVC()
-        let menuNC = createNavController(vc: menuVC, title: "Menu", image: "Menu")
+        let menuNC = createNavController(vc: menuVC, title: "menu", image: "menu")
         
         return [homeNC, visitsNC, mapNC, menuNC]
     }

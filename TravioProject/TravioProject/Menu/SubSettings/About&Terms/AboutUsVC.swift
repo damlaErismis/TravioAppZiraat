@@ -33,7 +33,7 @@ class AboutUsVC: UICustomViewController{
             webView.load(request)
         }
         labelTitle.text = "About Us"
-        imageBack.image = UIImage(named: "Vector")
+        imageBack.image = UIImage(named: "vector")
         self.viewMain.backgroundColor = .viewColor
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleBack))
         imageBack.addGestureRecognizer(tap)

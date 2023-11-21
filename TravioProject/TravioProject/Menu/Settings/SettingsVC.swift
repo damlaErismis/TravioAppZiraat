@@ -214,6 +214,8 @@ extension SettingsVC:UICollectionViewDelegateFlowLayout {
             let vc = SecuritySettingsVC()
             vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
+        case 1:
+            return
         case 2:
             let vc = MyAddedPlacesVC()
             self.navigationController?.pushViewController(vc, animated: true)
@@ -226,10 +228,9 @@ extension SettingsVC:UICollectionViewDelegateFlowLayout {
             vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
         default:
-            print("")
-//            let vc = TermsOfUseVC()
-//            vc.hidesBottomBarWhenPushed = true
-//            self.navigationController?.pushViewController(vc, animated: true)
+            let vc = TermsOfUseVC()
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
@@ -254,7 +255,7 @@ extension SettingsVC:UICollectionViewDataSource {
         case 1:
             cell.getSettingCollectionData(imageIconString: "appDefault", imageDirectionString: "vektorRight", itemString: "App Defaults")
         case 2:
-            cell.getSettingCollectionData(imageIconString: "Map", imageDirectionString: "vektorRight", itemString: "My Added Places")
+            cell.getSettingCollectionData(imageIconString: "map", imageDirectionString: "vektorRight", itemString: "My Added Places")
         case 3:
             cell.getSettingCollectionData(imageIconString: "helpAndSupport", imageDirectionString: "vektorRight", itemString: "Help&Support")
         case 4:

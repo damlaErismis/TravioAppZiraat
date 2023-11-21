@@ -60,7 +60,7 @@ class SignUpVC: UIViewController {
         return sv
     }()
     private lazy var btnBack: UIButton = {
-        let image = UIImage(named: "btnBack")
+        let image = UIImage(named: "vector")
         let btn = UIButton()
         btn.setImage(image, for: .normal)
         btn.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
@@ -158,7 +158,7 @@ class SignUpVC: UIViewController {
     }
 
     private func createLeftBarButton() -> UIBarButtonItem {
-        let image = UIImage(named: "Vector")
+        let image = UIImage(named: "vector")
         let leftBarButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(backButtonTapped))
         leftBarButton.tintColor = .white
         return leftBarButton

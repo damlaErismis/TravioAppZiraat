@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0062B3C42AEA4B7A000066E5 /* SignUpVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0062B3C32AEA4B7A000066E5 /* SignUpVM.swift */; };
+		0081C4932B0CD50500D5A7BA /* TermsOfUse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081C4922B0CD50500D5A7BA /* TermsOfUse.swift */; };
 		00A47A6A2AFA5528001EDF1D /* EditProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A692AFA5528001EDF1D /* EditProfileVM.swift */; };
 		00A47A6C2AFA5710001EDF1D /* EditProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A6B2AFA5710001EDF1D /* EditProfileModel.swift */; };
 		00A47A6F2AFA6657001EDF1D /* HelpAndSupportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A6E2AFA6657001EDF1D /* HelpAndSupportVC.swift */; };
@@ -101,6 +102,7 @@
 
 /* Begin PBXFileReference section */
 		0062B3C32AEA4B7A000066E5 /* SignUpVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVM.swift; sourceTree = "<group>"; };
+		0081C4922B0CD50500D5A7BA /* TermsOfUse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUse.swift; sourceTree = "<group>"; };
 		00A47A692AFA5528001EDF1D /* EditProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVM.swift; sourceTree = "<group>"; };
 		00A47A6B2AFA5710001EDF1D /* EditProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileModel.swift; sourceTree = "<group>"; };
 		00A47A6E2AFA6657001EDF1D /* HelpAndSupportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpAndSupportVC.swift; sourceTree = "<group>"; };
@@ -208,11 +210,11 @@
 		0062B3C02AE91055000066E5 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				0CF742392ADACB06002B1389 /* Poppins */,
 				0CF742102AD99FE8002B1389 /* Extentions.swift */,
 				0C04A7702AE92CA5002972CF /* Router.swift */,
 				0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */,
 				0C2ECED52AF0D6AA0013F6C5 /* KeychainHelper.swift */,
-				0C499D0C2AF6DD5F00A7C916 /* ApiErrorStatus.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -282,6 +284,7 @@
 		00A47A852B025CD8001EDF1D /* BaseModels */ = {
 			isa = PBXGroup;
 			children = (
+				0C499D0C2AF6DD5F00A7C916 /* ApiErrorStatus.swift */,
 				0C988EE52AF679B30090E85A /* SuccessResponse.swift */,
 				0C988EB32AF15F140090E85A /* Place.swift */,
 			);
@@ -435,6 +438,7 @@
 			isa = PBXGroup;
 			children = (
 				0CD1F37D2B0400B3002B4486 /* AboutUsVC.swift */,
+				0081C4922B0CD50500D5A7BA /* TermsOfUse.swift */,
 			);
 			path = "About&Terms";
 			sourceTree = "<group>";
@@ -472,7 +476,6 @@
 				00A47A852B025CD8001EDF1D /* BaseModels */,
 				0062B3C02AE91055000066E5 /* Utils */,
 				0CF742602ADB33AB002B1389 /* Customs */,
-				0CF742392ADACB06002B1389 /* Poppins */,
 				0CF741FD2AD99AC9002B1389 /* Assets.xcassets */,
 				0CF741FF2AD99AC9002B1389 /* LaunchScreen.storyboard */,
 				0CF742022AD99AC9002B1389 /* Info.plist */,
@@ -651,6 +654,7 @@
 				00A47A8F2B04E21C001EDF1D /* MyVisitsVM.swift in Sources */,
 				0C32DE812B0A7B7A00D873C8 /* UIViewCC.swift in Sources */,
 				0062B3C42AEA4B7A000066E5 /* SignUpVM.swift in Sources */,
+				0081C4932B0CD50500D5A7BA /* TermsOfUse.swift in Sources */,
 				0C988ED62AF37EAC0090E85A /* Visit.swift in Sources */,
 				00A47A8B2B0401F7001EDF1D /* MyAddedPlacesCell.swift in Sources */,
 				00A47A6F2AFA6657001EDF1D /* HelpAndSupportVC.swift in Sources */,

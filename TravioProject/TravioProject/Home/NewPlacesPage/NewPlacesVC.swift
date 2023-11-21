@@ -82,7 +82,7 @@ class NewPlacesVC: UICustomViewController {
     }
     func configureView(){
         labelTitle.text = "New Places"
-        imageBack.image = UIImage(named: "Vector")
+        imageBack.image = UIImage(named: "vector")
         self.viewMain.backgroundColor = .viewColor
         let tap = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
         imageBack.addGestureRecognizer(tap)

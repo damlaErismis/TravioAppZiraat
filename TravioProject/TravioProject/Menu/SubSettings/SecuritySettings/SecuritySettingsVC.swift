@@ -179,6 +179,7 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
             }
         case .denied, .restricted:
             DispatchQueue.main.async {
+                self.toggleSwitchPhotoLibrary.isOn = false
                 self.showPermissionPopup(permissionType: "Photo Library", toggleSwitch: self.toggleSwitchPhotoLibrary)
             }
         case .notDetermined:
@@ -283,7 +284,7 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
         
         
         labelTitle.text = "Security Settings"
-        imageBack.image = UIImage(named: "btnBack")
+        imageBack.image = UIImage(named: "vector")
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleBack))
         imageBack.addGestureRecognizer(tap)
         
