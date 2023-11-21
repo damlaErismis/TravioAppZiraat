@@ -10,18 +10,19 @@ import UIKit
 import SnapKit
 import WebKit
 
-class AboutUsVC: UICustomViewController {
+class AboutUsVC: UICustomViewController, WKUIDelegate {
     
     private lazy var webView:WKWebView = {
         let wb = WKWebView()
         wb.layer.cornerRadius = 75
         wb.layer.maskedCorners = [.topLeft]
         wb.layer.masksToBounds = true
+        wb.uiDelegate = self
         return wb
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let url = URL(string: "https://www.linkedin.com/in/burak-özer-b66aa31b0/") {
+        if let url = URL(string: "https://api.iosclass.live/about") {
             let request = URLRequest(url: url)
             webView.load(request)
         }
@@ -48,7 +49,7 @@ class AboutUsVC: UICustomViewController {
     }
     func setupLayouts() {
         webView.snp.makeConstraints({ wb in
-            wb.top.equalToSuperview()/*.offset(30)*/
+            wb.top.equalToSuperview()
             wb.leading.equalToSuperview()
             wb.trailing.equalToSuperview()
             wb.bottom.equalToSuperview()

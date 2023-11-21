@@ -43,7 +43,7 @@ class MapVC: UIViewController, ViewControllerDelegate{
         cv.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 10)
         cv.backgroundColor = .clear
         cv.register(MapImageCollectionCell.self, forCellWithReuseIdentifier: "collectionCellMap")
-        cv.layer.addShadow(color: UIColor(hexString: "#000000"), opacity: 0.2, offset: CGSize(width: 5, height: 5), radius: 7)
+        cv.layer.addShadow(color: .black, opacity: 0.2, offset: CGSize(width: 5, height: 5), radius: 7)
         cv.dataSource = self
         cv.delegate = self
         return cv
@@ -62,7 +62,6 @@ class MapVC: UIViewController, ViewControllerDelegate{
         mapView.addGestureRecognizer(longPressGesture)
         initView()
         initVM()
-        
     }
     
     func initView(){
@@ -244,15 +243,12 @@ extension MapVC:UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCellMap", for: indexPath) as! MapImageCollectionCell
-        
         if let url = URL(string: vm.places[indexPath.row].cover_image_url) {
             cell.imagePlace.kf.setImage(with: url)
         }
         cell.labelCity.text = vm.places[indexPath.row].place
         cell.labelPlace.text = vm.places[indexPath.row].title
         cell.roundAllCorners(radius: 20)
-                
-        cell.layer.addShadow(color: UIColor(hexString: "#ff2400"), opacity: 0.6, offset: CGSize(width: 10, height: 10), radius: 20)
         return cell
     }
 }
