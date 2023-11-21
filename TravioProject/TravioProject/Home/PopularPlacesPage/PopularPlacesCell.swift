@@ -70,7 +70,7 @@ class PopularPlacesCell: UICollectionViewCell {
         self.backgroundColor = .clear
         self.contentView.addSubview(containerView)
         self.contentView.backgroundColor = .clear
-        self.contentView.addShadow(shadowColor: .black, offsetX: 0, offsetY: 0, shadowOpacity: 0.1, shadowRadius: 8)
+        self.contentView.addShadow(shadowColor: .black, offsetX: 0, offsetY: 0, shadowOpacity: 0.07, shadowRadius: 4)
         containerView.addSubviews(imgPopularPlace, labelPlace,imageVector,labelCity)
         setupLayout()
     }
