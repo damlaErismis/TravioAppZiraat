@@ -67,7 +67,7 @@ class PlaceDetailVM {
     func initFetchImages(){
         
         let id = selectedID
-        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .getAllGalleryByPlaceID(placeId: id), callback: {(result: Result<ImageData,APIErrorMessage>) in
+        GenericNetworkingHelper.shared.fetchData(urlRequest: .getAllGalleryByPlaceID(placeId: id), callback: {(result: Result<ImageData,APIError>) in
             switch result {
             case .success(let success):
                 self.galleryData = success
@@ -78,7 +78,7 @@ class PlaceDetailVM {
     }
     func initFetchLayersAndMap(){
         let id = selectedID
-        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .getAPlaceById(placeId: id), callback: {(result: Result<PlaceIdData,APIErrorMessage>) in
+        GenericNetworkingHelper.shared.fetchData(urlRequest: .getAPlaceById(placeId: id), callback: {(result: Result<PlaceIdData,APIError>) in
             switch result {
             case .success(let success):
                 self.placeData = success
@@ -120,7 +120,7 @@ class PlaceDetailVM {
             "place_id": placeId,
             "visited_at": visitedAt
         ]
-        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .postAVisit(params: params), callback: {(result: Result<SuccessResponse,APIErrorMessage>) in
+        GenericNetworkingHelper.shared.fetchData(urlRequest: .postAVisit(params: params), callback: {(result: Result<SuccessResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.successMessage = success.message
@@ -130,7 +130,7 @@ class PlaceDetailVM {
         })
     }
     func deleteAVisit(placeId:String){
-        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .deleteAVisit(placeId: placeId), callback: {(result: Result<SuccessResponse,APIErrorMessage>) in
+        GenericNetworkingHelper.shared.fetchData(urlRequest: .deleteAVisit(placeId: placeId), callback: {(result: Result<SuccessResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.successMessage = success.message
@@ -140,7 +140,7 @@ class PlaceDetailVM {
         })
     }
     func checkVisit(placeId:String){
-        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .checkVisitByPlaceId(placeId: placeId), callback: {(result: Result<SuccessResponse,APIErrorMessage>) in
+        GenericNetworkingHelper.shared.fetchData(urlRequest: .checkVisitByPlaceId(placeId: placeId), callback: {(result: Result<SuccessResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.successCheckIdResponse = success.message

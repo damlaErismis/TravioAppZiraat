@@ -31,7 +31,7 @@ class MyAddedPlacesVM {
     }
     
     func getPopularPlaces(completion: @escaping (Result<PlaceResponse, Error>) -> Void) {
-        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .getAllPlacesForUser, callback: {(result: Result<PlaceResponse,APIErrorMessage>) in
+        GenericNetworkingHelper.shared.fetchData(urlRequest: .getAllPlacesForUser, callback: {(result: Result<PlaceResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.myAddedPlacesResponse = success

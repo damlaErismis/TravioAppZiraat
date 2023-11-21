@@ -19,7 +19,7 @@ class SettingsVM {
 
     func initFetch(){
 
-        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .getUserProfile, callback: {(result: Result<UserProfileResponse,APIErrorMessage>) in
+        GenericNetworkingHelper.shared.fetchData(urlRequest: .getUserProfile, callback: {(result: Result<UserProfileResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.userProfileResponse = success

@@ -61,7 +61,7 @@ class EditProfileVM {
     }
 
     func getPersonalInfo() {
-        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .getPersonalInfo, callback: {(result: Result<UserProfile, APIErrorMessage>) in
+        GenericNetworkingHelper.shared.fetchData(urlRequest: .getPersonalInfo, callback: {(result: Result<UserProfile, APIError>) in
             switch result {
             case .success(let userProfile):
                 self.userProfile = userProfile
@@ -79,7 +79,7 @@ class EditProfileVM {
             "pp_url": pp_url
         ] as [String : Any]
         
-        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .editProfile(params: parameters)) { (result: Result<UserProfileUpdateResponse, APIErrorMessage>) in
+        GenericNetworkingHelper.shared.fetchData(urlRequest: .editProfile(params: parameters)) { (result: Result<UserProfileUpdateResponse, APIError>) in
             switch result {
             case .success(let success):
                 print(success)
@@ -92,7 +92,7 @@ class EditProfileVM {
     }
 
     public func uploadImages(images: [UIImage]){
-        GenericNetworkingHelper.shared.uploadImagess(urlRequest: .uploadImages(images: images),  callback: {(result: Result<UploadResponse,APIErrorMessage>) in
+        GenericNetworkingHelper.shared.uploadImagess(urlRequest: .uploadImages(images: images),  callback: {(result: Result<UploadResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.uploadResponse = success

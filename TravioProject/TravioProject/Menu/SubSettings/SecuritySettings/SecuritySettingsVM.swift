@@ -32,7 +32,7 @@ class SecuritySettingsVM {
             "new_password": newPassword
         ]
         
-        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .changePassword(params: params), callback: {(result: Result<SuccessResponse,APIErrorMessage>) in
+        GenericNetworkingHelper.shared.fetchData(urlRequest: .changePassword(params: params), callback: {(result: Result<SuccessResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.successMessage = success.message

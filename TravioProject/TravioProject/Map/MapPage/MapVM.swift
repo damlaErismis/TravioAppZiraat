@@ -29,7 +29,7 @@ class MapVM {
     var addPins: (()->())?
     
     func initFetch(){
-        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .getAllPlaces, callback: {(result: Result<PlaceResponse,APIErrorMessage>) in
+        GenericNetworkingHelper.shared.fetchData(urlRequest: .getAllPlaces, callback: {(result: Result<PlaceResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.getData = success

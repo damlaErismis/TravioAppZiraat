@@ -16,6 +16,7 @@
 		00A47A8B2B0401F7001EDF1D /* MyAddedPlacesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A8A2B0401F7001EDF1D /* MyAddedPlacesCell.swift */; };
 		00A47A8D2B0403A4001EDF1D /* MyAddedPlacesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A8C2B0403A4001EDF1D /* MyAddedPlacesVM.swift */; };
 		00A47A8F2B04E21C001EDF1D /* MyVisitsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A8E2B04E21C001EDF1D /* MyVisitsVM.swift */; };
+		00A47A912B0C925E001EDF1D /* TermsOfUseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A902B0C925E001EDF1D /* TermsOfUseVC.swift */; };
 		00C8106C2AEBB79B0077E800 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106B2AEBB79B0077E800 /* MapVC.swift */; };
 		00C8106E2AEBB7A90077E800 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106D2AEBB7A90077E800 /* SettingsVC.swift */; };
 		00C810702AEBB7B70077E800 /* VisitsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8106F2AEBB7B70077E800 /* VisitsVC.swift */; };
@@ -58,7 +59,6 @@
 		0C563C4A2AFCF6E800A0F5F0 /* SettingsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C563C492AFCF6E800A0F5F0 /* SettingsVM.swift */; };
 		0C563C4C2AFCF84600A0F5F0 /* UserProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C563C4B2AFCF84600A0F5F0 /* UserProfileResponse.swift */; };
 		0C563C502AFE1C4A00A0F5F0 /* SecuritySettingsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C563C4F2AFE1C4A00A0F5F0 /* SecuritySettingsVM.swift */; };
-		0C5A49D92AEF032C007CB2A8 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5A49D82AEF032C007CB2A8 /* APIError.swift */; };
 		0C988EB02AF14EB80090E85A /* MapVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988EAF2AF14EB80090E85A /* MapVM.swift */; };
 		0C988EB42AF15F140090E85A /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988EB32AF15F140090E85A /* Place.swift */; };
 		0C988ECE2AF2C0EC0090E85A /* CompositionalLayoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C988ECD2AF2C0EC0090E85A /* CompositionalLayoutCell.swift */; };
@@ -109,6 +109,7 @@
 		00A47A8A2B0401F7001EDF1D /* MyAddedPlacesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAddedPlacesCell.swift; sourceTree = "<group>"; };
 		00A47A8C2B0403A4001EDF1D /* MyAddedPlacesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAddedPlacesVM.swift; sourceTree = "<group>"; };
 		00A47A8E2B04E21C001EDF1D /* MyVisitsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVisitsVM.swift; sourceTree = "<group>"; };
+		00A47A902B0C925E001EDF1D /* TermsOfUseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseVC.swift; sourceTree = "<group>"; };
 		00C8106B2AEBB79B0077E800 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		00C8106D2AEBB7A90077E800 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		00C8106F2AEBB7B70077E800 /* VisitsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsVC.swift; sourceTree = "<group>"; };
@@ -147,7 +148,6 @@
 		0C563C492AFCF6E800A0F5F0 /* SettingsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVM.swift; sourceTree = "<group>"; };
 		0C563C4B2AFCF84600A0F5F0 /* UserProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileResponse.swift; sourceTree = "<group>"; };
 		0C563C4F2AFE1C4A00A0F5F0 /* SecuritySettingsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecuritySettingsVM.swift; sourceTree = "<group>"; };
-		0C5A49D82AEF032C007CB2A8 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		0C988EAF2AF14EB80090E85A /* MapVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVM.swift; sourceTree = "<group>"; };
 		0C988EB32AF15F140090E85A /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		0C988ECD2AF2C0EC0090E85A /* CompositionalLayoutCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositionalLayoutCell.swift; sourceTree = "<group>"; };
@@ -215,7 +215,6 @@
 				0C04A7752AE933B1002972CF /* GenericNetworkingHelper.swift */,
 				0C2ECED52AF0D6AA0013F6C5 /* KeychainHelper.swift */,
 				0C499D0C2AF6DD5F00A7C916 /* ApiErrorStatus.swift */,
-				0C5A49D82AEF032C007CB2A8 /* APIError.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -395,6 +394,7 @@
 			children = (
 				0CD1F37C2B04006A002B4486 /* SecuritySettings */,
 				0CD1F37D2B0400B3002B4486 /* AboutUsVC.swift */,
+				00A47A902B0C925E001EDF1D /* TermsOfUseVC.swift */,
 			);
 			path = SubSettings;
 			sourceTree = "<group>";
@@ -612,6 +612,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00A47A912B0C925E001EDF1D /* TermsOfUseVC.swift in Sources */,
 				00C810CD2AF9904D0077E800 /* EditProfileVC.swift in Sources */,
 				0C04A7812AEA4B5D002972CF /* LoginVM.swift in Sources */,
 				0C499D182AF9481500A7C916 /* SecuritySettingsVC.swift in Sources */,
@@ -654,7 +655,6 @@
 				0C563C4A2AFCF6E800A0F5F0 /* SettingsVM.swift in Sources */,
 				0C988ED22AF2C1460090E85A /* PlaceDetailVC.swift in Sources */,
 				0C988ED42AF2C15A0090E85A /* PlaceDetailCollectionCell.swift in Sources */,
-				0C5A49D92AEF032C007CB2A8 /* APIError.swift in Sources */,
 				0C499D0D2AF6DD5F00A7C916 /* ApiErrorStatus.swift in Sources */,
 				0CF742112AD99FE8002B1389 /* Extentions.swift in Sources */,
 				0C04A7852AEA817B002972CF /* LoginSuccessResponse.swift in Sources */,
@@ -817,7 +817,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8RN557C642;
+				DEVELOPMENT_TEAM = 8LK4NW3VS8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TravioProject/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need to access your camera to take photos.";
@@ -828,12 +828,13 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.burakozer.TravioProject;
+				PRODUCT_BUNDLE_IDENTIFIER = com.damla;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -850,7 +851,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8RN557C642;
+				DEVELOPMENT_TEAM = 8LK4NW3VS8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TravioProject/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need to access your camera to take photos.";
@@ -861,12 +862,13 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.burakozer.TravioProject;
+				PRODUCT_BUNDLE_IDENTIFIER = com.damla;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

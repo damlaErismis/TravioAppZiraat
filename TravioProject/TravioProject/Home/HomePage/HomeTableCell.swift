@@ -55,6 +55,7 @@ class HomeTableCell: UITableViewCell {
             lbl.centerY.equalToSuperview()
         })
         collectionView.edgesToSuperview()
+        collectionView.dropShadow()
     }
 
     required init?(coder: NSCoder) {

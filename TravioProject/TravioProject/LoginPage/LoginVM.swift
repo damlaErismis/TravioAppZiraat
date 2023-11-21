@@ -29,7 +29,7 @@ class LoginVM{
             "email": email,
             "password": password
         ]
-        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .login(params: params as Parameters), callback: {(result: Result<LoginSuccessResponse,APIErrorMessage>) in
+        GenericNetworkingHelper.shared.fetchData(urlRequest: .login(params: params as Parameters), callback: {(result: Result<LoginSuccessResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.loginSuccessResponse = success

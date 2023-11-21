@@ -31,7 +31,7 @@ class MyVisitsVM {
     }
     
     func getMyVisits(){
-        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .getAllVisits, callback: {(result: Result<DataResponse,APIErrorMessage>) in
+        GenericNetworkingHelper.shared.fetchData(urlRequest: .getAllVisits, callback: {(result: Result<DataResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.getData = success

@@ -12,13 +12,11 @@ import UIKit
 class GenericNetworkingHelper{
     
     static let shared = GenericNetworkingHelper()
-    typealias Callbackk<T: Codable> = (Result<T, APIError>) -> Void
+    
+    typealias Callback<T: Codable> = (Result<T, APIError>) -> Void
     
     
-    typealias Callback<T: Codable> = (Result<T, APIErrorMessage>) -> Void
-    
-    
-    public func getDataFromRemotee<T: Codable>(urlRequest: Router, callback: @escaping Callback<T>) {
+    public func fetchData<T: Codable>(urlRequest: Router, callback: @escaping Callback<T>) {
         
         DispatchQueue.global(qos: .utility).async {
             AF.request(urlRequest).validate().responseDecodable(of: T.self) { response in
@@ -27,10 +25,10 @@ class GenericNetworkingHelper{
                     callback(.success(success))
                 case .failure(let error):
                     if let statusCode = response.response?.statusCode {
-                        let apiError = APIErrorMessage(status: APIErrorStatus(rawValue: statusCode)!, message: error.localizedDescription)
+                        let apiError = APIError(status: APIErrorStatus(rawValue: statusCode)!, message: error.localizedDescription)
                         callback(.failure(apiError))
                     } else {
-                        let unknownError = APIErrorMessage(status: APIErrorStatus(rawValue: -1)!, message: "Unknown error occurred")
+                        let unknownError = APIError(status: APIErrorStatus(rawValue: -1)!, message: "Unknown error occurred")
                         callback(.failure(unknownError))
                     }
                 }
@@ -46,10 +44,10 @@ class GenericNetworkingHelper{
                     callback(.success(success))
                 case .failure(let error):
                     if let statusCode = response.response?.statusCode {
-                        let apiError = APIErrorMessage(status: APIErrorStatus(rawValue: statusCode)!, message: error.localizedDescription)
+                        let apiError = APIError(status: APIErrorStatus(rawValue: statusCode)!, message: error.localizedDescription)
                         callback(.failure(apiError))
                     } else {
-                        let unknownError = APIErrorMessage(status: APIErrorStatus(rawValue: -1)!, message: error.localizedDescription)
+                        let unknownError = APIError(status: APIErrorStatus(rawValue: -1)!, message: error.localizedDescription)
                         callback(.failure(unknownError))
                     }
                 }

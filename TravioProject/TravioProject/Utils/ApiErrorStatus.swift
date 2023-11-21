@@ -23,7 +23,7 @@ enum APIErrorStatus: Int {
     case unknown = -1
 }
 
-enum APIErrorMessage: Error {
+enum APIError: Error {
     case networkError
     case invalidResponse
     case apiError(status: APIErrorStatus, message: String)

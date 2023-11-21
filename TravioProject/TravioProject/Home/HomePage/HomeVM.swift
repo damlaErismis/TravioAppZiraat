@@ -28,7 +28,7 @@ final class HomeVM {
     
     let dispatchGroup = DispatchGroup()
     
-    func fetchData() {
+    func fetchDataDispatch() {
         dispatchGroup.enter()
         getPopularPlaces()
         
@@ -43,7 +43,7 @@ final class HomeVM {
         }
     }
     private func getPopularPlaces() {
-        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .getPopularPlacesWithLimit(limit: 5), callback: {(result: Result<PlaceResponse,APIErrorMessage>) in
+        GenericNetworkingHelper.shared.fetchData(urlRequest: .getPopularPlacesWithLimit(limit: 5), callback: {(result: Result<PlaceResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.tableSection.append(.popularPlaces)
@@ -56,7 +56,7 @@ final class HomeVM {
     }
     
     private func getNewPlaces() {
-        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .getLastPlacesWithLimit(limit: 5), callback: {(result: Result<PlaceResponse,APIErrorMessage>) in
+        GenericNetworkingHelper.shared.fetchData(urlRequest: .getLastPlacesWithLimit(limit: 5), callback: {(result: Result<PlaceResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.tableSection.append(.newPlaces)
@@ -69,7 +69,7 @@ final class HomeVM {
     }
     
     private func getMyAddedPlaces() {
-        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .getAllPlacesForUser, callback: {(result: Result<PlaceResponse,APIErrorMessage>) in
+        GenericNetworkingHelper.shared.fetchData(urlRequest: .getAllPlacesForUser, callback: {(result: Result<PlaceResponse,APIError>) in
             switch result {
             case .success(let success):
                 self.tableSection.append(.myAddedPlaces)

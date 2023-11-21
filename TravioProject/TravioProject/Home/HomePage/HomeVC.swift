@@ -49,7 +49,7 @@ class HomeVC: UIViewController {
         navigationController?.navigationBar.isHidden = true
         viewModel.delegate = self
         setupViews()
-        viewModel.fetchData()
+        viewModel.fetchDataDispatch()
     }
     
     
@@ -189,23 +189,14 @@ extension HomeVC:UITableViewDataSource{
             cell.onItemSelect = { [weak self] itemIndexPath in
                 guard let strongSelf = self else { return }
                 var selectedID: String?
-                cell.onItemSelect = { [weak self] itemIndexPath in
-                    guard let strongSelf = self else { return }
-                    var selectedID: String?
-                    switch strongSelf.viewModel.tableSection[indexPath.section] {
-                    case .popularPlaces:
-                        selectedID = strongSelf.viewModel.popularPlaces[itemIndexPath.row].id
-                    case .newPlaces:
-                        selectedID = strongSelf.viewModel.newPlaces[itemIndexPath.row].id
-                    case .myAddedPlaces:
-                        selectedID = strongSelf.viewModel.myAddedPlaces[itemIndexPath.row].id
-                    }
-                    
-                    if let id = selectedID {
-                        let vc = PlaceDetailVC()
-                        vc.selectedID = id
-                        strongSelf.navigationController?.pushViewController(vc, animated: true)
-                    }
+                
+                switch strongSelf.viewModel.tableSection[indexPath.section] {
+                case .popularPlaces:
+                    selectedID = strongSelf.viewModel.popularPlaces[itemIndexPath.row].id
+                case .newPlaces:
+                    selectedID = strongSelf.viewModel.newPlaces[itemIndexPath.row].id
+                case .myAddedPlaces:
+                    selectedID = strongSelf.viewModel.myAddedPlaces[itemIndexPath.row].id
                 }
                 
                 if let id = selectedID {
@@ -219,7 +210,7 @@ extension HomeVC:UITableViewDataSource{
         }
         return UITableViewCell()
     }
-
+    
 }
 
 extension HomeVC: HomeViewModelDelegate {

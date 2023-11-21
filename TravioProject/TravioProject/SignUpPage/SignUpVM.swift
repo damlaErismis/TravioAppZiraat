@@ -28,7 +28,7 @@ class SignUpViewModel {
             "email": email,
             "password":password
         ]
-        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .signUp(params: params as Parameters), callback: { (result: Result<SuccessResponse,APIErrorMessage>) in
+        GenericNetworkingHelper.shared.fetchData(urlRequest: .signUp(params: params as Parameters), callback: { (result: Result<SuccessResponse,APIError>) in
             
             switch result {
             case .success(let success):
