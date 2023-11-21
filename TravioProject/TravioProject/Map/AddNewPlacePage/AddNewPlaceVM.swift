@@ -59,13 +59,8 @@ class AddNewPlaceVM {
             "latitude": latitude,
             "longitude": longitude
         ] as [String : Any]
-<<<<<<< HEAD
         GenericNetworkingHelper.shared.fetchData(urlRequest: .postAPlace(params: params), callback: {(result: Result<SuccessResponse,APIError>) in
-=======
-        
         dispatchGroup.enter()
-        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .postAPlace(params: params), callback: {(result: Result<SuccessResponse,APIErrorMessage>) in
->>>>>>> sprint5/projectRefactor
             switch result {
             case .success(let success):
                 self.placeResponse = success
@@ -93,12 +88,9 @@ class AddNewPlaceVM {
             "place_id": placeId,
             "image_url": imageURL
         ]
-<<<<<<< HEAD
         GenericNetworkingHelper.shared.fetchData(urlRequest: .postAGalleryImage(params: params), callback: {(result: Result<SuccessResponse, APIError>) in
-=======
         dispatchGroup.enter()
-        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .postAGalleryImage(params: params), callback: {(result: Result<SuccessResponse, APIErrorMessage>) in
->>>>>>> sprint5/projectRefactor
+
             switch result {
             case .success(let success):
                 self.galleryResponse = success
@@ -122,12 +114,10 @@ class AddNewPlaceVM {
     }
     
     public func uploadImages(images: [UIImage]){
-<<<<<<< HEAD
+
         GenericNetworkingHelper.shared.uploadImagess(urlRequest: .uploadImages(images: images),  callback: {(result: Result<UploadResponse,APIError>) in
-=======
         dispatchGroup.enter()
-        GenericNetworkingHelper.shared.uploadImagess(urlRequest: .uploadImages(images: images),  callback: {(result: Result<UploadResponse,APIErrorMessage>) in
->>>>>>> sprint5/projectRefactor
+
             switch result {
             case .success(let success):
                 self.uploadResponse = success
