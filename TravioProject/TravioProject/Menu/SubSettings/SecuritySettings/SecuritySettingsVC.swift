@@ -25,6 +25,12 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
     
     //MARK: -- Views
     
+    private lazy var containerView:UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+       return view
+    }()
+    
     private lazy var labelPrivacy:UILabelCC = {
         let lbl = UILabelCC(labelText: "Privacy", font: .poppinsRegular20)
         lbl.textColor =  .mainColor
@@ -67,7 +73,8 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
         sv.isScrollEnabled = true
         sv.layer.cornerRadius = 75
         sv.layer.maskedCorners = [.topLeft]
-//        sv.isDirectionalLockEnabled = true
+        sv.isDirectionalLockEnabled = true
+        sv.contentInsetAdjustmentBehavior = .always
         return sv
     }()
     
@@ -277,17 +284,6 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        toggleSwitchCamera.isOn = checkCameraPermission()
-        toggleSwitchLocation.isOn = checkLocationPermission()
-        toggleSwitchPhotoLibrary.isOn = checkPhotoLibraryPermission()
-        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-        
-        
-        labelTitle.text = "Security Settings"
-        imageBack.image = UIImage(named: "vector")
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleBack))
-        imageBack.addGestureRecognizer(tap)
-        
         initVC()
         initVM()
     }
@@ -313,6 +309,16 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
     }
     
     func initVC(){
+        toggleSwitchCamera.isOn = checkCameraPermission()
+        toggleSwitchLocation.isOn = checkLocationPermission()
+        toggleSwitchPhotoLibrary.isOn = checkPhotoLibraryPermission()
+        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+    
+        labelTitle.text = "Security Settings"
+        imageBack.image = UIImage(named: "vector")
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleBack))
+        imageBack.addGestureRecognizer(tap)
+        
         setupViews()
     }
     
@@ -331,10 +337,8 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        
         let passwordText = viewPassword.textField.text ?? ""
         let passwordConfirmText = viewPasswordConfirm.textField.text ?? ""
-        
         if textField == viewPassword.textField || textField == viewPasswordConfirm.textField {
             let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmText.count >= 6
             let passwordLenght = passwordText.count >= 6
@@ -357,7 +361,8 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
         // Add here the setup for the UI
         self.view.backgroundColor = .mainColor
         self.viewMain.addSubviews(scrollViewAll)
-        scrollViewAll.addSubviews(labelChangePassword, stackViewTop, labelPrivacy, stackViewBottom, buttonSave)
+        scrollViewAll.addSubviews(containerView)
+        containerView.addSubviews(labelChangePassword, stackViewTop, labelPrivacy, stackViewBottom, buttonSave)
         stackViewTop.addArrangedSubviews(viewPassword,viewPasswordConfirm)
         stackViewBottom.addArrangedSubviews(viewCamera,viewPhotoLibrary,viewLocation)
         viewCamera.addSubviews(labelCamera, toggleSwitchCamera)
@@ -368,30 +373,30 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
     }
     
     func setupLayouts() {
+        containerView.snp.makeConstraints({ view in
+            view.height.width.equalToSuperview()
+            view.trailing.leading.bottom.top.equalToSuperview()
+        })
         scrollViewAll.snp.makeConstraints({sv in
-            sv.top.equalToSuperview()
-            sv.leading.equalToSuperview().offset(10)
-            sv.trailing.equalToSuperview().offset(-10)
-            sv.bottom.equalToSuperview().offset(-10)
+            sv.edges.equalToSuperview()
         })
         labelChangePassword.snp.makeConstraints({lbl in
             lbl.top.equalToSuperview().offset(50)
-            lbl.leading.equalToSuperview().offset(14)
+            lbl.trailing.leading.equalToSuperview().inset(14)
+            lbl.height.equalTo(25)
         })
         stackViewTop.snp.makeConstraints({sv in
             sv.top.equalTo(labelChangePassword.snp.bottom).offset(8)
-            sv.leading.equalToSuperview().offset(14)
-            sv.trailing.equalToSuperview().offset(-14)
-            sv.width.equalToSuperview().multipliedBy(0.95)
+            sv.leading.trailing.equalToSuperview().inset(14)
         })
         labelPrivacy.snp.makeConstraints({lbl in
-            lbl.top.equalTo(stackViewTop.snp.bottom).offset(50)
-            lbl.leading.equalToSuperview().offset(14)
+            lbl.top.equalTo(stackViewTop.snp.bottom).offset(30)
+            lbl.trailing.leading.equalToSuperview().inset(14)
+            lbl.height.equalTo(25)
         })
         stackViewBottom.snp.makeConstraints({sv in
             sv.top.equalTo(labelPrivacy.snp.bottom).offset(8)
-            sv.leading.equalToSuperview().offset(14)
-            sv.trailing.equalToSuperview().offset(-14)
+            sv.leading.trailing.equalToSuperview().inset(14)
         })
         labelCamera.snp.makeConstraints({lbl in
             lbl.leading.equalTo(15)
@@ -425,10 +430,9 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
         })
         buttonSave.snp.makeConstraints({ btn in
             btn.top.equalTo(stackViewBottom.snp.bottom).offset(50)
-            btn.leading.equalToSuperview().offset(14)
-            btn.trailing.equalToSuperview().offset(-14)
+            btn.leading.trailing.equalToSuperview().inset(14)
             btn.height.equalTo(54)
-            btn.bottom.equalToSuperview()
+            btn.bottom.equalToSuperview().offset(-40)
         })
     }
 }
