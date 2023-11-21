@@ -12,12 +12,15 @@ import Kingfisher
 
 class PlaceDetailVC: UIViewController {
     
+    let dispatchGroup = DispatchGroup()
+    
     var selectedID:String = ""
     
     lazy var vm: PlaceDetailVM = {
         
         return PlaceDetailVM(selectedID: selectedID)
     }()
+    
     private lazy var collectionTopView:UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createCompositionalLayout())
         collectionView.showsVerticalScrollIndicator = false
@@ -59,13 +62,13 @@ class PlaceDetailVC: UIViewController {
     
     private lazy var imageFavorite:UIImageView = {
         let img = UIImageView()
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleAddorRemoveVisit))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleVisitedPlace))
         img.addGestureRecognizer(tap)
         img.isUserInteractionEnabled = true
         return img
     }()
     
-    @objc func handleAddorRemoveVisit(){
+    @objc func handleVisitedPlace(){
         
         if self.imageFavorite.image == UIImage(named: "emptyFavorite"){
             vm.postAVisit(placeId: selectedID)
@@ -104,7 +107,6 @@ class PlaceDetailVC: UIViewController {
         super.viewDidLoad()
         
         initView()
-        
         initVM()
     }
     
@@ -119,15 +121,16 @@ class PlaceDetailVC: UIViewController {
         vm.initFetchLayersAndMap()
         vm.checkVisit(placeId: vm.selectedID)
         
-        
         vm.errorCheckId = { [weak self] () in
-            self?.imageFavorite.image = UIImage(named: "emptyFavorite")
-           }
-        
-        vm.successCheckId = { [weak self] () in
-         self?.imageFavorite.image = UIImage(named: "fullyFavorite")
+            DispatchQueue.main.async {
+                self?.imageFavorite.image = UIImage(named: "emptyFavorite")
+            }
         }
-
+        vm.successCheckId = { [weak self] () in
+            DispatchQueue.main.async {
+                self?.imageFavorite.image = UIImage(named: "fullyFavorite")
+            }
+        }
         vm.reloadCompositionalLayoutClosure = { [weak self] () in
             DispatchQueue.main.async {
                 self?.collectionTopView.reloadData()
@@ -138,7 +141,6 @@ class PlaceDetailVC: UIViewController {
                 self?.collectionBottomView.reloadData()
             }
         }
-        
         vm.reloadPageControlPages = { [weak self] () in
             DispatchQueue.main.async {
                 let numberOfPages = self?.vm.galleryData?.data.images.count ?? 0
@@ -233,7 +235,6 @@ extension PlaceDetailVC: UICollectionViewDataSource {
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCellBottom", for: indexPath) as! PlaceDetailCollectionCell
             let placeDetailData = vm.place
-
             var placeDetailInfo = PlaceDetailCellInfo()
             let updateDate =  self.vm.formatServerDate(dateString: placeDetailData?.updated_at ?? "")
             placeDetailInfo.labelAddedByText = "addedby " + (placeDetailData?.creator ?? "")

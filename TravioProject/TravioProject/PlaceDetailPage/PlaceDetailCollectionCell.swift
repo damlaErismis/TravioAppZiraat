@@ -62,7 +62,6 @@ class PlaceDetailCollectionCell: UICollectionViewCell,MKMapViewDelegate {
         let locationCoordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let annotation = CustomAnnotation()
         annotation.coordinate = locationCoordinate
-//        annotation.customImage = UIImage(named: "mapPin")
         mapView.addAnnotation(annotation)
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), span: span)
         mapView.setRegion(region, animated: true)

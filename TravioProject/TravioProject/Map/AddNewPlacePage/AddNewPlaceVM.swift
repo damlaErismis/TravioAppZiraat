@@ -11,6 +11,8 @@ import UIKit
 
 class AddNewPlaceVM {
     
+    
+    let dispatchGroup = DispatchGroup()
     var imageUrls:[String]?
     var placeId:String?
     
@@ -31,16 +33,17 @@ class AddNewPlaceVM {
             showSuccessAlertClosure?()
         }
     }
-    var errorStatusMessage: ErrorResponse? {
+    var errorStatusMessage: ErrorResponse?{
         didSet {
             self.showErrorAlertClosure?()
         }
     }
-    var errorGalleryErrorResponse: ErrorResponse? {
+    var errorGalleryErrorResponse: ErrorResponse?{
         didSet {
             self.showErrorGalleryAlertClosure?()
         }
     }
+    
     var addNewPlaceClosure : (()->())?
     var addGalleriesClosure : (()->())?
     var showErrorAlertClosure: (()->())?
@@ -56,7 +59,13 @@ class AddNewPlaceVM {
             "latitude": latitude,
             "longitude": longitude
         ] as [String : Any]
+<<<<<<< HEAD
         GenericNetworkingHelper.shared.fetchData(urlRequest: .postAPlace(params: params), callback: {(result: Result<SuccessResponse,APIError>) in
+=======
+        
+        dispatchGroup.enter()
+        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .postAPlace(params: params), callback: {(result: Result<SuccessResponse,APIErrorMessage>) in
+>>>>>>> sprint5/projectRefactor
             switch result {
             case .success(let success):
                 self.placeResponse = success
@@ -75,6 +84,7 @@ class AddNewPlaceVM {
                     self.errorGalleryErrorResponse = ErrorResponse(status: "Error", message: failure.localizedDescription)
                 }
             }
+            self.dispatchGroup.leave()
         })
     }
     
@@ -83,7 +93,12 @@ class AddNewPlaceVM {
             "place_id": placeId,
             "image_url": imageURL
         ]
+<<<<<<< HEAD
         GenericNetworkingHelper.shared.fetchData(urlRequest: .postAGalleryImage(params: params), callback: {(result: Result<SuccessResponse, APIError>) in
+=======
+        dispatchGroup.enter()
+        GenericNetworkingHelper.shared.getDataFromRemotee(urlRequest: .postAGalleryImage(params: params), callback: {(result: Result<SuccessResponse, APIErrorMessage>) in
+>>>>>>> sprint5/projectRefactor
             switch result {
             case .success(let success):
                 self.galleryResponse = success
@@ -102,11 +117,17 @@ class AddNewPlaceVM {
                     self.errorStatusMessage = ErrorResponse(status: "Error", message: failure.localizedDescription)
                 }
             }
+            self.dispatchGroup.leave()
         })
     }
     
     public func uploadImages(images: [UIImage]){
+<<<<<<< HEAD
         GenericNetworkingHelper.shared.uploadImagess(urlRequest: .uploadImages(images: images),  callback: {(result: Result<UploadResponse,APIError>) in
+=======
+        dispatchGroup.enter()
+        GenericNetworkingHelper.shared.uploadImagess(urlRequest: .uploadImages(images: images),  callback: {(result: Result<UploadResponse,APIErrorMessage>) in
+>>>>>>> sprint5/projectRefactor
             switch result {
             case .success(let success):
                 self.uploadResponse = success
@@ -124,8 +145,8 @@ class AddNewPlaceVM {
                 default:
                     self.errorStatusMessage = ErrorResponse(status: "Error", message: failure.localizedDescription)
                 }
-
             }
+            self.dispatchGroup.leave()
         })
     }
 }
