@@ -11,7 +11,6 @@ import UIKit
 
 class AddNewPlaceVM {
     
-    
     let dispatchGroup = DispatchGroup()
     var imageUrls:[String]?
     var placeId:String?

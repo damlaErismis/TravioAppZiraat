@@ -11,7 +11,6 @@ class SecuritySettingsVM {
     
     private lazy var vm:SecuritySettingsVM = {
         return SecuritySettingsVM()
-        
     }()
     
     var successMessage: String? {

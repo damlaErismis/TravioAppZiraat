@@ -9,16 +9,14 @@ import Foundation
 
 class SettingsVM {
     
-    
     var userProfileResponse:UserProfileResponse? {
         didSet{
             getUserProfileData?()
         }
     }
+    
     var getUserProfileData: (()->())?
-
     func initFetch(){
-
         GenericNetworkingHelper.shared.fetchData(urlRequest: .getUserProfile, callback: {(result: Result<UserProfileResponse,APIError>) in
             switch result {
             case .success(let success):
@@ -28,6 +26,4 @@ class SettingsVM {
             }
         })
     }
-
-    
 }

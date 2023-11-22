@@ -56,15 +56,12 @@ class CompositionalLayoutCell: UICollectionViewCell {
     func setupLayout() {
         // Add here the setup for layout
         viewTop.snp.makeConstraints({ view in
-            view.top.equalToSuperview()
-            view.leading.equalToSuperview()
-            view.trailing.equalToSuperview()
+            view.top.leading.trailing.equalToSuperview()
             view.height.equalTo(250)
         })
         imagePlace.snp.makeConstraints({ view in
             view.top.equalToSuperview().offset(-60)
-            view.leading.equalToSuperview()
-            view.trailing.equalToSuperview()
+            view.leading.trailing.equalToSuperview()
             view.height.equalTo(250)
         })
     }

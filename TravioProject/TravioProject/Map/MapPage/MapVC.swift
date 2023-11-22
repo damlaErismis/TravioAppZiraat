@@ -168,14 +168,10 @@ class MapVC: UIViewController, ViewControllerDelegate{
     func setupLayout() {
         // Add here the setup for layout
         mapView.snp.makeConstraints({mv in
-            mv.top.equalToSuperview()
-            mv.leading.equalToSuperview()
-            mv.trailing.equalToSuperview()
-            mv.bottom.equalToSuperview()
+            mv.edges.equalToSuperview()
         })
         collectionView.snp.makeConstraints({cv in
-            cv.leading.equalToSuperview()
-            cv.trailing.equalToSuperview()
+            cv.leading.trailing.equalToSuperview()
             cv.height.equalToSuperview().multipliedBy(0.26)
             cv.bottom.equalToSuperview().offset(-30)
         })

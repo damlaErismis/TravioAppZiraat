@@ -167,26 +167,20 @@ class PlaceDetailVC: UIViewController {
         imageFavorite.snp.makeConstraints({img in
             img.top.equalToSuperview().offset(40)
             img.trailing.equalToSuperview().offset(-15)
-            img.height.equalTo(50)
-            img.width.equalTo(50)
+            img.height.width.equalTo(50)
         })
         imageBack.snp.makeConstraints({img in
             img.centerY.equalTo(imageFavorite)
             img.leading.equalToSuperview().offset(25)
-            img.height.equalTo(40)
-            img.width.equalTo(40)
+            img.height.width.equalTo(40)
         })
         collectionTopView.snp.makeConstraints({ cv in
-            cv.top.equalToSuperview()
-            cv.leading.equalToSuperview()
-            cv.trailing.equalToSuperview()
+            cv.top.leading.trailing.equalToSuperview()
             cv.height.equalTo(250)
         })
         collectionBottomView.snp.makeConstraints({ cv in
             cv.top.equalTo(collectionTopView.snp.bottom)
-            cv.leading.equalToSuperview()
-            cv.trailing.equalToSuperview()
-            cv.bottom.equalToSuperview()
+            cv.leading.trailing.bottom.equalToSuperview()
         })
         
     }

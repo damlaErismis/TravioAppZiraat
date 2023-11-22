@@ -16,8 +16,11 @@ class SettingCollectionCell: UICollectionViewCell {
     
     //MARK: -- Views
     
-    private lazy var viewItem:UIViewCC = {
-        let view = UIViewCC()
+    private lazy var viewItem:UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 16
+        view.addShadow(shadowColor: .black, offsetX: 0, offsetY: 0, shadowOpacity: 0.1, shadowRadius: 10.0)
         return view
     }()
     
@@ -76,8 +79,7 @@ class SettingCollectionCell: UICollectionViewCell {
         imageIcon.snp.makeConstraints({img in
             img.centerY.equalTo(viewItem.snp.centerY)
             img.leading.equalToSuperview().offset(17)
-            img.height.equalTo(20)
-            img.width.equalTo(20)
+            img.height.width.equalTo(20)
         })
         labelItem.snp.makeConstraints({lbl in
             lbl.centerY.equalTo(viewItem.snp.centerY)

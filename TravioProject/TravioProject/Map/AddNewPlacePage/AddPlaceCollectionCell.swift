@@ -34,10 +34,7 @@ class AddPlaceCollectionCell: UICollectionViewCell {
     func setupLayout(){
         
         imgNewPlace.snp.makeConstraints({img in
-            img.top.equalToSuperview()
-            img.leading.equalToSuperview()
-            img.trailing.equalToSuperview()
-            img.bottom.equalToSuperview()
+            img.edges.equalToSuperview()
         })
 
     }

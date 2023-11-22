@@ -12,7 +12,6 @@ struct PlaceDetailCellInfo:Codable {
     var latitude: Double?
     var longitude: Double?
     var labelCityText:String?
-//    var labelTitleText:String?
     var labelDateText:String?
     var labelAddedByText:String?
     var labelDescriptionText:String?

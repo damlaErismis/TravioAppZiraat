@@ -13,7 +13,7 @@ import AVFoundation
 import CoreLocation
 import Photos
 
-class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
+class SecuritySettingsVC: UICustomViewController{
     
     private lazy var vm:SecuritySettingsVM = {
         return SecuritySettingsVM()
@@ -24,11 +24,10 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     
     //MARK: -- Views
-    
     private lazy var containerView:UIView = {
         let view = UIView()
         view.backgroundColor = .clear
-       return view
+        return view
     }()
     
     private lazy var labelPrivacy:UILabelCC = {
@@ -36,6 +35,7 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
         lbl.textColor =  .mainColor
         return lbl
     }()
+    
     private lazy var labelChangePassword:UILabelCC = {
         let lbl = UILabelCC(labelText: "Change Password", font: .poppinsRegular20)
         lbl.textColor = .mainColor
@@ -51,6 +51,7 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
         lbl.textColor = .white
         return lbl
     }()
+    
     private lazy var labelCamera = UILabelCC(labelText: "Camera", font: .poppinsRegular14)
     private lazy var labelPhotoLibrary = UILabelCC(labelText: "Photo Library", font: .poppinsRegular14)
     private lazy var labelLocation = UILabelCC(labelText: "Location", font: .poppinsRegular14)
@@ -68,6 +69,7 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
         view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         return view
     }()
+    
     private lazy var scrollViewAll:UIScrollView = {
         let sv = UIScrollView()
         sv.isScrollEnabled = true
@@ -85,15 +87,16 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
         sv.distribution = .fillProportionally
         return sv
     }()
+    
     private lazy var stackViewBottom:UIStackView = {
         let sv = UIStackView()
         sv.axis = .vertical
         sv.backgroundColor = UIColor(hexString: "F8F8F8")
         sv.spacing = 12
         sv.distribution = .fillProportionally
-        
         return sv
     }()
+    
     private lazy var buttonSave:UIButton = {
         let btn = UIButton()
         btn.setTitle("Save", for: .normal)
@@ -111,41 +114,18 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
         s.addTarget(self, action: #selector(toggleSwitcChangeForCamera), for: .valueChanged)
         return s
     }()
+    
     private lazy var toggleSwitchPhotoLibrary = {
         let s = UISwitch()
         s.addTarget(self, action: #selector(toggleSwitcChangeForPhotoLibrary), for: .valueChanged)
         return s
     }()
+    
     private lazy var toggleSwitchLocation = {
         let s = UISwitch()
         s.addTarget(self, action: #selector(toggleSwitcChangeForLocation), for: .valueChanged)
         return s
     }()
-    
-    @objc func toggleSwitcChangeForLocation() {
-        if toggleSwitchLocation.isOn {
-            requestLocationPermission()
-        }else {
-            toggleSwitchLocation.isOn = true
-            showPermissionPopup(permissionType: "Location", toggleSwitch: self.toggleSwitchLocation)
-        }
-    }
-    @objc func toggleSwitcChangeForCamera() {
-        if toggleSwitchCamera.isOn {
-            requestCameraPermission()
-        }else {
-            toggleSwitchCamera.isOn = true
-            showPermissionPopup(permissionType: "Camera", toggleSwitch: self.toggleSwitchCamera)
-        }
-    }
-    @objc func toggleSwitcChangeForPhotoLibrary() {
-        if toggleSwitchPhotoLibrary.isOn {
-            requestPhotoLibraryPermission()
-        }else {
-            toggleSwitchPhotoLibrary.isOn = true
-            showPermissionPopup(permissionType: "Photo Library", toggleSwitch: self.toggleSwitchPhotoLibrary)
-        }
-    }
     
     func requestCameraPermission() {
         let status = AVCaptureDevice.authorizationStatus(for: .video)
@@ -205,26 +185,6 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
             }
         case .limited:
             break
-        @unknown default:
-            break
-        }
-    }
-    func requestLocationPermission() {
-        let locationManager = CLLocationManager()
-        switch locationManager.authorizationStatus {
-        case .authorizedWhenInUse, .authorizedAlways:
-            DispatchQueue.main.async {
-                self.toggleSwitchLocation.isOn = true
-            }
-        case .denied, .restricted:
-            DispatchQueue.main.async {
-                self.toggleSwitchLocation.isOn = false
-                self.showPermissionPopup(permissionType: "Location", toggleSwitch: self.toggleSwitchLocation)
-            }
-        case .notDetermined:
-            self.toggleSwitchLocation.isOn = false
-            locationManager.delegate = self
-            locationManager.requestWhenInUseAuthorization()
         @unknown default:
             break
         }
@@ -313,7 +273,7 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
         toggleSwitchLocation.isOn = checkLocationPermission()
         toggleSwitchPhotoLibrary.isOn = checkPhotoLibraryPermission()
         NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-    
+        
         labelTitle.text = "Security Settings"
         imageBack.image = UIImage(named: "vector")
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleBack))
@@ -322,6 +282,30 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
         setupViews()
     }
     
+    @objc func toggleSwitcChangeForLocation() {
+        if toggleSwitchLocation.isOn {
+            requestLocationPermission()
+        }else {
+            toggleSwitchLocation.isOn = true
+            showPermissionPopup(permissionType: "Location", toggleSwitch: self.toggleSwitchLocation)
+        }
+    }
+    @objc func toggleSwitcChangeForCamera() {
+        if toggleSwitchCamera.isOn {
+            requestCameraPermission()
+        }else {
+            toggleSwitchCamera.isOn = true
+            showPermissionPopup(permissionType: "Camera", toggleSwitch: self.toggleSwitchCamera)
+        }
+    }
+    @objc func toggleSwitcChangeForPhotoLibrary() {
+        if toggleSwitchPhotoLibrary.isOn {
+            requestPhotoLibraryPermission()
+        }else {
+            toggleSwitchPhotoLibrary.isOn = true
+            showPermissionPopup(permissionType: "Photo Library", toggleSwitch: self.toggleSwitchPhotoLibrary)
+        }
+    }
     @objc func appWillEnterForeground() {
         toggleSwitchCamera.isOn = checkCameraPermission()
         toggleSwitchLocation.isOn = checkLocationPermission()
@@ -339,22 +323,21 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
     @objc func textFieldDidChange(_ textField: UITextField) {
         let passwordText = viewPassword.textField.text ?? ""
         let passwordConfirmText = viewPasswordConfirm.textField.text ?? ""
+        let passwordLenght = passwordText.count >= 6
+        let passwordConfirmLenght = passwordConfirmText.count >= 6
+        
         if textField == viewPassword.textField || textField == viewPasswordConfirm.textField {
-            let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmText.count >= 6
-            let passwordLenght = passwordText.count >= 6
-            isFormComplete = passwordText.count >= 6 && passwordsMatch && !passwordText.isEmpty && !passwordConfirmText.isEmpty
+            let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmLenght
+            isFormComplete = passwordLenght && passwordsMatch && !passwordText.isEmpty && !passwordConfirmText.isEmpty
             buttonSave.isEnabled = isFormComplete
             buttonSave.backgroundColor = isFormComplete ? .mainColor : .lightGray
         }
         
         if textField == viewPasswordConfirm.textField{
-            let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmText.count >= 6
+            let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmLenght
             viewPasswordConfirm.showPasswordMatched(passwordsMatch)
         }
     }
-    
-    //MARK: -- Private Methods
-    
     
     //MARK: -- UI Methods
     func setupViews() {
@@ -375,10 +358,11 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
     func setupLayouts() {
         containerView.snp.makeConstraints({ view in
             view.height.width.equalToSuperview()
-            view.trailing.leading.bottom.top.equalToSuperview()
+            view.trailing.leading.top.equalToSuperview()
+            view.bottom.equalToSuperview()
         })
         scrollViewAll.snp.makeConstraints({sv in
-            sv.edges.equalToSuperview()
+            sv.trailing.leading.top.equalToSuperview()
         })
         labelChangePassword.snp.makeConstraints({lbl in
             lbl.top.equalToSuperview().offset(50)
@@ -434,5 +418,29 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
             btn.height.equalTo(54)
             btn.bottom.equalToSuperview().offset(-40)
         })
+    }
+}
+
+extension SecuritySettingsVC: CLLocationManagerDelegate{
+    
+    func requestLocationPermission() {
+        let locationManager = CLLocationManager()
+        switch locationManager.authorizationStatus {
+        case .authorizedWhenInUse, .authorizedAlways:
+            DispatchQueue.main.async {
+                self.toggleSwitchLocation.isOn = true
+            }
+        case .denied, .restricted:
+            DispatchQueue.main.async {
+                self.toggleSwitchLocation.isOn = false
+                self.showPermissionPopup(permissionType: "Location", toggleSwitch: self.toggleSwitchLocation)
+            }
+        case .notDetermined:
+            self.toggleSwitchLocation.isOn = false
+            locationManager.delegate = self
+            locationManager.requestWhenInUseAuthorization()
+        @unknown default:
+            break
+        }
     }
 }

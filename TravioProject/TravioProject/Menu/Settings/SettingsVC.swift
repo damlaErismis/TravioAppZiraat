@@ -107,9 +107,6 @@ class SettingsVC: UIViewController {
         UIApplication.shared.windows.first?.rootViewController = rootViewController
         UIApplication.shared.windows.first?.makeKeyAndVisible()
     }
-
-
-    
     @objc func buttonEditProfileTapped(){
         let editProfile = EditProfileVC()
         editProfile.delegate = self
@@ -172,20 +169,16 @@ class SettingsVC: UIViewController {
         imageLogout.snp.makeConstraints({img in
             img.centerY.equalTo(buttonSetting.snp.centerY)
             img.trailing.equalTo(-30)
-            img.height.equalTo(30)
-            img.width.equalTo(30)
+            img.height.width.equalTo(30)
         })
         viewMain.snp.makeConstraints({ view in
-            view.bottom.equalToSuperview()
-            view.leading.equalToSuperview()
-            view.trailing.equalToSuperview()
+            view.bottom.leading.trailing.equalToSuperview()
             view.height.equalToSuperview().multipliedBy(0.82)
         })
         imageProfile.snp.makeConstraints({img in
             img.top.equalToSuperview().offset(25)
             img.centerX.equalToSuperview()
-            img.height.equalTo(120)
-            img.width.equalTo(120)
+            img.height.width.equalTo(120)
         })
         labelNameSurname.snp.makeConstraints({lbl in
             lbl.top.equalTo(imageProfile.snp.bottom).offset(9)
@@ -199,9 +192,7 @@ class SettingsVC: UIViewController {
         })
         collectionView.snp.makeConstraints({cv in
             cv.top.equalTo(buttonEditProfile.snp.bottom).offset(24)
-            cv.leading.equalToSuperview()
-            cv.trailing.equalToSuperview()
-            cv.bottom.equalToSuperview()
+            cv.leading.trailing.bottom.equalToSuperview()
         })
     }
 }
@@ -235,7 +226,7 @@ extension SettingsVC:UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (collectionView.frame.width - 20), height: (collectionView.frame.height-10) * 0.13)
+        return CGSize(width: (collectionView.frame.width - 20), height: (collectionView.frame.height)*0.12)
     }
 }
 

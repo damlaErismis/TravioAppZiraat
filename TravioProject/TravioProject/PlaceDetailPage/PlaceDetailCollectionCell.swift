@@ -104,28 +104,22 @@ class PlaceDetailCollectionCell: UICollectionViewCell,MKMapViewDelegate {
     func setupLayout(){
    
         viewBottom.snp.makeConstraints({ vb in
-            vb.top.equalToSuperview()
+            vb.top.bottom.equalToSuperview()
             vb.leading.equalToSuperview().offset(10)
             vb.trailing.equalToSuperview().offset(-20)
-            vb.bottom.equalToSuperview()
         })
-        
         labelCity.snp.makeConstraints({lbl in
             lbl.top.equalToSuperview().offset(20)
             lbl.height.equalTo(40)
-            lbl.leading.equalToSuperview()
-            lbl.trailing.equalToSuperview()
+            lbl.leading.trailing.equalToSuperview()
             lbl.bottom.equalTo(labelDate.snp.top).offset(-10)
         })
-        
         labelDate.snp.makeConstraints({lbl in
             lbl.top.equalTo(labelCity.snp.bottom).offset(10)
             lbl.height.equalTo(20)
-            lbl.leading.equalToSuperview()
-            lbl.trailing.equalToSuperview()
+            lbl.leading.trailing.equalToSuperview()
             lbl.bottom.equalTo(labelAddedBy.snp.top).offset(-10)
         })
-        
         labelAddedBy.snp.makeConstraints({lbl in
             lbl.top.equalTo(labelDate.snp.bottom).offset(5)
             lbl.leading.equalTo(labelCity.snp.leading)
@@ -135,24 +129,19 @@ class PlaceDetailCollectionCell: UICollectionViewCell,MKMapViewDelegate {
         })
         mapView.snp.makeConstraints({mv in
             mv.top.equalTo(labelAddedBy.snp.bottom).offset(20)
-            mv.leading.equalToSuperview()
-            mv.trailing.equalToSuperview()
+            mv.leading.trailing.equalToSuperview()
             mv.bottom.equalTo(labelDescription.snp.top).offset(-10)
             mv.height.equalToSuperview().multipliedBy(0.24)
-           
         })
         labelDescription.snp.makeConstraints({lbl in
             lbl.top.equalTo(mapView.snp.bottom).offset(20)
             lbl.leading.equalTo(labelCity.snp.leading)
             lbl.trailing.equalToSuperview()
         })
-
-
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }
 
 

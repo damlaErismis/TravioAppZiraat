@@ -163,9 +163,7 @@ class LoginVC: UIViewController {
             img.width.equalTo(149.0)
         })
         viewMain.snp.makeConstraints({ view in
-            view.bottom.equalToSuperview()
-            view.leading.equalToSuperview()
-            view.trailing.equalToSuperview()
+            view.bottom.leading.trailing.equalToSuperview()
             view.height.equalToSuperview().multipliedBy(0.70)
         })
         labelWelcome.snp.makeConstraints({lbl in
@@ -173,16 +171,13 @@ class LoginVC: UIViewController {
             lbl.centerX.equalToSuperview()
             lbl.height.equalTo(36)
         })
-        
         stackView.snp.makeConstraints({ sv in
             sv.top.equalTo(labelWelcome.snp.bottom).offset(45)
-            sv.leading.equalToSuperview().offset(25)
-            sv.trailing.equalToSuperview().offset(-25)
+            sv.leading.trailing.equalToSuperview().inset(25)
         })
         buttonLogin.snp.makeConstraints({ btn in
             btn.top.equalTo(viewPassword.snp.bottom).offset(48)
-            btn.leading.equalToSuperview().offset(25)
-            btn.trailing.equalToSuperview().offset(-25)
+            btn.leading.trailing.equalToSuperview().inset(25)
             btn.height.equalTo(54)
         })
         stackViewSignUp.snp.makeConstraints({sv in

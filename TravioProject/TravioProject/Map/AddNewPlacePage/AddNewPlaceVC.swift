@@ -10,7 +10,7 @@ import SnapKit
 import TinyConstraints
 import MapKit
 
-class AddNewPlaceVC: UIViewController, UITextFieldDelegate{
+class AddNewPlaceVC: UIViewController{
     
     weak var delegate: ViewControllerDelegate?
     
@@ -61,7 +61,6 @@ class AddNewPlaceVC: UIViewController, UITextFieldDelegate{
         view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         view.textField.autocapitalizationType = .none
         return view
-        
     }()
     
     lazy var viewCountryCity:UIViewCC = {
@@ -169,16 +168,6 @@ class AddNewPlaceVC: UIViewController, UITextFieldDelegate{
         present(imagePicker, animated: true, completion: nil)
     }
     
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        if textField == viewPlaceName.textField || textField == viewCountryCity.textField{
-            let placeTitle = viewPlaceName.textField.text ?? ""
-            let placeLocation = viewCountryCity.textField.text ?? ""
-            isFormComplete = !placeTitle.isEmpty && !placeLocation.isEmpty
-            btnAddPlace.isEnabled = isFormComplete
-            btnAddPlace.backgroundColor = isFormComplete ? .mainColor : .lightGray
-        }
-    }
-    
     func setupViews() {
         self.view.backgroundColor = .mainColor
         self.view.addSubview(viewMain)
@@ -189,39 +178,31 @@ class AddNewPlaceVC: UIViewController, UITextFieldDelegate{
     
     func setupLayout() {
         viewMain.snp.makeConstraints({ view in
-            view.bottom.equalToSuperview()
-            view.leading.equalToSuperview()
-            view.trailing.equalToSuperview()
-            view.height.equalToSuperview()
+            view.bottom.leading.trailing.height.equalToSuperview()
         })
         viewPlaceName.snp.makeConstraints({ view in
             view.top.equalToSuperview().offset(64)
-            view.leading.equalToSuperview().offset(24)
-            view.trailing.equalToSuperview().offset(-24)
+            view.leading.trailing.equalToSuperview().inset(24)
             view.height.equalTo(74)
         })
         viewDescription.snp.makeConstraints({ view in
             view.top.equalTo(viewPlaceName.snp.bottom).offset(12)
-            view.leading.equalToSuperview().offset(24)
-            view.trailing.equalToSuperview().offset(-24)
+            view.leading.trailing.equalToSuperview().inset(24)
             view.height.equalTo(215)
         })
         labelDescription.snp.makeConstraints({ label in
             label.top.equalToSuperview().offset(11)
-            label.leading.equalToSuperview().offset(11)
-            label.trailing.equalToSuperview().offset(-11)
+            label.leading.trailing.equalToSuperview().inset(11)
             label.bottom.equalTo(textViewDescription.snp.top)
         })
         textViewDescription.snp.makeConstraints({ txt in
             txt.top.equalTo(labelDescription.snp.bottom).offset(11)
             txt.bottom.equalToSuperview()
-            txt.leading.equalToSuperview().offset(11)
-            txt.trailing.equalToSuperview().offset(-11)
+            txt.leading.trailing.equalToSuperview().inset(11)
         })
         viewCountryCity.snp.makeConstraints({ view in
             view.top.equalTo(viewDescription.snp.bottom).offset(12)
-            view.leading.equalToSuperview().offset(24)
-            view.trailing.equalToSuperview().offset(-24)
+            view.leading.trailing.equalToSuperview().inset(24)
             view.height.equalTo(74)
         })
         collectionView.snp.makeConstraints({ cv in
@@ -232,8 +213,7 @@ class AddNewPlaceVC: UIViewController, UITextFieldDelegate{
         })
         btnAddPlace.snp.makeConstraints({ btn in
             btn.height.equalTo(54)
-            btn.leading.equalToSuperview().offset(24)
-            btn.trailing.equalToSuperview().offset(-24)
+            btn.leading.trailing.equalToSuperview().inset(24)
             btn.bottom.equalToSuperview().offset(-50)
         })
     }
@@ -279,5 +259,19 @@ extension AddNewPlaceVC: UIImagePickerControllerDelegate, UINavigationController
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
+}
+
+extension AddNewPlaceVC: UITextFieldDelegate{
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if textField == viewPlaceName.textField || textField == viewCountryCity.textField{
+            let placeTitle = viewPlaceName.textField.text ?? ""
+            let placeLocation = viewCountryCity.textField.text ?? ""
+            isFormComplete = !placeTitle.isEmpty && !placeLocation.isEmpty
+            btnAddPlace.isEnabled = isFormComplete
+            btnAddPlace.backgroundColor = isFormComplete ? .mainColor : .lightGray
+        }
+    }
+    
 }
 
