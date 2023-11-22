@@ -181,7 +181,7 @@ class LoginVC: UIViewController {
             btn.height.equalTo(54)
         })
         stackViewSignUp.snp.makeConstraints({sv in
-            sv.bottom.equalToSuperview().offset(-27)
+            sv.bottom.equalToSuperview().offset(-50)
             sv.centerX.equalTo(labelWelcome.snp.centerX)
             sv.width.equalTo(238)
         })

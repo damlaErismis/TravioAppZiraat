@@ -25,6 +25,7 @@ class PlaceDetailVC: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createCompositionalLayout())
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = true
+        collectionView.isScrollEnabled = false
         collectionView.backgroundColor = .white
         collectionView.register(CompositionalLayoutCell.self, forCellWithReuseIdentifier: CompositionalLayoutCell.identifier)
         collectionView.dataSource = self

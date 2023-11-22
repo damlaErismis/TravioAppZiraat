@@ -52,7 +52,6 @@ class HomeVC: UIViewController {
         viewModel.fetchDataDispatch()
     }
     
-    
     //MARK: -- UI Methods
     func setupViews() {
         self.view.backgroundColor = .mainColor
@@ -66,25 +65,19 @@ class HomeVC: UIViewController {
         imageLogo.snp.makeConstraints({ img in
             img.bottom.equalTo(viewMain.snp.top).offset(-28)
             img.leading.equalToSuperview().offset(16)
-            img.height.equalTo(62)
-            img.width.equalTo(171)
+            img.height.equalTo(60)
+            img.width.equalTo(170)
         })
         viewMain.snp.makeConstraints({ view in
-            view.bottom.equalToSuperview()
-            view.leading.equalToSuperview()
-            view.trailing.equalToSuperview()
+            view.leading.trailing.bottom.equalToSuperview()
             view.height.equalToSuperview().multipliedBy(0.80)
         })
         tableView.snp.makeConstraints({cv in
-            cv.top.equalToSuperview()
-            cv.leading.equalToSuperview()
-            cv.trailing.equalToSuperview()
-            cv.bottom.equalToSuperview()
+            cv.edges.equalToSuperview()
         })
     }
 }
 extension HomeVC:UITableViewDelegate{
-    
     internal func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch viewModel.tableSection[section] {
         case .popularPlaces:
@@ -98,7 +91,6 @@ extension HomeVC:UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
-        
         let lbl = VerticalAlignedLabel()
         lbl.contentMode = .bottom
         lbl.font = UIFont(name: "Poppins-Regular", size: 20)
@@ -126,7 +118,6 @@ extension HomeVC:UITableViewDelegate{
             make.centerY.equalTo(lbl.snp.centerY)
             make.top.equalTo(headerView).offset(10)
         }
-        
         return headerView
     }
     
@@ -152,9 +143,8 @@ extension HomeVC:UITableViewDelegate{
             return 40
         }
     }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        return tableView.frame.height / 3.5
     }
 }
 
@@ -205,12 +195,10 @@ extension HomeVC:UITableViewDataSource{
                     strongSelf.navigationController?.pushViewController(vc, animated: true)
                 }
             }
-            
             return cell
         }
         return UITableViewCell()
     }
-    
 }
 
 extension HomeVC: HomeViewModelDelegate {

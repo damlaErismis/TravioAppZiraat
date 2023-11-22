@@ -42,6 +42,7 @@ class HomeCollectionCell: UICollectionViewCell {
         setupShadow()
         setupViews()
     }
+    
     private func setupShadow() {
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOpacity = 0.1
@@ -65,12 +66,11 @@ class HomeCollectionCell: UICollectionViewCell {
         imagePlace.addSubviews(imageVektor, labelCity, labelPlace)
         setupLayout()
     }
+    
     func setupLayout(){
-        
         imagePlace.snp.makeConstraints({image in
             image.edges.equalToSuperview()
         })
-        
         imageVektor.snp.makeConstraints({ image in
             image.leading.equalToSuperview().offset(15)
             image.bottom.equalToSuperview().offset(-10)
@@ -82,7 +82,6 @@ class HomeCollectionCell: UICollectionViewCell {
             lbl.leading.equalTo(imageVektor.snp.leading).offset(15)
             lbl.centerY.equalTo(imageVektor)
         })
-        
         labelPlace.snp.makeConstraints({ lbl in
             lbl.leading.equalTo(imageVektor)
             lbl.bottom.equalTo(imageVektor.snp.top).offset(-5)

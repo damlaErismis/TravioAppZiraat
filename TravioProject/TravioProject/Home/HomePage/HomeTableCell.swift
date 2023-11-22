@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import TinyConstraints
 import Kingfisher
 
 class HomeTableCell: UITableViewCell {
@@ -50,11 +49,12 @@ class HomeTableCell: UITableViewCell {
     
     func setupLayout(){
         labelSectionName.snp.makeConstraints({ lbl in
-            lbl.leading.equalToSuperview()
-            lbl.trailing.equalToSuperview()
+            lbl.trailing.leading.equalToSuperview()
             lbl.centerY.equalToSuperview()
         })
-        collectionView.edgesToSuperview()
+        collectionView.snp.makeConstraints({cv in
+            cv.edges.equalToSuperview()
+        })
         collectionView.dropShadow()
     }
 
@@ -64,7 +64,6 @@ class HomeTableCell: UITableViewCell {
     
     var selectedIndex:IndexPath?
 }
-
 
 extension HomeTableCell:UICollectionViewDelegateFlowLayout {
     

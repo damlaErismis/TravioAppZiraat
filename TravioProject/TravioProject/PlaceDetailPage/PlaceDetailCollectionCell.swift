@@ -112,25 +112,21 @@ class PlaceDetailCollectionCell: UICollectionViewCell,MKMapViewDelegate {
             lbl.top.equalToSuperview().offset(20)
             lbl.height.equalTo(40)
             lbl.leading.trailing.equalToSuperview()
-            lbl.bottom.equalTo(labelDate.snp.top).offset(-10)
         })
         labelDate.snp.makeConstraints({lbl in
             lbl.top.equalTo(labelCity.snp.bottom).offset(10)
             lbl.height.equalTo(20)
             lbl.leading.trailing.equalToSuperview()
-            lbl.bottom.equalTo(labelAddedBy.snp.top).offset(-10)
         })
         labelAddedBy.snp.makeConstraints({lbl in
             lbl.top.equalTo(labelDate.snp.bottom).offset(5)
             lbl.leading.equalTo(labelCity.snp.leading)
             lbl.height.equalTo(20)
             lbl.trailing.equalToSuperview()
-            lbl.bottom.equalTo(mapView.snp.top).offset(-10)
         })
         mapView.snp.makeConstraints({mv in
             mv.top.equalTo(labelAddedBy.snp.bottom).offset(20)
             mv.leading.trailing.equalToSuperview()
-            mv.bottom.equalTo(labelDescription.snp.top).offset(-10)
             mv.height.equalToSuperview().multipliedBy(0.24)
         })
         labelDescription.snp.makeConstraints({lbl in

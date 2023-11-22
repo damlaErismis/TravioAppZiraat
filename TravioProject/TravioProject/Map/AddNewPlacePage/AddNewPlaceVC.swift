@@ -24,10 +24,6 @@ class AddNewPlaceVC: UIViewController{
         }
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        closePage()
-    }
-    
     var selectedPlace = CustomAnnotation()
     var vm:AddNewPlaceVM = {
         AddNewPlaceVM()
@@ -94,6 +90,10 @@ class AddNewPlaceVC: UIViewController{
         cv.delegate = self
         return cv
     }()
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        closePage()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -183,7 +183,6 @@ class AddNewPlaceVC: UIViewController{
         viewPlaceName.snp.makeConstraints({ view in
             view.top.equalToSuperview().offset(64)
             view.leading.trailing.equalToSuperview().inset(24)
-            view.height.equalTo(74)
         })
         viewDescription.snp.makeConstraints({ view in
             view.top.equalTo(viewPlaceName.snp.bottom).offset(12)
@@ -193,7 +192,6 @@ class AddNewPlaceVC: UIViewController{
         labelDescription.snp.makeConstraints({ label in
             label.top.equalToSuperview().offset(11)
             label.leading.trailing.equalToSuperview().inset(11)
-            label.bottom.equalTo(textViewDescription.snp.top)
         })
         textViewDescription.snp.makeConstraints({ txt in
             txt.top.equalTo(labelDescription.snp.bottom).offset(11)
@@ -203,7 +201,6 @@ class AddNewPlaceVC: UIViewController{
         viewCountryCity.snp.makeConstraints({ view in
             view.top.equalTo(viewDescription.snp.bottom).offset(12)
             view.leading.trailing.equalToSuperview().inset(24)
-            view.height.equalTo(74)
         })
         collectionView.snp.makeConstraints({ cv in
             cv.top.equalTo(viewCountryCity.snp.bottom).offset(11)
