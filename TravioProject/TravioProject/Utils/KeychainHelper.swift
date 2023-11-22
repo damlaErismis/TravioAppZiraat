@@ -20,7 +20,7 @@ final class KeychainHelper {
         let account = "travio"
         guard let storedTokenData = KeychainHelper.shared.read(service: service, account: account),
               let storedToken = String(data: storedTokenData, encoding: .utf8) else{
-            return "Token okunamadı veya bulunamadı."
+            return nil
         }
         return storedToken
     }
