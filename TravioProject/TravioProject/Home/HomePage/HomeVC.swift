@@ -24,7 +24,7 @@ class HomeVC: UIViewController {
     }()
     private lazy var viewMain:UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hexString: "F8F8F8")
+        view.backgroundColor = .viewColor
         view.layer.cornerRadius = 75
         view.layer.maskedCorners = [.topLeft]
         return view
@@ -35,7 +35,7 @@ class HomeVC: UIViewController {
         tv.separatorColor = .white
         tv.delegate = self
         tv.dataSource = self
-        tv.backgroundColor = UIColor(hexString: "F8F8F8")
+        tv.backgroundColor = .viewColor
         tv.register(HomeTableCell.self, forCellReuseIdentifier: "tableCell")
         tv.isPagingEnabled = true
         tv.layer.cornerRadius = 75
@@ -107,7 +107,6 @@ extension HomeVC:UITableViewDelegate{
         btn.tag = section
         
         headerView.addSubviews(lbl, btn)
-        
         lbl.snp.makeConstraints { make in
             make.leading.equalTo(headerView).offset(25)
             make.top.equalTo(headerView).offset(15)
@@ -179,7 +178,6 @@ extension HomeVC:UITableViewDataSource{
             cell.onItemSelect = { [weak self] itemIndexPath in
                 guard let strongSelf = self else { return }
                 var selectedID: String?
-                
                 switch strongSelf.viewModel.tableSection[indexPath.section] {
                 case .popularPlaces:
                     selectedID = strongSelf.viewModel.popularPlaces[itemIndexPath.row].id

@@ -150,6 +150,8 @@ class PlaceDetailVC: UIViewController {
         }
     }
     
+    
+    
     //MARK: -- UI Methods
     func setupViews() {
         // Add here the setup for the UI
@@ -189,13 +191,26 @@ class PlaceDetailVC: UIViewController {
 extension PlaceDetailVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == collectionBottomView {
-            return CGSize(width: collectionView.frame.width, height: collectionView.frame.height + 500)
-        }
-        else{
+            let placeDetailData = vm.place
+            let updateDate = vm.formatServerDate(dateString: placeDetailData?.updated_at ?? "")
+            let placeDetailInfo = PlaceDetailCellInfo(
+                latitude: placeDetailData?.latitude, longitude: placeDetailData?.longitude, labelCityText: placeDetailData?.place, labelDateText: updateDate, labelAddedByText: "addedby " + (placeDetailData?.creator ?? ""),
+                labelDescriptionText: placeDetailData?.description
+            )
+            let cell = PlaceDetailCollectionCell()
+            cell.getDetailPlaceCollectionCellData(data: placeDetailInfo)
+            let size = cell.contentView.systemLayoutSizeFitting(
+                CGSize(width: collectionView.bounds.width, height: 1),
+                withHorizontalFittingPriority: .required,
+                verticalFittingPriority: .fittingSizeLevel
+            )
+            return CGSize(width: collectionView.bounds.width, height: size.height)
+        } else {
             return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
         }
     }
 }
+
 
 extension PlaceDetailVC: UICollectionViewDataSource {
     

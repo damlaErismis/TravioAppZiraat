@@ -35,7 +35,7 @@ class SettingsVC: UIViewController {
     private lazy var buttonSetting:UIButton = {
         let btn = UIButton()
         btn.setTitle("Settings", for: .normal)
-        btn.setTitleColor(UIColor(hexString: "#FFFFFF"), for: .normal)
+        btn.setTitleColor(.white, for: .normal)
         btn.titleLabel?.font = UIFont(name: "Poppins-Medium", size: 32)
         return btn
     }()
@@ -51,7 +51,7 @@ class SettingsVC: UIViewController {
     
     private lazy var viewMain:UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hexString: "F8F8F8")
+        view.backgroundColor = .viewColor
         view.layer.cornerRadius = 75
         view.layer.maskedCorners = [.topLeft]
         return view

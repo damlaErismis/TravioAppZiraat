@@ -84,7 +84,7 @@ class HelpAndSupportCell: UITableViewCell {
     
     private func setupViews(){
         self.contentView.addSubview(container)
-        self.contentView.backgroundColor = UIColor(hexString: "F8F8F8")
+        self.contentView.backgroundColor = .viewColor
         container.addSubviews(lblQuestion, lblAnswer)
         lblQuestion.addSubview(imageChevron)
         setupLayout()

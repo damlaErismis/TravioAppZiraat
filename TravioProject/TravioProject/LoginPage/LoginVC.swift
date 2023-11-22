@@ -57,7 +57,7 @@ class LoginVC: UIViewController {
     }()
     private lazy var viewMain:UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hexString: "F8F8F8")
+        view.backgroundColor = .viewColor
         view.layer.cornerRadius = 75
         view.layer.maskedCorners = [.topLeft]
         return view
@@ -137,7 +137,7 @@ class LoginVC: UIViewController {
             let passwordText = viewPassword.textField.text ?? ""
             isFormComplete = (passwordText.count >= 6) && emailText.isValidEmail && !passwordText.isEmpty && !emailText.isEmpty
             buttonLogin.isEnabled = isFormComplete
-            buttonLogin.backgroundColor = isFormComplete ? UIColor(hexString: "#38ada9") : .lightGray
+            buttonLogin.backgroundColor = isFormComplete ? .mainColor : .lightGray
         }
     }
     
@@ -146,7 +146,7 @@ class LoginVC: UIViewController {
     
     //MARK: -- UI Methods
     private func setupView(){
-        self.view.backgroundColor = UIColor(hexString: "#38ada9")
+        self.view.backgroundColor = .mainColor
         self.view.addSubviews(viewMain, imageLogo)
         viewMain.addSubviews(labelWelcome, stackView,  buttonLogin, stackViewSignUp)
         stackView.addArrangedSubviews(viewEmail, viewPassword)

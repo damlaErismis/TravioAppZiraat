@@ -40,12 +40,12 @@ class PlaceDetailCollectionCell: UICollectionViewCell,MKMapViewDelegate {
     }()
     private lazy var labelAddedBy:UILabelCC = {
         let lbl = UILabelCC()
-        lbl.textColor = UIColor(hexString: "#999999")
+        lbl.textColor = .systemGray2
         lbl.addFont = .poppinsRegular10
         return lbl
         
     }()
-    private lazy var labelDescription:UILabelCC = {
+    lazy var labelDescription:UILabelCC = {
         let lbl = UILabelCC()
         lbl.numberOfLines = 0
         lbl.lineBreakMode = NSLineBreakMode.byWordWrapping
@@ -54,8 +54,20 @@ class PlaceDetailCollectionCell: UICollectionViewCell,MKMapViewDelegate {
         return lbl
     }()
 
+    
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        stackView.addArrangedSubview(labelCity)
+        stackView.addArrangedSubview(labelDate)
+        stackView.addArrangedSubview(labelAddedBy)
+        stackView.addArrangedSubview(mapView)
+        stackView.addArrangedSubview(labelDescription)
+        return stackView
+    }()
+    
     public func getDetailPlaceCollectionCellData(data: PlaceDetailCellInfo){
-
         let latitude: CLLocationDegrees = data.latitude ?? 0
         let longitude: CLLocationDegrees = data.longitude ?? 0
         let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
@@ -69,6 +81,7 @@ class PlaceDetailCollectionCell: UICollectionViewCell,MKMapViewDelegate {
         self.labelDate.text = data.labelDateText
         self.labelAddedBy.text = data.labelAddedByText
         self.labelDescription.text = data.labelDescriptionText
+        self.labelDescription.sizeToFit()
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -127,12 +140,13 @@ class PlaceDetailCollectionCell: UICollectionViewCell,MKMapViewDelegate {
         mapView.snp.makeConstraints({mv in
             mv.top.equalTo(labelAddedBy.snp.bottom).offset(20)
             mv.leading.trailing.equalToSuperview()
-            mv.height.equalToSuperview().multipliedBy(0.24)
+            mv.height.equalTo(230)
         })
         labelDescription.snp.makeConstraints({lbl in
             lbl.top.equalTo(mapView.snp.bottom).offset(20)
             lbl.leading.equalTo(labelCity.snp.leading)
             lbl.trailing.equalToSuperview()
+            lbl.bottom.equalToSuperview().offset(-20)
         })
     }
     required init?(coder: NSCoder) {

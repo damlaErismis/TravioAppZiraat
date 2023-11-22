@@ -25,7 +25,7 @@ class MyAddedPlacesVC: UICustomViewController {
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 10
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = UIColor(hexString: "F8F8F8")
+        cv.backgroundColor = .viewColor
         cv.register(MyAddedPlacesCell.self, forCellWithReuseIdentifier: "collectionCell")
         cv.layer.cornerRadius = 20
         cv.layer.maskedCorners = [.topLeft]

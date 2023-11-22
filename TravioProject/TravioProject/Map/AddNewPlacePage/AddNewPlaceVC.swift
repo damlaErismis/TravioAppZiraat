@@ -31,15 +31,15 @@ class AddNewPlaceVC: UIViewController{
     
     private lazy var viewMain:UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hexString: "F8F8F8")
+        view.backgroundColor = .viewColor
         return view
     }()
     
     private lazy var viewDescription:UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hexString: "FFFFFF")
+        view.backgroundColor = .white
         view.layer.cornerRadius = 16
-        view.addShadow(shadowColor: UIColor(hexString: "#000000"), offsetX: 0, offsetY: 0, shadowOpacity: 0.1, shadowRadius: 10.0)
+        view.addShadow(shadowColor: .black, offsetX: 0, offsetY: 0, shadowOpacity: 0.1, shadowRadius: 10.0)
         return view
     }()
     
@@ -84,7 +84,7 @@ class AddNewPlaceVC: UIViewController{
         layout.minimumLineSpacing = 10
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 10)
-        cv.backgroundColor = UIColor(hexString: "F8F8F8")
+        cv.backgroundColor = .viewColor
         cv.register(AddPlaceCollectionCell.self, forCellWithReuseIdentifier: "collectionCell")
         cv.dataSource = self
         cv.delegate = self

@@ -91,7 +91,7 @@ class SecuritySettingsVC: UICustomViewController{
     private lazy var stackViewBottom:UIStackView = {
         let sv = UIStackView()
         sv.axis = .vertical
-        sv.backgroundColor = UIColor(hexString: "F8F8F8")
+        sv.backgroundColor = .viewColor
         sv.spacing = 12
         sv.distribution = .fillProportionally
         return sv

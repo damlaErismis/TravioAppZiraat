@@ -19,7 +19,7 @@ class VisitsVC: UIViewController {
     
     private lazy var viewMain:UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hexString: "F8F8F8")
+        view.backgroundColor = .viewColor
         view.layer.cornerRadius = 75
         view.layer.maskedCorners = [.topLeft]
         return view

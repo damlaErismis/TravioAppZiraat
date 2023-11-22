@@ -25,7 +25,7 @@ class HomeTableCell: UITableViewCell {
         layout.minimumLineSpacing = 15
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 10)
-        cv.backgroundColor = UIColor(hexString: "F8F8F8")
+        cv.backgroundColor = .viewColor
         cv.register(HomeCollectionCell.self, forCellWithReuseIdentifier: "collectionCell")
         cv.dataSource = self
         cv.delegate = self

@@ -28,7 +28,7 @@ class PopularPlacesVC: UICustomViewController {
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 10
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = UIColor(hexString: "F8F8F8")
+        cv.backgroundColor = .viewColor
         cv.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 5, right: 0)
         cv.register(PopularPlacesCell.self, forCellWithReuseIdentifier: "collectionCell")
         cv.layer.cornerRadius = 20
