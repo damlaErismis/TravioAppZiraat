@@ -103,13 +103,14 @@ class SettingsVC: UIViewController {
     
     func switchToLoginVC() {
         let loginVC = LoginVC()
-        let rootViewController = UINavigationController(rootViewController: loginVC)
-        UIApplication.shared.windows.first?.rootViewController = rootViewController
-        UIApplication.shared.windows.first?.makeKeyAndVisible()
+        let navigationController = UINavigationController(rootViewController: loginVC)
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first(where: { $0.isKeyWindow }) {
+            window.rootViewController = navigationController
+            window.makeKeyAndVisible()
+        }
     }
 
-
-    
     @objc func buttonEditProfileTapped(){
         let editProfile = EditProfileVC()
         editProfile.delegate = self

@@ -251,7 +251,8 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
         return AVCaptureDevice.authorizationStatus(for: .video) == .authorized
     }
     func checkLocationPermission() -> Bool {
-        return CLLocationManager.authorizationStatus() == .authorizedWhenInUse || CLLocationManager.authorizationStatus() == .authorizedAlways
+        let locationManager = CLLocationManager()
+        return locationManager.authorizationStatus == .authorizedWhenInUse || locationManager.authorizationStatus == .authorizedAlways
     }
     func checkPhotoLibraryPermission() -> Bool {
         return PHPhotoLibrary.authorizationStatus() == .authorized
@@ -337,7 +338,6 @@ class SecuritySettingsVC: UICustomViewController, CLLocationManagerDelegate {
         
         if textField == viewPassword.textField || textField == viewPasswordConfirm.textField {
             let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmText.count >= 6
-            let passwordLenght = passwordText.count >= 6
             isFormComplete = passwordText.count >= 6 && passwordsMatch && !passwordText.isEmpty && !passwordConfirmText.isEmpty
             buttonSave.isEnabled = isFormComplete
             buttonSave.backgroundColor = isFormComplete ? .mainColor : .lightGray
