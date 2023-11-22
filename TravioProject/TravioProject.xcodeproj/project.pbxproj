@@ -830,7 +830,8 @@
 				INFOPLIST_FILE = TravioProject/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need to access your camera to take photos.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Near me requires location so it can offer nearby points of interests.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Near me requires location so it can offer nearby points of interests.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Please allow to location for use always.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow to location for when in use";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Please allow access to select a photo for your profile.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -864,7 +865,8 @@
 				INFOPLIST_FILE = TravioProject/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need to access your camera to take photos.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Near me requires location so it can offer nearby points of interests.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Near me requires location so it can offer nearby points of interests.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Please allow to location for use always.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow to location for when in use";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Please allow access to select a photo for your profile.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

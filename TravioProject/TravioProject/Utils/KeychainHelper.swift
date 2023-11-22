@@ -81,11 +81,11 @@ final class KeychainHelper {
     func getAllKeyChainItemsOfClass(_ secClass: String) -> [String:String] {
 
         let query: [String: Any] = [
-            kSecClass as String : secClass,
-            kSecReturnData as String  : kCFBooleanTrue,
-            kSecReturnAttributes as String : kCFBooleanTrue,
-            kSecReturnRef as String : kCFBooleanTrue,
-            kSecMatchLimit as String : kSecMatchLimitAll
+            kSecClass as String: secClass,
+            kSecReturnData as String: NSNumber(value: true),
+            kSecReturnAttributes as String: NSNumber(value: true),
+            kSecReturnRef as String: NSNumber(value: true),
+            kSecMatchLimit as String: kSecMatchLimitAll
         ]
 
         var result: AnyObject?

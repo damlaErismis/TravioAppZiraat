@@ -67,8 +67,6 @@ class UIViewCC: UIView{
         self.addShadow(shadowColor: .black, offsetX: 0, offsetY: 0, shadowOpacity: 0.1, shadowRadius: 10.0)
         self.height(74)
         commonInit(isStatusImageViewVisible: false)
-
-     
     }
     
     convenience init(labeltext: String, placeholderText:String, isStatusImageViewVisible: Bool = false) {
