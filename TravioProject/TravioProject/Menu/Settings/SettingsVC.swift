@@ -110,10 +110,7 @@ class SettingsVC: UIViewController {
             window.makeKeyAndVisible()
         }
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> sprint5/codeRefactor
     @objc func buttonEditProfileTapped(){
         let editProfile = EditProfileVC()
         editProfile.delegate = self
