@@ -20,8 +20,15 @@ class HomeVC: UIViewController {
         let img = UIImageView()
         img.image = UIImage(named: "homeLogo")
         return img
-        
     }()
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = .black
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
     private lazy var viewMain:UIView = {
         let view = UIView()
         view.backgroundColor = .viewColor
@@ -49,18 +56,35 @@ class HomeVC: UIViewController {
         navigationController?.navigationBar.isHidden = true
         viewModel.delegate = self
         setupViews()
+        initVM()
         viewModel.fetchDataDispatch()
+    }
+    
+    func initVM() {
+        
+        viewModel.updateLoadingStatus = { [weak self] (staus) in
+            DispatchQueue.main.async {
+                if staus {
+                    self?.activityIndicator.startAnimating()
+                } else {
+                    self?.activityIndicator.stopAnimating()
+                }
+            }
+        }
     }
     
     //MARK: -- UI Methods
     func setupViews() {
         self.view.backgroundColor = .mainColor
-        self.view.addSubviews(imageLogo, viewMain)
+        self.view.addSubviews(imageLogo, viewMain, activityIndicator)
         self.viewMain.addSubviews(tableView)
         setupLayout()
     }
     
     func setupLayout() {
+        activityIndicator.snp.makeConstraints({ai in
+            ai.edges.equalToSuperview()
+        })
         
         imageLogo.snp.makeConstraints({ img in
             img.bottom.equalTo(viewMain.snp.top).offset(-28)

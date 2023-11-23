@@ -28,10 +28,18 @@ final class HomeVM {
     
     let dispatchGroup = DispatchGroup()
     
+    var isLoading: Bool? {
+        didSet {
+            self.updateLoadingStatus?(isLoading!)
+        }
+    }
+    var updateLoadingStatus: ((Bool)->())?
+    
     func fetchDataDispatch() {
+        self.isLoading = true
         dispatchGroup.enter()
         getPopularPlaces()
-        
+
         dispatchGroup.enter()
         getNewPlaces()
         
@@ -40,8 +48,10 @@ final class HomeVM {
         
         dispatchGroup.notify(queue: .main) {
             self.delegate?.reloadTableView()
+            self.isLoading = false
         }
     }
+    
     private func getPopularPlaces() {
         GenericNetworkingHelper.shared.fetchData(urlRequest: .getPopularPlacesWithLimit(limit: 5), callback: {(result: Result<PlaceResponse,APIError>) in
             switch result {
@@ -80,7 +90,6 @@ final class HomeVM {
             self.dispatchGroup.leave()
         })
     }
-    
 }
 
 
