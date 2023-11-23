@@ -41,6 +41,12 @@ class EditProfileVM {
             self.showErrorGalleryAlertClosure?()
         }
     }
+    var isLoading: Bool? {
+        didSet {
+            self.updateLoadingStatus?(isLoading!)
+        }
+    }
+    var updateLoadingStatus: ((Bool)->())?
     var showErrorAlertClosure: (()->())?
     var showErrorGalleryAlertClosure: (()->())?
     var showAlertClosure: (()->())?
@@ -61,7 +67,9 @@ class EditProfileVM {
     }
 
     func getPersonalInfo() {
+        self.isLoading = true
         GenericNetworkingHelper.shared.fetchData(urlRequest: .getPersonalInfo, callback: {(result: Result<UserProfile, APIError>) in
+            self.isLoading = false
             switch result {
             case .success(let userProfile):
                 self.userProfile = userProfile
@@ -73,6 +81,7 @@ class EditProfileVM {
     }
     
     func updateUserProfile(fullName: String, email: String, pp_url: String) {
+        self.isLoading = true
         let parameters = [
             "full_name": fullName,
             "email": email,
@@ -80,6 +89,7 @@ class EditProfileVM {
         ] as [String : Any]
         
         GenericNetworkingHelper.shared.fetchData(urlRequest: .editProfile(params: parameters)) { (result: Result<UserProfileUpdateResponse, APIError>) in
+            self.isLoading = false
             switch result {
             case .success(let success):
                 print(success)

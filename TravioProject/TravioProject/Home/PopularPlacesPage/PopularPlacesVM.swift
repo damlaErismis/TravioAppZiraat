@@ -21,6 +21,13 @@ class PopularPlacesVM {
         }
     }
     
+    var isLoading: Bool? {
+        didSet {
+            self.updateLoadingStatus?(isLoading!)
+        }
+    }
+    var updateLoadingStatus: ((Bool)->())?
+    
     var popularPlacesChange: (() -> Void)?
     var reloadCollectionViewForPopularPlaces: (() -> Void)?
     
@@ -31,7 +38,9 @@ class PopularPlacesVM {
     }
     
     func getPopularPlaces(completion: @escaping (Result<PlaceResponse, Error>) -> Void) {
+        self.isLoading = true
         GenericNetworkingHelper.shared.fetchData(urlRequest: .getPopularPlaces, callback: {(result: Result<PlaceResponse,APIError>) in
+            self.isLoading = false
             switch result {
             case .success(let success):
                 self.popularPlacesResponse = success

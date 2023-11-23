@@ -12,7 +12,6 @@ import SnapKit
 import Kingfisher
 
 
-
 class PopularPlacesVC: UICustomViewController {
     
     enum OrderState {
@@ -46,7 +45,7 @@ class PopularPlacesVC: UICustomViewController {
         return btn
     }()
     
-    func configureView(){
+    private func configureView(){
         labelTitle.text = "Popular Places"
         imageBack.image = UIImage(named: "vector")
         self.viewMain.backgroundColor = .viewColor
@@ -86,6 +85,15 @@ class PopularPlacesVC: UICustomViewController {
         }
     }
     private func initVM(){
+        viewModel.updateLoadingStatus = { [weak self] (staus) in
+            DispatchQueue.main.async {
+                if staus {
+                    self?.activityIndicator.startAnimating()
+                } else {
+                    self?.activityIndicator.stopAnimating()
+                }
+            }
+        }
         viewModel.reloadCollectionViewForPopularPlaces = { [weak self] () in
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()

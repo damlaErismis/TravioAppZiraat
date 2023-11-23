@@ -28,8 +28,17 @@ class MapVM {
     }
     var addPins: (()->())?
     
+    var isLoading: Bool? {
+        didSet {
+            self.updateLoadingStatus?(isLoading!)
+        }
+    }
+    var updateLoadingStatus: ((Bool)->())?
+    
     func initFetch(){
+        self.isLoading = true
         GenericNetworkingHelper.shared.fetchData(urlRequest: .getAllPlaces, callback: {(result: Result<PlaceResponse,APIError>) in
+            self.isLoading = false
             switch result {
             case .success(let success):
                 self.getData = success

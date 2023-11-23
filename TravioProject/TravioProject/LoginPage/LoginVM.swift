@@ -11,25 +11,36 @@ import Alamofire
 
 class LoginVM{
     
-
     var loginSuccessResponse:LoginSuccessResponse? {
         didSet{
             self.makeLogin?()
         }
     }
+    
     var errorStatusMessage: ErrorResponse? {
         didSet {
             self.showAlertClosure?()
         }
     }
+    
+    var isLoading: Bool? {
+        didSet {
+            self.updateLoadingStatus?(isLoading!)
+        }
+    }
+    var updateLoadingStatus: ((Bool)->())?
+    
     var makeLogin: (()->())?
     var showAlertClosure: (()->())?
+    
     func postLoginData(email:String, password: String){
+        self.isLoading = true
         let params = [
             "email": email,
             "password": password
         ]
         GenericNetworkingHelper.shared.fetchData(urlRequest: .login(params: params as Parameters), callback: {(result: Result<LoginSuccessResponse,APIError>) in
+            self.isLoading = false
             switch result {
             case .success(let success):
                 self.loginSuccessResponse = success
@@ -54,12 +65,3 @@ class LoginVM{
         })
     }
 }
-
-
-    
-    
-    
-    
-    
-    
-    

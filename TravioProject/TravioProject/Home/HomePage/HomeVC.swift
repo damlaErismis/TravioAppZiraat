@@ -61,7 +61,6 @@ class HomeVC: UIViewController {
     }
     
     func initVM() {
-        
         viewModel.updateLoadingStatus = { [weak self] (staus) in
             DispatchQueue.main.async {
                 if staus {
@@ -145,20 +144,20 @@ extension HomeVC:UITableViewDelegate{
     }
     
     @objc func btnSeeAllTapped(sender: UIButton) {
-        switch sender.tag {
-        case 0:
+        let sectionType = viewModel.tableSection[sender.tag]
+        switch sectionType {
+        case .popularPlaces:
             let popPlaces = PopularPlacesVC()
             self.navigationController?.pushViewController(popPlaces, animated: true)
-        case 1:
+        case .newPlaces:
             let newPlaces = NewPlacesVC()
             self.navigationController?.pushViewController(newPlaces, animated: true)
-        case 2:
+        case .myAddedPlaces:
             let myAddedPlaces = MyAddedPlacesVC()
             self.navigationController?.pushViewController(myAddedPlaces, animated: true)
-        default:
-            break
         }
     }
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section==0{
             return 80

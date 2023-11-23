@@ -20,6 +20,12 @@ class MyVisitsVM {
             self.reloadCollectionViewForVisits?()
         }
     }
+    var isLoading: Bool? {
+        didSet {
+            self.updateLoadingStatus?(isLoading!)
+        }
+    }
+    var updateLoadingStatus: ((Bool)->())?
     
     var reloadCollectionViewForVisits: (() -> Void)?
 
@@ -31,7 +37,9 @@ class MyVisitsVM {
     }
     
     func getMyVisits(){
+        self.isLoading = true
         GenericNetworkingHelper.shared.fetchData(urlRequest: .getAllVisits, callback: {(result: Result<DataResponse,APIError>) in
+            self.isLoading = false
             switch result {
             case .success(let success):
                 self.getData = success

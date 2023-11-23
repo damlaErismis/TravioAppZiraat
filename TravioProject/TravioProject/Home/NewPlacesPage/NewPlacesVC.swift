@@ -74,6 +74,15 @@ class NewPlacesVC: UICustomViewController {
         }
     }
     private func initVM(){
+        viewModel.updateLoadingStatus = { [weak self] (staus) in
+            DispatchQueue.main.async {
+                if staus {
+                    self?.activityIndicator.startAnimating()
+                } else {
+                    self?.activityIndicator.stopAnimating()
+                }
+            }
+        }
         viewModel.reloadCollectionViewForNewPlaces = { [weak self] () in
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
@@ -88,7 +97,6 @@ class NewPlacesVC: UICustomViewController {
         imageBack.addGestureRecognizer(tap)
     }
     func setupViews() {
-
         viewMain.addSubviews(collectionView, btnOrder)
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()

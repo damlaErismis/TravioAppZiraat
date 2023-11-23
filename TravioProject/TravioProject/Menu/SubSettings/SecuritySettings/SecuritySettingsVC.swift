@@ -252,6 +252,15 @@ class SecuritySettingsVC: UICustomViewController{
     //MARK: -- Component Actions
     
     func initVM(){
+        vm.updateLoadingStatus = { [weak self] (staus) in
+            DispatchQueue.main.async {
+                if staus {
+                    self?.activityIndicator.startAnimating()
+                } else {
+                    self?.activityIndicator.stopAnimating()
+                }
+            }
+        }
         vm.showSuccessAlertClosure = { [weak self] () in
             DispatchQueue.main.async {
                 guard let message = self?.vm.successMessage else {

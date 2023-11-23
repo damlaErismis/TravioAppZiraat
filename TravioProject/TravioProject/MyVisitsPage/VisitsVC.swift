@@ -13,7 +13,6 @@ import SnapKit
 class VisitsVC: UIViewController {
     
     lazy var vm: MyVisitsVM = {
-        
         return MyVisitsVM()
     }()
     
@@ -47,10 +46,18 @@ class VisitsVC: UIViewController {
         lbl.textColor = .white
         return lbl
     }()
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = .black
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         vm.getMyVisits()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
@@ -59,6 +66,15 @@ class VisitsVC: UIViewController {
     }
 
     private func initVM(){
+        vm.updateLoadingStatus = { [weak self] (staus) in
+            DispatchQueue.main.async {
+                if staus {
+                    self?.activityIndicator.startAnimating()
+                } else {
+                    self?.activityIndicator.stopAnimating()
+                }
+            }
+        }
         vm.reloadCollectionViewForVisits = { [weak self] () in
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
@@ -68,14 +84,16 @@ class VisitsVC: UIViewController {
 
     private func setupViews(){
         
-        self.view.addSubviews(viewMain, labelMyVisits)
+        self.view.addSubviews(viewMain, labelMyVisits, activityIndicator)
         self.view.backgroundColor = .mainColor
         viewMain.addSubview(collectionView)
         setupLayout()
     }
     
     private func setupLayout(){
-
+        activityIndicator.snp.makeConstraints({ai in
+            ai.edges.equalToSuperview()
+        })
         labelMyVisits.snp.makeConstraints({ img in
             img.top.equalToSuperview().offset(55)
             img.centerX.equalToSuperview()

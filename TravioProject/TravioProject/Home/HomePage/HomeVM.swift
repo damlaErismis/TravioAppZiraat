@@ -20,8 +20,8 @@ final class HomeVM {
         case myAddedPlaces
     }
     var popularPlaces:[Place] = []
-    var newPlaces: [Place] = []
-    var myAddedPlaces: [Place] = []
+    var newPlaces:[Place] = []
+    var myAddedPlaces:[Place] = []
     
     weak var delegate: HomeViewModelDelegate?
     var tableSection: [TableViewSection] = []
@@ -37,9 +37,11 @@ final class HomeVM {
     
     func fetchDataDispatch() {
         self.isLoading = true
+        self.tableSection = [.popularPlaces, .newPlaces, .myAddedPlaces]
+        
         dispatchGroup.enter()
         getPopularPlaces()
-
+        
         dispatchGroup.enter()
         getNewPlaces()
         

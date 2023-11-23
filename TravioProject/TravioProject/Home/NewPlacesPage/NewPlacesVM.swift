@@ -20,6 +20,13 @@ class NewPlacesVM {
             self.reloadCollectionViewForNewPlaces?()
         }
     }
+    var isLoading: Bool? {
+        didSet {
+            self.updateLoadingStatus?(isLoading!)
+        }
+    }
+    var updateLoadingStatus: ((Bool)->())?
+    
     var newPlacesChange: (() -> Void)?
     var reloadCollectionViewForNewPlaces: (() -> Void)?
 
@@ -30,7 +37,9 @@ class NewPlacesVM {
     }
 
     func getNewPlaces(completion: @escaping (Result<PlaceResponse, Error>) -> Void) {
+        self.isLoading = true
         GenericNetworkingHelper.shared.fetchData(urlRequest: .getLastPlaces, callback: {(result: Result<PlaceResponse,APIError>) in
+            self.isLoading = false
             switch result {
             case .success(let success):
                 self.newPlacesResponse = success
