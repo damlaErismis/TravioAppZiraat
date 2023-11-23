@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import TinyConstraints
 import MapKit
+import Photos
 
 class AddNewPlaceVC: UIViewController{
     
@@ -24,6 +25,12 @@ class AddNewPlaceVC: UIViewController{
         }
     }
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = .black
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
     var selectedPlace = CustomAnnotation()
     var vm:AddNewPlaceVM = {
         AddNewPlaceVM()
@@ -131,6 +138,15 @@ class AddNewPlaceVC: UIViewController{
         }
     }
     @objc func handleAddPlace(){
+        vm.updateLoadingStatus = { [weak self] (staus) in
+            DispatchQueue.main.async {
+                if staus {
+                    self?.activityIndicator.startAnimating()
+                } else {
+                    self?.activityIndicator.stopAnimating()
+                }
+            }
+        }
         uploadImages()
         vm.addNewPlaceClosure = {
             guard let imageResponse = self.vm.imageUrls,
@@ -165,12 +181,47 @@ class AddNewPlaceVC: UIViewController{
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: true, completion: nil)
+        
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            let status = PHPhotoLibrary.authorizationStatus()
+            if status == .authorized {
+                present(imagePicker, animated: true, completion: nil)
+            } else if status == .denied || status == .restricted {
+                showAlertForSettings()
+            } else if status == .notDetermined {
+                PHPhotoLibrary.requestAuthorization({ (newStatus) in
+                    if newStatus == .authorized {
+                        DispatchQueue.main.async {
+                            self.present(imagePicker, animated: true, completion: nil)
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.showAlertForSettings()
+                        }
+                    }
+                })
+            }
+        }
     }
+    
+    func showAlertForSettings() {
+        let alert = UIAlertController(title: "Access Permission",
+                                      message: "Permission to access the photo library is required. You can enable it in Settings.",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: { action in
+            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
     
     func setupViews() {
         self.view.backgroundColor = .mainColor
-        self.view.addSubview(viewMain)
+        self.view.addSubviews(viewMain, activityIndicator)
         viewMain.addSubviews(viewPlaceName, viewDescription, viewCountryCity, collectionView, btnAddPlace)
         viewDescription.addSubviews(labelDescription, textViewDescription)
         setupLayout()
@@ -179,6 +230,10 @@ class AddNewPlaceVC: UIViewController{
     func setupLayout() {
         viewMain.snp.makeConstraints({ view in
             view.bottom.leading.trailing.height.equalToSuperview()
+        })
+        
+        activityIndicator.snp.makeConstraints({ai in
+            ai.edges.equalToSuperview()
         })
         viewPlaceName.snp.makeConstraints({ view in
             view.top.equalToSuperview().offset(64)
@@ -245,7 +300,6 @@ extension AddNewPlaceVC: UIImagePickerControllerDelegate, UINavigationController
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let selectedImage = info[.originalImage] as? UIImage {
-            
             if let cell = collectionView.cellForItem(at: selectedIndex!) as? AddPlaceCollectionCell {
                 cell.imgNewPlace.image = selectedImage
                 imagesFromLibrary.append(selectedImage)
@@ -253,13 +307,13 @@ extension AddNewPlaceVC: UIImagePickerControllerDelegate, UINavigationController
         }
         picker.dismiss(animated: true, completion: nil)
     }
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
 }
 
 extension AddNewPlaceVC: UITextFieldDelegate{
-    
     @objc func textFieldDidChange(_ textField: UITextField) {
         if textField == viewPlaceName.textField || textField == viewCountryCity.textField{
             let placeTitle = viewPlaceName.textField.text ?? ""
@@ -269,6 +323,5 @@ extension AddNewPlaceVC: UITextFieldDelegate{
             btnAddPlace.backgroundColor = isFormComplete ? .mainColor : .lightGray
         }
     }
-    
 }
 

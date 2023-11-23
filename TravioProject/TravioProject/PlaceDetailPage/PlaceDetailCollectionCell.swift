@@ -54,7 +54,6 @@ class PlaceDetailCollectionCell: UICollectionViewCell,MKMapViewDelegate {
         return lbl
     }()
 
-    
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical

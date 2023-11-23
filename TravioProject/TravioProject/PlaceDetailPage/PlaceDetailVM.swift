@@ -55,6 +55,13 @@ class PlaceDetailVM {
         }
     }
     
+    var isLoading: Bool? {
+        didSet {
+            self.updateLoadingStatus?(isLoading!)
+        }
+    }
+    
+    var updateLoadingStatus: ((Bool)->())?
     var errorCheckId:(()->())?
     var successCheckId:(()->())?
     var reloadPageControlPages: (()->())?
@@ -80,10 +87,11 @@ class PlaceDetailVM {
         })
     }
     func initFetchLayersAndMap(){
+        self.isLoading = true
         let id = selectedID
         GenericNetworkingHelper.shared.fetchData(urlRequest: .getAPlaceById(placeId: id), callback: {(result: Result<PlaceIdData,APIError>) in
+            self.isLoading = false
             self.dispatchGroup.enter()
-
             switch result {
             case .success(let success):
                 self.placeData = success
@@ -110,6 +118,7 @@ class PlaceDetailVM {
         }
     }
     func dateFormatter()->String{
+        
         let currentDate = Date()
         
         let dateFormatter = DateFormatter()

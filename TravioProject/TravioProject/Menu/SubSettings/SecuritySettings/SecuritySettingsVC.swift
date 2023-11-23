@@ -270,9 +270,10 @@ class SecuritySettingsVC: UICustomViewController{
     }
     
     func initVC(){
-//        toggleSwitchCamera.isOn = checkCameraPermission()
-//        toggleSwitchLocation.isOn = checkLocationPermission()
-//        toggleSwitchPhotoLibrary.isOn = checkPhotoLibraryPermission()
+        
+        toggleSwitchCamera.isOn = checkCameraPermission()
+        toggleSwitchLocation.isOn = checkLocationPermission()
+        toggleSwitchPhotoLibrary.isOn = checkPhotoLibraryPermission()
         
         NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         
@@ -424,7 +425,6 @@ class SecuritySettingsVC: UICustomViewController{
 }
 
 extension SecuritySettingsVC: CLLocationManagerDelegate{
-    
     func requestLocationPermission() {
         let locationManager = CLLocationManager()
         switch locationManager.authorizationStatus {

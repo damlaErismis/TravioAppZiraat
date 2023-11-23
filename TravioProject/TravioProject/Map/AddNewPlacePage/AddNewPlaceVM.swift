@@ -42,7 +42,13 @@ class AddNewPlaceVM {
             self.showErrorGalleryAlertClosure?()
         }
     }
+    var isLoading: Bool? {
+        didSet {
+            self.updateLoadingStatus?(isLoading!)
+        }
+    }
     
+    var updateLoadingStatus: ((Bool)->())?
     var addNewPlaceClosure : (()->())?
     var addGalleriesClosure : (()->())?
     var showErrorAlertClosure: (()->())?
@@ -50,6 +56,7 @@ class AddNewPlaceVM {
     var showErrorGalleryAlertClosure: (()->())?
     
     public func addNewPlace(place:String, placeTitle:String, placeDescription:String, imageString:String, latitude:Double, longitude:Double){
+  
         let params = [
             "place": place,
             "title": placeTitle,
@@ -59,6 +66,7 @@ class AddNewPlaceVM {
             "longitude": longitude
         ] as [String : Any]
         GenericNetworkingHelper.shared.fetchData(urlRequest: .postAPlace(params: params), callback: {(result: Result<SuccessResponse,APIError>) in
+            self.isLoading = false
             self.dispatchGroup.enter()
             switch result {
             case .success(let success):
@@ -113,7 +121,7 @@ class AddNewPlaceVM {
     }
     
     public func uploadImages(images: [UIImage]){
-
+        self.isLoading = true
         GenericNetworkingHelper.shared.uploadImagess(urlRequest: .uploadImages(images: images),  callback: {(result: Result<UploadResponse,APIError>) in
             self.dispatchGroup.enter()
 

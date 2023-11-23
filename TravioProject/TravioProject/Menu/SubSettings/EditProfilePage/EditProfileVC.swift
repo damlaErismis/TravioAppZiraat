@@ -10,6 +10,7 @@ import UIKit
 import TinyConstraints
 import SnapKit
 import Kingfisher
+import Photos
 
 protocol EditProfileVCDelegate: AnyObject {
     func profilePhotoDidUpdate(_ newPhoto: UIImage)
@@ -313,10 +314,43 @@ extension EditProfileVC: UIImagePickerControllerDelegate, UINavigationController
         present(actionSheet, animated: true)
     }
     
-    func presentPhotoPicker(){
+    func presentPhotoPicker() {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: true, completion: nil)
+        
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            let status = PHPhotoLibrary.authorizationStatus()
+            if status == .authorized {
+                present(imagePicker, animated: true, completion: nil)
+            } else if status == .denied || status == .restricted {
+                showAlertForSettings()
+            } else if status == .notDetermined {
+                PHPhotoLibrary.requestAuthorization({ (newStatus) in
+                    if newStatus == .authorized {
+                        DispatchQueue.main.async {
+                            self.present(imagePicker, animated: true, completion: nil)
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.showAlertForSettings()
+                        }
+                    }
+                })
+            }
+        }
+    }
+
+    func showAlertForSettings() {
+        let alert = UIAlertController(title: "Access Permission",
+                                      message: "Permission to access the photo library is required. You can enable it in Settings.",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: { action in
+            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }

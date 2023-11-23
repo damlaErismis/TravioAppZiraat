@@ -21,6 +21,13 @@ class PlaceDetailVC: UIViewController {
         return PlaceDetailVM(selectedID: selectedID)
     }()
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = .black
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
     private lazy var collectionTopView:UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createCompositionalLayout())
         collectionView.showsVerticalScrollIndicator = false
@@ -111,12 +118,22 @@ class PlaceDetailVC: UIViewController {
     }
     
     func initView(){
+        
         self.navigationController?.navigationBar.isHidden = true
         
         setupViews()
     }
     
     func initVM(){
+        vm.updateLoadingStatus = { [weak self] (staus) in
+            DispatchQueue.main.async {
+                if staus {
+                    self?.activityIndicator.startAnimating()
+                } else {
+                    self?.activityIndicator.stopAnimating()
+                }
+            }
+        }
         vm.initFetchImages()
         vm.initFetchLayersAndMap()
         vm.checkVisit(placeId: vm.selectedID)
@@ -150,16 +167,18 @@ class PlaceDetailVC: UIViewController {
     }
     
     
-    
     //MARK: -- UI Methods
     func setupViews() {
         // Add here the setup for the UI
         self.view.backgroundColor = .white
-        self.view.addSubviews(collectionBottomView, collectionTopView, imageBack, imageFavorite, pageControl)
+        self.view.addSubviews(collectionBottomView, collectionTopView, imageBack, imageFavorite, pageControl, activityIndicator)
         self.view.bringSubviewToFront(pageControl)
         setupLayout()
     }
     func setupLayout() {
+        activityIndicator.snp.makeConstraints({ai in
+            ai.edges.equalToSuperview()
+        })
         pageControl.snp.makeConstraints({ pc in
             pc.centerX.equalToSuperview()
             pc.height.equalTo(44)
@@ -246,7 +265,7 @@ extension PlaceDetailVC: UICollectionViewDataSource {
             let placeDetailData = vm.place
             var placeDetailInfo = PlaceDetailCellInfo()
             let updateDate =  self.vm.formatServerDate(dateString: placeDetailData?.updated_at ?? "")
-            placeDetailInfo.labelAddedByText = "addedby " + (placeDetailData?.creator ?? "")
+            placeDetailInfo.labelAddedByText = "added by @" + (placeDetailData?.creator ?? "")
             placeDetailInfo.labelCityText = placeDetailData?.place
             placeDetailInfo.labelDateText = updateDate
             placeDetailInfo.labelDescriptionText = placeDetailData?.description

@@ -24,7 +24,6 @@ class AboutUsVC: UICustomViewController{
         super.viewDidLoad()
 
         initView()
-
     }
     
     func initView(){
@@ -62,6 +61,7 @@ class AboutUsVC: UICustomViewController{
 extension AboutUsVC: WKNavigationDelegate{
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        
         increaseFontSizeForAllH1()
         injectFontStyle()
     }
