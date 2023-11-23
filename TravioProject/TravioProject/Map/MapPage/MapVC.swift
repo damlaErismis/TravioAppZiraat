@@ -26,7 +26,7 @@ class MapVC: UIViewController, ViewControllerDelegate{
         return MapVM()
     }()
     var locationManager:CLLocationManager?
-    
+
     //MARK: -- Views
     private lazy var mapView:MKMapView = {
         let map = MKMapView()
@@ -57,6 +57,11 @@ class MapVC: UIViewController, ViewControllerDelegate{
         locationManager?.requestWhenInUseAuthorization()
         locationManager?.requestLocation()
         locationManager?.requestAlwaysAuthorization()
+        
+        let authorizationStatus = locationManager?.authorizationStatus
+        if authorizationStatus == .notDetermined {
+            locationManager?.requestWhenInUseAuthorization()
+        }
         
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gesture:)))
         mapView.addGestureRecognizer(longPressGesture)
@@ -148,7 +153,7 @@ class MapVC: UIViewController, ViewControllerDelegate{
         }
         switch locationManager.authorizationStatus{
         case .authorizedWhenInUse, .authorizedAlways:
-            let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 10000, longitudinalMeters: 10000)
+            let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 5000, longitudinalMeters: 5000)
             mapView.setRegion(region, animated: true)
         case .denied:
             print("location is denied")

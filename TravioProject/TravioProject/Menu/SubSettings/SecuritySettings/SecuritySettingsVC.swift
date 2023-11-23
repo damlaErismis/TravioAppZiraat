@@ -218,7 +218,8 @@ class SecuritySettingsVC: UICustomViewController{
         return AVCaptureDevice.authorizationStatus(for: .video) == .authorized
     }
     func checkLocationPermission() -> Bool {
-        return CLLocationManager.authorizationStatus() == .authorizedWhenInUse || CLLocationManager.authorizationStatus() == .authorizedAlways
+        let locationManager = CLLocationManager()
+        return locationManager.authorizationStatus == .authorizedWhenInUse || locationManager.authorizationStatus == .authorizedAlways
     }
     func checkPhotoLibraryPermission() -> Bool {
         return PHPhotoLibrary.authorizationStatus() == .authorized

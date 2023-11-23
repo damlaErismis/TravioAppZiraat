@@ -20,7 +20,7 @@ final class KeychainHelper {
         let account = "travio"
         guard let storedTokenData = KeychainHelper.shared.read(service: service, account: account),
               let storedToken = String(data: storedTokenData, encoding: .utf8) else{
-            return "Token okunamadı veya bulunamadı."
+            return nil
         }
         return storedToken
     }
@@ -81,11 +81,11 @@ final class KeychainHelper {
     func getAllKeyChainItemsOfClass(_ secClass: String) -> [String:String] {
 
         let query: [String: Any] = [
-            kSecClass as String : secClass,
-            kSecReturnData as String  : kCFBooleanTrue,
-            kSecReturnAttributes as String : kCFBooleanTrue,
-            kSecReturnRef as String : kCFBooleanTrue,
-            kSecMatchLimit as String : kSecMatchLimitAll
+            kSecClass as String: secClass,
+            kSecReturnData as String: NSNumber(value: true),
+            kSecReturnAttributes as String: NSNumber(value: true),
+            kSecReturnRef as String: NSNumber(value: true),
+            kSecMatchLimit as String: kSecMatchLimitAll
         ]
 
         var result: AnyObject?

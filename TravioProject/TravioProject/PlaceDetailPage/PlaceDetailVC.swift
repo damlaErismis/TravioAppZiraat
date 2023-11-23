@@ -92,7 +92,6 @@ class PlaceDetailVC: UIViewController {
         }
     }
     @objc func imageBackTapped(tapGestureRecognizer: UITapGestureRecognizer){
-        let tappedImage = tapGestureRecognizer.view as! UIImageView
         self.navigationController?.popViewController(animated: true)
     }
     

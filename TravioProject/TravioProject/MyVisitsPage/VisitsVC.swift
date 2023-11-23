@@ -80,7 +80,6 @@ class VisitsVC: UIViewController {
             img.top.equalToSuperview().offset(55)
             img.centerX.equalToSuperview()
             img.height.equalTo(52)
-            img.width.equalTo(165)
             img.leading.equalToSuperview().offset(40)
         })
         viewMain.snp.makeConstraints({ view in
