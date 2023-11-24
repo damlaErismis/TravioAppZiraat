@@ -112,7 +112,6 @@ class MyAddedPlacesVC: UICustomViewController {
 extension MyAddedPlacesVC:UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
         let selectedID = viewModel.myAddedPlaces[indexPath.row].id
         let vc = PlaceDetailVC()
         vc.selectedID = selectedID

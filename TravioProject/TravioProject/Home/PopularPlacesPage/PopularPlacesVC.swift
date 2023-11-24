@@ -120,8 +120,6 @@ class PopularPlacesVC: UICustomViewController {
 extension PopularPlacesVC:UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
-        
         let selectedID = viewModel.popularPlaces[indexPath.row].id
         let vc = PlaceDetailVC()
         vc.selectedID = selectedID

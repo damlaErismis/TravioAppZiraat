@@ -274,9 +274,8 @@ class SecuritySettingsVC: UICustomViewController{
         toggleSwitchCamera.isOn = checkCameraPermission()
         toggleSwitchLocation.isOn = checkLocationPermission()
         toggleSwitchPhotoLibrary.isOn = checkPhotoLibraryPermission()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-        
+//        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+//        
         labelTitle.text = "Security Settings"
         imageBack.image = UIImage(named: "vector")
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleBack))
@@ -309,11 +308,11 @@ class SecuritySettingsVC: UICustomViewController{
             showPermissionPopup(permissionType: "Photo Library", toggleSwitch: self.toggleSwitchPhotoLibrary)
         }
     }
-    @objc func appWillEnterForeground() {
-        toggleSwitchCamera.isOn = checkCameraPermission()
-        toggleSwitchLocation.isOn = checkLocationPermission()
-        toggleSwitchPhotoLibrary.isOn = checkPhotoLibraryPermission()
-    }
+//    @objc func appWillEnterForeground() {
+//        toggleSwitchCamera.isOn = checkCameraPermission()
+//        toggleSwitchLocation.isOn = checkLocationPermission()
+//        toggleSwitchPhotoLibrary.isOn = checkPhotoLibraryPermission()
+//    }
     
     @objc func handleBack(){
         navigationController?.popViewController(animated: true)

@@ -146,7 +146,6 @@ class MapVC: UIViewController, ViewControllerDelegate{
     
     //MARK: -- Private Methods
     private func checkLocationAuthorization(){
-        
         guard let locationManager = locationManager,
               let location = locationManager.location else{
             return
@@ -156,12 +155,29 @@ class MapVC: UIViewController, ViewControllerDelegate{
             let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 5000, longitudinalMeters: 5000)
             mapView.setRegion(region, animated: true)
         case .denied:
-            print("location is denied")
+            showLocationPermissionDeniedAlert()
         case .notDetermined, .restricted:
-            print("location is not determined or restricted")
+            locationManager.requestWhenInUseAuthorization()
         @unknown default:
             print("Unknown error")
         }
+    }
+    
+    private func showLocationPermissionDeniedAlert() {
+        let alertController = UIAlertController(
+            title: "Location Permission Denied",
+            message: "To use the app's location features, you need to grant location permission. You can go to settings to enable the permission.",
+            preferredStyle: .alert
+        )
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { (action) in
+            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+            }
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(settingsAction)
+        present(alertController, animated: true, completion: nil)
     }
     
     //MARK: -- UI Methods

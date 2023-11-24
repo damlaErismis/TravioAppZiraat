@@ -82,7 +82,6 @@ class EditProfileVM {
         GenericNetworkingHelper.shared.fetchData(urlRequest: .editProfile(params: parameters)) { (result: Result<UserProfileUpdateResponse, APIError>) in
             switch result {
             case .success(let success):
-                print(success)
                 self.processFetched(response: success)
                 self.alertMessage = self.updateProfileResponse?.message
             case .failure(let error):
