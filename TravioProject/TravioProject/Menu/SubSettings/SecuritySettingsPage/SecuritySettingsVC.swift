@@ -14,7 +14,6 @@ import CoreLocation
 import Photos
 
 class SecuritySettingsVC: UICustomViewController{
-    
     private lazy var vm:SecuritySettingsVM = {
         return SecuritySettingsVM()
     }()
@@ -45,7 +44,6 @@ class SecuritySettingsVC: UICustomViewController{
     private lazy var viewCamera = UIViewCC()
     private lazy var viewPhotoLibrary = UIViewCC()
     private lazy var viewLocation = UIViewCC()
-    
     private lazy var labelSecuritySetting:UILabelCC = {
         let lbl =  UILabelCC(labelText: "Security Setting", font: .poppinsMedium30)
         lbl.textColor = .white
@@ -57,12 +55,15 @@ class SecuritySettingsVC: UICustomViewController{
     private lazy var labelLocation = UILabelCC(labelText: "Location", font: .poppinsRegular14)
     
     private lazy var viewPassword: UIViewCC = {
-        let view = UIViewCC(labeltext: "New Password", placeholderText: "***********")
+        let view = UIViewCC(labeltext: "New Password", placeholderText: "***********", isStatusImageViewVisible: true)
         view.textField.isSecureTextEntry = true
         view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        view.statusImageView.image = UIImage(systemName: "eye.slash.fill")
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handlePasswordLongPress(_:)))
+        view.addGestureRecognizer(longPressGesture)
         return view
     }()
-    
+
     private lazy var viewPasswordConfirm: UIViewCC = {
         let view = UIViewCC(labeltext: "New Password Confirm", placeholderText: "***********", isStatusImageViewVisible: true)
         view.textField.isSecureTextEntry = true
@@ -127,6 +128,69 @@ class SecuritySettingsVC: UICustomViewController{
         return s
     }()
     
+    @objc func toggleSwitcChangeForLocation() {
+        if toggleSwitchLocation.isOn {
+            requestLocationPermission()
+        }else {
+            toggleSwitchLocation.isOn = true
+            showPermissionPopup(permissionType: "Location", toggleSwitch: self.toggleSwitchLocation)
+        }
+    }
+    
+    @objc func toggleSwitcChangeForCamera() {
+        if toggleSwitchCamera.isOn {
+            requestCameraPermission()
+        }else {
+            toggleSwitchCamera.isOn = true
+            showPermissionPopup(permissionType: "Camera", toggleSwitch: self.toggleSwitchCamera)
+        }
+    }
+    @objc func toggleSwitcChangeForPhotoLibrary() {
+        if toggleSwitchPhotoLibrary.isOn {
+            requestPhotoLibraryPermission()
+        }else {
+            toggleSwitchPhotoLibrary.isOn = true
+            showPermissionPopup(permissionType: "Photo Library", toggleSwitch: self.toggleSwitchPhotoLibrary)
+        }
+    }
+    
+    @objc func handleBack(){
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func handleSave(){
+        vm.changePassword(newPassword: viewPassword.textField.text!)
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        let passwordText = viewPassword.textField.text ?? ""
+        let passwordConfirmText = viewPasswordConfirm.textField.text ?? ""
+        let passwordLenght = passwordText.count >= 6
+        let passwordConfirmLenght = passwordConfirmText.count >= 6
+        
+        if textField == viewPassword.textField || textField == viewPasswordConfirm.textField {
+            let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmLenght
+            isFormComplete = passwordLenght && passwordsMatch && !passwordText.isEmpty && !passwordConfirmText.isEmpty
+            buttonSave.isEnabled = isFormComplete
+            buttonSave.backgroundColor = isFormComplete ? .mainColor : .lightGray
+        }
+        
+        if textField == viewPasswordConfirm.textField{
+            let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmLenght
+            viewPasswordConfirm.showPasswordMatched(passwordsMatch)
+        }
+    }
+    
+    @objc func handlePasswordLongPress(_ gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            viewPassword.statusImageView.image = UIImage(systemName: "eye.fill")
+            viewPassword.textField.isSecureTextEntry = false
+        } else if gesture.state == .ended {
+            viewPassword.statusImageView.image = UIImage(systemName: "eye.slash.fill")
+            viewPassword.textField.isSecureTextEntry = true
+        }
+    }
+
     func requestCameraPermission() {
         let status = AVCaptureDevice.authorizationStatus(for: .video)
         switch status {
@@ -153,7 +217,7 @@ class SecuritySettingsVC: UICustomViewController{
                 }
             }
         @unknown default:
-            print("Unknown camera permission status.")
+            return
         }
     }
     
@@ -208,7 +272,7 @@ class SecuritySettingsVC: UICustomViewController{
             else {
                 toggleSwitch?.isOn = true
             }
-            
+
         }
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
@@ -244,7 +308,6 @@ class SecuritySettingsVC: UICustomViewController{
     //MARK: -- Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initVC()
         initVM()
     }
@@ -270,82 +333,19 @@ class SecuritySettingsVC: UICustomViewController{
     }
     
     func initVC(){
-        
         toggleSwitchCamera.isOn = checkCameraPermission()
         toggleSwitchLocation.isOn = checkLocationPermission()
         toggleSwitchPhotoLibrary.isOn = checkPhotoLibraryPermission()
-//        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-//        
+
         labelTitle.text = "Security Settings"
-        imageBack.image = UIImage(named: "vector")
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleBack))
-        imageBack.addGestureRecognizer(tap)
+        buttonBack.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
         
         setupViews()
     }
     
-    @objc func toggleSwitcChangeForLocation() {
-        if toggleSwitchLocation.isOn {
-            requestLocationPermission()
-        }else {
-            toggleSwitchLocation.isOn = true
-            showPermissionPopup(permissionType: "Location", toggleSwitch: self.toggleSwitchLocation)
-        }
-    }
-    @objc func toggleSwitcChangeForCamera() {
-        if toggleSwitchCamera.isOn {
-            requestCameraPermission()
-        }else {
-            toggleSwitchCamera.isOn = true
-            showPermissionPopup(permissionType: "Camera", toggleSwitch: self.toggleSwitchCamera)
-        }
-    }
-    @objc func toggleSwitcChangeForPhotoLibrary() {
-        if toggleSwitchPhotoLibrary.isOn {
-            requestPhotoLibraryPermission()
-        }else {
-            toggleSwitchPhotoLibrary.isOn = true
-            showPermissionPopup(permissionType: "Photo Library", toggleSwitch: self.toggleSwitchPhotoLibrary)
-        }
-    }
-//    @objc func appWillEnterForeground() {
-//        toggleSwitchCamera.isOn = checkCameraPermission()
-//        toggleSwitchLocation.isOn = checkLocationPermission()
-//        toggleSwitchPhotoLibrary.isOn = checkPhotoLibraryPermission()
-//    }
-    
-    @objc func handleBack(){
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func handleSave(){
-        vm.changePassword(newPassword: viewPassword.textField.text!)
-    }
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        let passwordText = viewPassword.textField.text ?? ""
-        let passwordConfirmText = viewPasswordConfirm.textField.text ?? ""
-        let passwordLenght = passwordText.count >= 6
-        let passwordConfirmLenght = passwordConfirmText.count >= 6
-        
-        if textField == viewPassword.textField || textField == viewPasswordConfirm.textField {
-            let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmLenght
-            isFormComplete = passwordLenght && passwordsMatch && !passwordText.isEmpty && !passwordConfirmText.isEmpty
-            buttonSave.isEnabled = isFormComplete
-            buttonSave.backgroundColor = isFormComplete ? .mainColor : .lightGray
-        }
-        
-        if textField == viewPasswordConfirm.textField{
-            let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmLenght
-            viewPasswordConfirm.showPasswordMatched(passwordsMatch)
-        }
-    }
-    
     //MARK: -- UI Methods
     func setupViews() {
-        // Add here the setup for the UI
-        self.view.backgroundColor = .mainColor
-        self.viewMain.addSubviews(scrollViewAll)
+        viewMain.addSubviews(scrollViewAll)
         scrollViewAll.addSubviews(containerView)
         containerView.addSubviews(labelChangePassword, stackViewTop, labelPrivacy, stackViewBottom, buttonSave)
         stackViewTop.addArrangedSubviews(viewPassword,viewPasswordConfirm)
@@ -359,30 +359,31 @@ class SecuritySettingsVC: UICustomViewController{
     
     func setupLayouts() {
         containerView.snp.makeConstraints({ view in
-            view.height.width.equalToSuperview()
+            view.width.equalToSuperview()
             view.trailing.leading.top.equalToSuperview()
             view.bottom.equalToSuperview()
         })
         scrollViewAll.snp.makeConstraints({sv in
             sv.trailing.leading.top.equalToSuperview()
+            sv.height.width.equalToSuperview()
         })
         labelChangePassword.snp.makeConstraints({lbl in
             lbl.top.equalToSuperview().offset(50)
-            lbl.trailing.leading.equalToSuperview().inset(14)
+            lbl.trailing.leading.equalToSuperview().inset(24)
             lbl.height.equalTo(25)
         })
         stackViewTop.snp.makeConstraints({sv in
             sv.top.equalTo(labelChangePassword.snp.bottom).offset(8)
-            sv.leading.trailing.equalToSuperview().inset(14)
+            sv.leading.trailing.equalToSuperview().inset(24)
         })
         labelPrivacy.snp.makeConstraints({lbl in
             lbl.top.equalTo(stackViewTop.snp.bottom).offset(30)
-            lbl.trailing.leading.equalToSuperview().inset(14)
+            lbl.trailing.leading.equalToSuperview().inset(24)
             lbl.height.equalTo(25)
         })
         stackViewBottom.snp.makeConstraints({sv in
             sv.top.equalTo(labelPrivacy.snp.bottom).offset(8)
-            sv.leading.trailing.equalToSuperview().inset(14)
+            sv.leading.trailing.equalToSuperview().inset(24)
         })
         labelCamera.snp.makeConstraints({lbl in
             lbl.leading.equalTo(15)
@@ -416,13 +417,12 @@ class SecuritySettingsVC: UICustomViewController{
         })
         buttonSave.snp.makeConstraints({ btn in
             btn.top.equalTo(stackViewBottom.snp.bottom).offset(50)
-            btn.leading.trailing.equalToSuperview().inset(14)
+            btn.leading.trailing.equalToSuperview().inset(24)
             btn.height.equalTo(54)
-            btn.bottom.equalToSuperview().offset(-40)
+            btn.bottom.equalToSuperview().offset(-30)
         })
     }
 }
-
 extension SecuritySettingsVC: CLLocationManagerDelegate{
     func requestLocationPermission() {
         let locationManager = CLLocationManager()

@@ -61,7 +61,6 @@ class HomeVC: UIViewController {
     }
     
     func initVM() {
-        
         viewModel.updateLoadingStatus = { [weak self] (staus) in
             DispatchQueue.main.async {
                 if staus {

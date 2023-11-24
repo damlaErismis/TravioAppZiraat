@@ -34,6 +34,7 @@ class LoginVC: UIViewController {
         lbl.textAlignment = .center
         return lbl
     }()
+    
     private lazy var labelSuggestion = UILabelCC(labelText: "Don’t have any account?", font: .poppinsRegular14)
     private lazy var buttonLogin:UIButton = {
         let btn = UIButton()
@@ -46,6 +47,7 @@ class LoginVC: UIViewController {
         btn.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return btn
     }()
+    
     private lazy var buttonSignUp:UIButton = {
         let btn = UIButton()
         btn.setTitle("Sign Up", for: .normal)
@@ -55,6 +57,7 @@ class LoginVC: UIViewController {
         btn.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
         return btn
     }()
+    
     private lazy var viewMain:UIView = {
         let view = UIView()
         view.backgroundColor = .viewColor
@@ -68,15 +71,18 @@ class LoginVC: UIViewController {
         view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         view.textField.autocapitalizationType = .none
         return view
-        
     }()
+    
     private lazy var viewPassword:UIViewCC = {
-        let view = UIViewCC(labeltext: "Password", placeholderText: "***************")
+        let view = UIViewCC(labeltext: "Password", placeholderText: "***************", isStatusImageViewVisible: true)
         view.textField.isSecureTextEntry = true
         view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        view.statusImageView.image = UIImage(systemName: "eye.slash.fill")
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handlePasswordLongPress(_:)))
+        view.addGestureRecognizer(longPressGesture)
         return view
-        
     }()
+    
     private lazy var stackViewSignUp:UIStackView = {
         let sv = UIStackView()
         sv.axis = .horizontal
@@ -84,6 +90,7 @@ class LoginVC: UIViewController {
         sv.distribution = .fillProportionally
         return sv
     }()
+    
     private lazy var stackView:UIStackView = {
         let sv = UIStackView()
         sv.axis = .vertical
@@ -103,6 +110,7 @@ class LoginVC: UIViewController {
     func initView(){
         setupView()
     }
+    
     func initVM(){
         vm.showAlertClosure = { [weak self] () in
             DispatchQueue.main.async {
@@ -112,8 +120,6 @@ class LoginVC: UIViewController {
             }
         }
     }
-    
-
     
     //MARK: -- Component Actions
     @objc func handleSignUp(){
@@ -138,6 +144,16 @@ class LoginVC: UIViewController {
             isFormComplete = (passwordText.count >= 6) && emailText.isValidEmail && !passwordText.isEmpty && !emailText.isEmpty
             buttonLogin.isEnabled = isFormComplete
             buttonLogin.backgroundColor = isFormComplete ? .mainColor : .lightGray
+        }
+    }
+    
+    @objc func handlePasswordLongPress(_ gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            viewPassword.statusImageView.image = UIImage(systemName: "eye.fill")
+            viewPassword.textField.isSecureTextEntry = false
+        } else if gesture.state == .ended {
+            viewPassword.statusImageView.image = UIImage(systemName: "eye.slash.fill")
+            viewPassword.textField.isSecureTextEntry = true
         }
     }
     
@@ -178,10 +194,11 @@ class LoginVC: UIViewController {
         buttonLogin.snp.makeConstraints({ btn in
             btn.top.equalTo(viewPassword.snp.bottom).offset(48)
             btn.leading.trailing.equalToSuperview().inset(25)
+            
             btn.height.equalTo(54)
         })
         stackViewSignUp.snp.makeConstraints({sv in
-            sv.bottom.equalToSuperview().offset(-50)
+            sv.bottom.equalToSuperview().offset(-20)
             sv.centerX.equalTo(labelWelcome.snp.centerX)
             sv.width.equalTo(238)
         })

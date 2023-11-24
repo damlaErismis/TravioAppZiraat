@@ -10,10 +10,13 @@ import SnapKit
 
 class UICustomViewController: UIViewController {
     
-    lazy var imageBack:UIImageView = {
-        let img = UIImageView()
-        img.isUserInteractionEnabled = true
-        return img
+    lazy var buttonBack: UIButton = {
+        let button = UIButton()
+        button.isUserInteractionEnabled = true
+        if let image = UIImage(named: "vector") {
+            button.setImage(image, for: .normal)
+        }
+        return button
     }()
     
     lazy var viewMain: UIView = {
@@ -37,27 +40,24 @@ class UICustomViewController: UIViewController {
     
     func setupView() {
         self.view.backgroundColor = .mainColor
-        self.view.addSubviews(viewMain, labelTitle, imageBack)
+        self.view.addSubviews(viewMain, labelTitle, buttonBack)
         setupLayout()
     }
 
     func setupLayout() {
-        
-        imageBack.snp.makeConstraints({img in
+        buttonBack.snp.makeConstraints({img in
             img.centerY.equalTo(labelTitle)
             img.leading.equalToSuperview().offset(25)
-            img.width.equalTo(24)
-            img.height.equalTo(21)
+            img.width.equalTo(30)
+            img.height.equalTo(26.75)
         })
-        
         labelTitle.snp.makeConstraints({ img in
             img.top.equalToSuperview().offset(50)
-            img.centerX.equalToSuperview()
+            img.leading.equalTo(buttonBack.snp.trailing).offset(24)
         })
         viewMain.snp.makeConstraints({ view in
             view.bottom.equalToSuperview()
-            view.leading.equalToSuperview()
-            view.trailing.equalToSuperview()
+            view.leading.trailing.equalToSuperview()
             view.height.equalToSuperview().multipliedBy(0.82)
         })
     }

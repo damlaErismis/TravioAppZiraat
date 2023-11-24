@@ -15,7 +15,6 @@ class SettingsVC: UIViewController {
     
     private lazy var vm:SettingsVM = {
         return SettingsVM()
-        
     }()
     
     //MARK: -- Views
@@ -61,6 +60,7 @@ class SettingsVC: UIViewController {
         let img = UIImageView()
         img.layer.cornerRadius = 60
         img.contentMode = .scaleAspectFill
+        img.image = UIImage(systemName: "person.crop.circle.fill")
         img.clipsToBounds = true
         return img
     }()

@@ -42,10 +42,7 @@ class HelpAndSupportVC: UICustomViewController {
 
     func configureView(){
         labelTitle.text = "Help And Support"
-        imageBack.image = UIImage(named: "vector")
-        self.viewMain.backgroundColor = .viewColor
-        let tap = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
-        imageBack.addGestureRecognizer(tap)
+        buttonBack.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
     
     override func viewDidLoad() {

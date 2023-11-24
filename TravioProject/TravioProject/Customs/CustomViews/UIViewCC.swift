@@ -10,8 +10,9 @@ import SnapKit
 
 class UIViewCC: UIView{
 
-    private lazy var statusImageView: UIImageView = {
+    lazy var statusImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.isUserInteractionEnabled = true
         imageView.contentMode = .scaleAspectFit
         imageView.alpha = 0.0
         return imageView

@@ -13,10 +13,12 @@ class MapImageCollectionCell:UICollectionViewCell{
         img.contentMode = .scaleAspectFill
         return img
     }()
+    
     lazy var labelPlace:UILabelCC = {
         let lbl = UILabelCC()
         lbl.textColor = .white
-            lbl.addFont = .poppinsRegular24
+        lbl.addFont = .poppinsRegular24
+        lbl.numberOfLines = 0
         return lbl
     }()
     lazy var labelCity:UILabelCC = {
@@ -58,6 +60,7 @@ class MapImageCollectionCell:UICollectionViewCell{
         })
         labelPlace.snp.makeConstraints({ lbl in
             lbl.leading.equalTo(imageVektor)
+            lbl.trailing.equalToSuperview().offset(-10)
             lbl.bottom.equalTo(imageVektor.snp.top).offset(-5)
         })
     }

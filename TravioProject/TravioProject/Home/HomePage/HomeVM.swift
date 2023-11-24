@@ -32,6 +32,11 @@ final class HomeVM {
             self.updateLoadingStatus?(isLoading!)
         }
     }
+    var errorStatusMessage: ErrorResponse?{
+        didSet{
+            
+        }
+    }
     var updateLoadingStatus: ((Bool)->())?
     
     func fetchDataDispatch() {
@@ -58,7 +63,21 @@ final class HomeVM {
                 self.tableSection.append(.popularPlaces)
                 self.popularPlaces = success.data.places
             case .failure(let failure):
-                print(failure.localizedDescription)
+                switch failure {
+                case .apiError(let status, _):
+                    switch status {
+                    case .unauthorized:
+                        self.errorStatusMessage = ErrorResponse(status: "Unauthorized", message: "Invalid credentials")
+                    case .forbidden:
+                        self.errorStatusMessage = ErrorResponse(status: "Forbidden", message: "Access to this resource is forbidden.")
+                    case .notFound:
+                        self.errorStatusMessage = ErrorResponse(status: "Not Found", message: "Resources not found")
+                    default:
+                        self.errorStatusMessage = ErrorResponse(status: "Unknown Error", message: "Unknown error occurred.")
+                    }
+                default:
+                    self.errorStatusMessage = ErrorResponse(status: "Error", message: failure.localizedDescription)
+                }
             }
             self.dispatchGroup.leave()
         })
@@ -71,7 +90,21 @@ final class HomeVM {
                 self.tableSection.append(.newPlaces)
                 self.newPlaces = success.data.places
             case .failure(let failure):
-                print(failure.localizedDescription)
+                switch failure {
+                case .apiError(let status, _):
+                    switch status {
+                    case .unauthorized:
+                        self.errorStatusMessage = ErrorResponse(status: "Unauthorized", message: "Invalid credentials")
+                    case .forbidden:
+                        self.errorStatusMessage = ErrorResponse(status: "Forbidden", message: "Access to this resource is forbidden.")
+                    case .notFound:
+                        self.errorStatusMessage = ErrorResponse(status: "Not Found", message: "Resources not found")
+                    default:
+                        self.errorStatusMessage = ErrorResponse(status: "Unknown Error", message: "Unknown error occurred.")
+                    }
+                default:
+                    self.errorStatusMessage = ErrorResponse(status: "Error", message: failure.localizedDescription)
+                }
             }
             self.dispatchGroup.leave()
         })
@@ -84,7 +117,21 @@ final class HomeVM {
                 self.tableSection.append(.myAddedPlaces)
                 self.myAddedPlaces = success.data.places
             case .failure(let failure):
-                print(failure.localizedDescription)
+                switch failure {
+                case .apiError(let status, _):
+                    switch status {
+                    case .unauthorized:
+                        self.errorStatusMessage = ErrorResponse(status: "Unauthorized", message: "Invalid credentials")
+                    case .forbidden:
+                        self.errorStatusMessage = ErrorResponse(status: "Forbidden", message: "Access to this resource is forbidden.")
+                    case .notFound:
+                        self.errorStatusMessage = ErrorResponse(status: "Not Found", message: "Resources not found")
+                    default:
+                        self.errorStatusMessage = ErrorResponse(status: "Unknown Error", message: "Unknown error occurred.")
+                    }
+                default:
+                    self.errorStatusMessage = ErrorResponse(status: "Error", message: failure.localizedDescription)
+                }
             }
             self.dispatchGroup.leave()
         })

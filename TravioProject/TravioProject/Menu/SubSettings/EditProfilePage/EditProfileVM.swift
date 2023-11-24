@@ -66,7 +66,21 @@ class EditProfileVM {
             case .success(let userProfile):
                 self.userProfile = userProfile
             case .failure(let failure):
-                print(failure.localizedDescription)
+                switch failure {
+                case .apiError(let status, _):
+                    switch status {
+                    case .unauthorized:
+                        self.errorStatusMessage = ErrorResponse(status: "Unauthorized", message: "Invalid credentials")
+                    case .forbidden:
+                        self.errorStatusMessage = ErrorResponse(status: "Forbidden", message: "Access to this resource is forbidden.")
+                    case .notFound:
+                        self.errorStatusMessage = ErrorResponse(status: "Not Found", message: "Resources not found")
+                    default:
+                        self.errorStatusMessage = ErrorResponse(status: "Unknown Error", message: "Unknown error occurred.")
+                    }
+                default:
+                    self.errorStatusMessage = ErrorResponse(status: "Error", message: failure.localizedDescription)
+                }
                 
             }
         })
@@ -84,8 +98,22 @@ class EditProfileVM {
             case .success(let success):
                 self.processFetched(response: success)
                 self.alertMessage = self.updateProfileResponse?.message
-            case .failure(let error):
-                print("Profil güncellemesi başarısız: \(error.localizedDescription)")
+            case .failure(let failure):
+                switch failure {
+                case .apiError(let status, _):
+                    switch status {
+                    case .unauthorized:
+                        self.errorStatusMessage = ErrorResponse(status: "Unauthorized", message: "Invalid credentials")
+                    case .forbidden:
+                        self.errorStatusMessage = ErrorResponse(status: "Forbidden", message: "Access to this resource is forbidden.")
+                    case .notFound:
+                        self.errorStatusMessage = ErrorResponse(status: "Not Found", message: "Resources not found")
+                    default:
+                        self.errorStatusMessage = ErrorResponse(status: "Unknown Error", message: "Unknown error occurred.")
+                    }
+                default:
+                    self.errorStatusMessage = ErrorResponse(status: "Error", message: failure.localizedDescription)
+                }
             }
         }
     }

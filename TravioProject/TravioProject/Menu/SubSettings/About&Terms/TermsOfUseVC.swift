@@ -21,7 +21,6 @@ class TermsOfUseVC: UICustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initView()
-
     }
     
     func initView(){
@@ -30,10 +29,7 @@ class TermsOfUseVC: UICustomViewController {
             webView.load(request)
         }
         labelTitle.text = "Terms of Use"
-        imageBack.image = UIImage(named: "vector")
-        self.viewMain.backgroundColor = .viewColor
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleBack))
-        imageBack.addGestureRecognizer(tap)
+        buttonBack.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
         setupViews()
     }
     
@@ -52,7 +48,6 @@ class TermsOfUseVC: UICustomViewController {
             wb.leading.equalToSuperview()
             wb.trailing.equalToSuperview()
             wb.bottom.equalToSuperview()
-            
         })
     }
 }

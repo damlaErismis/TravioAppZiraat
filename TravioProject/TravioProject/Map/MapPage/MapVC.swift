@@ -159,7 +159,7 @@ class MapVC: UIViewController, ViewControllerDelegate{
         case .notDetermined, .restricted:
             locationManager.requestWhenInUseAuthorization()
         @unknown default:
-            print("Unknown error")
+            return
         }
     }
     

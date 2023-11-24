@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0062B3C42AEA4B7A000066E5 /* SignUpVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0062B3C32AEA4B7A000066E5 /* SignUpVM.swift */; };
-		0081C4932B0CD50500D5A7BA /* TermsOfUse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081C4922B0CD50500D5A7BA /* TermsOfUse.swift */; };
+		0081C4932B0CD50500D5A7BA /* TermsOfUseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081C4922B0CD50500D5A7BA /* TermsOfUseVC.swift */; };
 		00A47A6A2AFA5528001EDF1D /* EditProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A692AFA5528001EDF1D /* EditProfileVM.swift */; };
 		00A47A6C2AFA5710001EDF1D /* EditProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A6B2AFA5710001EDF1D /* EditProfileModel.swift */; };
 		00A47A6F2AFA6657001EDF1D /* HelpAndSupportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A47A6E2AFA6657001EDF1D /* HelpAndSupportVC.swift */; };
@@ -102,7 +102,7 @@
 
 /* Begin PBXFileReference section */
 		0062B3C32AEA4B7A000066E5 /* SignUpVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVM.swift; sourceTree = "<group>"; };
-		0081C4922B0CD50500D5A7BA /* TermsOfUse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUse.swift; sourceTree = "<group>"; };
+		0081C4922B0CD50500D5A7BA /* TermsOfUseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseVC.swift; sourceTree = "<group>"; };
 		00A47A692AFA5528001EDF1D /* EditProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVM.swift; sourceTree = "<group>"; };
 		00A47A6B2AFA5710001EDF1D /* EditProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileModel.swift; sourceTree = "<group>"; };
 		00A47A6E2AFA6657001EDF1D /* HelpAndSupportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpAndSupportVC.swift; sourceTree = "<group>"; };
@@ -395,7 +395,7 @@
 			children = (
 				00C810CB2AF990330077E800 /* EditProfilePage */,
 				00A47A6D2AFA63E0001EDF1D /* Help&SupportPage */,
-				0CD1F37C2B04006A002B4486 /* SecuritySettings */,
+				0CD1F37C2B04006A002B4486 /* SecuritySettingsPage */,
 				0CE644B42B0CC4EC00127F78 /* About&Terms */,
 			);
 			path = SubSettings;
@@ -426,20 +426,20 @@
 			path = PlaceDetailPage;
 			sourceTree = "<group>";
 		};
-		0CD1F37C2B04006A002B4486 /* SecuritySettings */ = {
+		0CD1F37C2B04006A002B4486 /* SecuritySettingsPage */ = {
 			isa = PBXGroup;
 			children = (
 				0C499D172AF9481500A7C916 /* SecuritySettingsVC.swift */,
 				0C563C4F2AFE1C4A00A0F5F0 /* SecuritySettingsVM.swift */,
 			);
-			path = SecuritySettings;
+			path = SecuritySettingsPage;
 			sourceTree = "<group>";
 		};
 		0CE644B42B0CC4EC00127F78 /* About&Terms */ = {
 			isa = PBXGroup;
 			children = (
 				0CD1F37D2B0400B3002B4486 /* AboutUsVC.swift */,
-				0081C4922B0CD50500D5A7BA /* TermsOfUse.swift */,
+				0081C4922B0CD50500D5A7BA /* TermsOfUseVC.swift */,
 			);
 			path = "About&Terms";
 			sourceTree = "<group>";
@@ -654,7 +654,7 @@
 				00A47A8F2B04E21C001EDF1D /* MyVisitsVM.swift in Sources */,
 				0C32DE812B0A7B7A00D873C8 /* UIViewCC.swift in Sources */,
 				0062B3C42AEA4B7A000066E5 /* SignUpVM.swift in Sources */,
-				0081C4932B0CD50500D5A7BA /* TermsOfUse.swift in Sources */,
+				0081C4932B0CD50500D5A7BA /* TermsOfUseVC.swift in Sources */,
 				0C988ED62AF37EAC0090E85A /* Visit.swift in Sources */,
 				00A47A8B2B0401F7001EDF1D /* MyAddedPlacesCell.swift in Sources */,
 				00A47A6F2AFA6657001EDF1D /* HelpAndSupportVC.swift in Sources */,

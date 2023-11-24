@@ -20,6 +20,12 @@ class NewPlacesVM {
             self.reloadCollectionViewForNewPlaces?()
         }
     }
+    
+    var errorStatusMessage:ErrorResponse? {
+        didSet{
+            
+        }
+    }
     var newPlacesChange: (() -> Void)?
     var reloadCollectionViewForNewPlaces: (() -> Void)?
 
@@ -36,7 +42,21 @@ class NewPlacesVM {
                 self.newPlacesResponse = success
                 self.getNewPlacesData()
             case .failure(let failure):
-                print(failure.localizedDescription)
+                switch failure {
+                case .apiError(let status, _):
+                    switch status {
+                    case .unauthorized:
+                        self.errorStatusMessage = ErrorResponse(status: "Unauthorized", message: "Invalid credentials")
+                    case .forbidden:
+                        self.errorStatusMessage = ErrorResponse(status: "Forbidden", message: "Access to this resource is forbidden.")
+                    case .notFound:
+                        self.errorStatusMessage = ErrorResponse(status: "Not Found", message: "Resources not found")
+                    default:
+                        self.errorStatusMessage = ErrorResponse(status: "Unknown Error", message: "Unknown error occurred.")
+                    }
+                default:
+                    self.errorStatusMessage = ErrorResponse(status: "Error", message: failure.localizedDescription)
+                }
             }
         })
     }

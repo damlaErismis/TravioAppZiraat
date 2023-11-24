@@ -216,9 +216,7 @@ class AddNewPlaceVC: UIViewController{
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
-    
-    
-    
+
     func setupViews() {
         self.view.backgroundColor = .mainColor
         self.view.addSubviews(viewMain, activityIndicator)
@@ -242,7 +240,7 @@ class AddNewPlaceVC: UIViewController{
         viewDescription.snp.makeConstraints({ view in
             view.top.equalTo(viewPlaceName.snp.bottom).offset(12)
             view.leading.trailing.equalToSuperview().inset(24)
-            view.height.equalTo(215)
+            view.height.equalToSuperview().multipliedBy(0.24)
         })
         labelDescription.snp.makeConstraints({ label in
             label.top.equalToSuperview().offset(11)
@@ -266,7 +264,7 @@ class AddNewPlaceVC: UIViewController{
         btnAddPlace.snp.makeConstraints({ btn in
             btn.height.equalTo(54)
             btn.leading.trailing.equalToSuperview().inset(24)
-            btn.bottom.equalToSuperview().offset(-50)
+            btn.bottom.equalToSuperview().offset(-24)
         })
     }
 }
@@ -299,18 +297,25 @@ extension AddNewPlaceVC:UICollectionViewDataSource {
 extension AddNewPlaceVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let selectedImage = info[.originalImage] as? UIImage {
-            if let cell = collectionView.cellForItem(at: selectedIndex!) as? AddPlaceCollectionCell {
-                cell.imgNewPlace.image = selectedImage
-                imagesFromLibrary.append(selectedImage)
+        guard let selectedImage = info[.originalImage] as? UIImage else {
+            picker.dismiss(animated: true, completion: nil)
+            return
+        }
+        if let selectedIndex = selectedIndex, selectedIndex.row < imagesFromLibrary.count {
+            let replacedImage = imagesFromLibrary[selectedIndex.row]
+            imagesFromLibrary[selectedIndex.row] = selectedImage
+            if let indexToRemove = imagesFromLibrary.firstIndex(of: replacedImage) {
+                imagesFromLibrary.remove(at: indexToRemove)
             }
+        } else {
+            imagesFromLibrary.append(selectedImage)
+        }
+        if let cell = collectionView.cellForItem(at: selectedIndex ?? IndexPath(row: 0, section: 0)) as? AddPlaceCollectionCell {
+            cell.imgNewPlace.image = selectedImage
         }
         picker.dismiss(animated: true, completion: nil)
     }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
-    }
+
 }
 
 extension AddNewPlaceVC: UITextFieldDelegate{
