@@ -13,7 +13,7 @@ class HomeTableCell: UITableViewCell {
     
     var onItemSelect: ((IndexPath) -> Void)?
     var viewModel = HomeVM()
-    private var popularPlaces: [Place] = []
+    private var places: [Place] = []
     private lazy var labelSectionName:UILabel = {
         let lbl = UILabel()
         return lbl
@@ -38,7 +38,7 @@ class HomeTableCell: UITableViewCell {
     }
     
     func prepareCategory(with model: [Place]) {
-        self.popularPlaces = model
+        self.places = model
         collectionView.reloadData()
     }
 
@@ -78,12 +78,12 @@ extension HomeTableCell:UICollectionViewDelegateFlowLayout {
 
 extension HomeTableCell:UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return popularPlaces.count
+        return places.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as? HomeCollectionCell {
-            cell.configurePopularPlaces(with: self.popularPlaces[indexPath.row])
+            cell.configurePlaces(with: self.places[indexPath.row])
             cell.roundAllCorners(radius: 16)
             cell.addShadow(shadowColor: .black, offsetX: 0, offsetY: 0, shadowOpacity: 0.1, shadowRadius: 10.0)
             return cell

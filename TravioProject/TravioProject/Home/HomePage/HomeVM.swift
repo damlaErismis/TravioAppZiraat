@@ -37,11 +37,10 @@ final class HomeVM {
     
     func fetchDataDispatch() {
         self.isLoading = true
-        self.tableSection = [.popularPlaces, .newPlaces, .myAddedPlaces]
         
         dispatchGroup.enter()
         getPopularPlaces()
-        
+
         dispatchGroup.enter()
         getNewPlaces()
         
@@ -49,6 +48,7 @@ final class HomeVM {
         getMyAddedPlaces()
         
         dispatchGroup.notify(queue: .main) {
+            self.tableSection = [.popularPlaces, .newPlaces, .myAddedPlaces]
             self.delegate?.reloadTableView()
             self.isLoading = false
         }

@@ -30,12 +30,24 @@ class SignUpVC: UICustomViewController {
     }()
     
     private lazy var viewPassword:UIViewCC = {
-        let view = UIViewCC(labeltext: "Password", placeholderText: "********")
+        let view = UIViewCC(labeltext: "Password", placeholderText: "********", isStatusImageViewVisible: true)
         view.textField.isSecureTextEntry = true
         view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        view.statusImageView.image = UIImage(systemName: "eye.slash.fill")
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handlePasswordLongPress(_:)))
+        view.addGestureRecognizer(longPressGesture)
         return view
     }()
     
+    @objc func handlePasswordLongPress(_ gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            viewPassword.statusImageView.image = UIImage(systemName: "eye.fill")
+            viewPassword.textField.isSecureTextEntry = false
+        } else if gesture.state == .ended {
+            viewPassword.statusImageView.image = UIImage(systemName: "eye.slash.fill")
+            viewPassword.textField.isSecureTextEntry = true
+        }
+    }
     private lazy var viewPasswordConfirm:UIViewCC = {
         let view = UIViewCC(labeltext: "Password Confirm", placeholderText: "********", isStatusImageViewVisible: true)
         view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)

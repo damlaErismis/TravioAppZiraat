@@ -10,7 +10,7 @@ import SnapKit
 
 class UIViewCC: UIView{
 
-    private lazy var statusImageView: UIImageView = {
+    lazy var statusImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.alpha = 0.0
@@ -105,7 +105,7 @@ class UIViewCC: UIView{
         }
         textField.snp.makeConstraints({ txt in
             txt.top.equalTo(label.snp.bottom).offset(8)
-            txt.leading.equalToSuperview().offset(12)
+            txt.leading.equalToSuperview().inset(12)
             txt.height.equalTo(30)
         })
     }

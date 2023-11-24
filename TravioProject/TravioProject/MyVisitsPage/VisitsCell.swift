@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 import TinyConstraints
+import Kingfisher
 
 class VisitsCell:UICollectionViewCell {
     
@@ -46,8 +47,6 @@ class VisitsCell:UICollectionViewCell {
     public func configure(with object:Visit){
         if let url = URL(string: object.place.cover_image_url) {
             imagePlace.kf.setImage(with: url)
-        } else {
-            print("Invalid URL")
         }
         labelCity.text = object.place.place
         labelPlace.text = object.place.title

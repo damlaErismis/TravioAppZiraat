@@ -243,6 +243,7 @@ extension MapVC: CLLocationManagerDelegate {
     }
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkLocationAuthorization()
+
     }
 }
 
