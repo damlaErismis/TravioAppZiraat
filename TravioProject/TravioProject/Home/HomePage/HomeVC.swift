@@ -116,7 +116,7 @@ extension HomeVC:UITableViewDelegate{
         let headerView = UIView()
         let lbl = VerticalAlignedLabel()
         lbl.contentMode = .bottom
-        lbl.font = UIFont(name: "Poppins-Regular", size: 20)
+        lbl.font = .poppinsRegular20
         lbl.text = self.tableView(tableView, titleForHeaderInSection: section)
         
         let btn = UIButton(type: .system)
@@ -125,7 +125,7 @@ extension HomeVC:UITableViewDelegate{
         btn.titleLabel?.lineBreakMode = .byWordWrapping
         btn.contentVerticalAlignment = .bottom
         btn.setTitleColor(.textButtonColor, for: .normal)
-        btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 14)
+        btn.titleLabel?.font = .poppinsRegular14
         btn.addTarget(self, action: #selector(btnSeeAllTapped), for: .touchUpInside)
         btn.tag = section
         

@@ -80,7 +80,7 @@ class SignUpVC: UIViewController {
     private lazy var buttonSignup:UIButton = {
         let btn = UIButton()
         btn.setTitle("Sign Up", for: .normal)
-        btn.titleLabel?.font = UIFont(name: "Poppins-Bold", size: 16)
+        btn.titleLabel?.font = .poppinsBold16
         btn.setTitleColor(.white, for: .normal)
         btn.backgroundColor = .lightGray
         btn.layer.cornerRadius = 12

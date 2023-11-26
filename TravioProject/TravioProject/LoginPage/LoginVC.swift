@@ -39,7 +39,7 @@ class LoginVC: UIViewController {
     private lazy var buttonLogin:UIButton = {
         let btn = UIButton()
         btn.setTitle("Login", for: .normal)
-        btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 16)
+        btn.titleLabel?.font = .poppinsRegular16
         btn.setTitleColor(.white, for: .normal)
         btn.backgroundColor = .lightGray
         btn.layer.cornerRadius = 12
@@ -52,7 +52,7 @@ class LoginVC: UIViewController {
         let btn = UIButton()
         btn.setTitle("Sign Up", for: .normal)
         btn.setTitleColor(.black, for: .normal)
-        btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 14)
+        btn.titleLabel?.font = .poppinsRegular14
         btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
         return btn

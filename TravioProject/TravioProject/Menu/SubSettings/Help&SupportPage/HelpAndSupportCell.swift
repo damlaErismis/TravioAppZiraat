@@ -29,7 +29,7 @@ class HelpAndSupportCell: UITableViewCell {
     
     private lazy var lblQuestion:UILabel = {
         let lbl = UILabel()
-        lbl.font = UIFont(name: "Poppins-Medium", size: 14)
+        lbl.font = .poppinsMedium16
         lbl.numberOfLines = 0
         lbl.textColor = .fontColor
         lbl.translatesAutoresizingMaskIntoConstraints = false
@@ -39,7 +39,7 @@ class HelpAndSupportCell: UITableViewCell {
     private lazy var lblAnswer:UILabel = {
         let lbl = UILabel()
         lbl.numberOfLines = 0
-        lbl.font = UIFont(name: "Poppins-Medium", size: 10)
+        lbl.font = .poppinsMedium10
         lbl.textColor = .fontColor
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl

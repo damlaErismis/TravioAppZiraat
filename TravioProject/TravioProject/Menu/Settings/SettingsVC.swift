@@ -35,17 +35,17 @@ class SettingsVC: UIViewController {
         let btn = UIButton()
         btn.setTitle("Settings", for: .normal)
         btn.setTitleColor(.white, for: .normal)
-        btn.titleLabel?.font = UIFont(name: "Poppins-Medium", size: 32)
+        btn.titleLabel?.font = .poppinsMedium30
         return btn
     }()
     
-    private lazy var imageLogout:UIImageView = {
-        let img = UIImageView()
-        img.image = UIImage(named: "vectorSetting")
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleLogout))
-        img.addGestureRecognizer(tap)
-        img.isUserInteractionEnabled = true
-        return img
+    private lazy var btnLogout:UIButton = {
+        let btn = UIButton()
+        if let image = UIImage(named: "vectorSetting") {
+            btn.setImage(image, for: .normal)
+        }
+        btn.addTarget(self, action: #selector(handleLogout), for: .touchUpInside)
+        return btn
     }()
     
     private lazy var viewMain:UIView = {
@@ -67,7 +67,7 @@ class SettingsVC: UIViewController {
     
     private lazy var labelNameSurname:UILabelCC = {
         let lbl = UILabelCC()
-        lbl.font = UIFont(name: "Poppins-Medium", size: 16)
+        lbl.font = .poppinsMedium16
         return lbl
     }()
     
@@ -75,7 +75,7 @@ class SettingsVC: UIViewController {
         let btn = UIButton()
         btn.setTitle("Edit Profile", for: .normal)
         btn.setTitleColor(.textButtonColor, for: .normal)
-        btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 12)
+        btn.titleLabel?.font = .poppinsRegular12
         btn.addTarget(self, action: #selector(buttonEditProfileTapped), for: .touchUpInside)
         return btn
     }()
@@ -94,8 +94,8 @@ class SettingsVC: UIViewController {
         let account = "travio"
         KeychainHelper.shared.delete(service, account: account)
         
-        let alert = UIAlertController(title: "Alert!", message: "You have been logged out.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok.", style: .default, handler: { _ in
+        let alert = UIAlertController(title: "Alert!", message: "You have been logged out", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
             self.switchToLoginVC()
         }))
         present(alert, animated: true)
@@ -158,7 +158,7 @@ class SettingsVC: UIViewController {
     }
     
     func setupViews() {
-        self.view.addSubviews(viewMain, buttonSetting, imageLogout)
+        self.view.addSubviews(viewMain, buttonSetting, btnLogout)
         self.viewMain.addSubviews(imageProfile, labelNameSurname, buttonEditProfile, collectionView)
         setupLayout()
     }
@@ -170,7 +170,7 @@ class SettingsVC: UIViewController {
             btn.height.equalTo(48)
             btn.width.equalTo(134)
         })
-        imageLogout.snp.makeConstraints({img in
+        btnLogout.snp.makeConstraints({img in
             img.centerY.equalTo(buttonSetting.snp.centerY)
             img.trailing.equalTo(-30)
             img.height.width.equalTo(30)

@@ -15,6 +15,7 @@ class UIViewCC: UIView{
         imageView.isUserInteractionEnabled = true
         imageView.contentMode = .scaleAspectFit
         imageView.alpha = 0.0
+        imageView.tintColor = .lightGray
         return imageView
     }()
     

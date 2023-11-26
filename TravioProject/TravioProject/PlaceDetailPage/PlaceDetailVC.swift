@@ -58,14 +58,13 @@ class PlaceDetailVC: UIViewController {
         return cv
     }()
     
-    private lazy var imageBack:UIImageView = {
-        let img = UIImageView()
-        img.image = UIImage(named: "backLogo")
-        img.contentMode = .scaleToFill
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageBackTapped(tapGestureRecognizer:)))
-        img.isUserInteractionEnabled = true
-        img.addGestureRecognizer(tapGestureRecognizer)
-        return img
+    private lazy var btnBack:UIButton = {
+        let btn = UIButton()
+        if let image = UIImage(named: "backLogo") {
+            btn.setImage(image, for: .normal)
+        }
+        btn.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
+        return btn
     }()
     
     private lazy var imageFavorite:UIImageView = {
@@ -98,7 +97,7 @@ class PlaceDetailVC: UIViewController {
             }
         }
     }
-    @objc func imageBackTapped(tapGestureRecognizer: UITapGestureRecognizer){
+    @objc func handleBack(){
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -171,7 +170,7 @@ class PlaceDetailVC: UIViewController {
     func setupViews() {
         // Add here the setup for the UI
         self.view.backgroundColor = .white
-        self.view.addSubviews(collectionBottomView, collectionTopView, imageBack, imageFavorite, pageControl, activityIndicator)
+        self.view.addSubviews(collectionBottomView, collectionTopView, btnBack, imageFavorite, pageControl, activityIndicator)
         self.view.bringSubviewToFront(pageControl)
         setupLayout()
     }
@@ -190,7 +189,7 @@ class PlaceDetailVC: UIViewController {
             img.trailing.equalToSuperview().offset(-15)
             img.height.width.equalTo(50)
         })
-        imageBack.snp.makeConstraints({img in
+        btnBack.snp.makeConstraints({img in
             img.centerY.equalTo(imageFavorite)
             img.leading.equalToSuperview().offset(25)
             img.height.width.equalTo(40)

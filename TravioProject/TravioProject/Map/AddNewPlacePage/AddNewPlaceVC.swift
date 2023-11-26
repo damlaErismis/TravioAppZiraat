@@ -77,7 +77,7 @@ class AddNewPlaceVC: UIViewController{
     private lazy var btnAddPlace:UIButton = {
         let btn = UIButton()
         btn.setTitle("Add Place", for: .normal)
-        btn.titleLabel?.font = UIFont(name: "Poppins-Bold", size: 16)
+        btn.titleLabel?.font = .poppinsBold16
         btn.setTitleColor(.white, for: .normal)
         btn.backgroundColor = .mainColor
         btn.layer.cornerRadius = 12

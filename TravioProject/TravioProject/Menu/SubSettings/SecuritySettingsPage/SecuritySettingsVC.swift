@@ -101,7 +101,7 @@ class SecuritySettingsVC: UICustomViewController{
     private lazy var buttonSave:UIButton = {
         let btn = UIButton()
         btn.setTitle("Save", for: .normal)
-        btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 16)
+        btn.titleLabel?.font = .poppinsRegular16
         btn.setTitleColor(.white, for: .normal)
         btn.backgroundColor = .lightGray
         btn.layer.cornerRadius = 12

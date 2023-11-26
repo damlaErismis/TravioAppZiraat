@@ -12,7 +12,7 @@ class UICustomViewController: UIViewController {
     
     lazy var buttonBack: UIButton = {
         let button = UIButton()
-        button.isUserInteractionEnabled = true
+//        button.isUserInteractionEnabled = true
         if let image = UIImage(named: "vector") {
             button.setImage(image, for: .normal)
         }

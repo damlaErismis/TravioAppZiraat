@@ -89,7 +89,7 @@ class EditProfileVC: UIViewController {
     private lazy var buttonSave:UIButton = {
         let btn = UIButton()
         btn.setTitle("Save", for: .normal)
-        btn.titleLabel?.font = UIFont(name: "Poppins-Bold", size: 16)
+        btn.titleLabel?.font = .poppinsBold16
         btn.setTitleColor(.white, for: .normal)
         btn.backgroundColor = .mainColor
         btn.layer.cornerRadius = 12
@@ -101,7 +101,7 @@ class EditProfileVC: UIViewController {
         btn.setTitle("Change Photo", for: .normal)
         btn.setTitleColor(.textButtonColor, for: .normal)
         btn.frame = CGRect(x: view.frame.width - 120, y: 10, width: 149, height: 30)
-        btn.titleLabel?.font = UIFont(name: "Poppins-Regular", size: 14)
+        btn.titleLabel?.font = .poppinsRegular14
         btn.addTarget(self, action: #selector(btnChangePhotoTapped), for: .touchUpInside)
         return btn
         
