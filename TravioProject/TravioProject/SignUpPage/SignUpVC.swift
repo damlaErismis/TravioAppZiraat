@@ -117,10 +117,8 @@ class SignUpVC: UICustomViewController {
     }
     private func configureView(){
         labelTitle.text = "Sign Up"
-        imageBack.image = UIImage(named: "vector")
         self.viewMain.backgroundColor = .viewColor
-        let tap = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
-        imageBack.addGestureRecognizer(tap)
+        buttonBack.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
     
     func initVM(){
@@ -152,18 +150,10 @@ class SignUpVC: UICustomViewController {
     }
     
     private func setupViews() {
-        self.navigationItem.leftBarButtonItem = createLeftBarButton()
         self.view.backgroundColor = .mainColor
         viewMain.addSubviews(stackView, buttonSignup)
         stackView.addArrangedSubviews(viewUserName, viewEmail, viewPassword, viewPasswordConfirm)
         setupLayouts()
-    }
-
-    private func createLeftBarButton() -> UIBarButtonItem {
-        let image = UIImage(named: "vector")
-        let leftBarButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(backButtonTapped))
-        leftBarButton.tintColor = .white
-        return leftBarButton
     }
     
     private func setupLayouts() {

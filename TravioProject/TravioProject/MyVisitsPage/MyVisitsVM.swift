@@ -20,6 +20,11 @@ class MyVisitsVM {
             self.reloadCollectionViewForVisits?()
         }
     }
+    var errorStatusMessage:ErrorResponse?{
+        didSet {
+            
+        }
+    }
     var isLoading: Bool? {
         didSet {
             self.updateLoadingStatus?(isLoading!)

@@ -12,7 +12,6 @@ class UICustomViewController: UIViewController {
     
     lazy var buttonBack: UIButton = {
         let button = UIButton()
-//        button.isUserInteractionEnabled = true
         if let image = UIImage(named: "vector") {
             button.setImage(image, for: .normal)
         }
@@ -47,22 +46,20 @@ class UICustomViewController: UIViewController {
     
     func setupView() {
         self.view.backgroundColor = .mainColor
-        self.view.addSubviews(viewMain, labelTitle, buttonBack)
-        self.view.addSubviews(viewMain, labelTitle, imageBack, activityIndicator)
+        self.view.addSubviews(viewMain, labelTitle,buttonBack, activityIndicator)
         setupLayout()
     }
 
     func setupLayout() {
-        buttonBack.snp.makeConstraints({img in
         activityIndicator.snp.makeConstraints({ai in
             ai.edges.equalToSuperview()
         })
         
-        imageBack.snp.makeConstraints({img in
-            img.centerY.equalTo(labelTitle)
-            img.leading.equalToSuperview().offset(25)
-            img.width.equalTo(30)
-            img.height.equalTo(26.75)
+        buttonBack.snp.makeConstraints({btn in
+            btn.centerY.equalTo(labelTitle)
+            btn.leading.equalToSuperview().offset(25)
+            btn.width.equalTo(30)
+            btn.height.equalTo(26.75)
         })
         labelTitle.snp.makeConstraints({ img in
             img.top.equalToSuperview().offset(50)
@@ -75,4 +72,5 @@ class UICustomViewController: UIViewController {
         })
     }
 }
+
 

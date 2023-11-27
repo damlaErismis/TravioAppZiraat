@@ -20,13 +20,12 @@ class MyAddedPlacesVM {
             self.reloadCollectionViewForMyAddedPlaces?()
         }
     }
-<<<<<<< HEAD
+
     var errorStatusMessage:ErrorResponse?{
         didSet {
             
         }
     }
-=======
     var isLoading: Bool? {
         didSet {
             self.updateLoadingStatus?(isLoading!)
@@ -34,7 +33,6 @@ class MyAddedPlacesVM {
     }
     var updateLoadingStatus: ((Bool)->())?
     
->>>>>>> sprint5/refactor
     var myAddedPlacesChange: (() -> Void)?
     var reloadCollectionViewForMyAddedPlaces: (() -> Void)?
     

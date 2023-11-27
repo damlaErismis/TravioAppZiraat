@@ -20,6 +20,11 @@ class NewPlacesVM {
             self.reloadCollectionViewForNewPlaces?()
         }
     }
+    var errorStatusMessage:ErrorResponse?{
+        didSet {
+            
+        }
+    }
     var isLoading: Bool? {
         didSet {
             self.updateLoadingStatus?(isLoading!)

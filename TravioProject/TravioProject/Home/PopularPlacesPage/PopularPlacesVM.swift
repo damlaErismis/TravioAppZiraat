@@ -20,7 +20,11 @@ class PopularPlacesVM {
             self.reloadCollectionViewForPopularPlaces?()
         }
     }
-    
+    var errorStatusMessage:ErrorResponse?{
+        didSet {
+            
+        }
+    }
     var isLoading: Bool? {
         didSet {
             self.updateLoadingStatus?(isLoading!)

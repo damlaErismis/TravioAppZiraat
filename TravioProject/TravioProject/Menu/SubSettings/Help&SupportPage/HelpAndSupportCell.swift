@@ -100,7 +100,7 @@ class HelpAndSupportCell: UITableViewCell {
         lblQuestion.snp.makeConstraints ({ lbl in
             lbl.top.equalTo(container.snp.top)
             lbl.leading.equalTo(container.snp.leading).offset(10)
-            lbl.trailing.equalTo(container.snp.trailing).offset(-4)
+            lbl.trailing.equalTo(container.snp.trailing).offset(-12)
             lbl.height.equalTo(60)
         })
         
