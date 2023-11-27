@@ -30,7 +30,7 @@ class LoginVC: UIViewController {
     }()
     
     private lazy var labelWelcome:UILabelCC = {
-        let lbl = UILabelCC(labelText: "Welcome to Travio", font: .poppinsRegular24)
+        let lbl = UILabelCC(labelText: "Welcome to Travio", font: .poppinsMedium24)
         lbl.textAlignment = .center
         return lbl
     }()
@@ -42,12 +42,12 @@ class LoginVC: UIViewController {
         return indicator
     }()
     
-    private lazy var labelSuggestion = UILabelCC(labelText: "Don’t have any account?", font: .poppinsRegular14)
+    private lazy var labelSuggestion = UILabelCC(labelText: "Don’t have any account?", font: .poppinsSemiBold14)
     
     private lazy var buttonLogin:UIButton = {
         let btn = UIButton()
         btn.setTitle("Login", for: .normal)
-        btn.titleLabel?.font = .poppinsRegular16
+        btn.titleLabel?.font = FontStatus.poppinsSemiBold16.defineFont
         btn.setTitleColor(.white, for: .normal)
         btn.backgroundColor = .lightGray
         btn.layer.cornerRadius = 12
@@ -60,7 +60,7 @@ class LoginVC: UIViewController {
         let btn = UIButton()
         btn.setTitle("Sign Up", for: .normal)
         btn.setTitleColor(.black, for: .normal)
-        btn.titleLabel?.font = .poppinsRegular14
+        btn.titleLabel?.font = FontStatus.poppinsSemiBold14.defineFont
         btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
         return btn
@@ -197,8 +197,8 @@ class LoginVC: UIViewController {
         imageLogo.snp.makeConstraints({ img in
             img.top.equalToSuperview().offset(50)
             img.centerX.equalToSuperview()
-            img.height.equalTo(178)
-            img.width.equalTo(149.0)
+            img.height.equalToSuperview().multipliedBy(0.2)
+            img.width.equalToSuperview().multipliedBy(0.34)
         })
         viewMain.snp.makeConstraints({ view in
             view.bottom.leading.trailing.equalToSuperview()

@@ -16,19 +16,16 @@ class UITextFieldCC: UITextField {
     }
 
     func applyFont(){
-        
         self.font = addFont?.defineFont
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         configure()
     }
     
     func configure(){
-        
-        self.addFont = .poppinsRegular20
+        self.addFont = .poppinsRegular16
         
     }
 

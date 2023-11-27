@@ -23,12 +23,12 @@ class VisitsCell:UICollectionViewCell {
     lazy var labelPlace:UILabelCC = {
         let lbl = UILabelCC()
         lbl.textColor = .white
-            lbl.addFont = .poppinsRegular24
+        lbl.addFont = .poppinsSemiBold30
         return lbl
     }()
     lazy var labelCity:UILabelCC = {
         let lbl = UILabelCC()
-            lbl.addFont = .poppinsRegular14
+            lbl.addFont = .poppinsLight16
         lbl.textColor = .white
         return lbl
     }()
@@ -67,12 +67,13 @@ class VisitsCell:UICollectionViewCell {
         })
         
         labelCity.snp.makeConstraints({lbl in
-            lbl.bottom.equalTo(imageVektor)
+            lbl.bottom.equalToSuperview().offset(-8)
             lbl.leading.equalTo(imageVektor.snp.leading).offset(15)
             lbl.centerY.equalTo(imageVektor)
         })
         labelPlace.snp.makeConstraints({ lbl in
             lbl.leading.equalTo(imageVektor)
+            lbl.trailing.equalToSuperview().offset(-10)
             lbl.bottom.equalTo(imageVektor.snp.top).offset(-5)
         })
     }

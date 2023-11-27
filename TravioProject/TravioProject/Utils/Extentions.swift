@@ -17,42 +17,59 @@ enum FontStatus {
     case poppinsRegular12
     case poppinsRegular14
     case poppinsRegular16
-    case poppinsRegular20
-    case poppinsRegular24
-    case poppinsThin12
-    case poppinsBold16
+    case poppinsLight10
+    case poppinsLight14
+    case poppinsLight16
+    case poppinsMedium12
+    case poppinsMedium14
+    case poppinsMedium20
+    case poppinsMedium24
+    case poppinsSemiBold30
+    case poppinsSemiBold16
+    case poppinsSemiBold14
+    case poppinsSemiBold24
+    case poppinsSemiBold32
+    case poppinsSemiBold36
     case poppinsBold30
-    case poppinsBold24
-    case poppinsBold36
-    case poppinsMedium30
-    
+
     var defineFont:UIFont? {
         switch self {
+        case .poppinsRegular10:
+            return UIFont(name: "Poppins-Regular", size: 10)
         case .poppinsRegular12:
             return UIFont(name: "Poppins-Regular", size: 12)
         case .poppinsRegular14:
             return UIFont(name: "Poppins-Regular", size: 14)
         case .poppinsRegular16:
             return UIFont(name: "Poppins-Regular", size: 16)
-        case .poppinsRegular20:
-            return UIFont(name: "Poppins-Regular", size: 20)
-        case .poppinsRegular24:
-            return UIFont(name: "Poppins-Regular", size: 24)
-        case .poppinsThin12:
-            return UIFont(name: "Poppins-Thin", size: 12)
-        case .poppinsBold16:
-            return UIFont(name: "Poppins-Bold", size: 16)
+        case .poppinsLight10:
+            return UIFont(name:"Poppins-Light", size: 10)
+        case .poppinsLight14:
+            return UIFont(name:"Poppins-Light", size: 14)
+        case .poppinsLight16:
+            return UIFont(name:"Poppins-Light", size: 16)
+        case .poppinsMedium12:
+            return UIFont(name: "Poppins-Medium", size: 12)
+        case .poppinsMedium14:
+            return UIFont(name: "Poppins-Medium", size: 14)
+        case .poppinsMedium20:
+            return UIFont(name: "Poppins-Medium", size: 20)
+        case .poppinsMedium24:
+            return UIFont(name: "Poppins-Medium", size: 24)
+        case .poppinsSemiBold30:
+            return UIFont(name:"Poppins-SemiBold", size: 30)
+        case .poppinsSemiBold14:
+            return UIFont(name: "Poppins-SemiBold", size: 14)
+        case .poppinsSemiBold16:
+            return UIFont(name: "Poppins-SemiBold", size: 16)
+        case .poppinsSemiBold24:
+            return UIFont(name: "Poppins-SemiBold", size: 24)
+        case .poppinsSemiBold32:
+            return UIFont(name: "Poppins-SemiBold", size: 32)
+        case .poppinsSemiBold36:
+            return UIFont(name: "Poppins-SemiBold", size: 36)
         case .poppinsBold30:
             return UIFont(name: "Poppins-Bold", size: 30)
-        case .poppinsBold24:
-            return UIFont(name: "Poppins-Bold", size: 24)
-        case .poppinsBold36:
-            return UIFont(name: "Poppins-Bold", size: 36)
-        case .poppinsMedium30:
-            return UIFont(name: "Poppins-Medium", size: 30)
-        case .poppinsRegular10:
-            return UIFont(name: "Poppins-Regular", size: 10)
-            
         }
     }
 }
@@ -90,25 +107,6 @@ extension UIView {
     }
 }
 
-
-extension UIFont {
-    
-    static let poppinsRegular10 = UIFont(name: "Poppins-Regular", size: 10)
-    static let poppinsRegular12 = UIFont(name: "Poppins-Regular", size: 12)
-    static let poppinsRegular14 = UIFont(name: "Poppins-Regular", size: 14)
-    static let poppinsRegular16 = UIFont(name: "Poppins-Regular", size: 16)
-    static let poppinsRegular20 = UIFont(name: "Poppins-Regular", size: 20)
-    static let poppinsRegular24 = UIFont(name: "Poppins-Regular", size: 24)
-    static let poppinsThin12 = UIFont(name: "Poppins-Thin", size: 12)
-    static let poppinsBold16 = UIFont(name: "Poppins-Bold", size: 16)
-    static let poppinsBold30 = UIFont(name: "Poppins-Bold", size: 30)
-    static let poppinsBold36 = UIFont(name: "Poppins-Bold", size: 36)
-    static let poppinsMedium10 = UIFont(name: "Poppins-Medium", size: 10)
-    static let poppinsMedium30 = UIFont(name: "Poppins-Medium", size: 30)
-    static let poppinsMedium16 = UIFont(name: "Poppins-Medium", size: 16)
-    static let poppinsLight14 = UIFont(name:"Poppins-Light", size: 14)
-}
-
 // MARK: UIColor
 extension UIColor {
     
@@ -116,6 +114,8 @@ extension UIColor {
     static let fontColor = UIColor(hexString: "#3d3d3d")
     static let mainColor = UIColor(hexString: "#38ada9")
     static let textButtonColor = UIColor(hexString: "#17C0EB")
+    static let grayText = UIColor(hexString: "#999999")
+    static let darkGrayText = UIColor(hexString: "#3c3c3c")
     
     convenience init(hexString: String) {
         let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)

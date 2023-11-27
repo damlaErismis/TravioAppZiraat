@@ -62,10 +62,10 @@ class EditProfileVC: UIViewController {
     private lazy var viewUserRole = UIViewCC()
     
     
-    private lazy var labelFullNameTitle = UILabelCC(labelText: " ", font: .poppinsRegular24)
+    private lazy var labelFullNameTitle = UILabelCC(labelText: " ", font: .poppinsSemiBold24)
     
-    private lazy var labelCreatedAtTime = UILabelCC(labelText: "Aug 30, 2023", font: .poppinsRegular14)
-    private lazy var labelUserRole = UILabelCC(labelText: "Admin", font: .poppinsRegular14)
+    private lazy var labelCreatedAtTime = UILabelCC(labelText: "Aug 30, 2023", font: .poppinsMedium12)
+    private lazy var labelUserRole = UILabelCC(labelText: "Admin", font: .poppinsMedium12)
     
     private lazy var imageCreatedAtTime:UIImageView = {
         let img = UIImageView()
@@ -89,7 +89,7 @@ class EditProfileVC: UIViewController {
     private lazy var buttonSave:UIButton = {
         let btn = UIButton()
         btn.setTitle("Save", for: .normal)
-        btn.titleLabel?.font = .poppinsBold16
+        btn.titleLabel?.font = FontStatus.poppinsSemiBold16.defineFont
         btn.setTitleColor(.white, for: .normal)
         btn.backgroundColor = .mainColor
         btn.layer.cornerRadius = 12
@@ -101,7 +101,7 @@ class EditProfileVC: UIViewController {
         btn.setTitle("Change Photo", for: .normal)
         btn.setTitleColor(.textButtonColor, for: .normal)
         btn.frame = CGRect(x: view.frame.width - 120, y: 10, width: 149, height: 30)
-        btn.titleLabel?.font = .poppinsRegular14
+        btn.titleLabel?.font = FontStatus.poppinsRegular12.defineFont
         btn.addTarget(self, action: #selector(btnChangePhotoTapped), for: .touchUpInside)
         return btn
         

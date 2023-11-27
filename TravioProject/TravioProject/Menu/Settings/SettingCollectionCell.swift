@@ -36,7 +36,7 @@ class SettingCollectionCell: UICollectionViewCell {
     
     private lazy var labelItem:UILabelCC = {
         let lbl = UILabelCC()
-        lbl.font = .poppinsLight14
+        lbl.font = FontStatus.poppinsLight14.defineFont
         lbl.textColor = .fontColor
         return lbl
     }()
@@ -47,7 +47,6 @@ class SettingCollectionCell: UICollectionViewCell {
         labelItem.text = itemString
     }
     
-    
     //MARK: -- Life Cycles
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -57,12 +56,6 @@ class SettingCollectionCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    //MARK: -- Component Actions
-    
-    
-    //MARK: -- Private Methods
-    
     
     //MARK: -- UI Methods
     func setupViews() {

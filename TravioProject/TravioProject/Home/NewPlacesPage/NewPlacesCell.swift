@@ -19,19 +19,19 @@ class NewPlacesCell:UICollectionViewCell {
         return iv
     }()
     
-    private lazy var labelPlace:UILabelCC = {
-        let lbl = UILabelCC()
-        lbl.textColor = .black
-        lbl.addFont = .poppinsRegular24
-        return lbl
-    }()
-    
-    private lazy var labelCity:UILabelCC = {
-        let lbl = UILabelCC()
-        lbl.addFont = .poppinsRegular14
-        lbl.textColor = .black
-        return lbl
-    }()
+    lazy var labelPlace:UILabelCC = {
+       let lbl = UILabelCC()
+       lbl.textColor = .darkGrayText
+       lbl.addFont = .poppinsSemiBold24
+       return lbl
+   }()
+   
+   private lazy var labelCity:UILabelCC = {
+       let lbl = UILabelCC()
+       lbl.addFont = .poppinsLight14
+       lbl.textColor = .darkGrayText
+       return lbl
+   }()
     
     private lazy var imageVector:UIImageView = {
         let img = UIImageView()

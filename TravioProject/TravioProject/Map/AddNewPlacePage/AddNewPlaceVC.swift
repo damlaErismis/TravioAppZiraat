@@ -50,10 +50,11 @@ class AddNewPlaceVC: UIViewController{
         return view
     }()
     
-    private lazy var labelDescription = UILabelCC(labelText: "Visit Description", font: .poppinsRegular14)
+    private lazy var labelDescription = UILabelCC(labelText: "Visit Description", font: .poppinsMedium14)
+    
     private lazy var textViewDescription: UITextView = {
         let tv = UITextView()
-        tv.font = UIFont.systemFont(ofSize: 14)
+        tv.font = FontStatus.poppinsRegular12.defineFont
         tv.layer.borderColor = UIColor.lightGray.cgColor
         tv.autocapitalizationType = .none
         return tv
@@ -68,6 +69,7 @@ class AddNewPlaceVC: UIViewController{
     
     lazy var viewCountryCity:UIViewCC = {
         let view = UIViewCC(labeltext: "Country, City", placeholderText: "France, Paris")
+        
         view.textField.delegate = self
         view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         view.textField.autocapitalizationType = .none
@@ -77,7 +79,7 @@ class AddNewPlaceVC: UIViewController{
     private lazy var btnAddPlace:UIButton = {
         let btn = UIButton()
         btn.setTitle("Add Place", for: .normal)
-        btn.titleLabel?.font = .poppinsBold16
+        btn.titleLabel?.font = FontStatus.poppinsSemiBold16.defineFont
         btn.setTitleColor(.white, for: .normal)
         btn.backgroundColor = .mainColor
         btn.layer.cornerRadius = 12

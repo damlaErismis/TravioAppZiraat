@@ -30,13 +30,13 @@ class SecuritySettingsVC: UICustomViewController{
     }()
     
     private lazy var labelPrivacy:UILabelCC = {
-        let lbl = UILabelCC(labelText: "Privacy", font: .poppinsRegular20)
+        let lbl = UILabelCC(labelText: "Privacy", font: .poppinsSemiBold16)
         lbl.textColor =  .mainColor
         return lbl
     }()
     
     private lazy var labelChangePassword:UILabelCC = {
-        let lbl = UILabelCC(labelText: "Change Password", font: .poppinsRegular20)
+        let lbl = UILabelCC(labelText: "Change Password", font: .poppinsSemiBold16)
         lbl.textColor = .mainColor
         return lbl
     }()
@@ -45,14 +45,14 @@ class SecuritySettingsVC: UICustomViewController{
     private lazy var viewPhotoLibrary = UIViewCC()
     private lazy var viewLocation = UIViewCC()
     private lazy var labelSecuritySetting:UILabelCC = {
-        let lbl =  UILabelCC(labelText: "Security Setting", font: .poppinsMedium30)
+        let lbl =  UILabelCC(labelText: "Security Setting", font: .poppinsSemiBold32)
         lbl.textColor = .white
         return lbl
     }()
     
-    private lazy var labelCamera = UILabelCC(labelText: "Camera", font: .poppinsRegular14)
-    private lazy var labelPhotoLibrary = UILabelCC(labelText: "Photo Library", font: .poppinsRegular14)
-    private lazy var labelLocation = UILabelCC(labelText: "Location", font: .poppinsRegular14)
+    private lazy var labelCamera = UILabelCC(labelText: "Camera", font: .poppinsMedium14)
+    private lazy var labelPhotoLibrary = UILabelCC(labelText: "Photo Library", font: .poppinsMedium14)
+    private lazy var labelLocation = UILabelCC(labelText: "Location", font: .poppinsMedium14)
     
     private lazy var viewPassword: UIViewCC = {
         let view = UIViewCC(labeltext: "New Password", placeholderText: "***********", isStatusImageViewVisible: true)
@@ -101,7 +101,7 @@ class SecuritySettingsVC: UICustomViewController{
     private lazy var buttonSave:UIButton = {
         let btn = UIButton()
         btn.setTitle("Save", for: .normal)
-        btn.titleLabel?.font = .poppinsRegular16
+        btn.titleLabel?.font = FontStatus.poppinsSemiBold16.defineFont
         btn.setTitleColor(.white, for: .normal)
         btn.backgroundColor = .lightGray
         btn.layer.cornerRadius = 12

@@ -28,7 +28,7 @@ class PlaceDetailCollectionCell: UICollectionViewCell,MKMapViewDelegate {
     }()
     private lazy var labelCity:UILabelCC = {
         let lbl = UILabelCC()
-        lbl.addFont = .poppinsMedium30
+        lbl.addFont = .poppinsSemiBold30
         return lbl
         
     }()
@@ -40,7 +40,7 @@ class PlaceDetailCollectionCell: UICollectionViewCell,MKMapViewDelegate {
     }()
     private lazy var labelAddedBy:UILabelCC = {
         let lbl = UILabelCC()
-        lbl.textColor = .systemGray2
+        lbl.textColor = .grayText
         lbl.addFont = .poppinsRegular10
         return lbl
         
@@ -50,7 +50,7 @@ class PlaceDetailCollectionCell: UICollectionViewCell,MKMapViewDelegate {
         lbl.numberOfLines = 0
         lbl.lineBreakMode = NSLineBreakMode.byWordWrapping
         lbl.textAlignment = .left
-        lbl.addFont = .poppinsRegular14
+        lbl.addFont = .poppinsRegular12
         return lbl
     }()
 

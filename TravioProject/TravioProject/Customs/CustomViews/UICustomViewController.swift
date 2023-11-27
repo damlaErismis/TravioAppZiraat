@@ -27,7 +27,7 @@ class UICustomViewController: UIViewController {
     }()
 
     lazy var labelTitle: UILabelCC = {
-        let lbl = UILabelCC(labelText: "Label", font: .poppinsBold30)
+        let lbl = UILabelCC(labelText: "Label", font: .poppinsSemiBold32)
         lbl.textColor = .white
         return lbl
     }()
@@ -61,9 +61,10 @@ class UICustomViewController: UIViewController {
             btn.width.equalTo(30)
             btn.height.equalTo(26.75)
         })
-        labelTitle.snp.makeConstraints({ img in
-            img.top.equalToSuperview().offset(50)
-            img.leading.equalTo(buttonBack.snp.trailing).offset(24)
+        labelTitle.snp.makeConstraints({ lbl in
+            lbl.top.equalToSuperview().offset(50)
+            lbl.leading.equalTo(buttonBack.snp.trailing).offset(12)
+            
         })
         viewMain.snp.makeConstraints({ view in
             view.bottom.equalToSuperview()

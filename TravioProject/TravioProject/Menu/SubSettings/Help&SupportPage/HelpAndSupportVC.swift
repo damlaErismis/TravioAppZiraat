@@ -34,14 +34,14 @@ class HelpAndSupportVC: UICustomViewController {
     }()
     
     private lazy var labelFAQ:UILabelCC = {
-        let lbl = UILabelCC(labelText: "FAQ", font: .poppinsBold24)
+        let lbl = UILabelCC(labelText: "FAQ", font: .poppinsSemiBold24)
         lbl.textColor = .mainColor
         lbl.adjustsFontSizeToFitWidth = true
         return lbl
     }()
 
     func configureView(){
-        labelTitle.text = "Help And Support"
+        labelTitle.text = "Help&Support"
         buttonBack.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
     

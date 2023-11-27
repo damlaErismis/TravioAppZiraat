@@ -31,12 +31,12 @@ class SettingsVC: UIViewController {
         return cv
     }()
     
-    private lazy var buttonSetting:UIButton = {
-        let btn = UIButton()
-        btn.setTitle("Settings", for: .normal)
-        btn.setTitleColor(.white, for: .normal)
-        btn.titleLabel?.font = .poppinsMedium30
-        return btn
+    private lazy var lblSettings:UILabel = {
+        let lbl = UILabel()
+        lbl.text = "Settings"
+        lbl.font = FontStatus.poppinsSemiBold32.defineFont
+        lbl.textColor = .white
+        return lbl
     }()
     
     private lazy var btnLogout:UIButton = {
@@ -65,9 +65,10 @@ class SettingsVC: UIViewController {
         return img
     }()
     
-    private lazy var labelNameSurname:UILabelCC = {
-        let lbl = UILabelCC()
-        lbl.font = .poppinsMedium16
+    private lazy var labelNameSurname:UILabel = {
+        let lbl = UILabel()
+        lbl.font = FontStatus.poppinsSemiBold16.defineFont
+        lbl.textColor = .darkGrayText
         return lbl
     }()
     
@@ -75,7 +76,7 @@ class SettingsVC: UIViewController {
         let btn = UIButton()
         btn.setTitle("Edit Profile", for: .normal)
         btn.setTitleColor(.textButtonColor, for: .normal)
-        btn.titleLabel?.font = .poppinsRegular12
+        btn.titleLabel?.font = FontStatus.poppinsRegular12.defineFont
         btn.addTarget(self, action: #selector(buttonEditProfileTapped), for: .touchUpInside)
         return btn
     }()
@@ -158,20 +159,20 @@ class SettingsVC: UIViewController {
     }
     
     func setupViews() {
-        self.view.addSubviews(viewMain, buttonSetting, btnLogout)
+        self.view.addSubviews(viewMain, lblSettings, btnLogout)
         self.viewMain.addSubviews(imageProfile, labelNameSurname, buttonEditProfile, collectionView)
         setupLayout()
     }
     
     func setupLayout() {
-        buttonSetting.snp.makeConstraints({btn in
+        lblSettings.snp.makeConstraints({btn in
             btn.top.equalToSuperview().offset(40)
             btn.leading.equalToSuperview().offset(20)
             btn.height.equalTo(48)
             btn.width.equalTo(134)
         })
         btnLogout.snp.makeConstraints({img in
-            img.centerY.equalTo(buttonSetting.snp.centerY)
+            img.centerY.equalTo(lblSettings.snp.centerY)
             img.trailing.equalTo(-30)
             img.height.width.equalTo(30)
         })

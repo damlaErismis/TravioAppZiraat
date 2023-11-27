@@ -53,9 +53,6 @@ class SignUpVC: UICustomViewController {
         view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         view.textField.autocapitalizationType = .none
         view.textField.isSecureTextEntry = true
-        view.statusImageView.image = UIImage(systemName: "eye.slash.fill")
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handlePasswordLongPress(_:)))
-        view.addGestureRecognizer(longPressGesture)
         return view
     }()
     
@@ -74,7 +71,7 @@ class SignUpVC: UICustomViewController {
     private lazy var buttonSignup:UIButton = {
         let btn = UIButton()
         btn.setTitle("Sign Up", for: .normal)
-        btn.titleLabel?.font = .poppinsBold16
+        btn.titleLabel?.font = FontStatus.poppinsSemiBold16.defineFont
         btn.setTitleColor(.white, for: .normal)
         btn.backgroundColor = .lightGray
         btn.layer.cornerRadius = 12

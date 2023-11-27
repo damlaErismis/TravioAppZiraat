@@ -17,13 +17,12 @@ class MapImageCollectionCell:UICollectionViewCell{
     lazy var labelPlace:UILabelCC = {
         let lbl = UILabelCC()
         lbl.textColor = .white
-        lbl.addFont = .poppinsRegular24
-        lbl.numberOfLines = 0
+        lbl.addFont = .poppinsSemiBold24
         return lbl
     }()
     lazy var labelCity:UILabelCC = {
         let lbl = UILabelCC()
-            lbl.addFont = .poppinsRegular14
+            lbl.addFont = .poppinsLight14
         lbl.textColor = .white
         return lbl
     }()
@@ -54,7 +53,7 @@ class MapImageCollectionCell:UICollectionViewCell{
         })
         
         labelCity.snp.makeConstraints({lbl in
-            lbl.bottom.equalTo(imageVektor)
+            lbl.bottom.equalToSuperview().offset(-8)
             lbl.leading.equalTo(imageVektor.snp.leading).offset(15)
             lbl.centerY.equalTo(imageVektor)
         })

@@ -34,13 +34,12 @@ class UIViewCC: UIView{
     }
     lazy var label:UILabelCC = {
         let lbl = UILabelCC()
-        lbl.addFont = .poppinsRegular14
+        lbl.addFont = .poppinsMedium14
         lbl.textColor = .black
         return lbl
     }()
     
     lazy var textField:UITextFieldCC = {
- 
         let txt = UITextFieldCC()
         txt.addFont = .poppinsRegular16
         return txt
@@ -54,7 +53,7 @@ class UIViewCC: UIView{
     var placeholder: String? {
         get { return textField.placeholder }
         set {
-            textField.attributedPlaceholder = NSAttributedString(string: newValue ?? "", attributes: [NSAttributedString.Key.font: UIFont(name: "Poppins-Thin", size: 12)!, NSAttributedString.Key.foregroundColor: UIColor.black])
+            textField.attributedPlaceholder = NSAttributedString(string: newValue ?? "", attributes: [NSAttributedString.Key.font: UIFont(name: "Poppins-Light", size: 12)!, NSAttributedString.Key.foregroundColor: UIColor.grayText])
         }
     }
     var text: String?{
@@ -97,7 +96,7 @@ class UIViewCC: UIView{
     func setupLayout(){
         label.snp.makeConstraints({ lbl in
             lbl.top.equalToSuperview().offset(8)
-            lbl.leading.equalToSuperview().offset(12)
+            lbl.leading.trailing.equalToSuperview().inset(12)
         })
         statusImageView.snp.makeConstraints { imgView in
             imgView.centerY.equalTo(textField)
@@ -107,7 +106,7 @@ class UIViewCC: UIView{
         }
         textField.snp.makeConstraints({ txt in
             txt.top.equalTo(label.snp.bottom).offset(8)
-            txt.leading.equalToSuperview().inset(12)
+            txt.leading.trailing.equalToSuperview().inset(12)
             txt.height.equalTo(30)
         })
     }

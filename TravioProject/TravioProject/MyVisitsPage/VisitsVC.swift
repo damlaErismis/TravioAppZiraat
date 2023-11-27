@@ -42,7 +42,7 @@ class VisitsVC: UIViewController {
     private lazy var labelMyVisits:UILabel = {
         let lbl = UILabel()
         lbl.text = "My Visits"
-        lbl.font = .poppinsBold36
+        lbl.font = FontStatus.poppinsSemiBold36.defineFont
         lbl.textColor = .white
         return lbl
     }()
