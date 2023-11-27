@@ -33,6 +33,13 @@ class UICustomViewController: UIViewController {
         return lbl
     }()
     
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = .black
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -41,11 +48,17 @@ class UICustomViewController: UIViewController {
     func setupView() {
         self.view.backgroundColor = .mainColor
         self.view.addSubviews(viewMain, labelTitle, buttonBack)
+        self.view.addSubviews(viewMain, labelTitle, imageBack, activityIndicator)
         setupLayout()
     }
 
     func setupLayout() {
         buttonBack.snp.makeConstraints({img in
+        activityIndicator.snp.makeConstraints({ai in
+            ai.edges.equalToSuperview()
+        })
+        
+        imageBack.snp.makeConstraints({img in
             img.centerY.equalTo(labelTitle)
             img.leading.equalToSuperview().offset(25)
             img.width.equalTo(30)

@@ -20,11 +20,21 @@ class MyAddedPlacesVM {
             self.reloadCollectionViewForMyAddedPlaces?()
         }
     }
+<<<<<<< HEAD
     var errorStatusMessage:ErrorResponse?{
         didSet {
             
         }
     }
+=======
+    var isLoading: Bool? {
+        didSet {
+            self.updateLoadingStatus?(isLoading!)
+        }
+    }
+    var updateLoadingStatus: ((Bool)->())?
+    
+>>>>>>> sprint5/refactor
     var myAddedPlacesChange: (() -> Void)?
     var reloadCollectionViewForMyAddedPlaces: (() -> Void)?
     
@@ -35,7 +45,9 @@ class MyAddedPlacesVM {
     }
     
     func getPopularPlaces(completion: @escaping (Result<PlaceResponse, Error>) -> Void) {
+        self.isLoading = true
         GenericNetworkingHelper.shared.fetchData(urlRequest: .getAllPlacesForUser, callback: {(result: Result<PlaceResponse,APIError>) in
+            self.isLoading = false
             switch result {
             case .success(let success):
                 self.myAddedPlacesResponse = success

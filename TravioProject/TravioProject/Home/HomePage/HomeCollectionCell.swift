@@ -53,7 +53,7 @@ class HomeCollectionCell: UICollectionViewCell {
         self.layer.rasterizationScale = UIScreen.main.scale
     }
     
-    public func configurePopularPlaces(with object:Place){
+    public func configurePlaces(with object:Place){
         if let imageURL = URL(string: object.cover_image_url) {
             imagePlace.kf.setImage(with: imageURL)
         }

@@ -114,6 +114,12 @@ class EditProfileVC: UIViewController {
         btn.addTarget(self, action: #selector(btnCrossTapped), for: .touchUpInside)
         return btn
     }()
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = .black
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
     
     @objc func btnCrossTapped() {
         self.dismiss(animated: true, completion: nil)
@@ -142,6 +148,15 @@ class EditProfileVC: UIViewController {
     }
     
     private func bindViewModel() {
+        viewModel.updateLoadingStatus = { [weak self] (staus) in
+            DispatchQueue.main.async {
+                if staus {
+                    self?.activityIndicator.startAnimating()
+                } else {
+                    self?.activityIndicator.stopAnimating()
+                }
+            }
+        }
         viewModel.userProfileDidChange = { [weak self] userProfile in
             self?.labelFullNameTitle.text = userProfile.full_name
             self?.labelUserRole.text = userProfile.role
@@ -187,7 +202,7 @@ class EditProfileVC: UIViewController {
     }
     
     func setupViews() {
-        self.view.addSubviews(viewMain, btnCross, labelEditProfile)
+        self.view.addSubviews(viewMain, btnCross, labelEditProfile, activityIndicator)
         self.view.backgroundColor = .mainColor
         viewMain.addSubviews(imgProfilePic, buttonChangePhoto ,buttonSave,viewCreatedAtTime,viewUserRole,viewFullName,viewEmail, labelFullNameTitle, stackView)
         viewCreatedAtTime.addSubviews(imageCreatedAtTime, labelCreatedAtTime)
@@ -197,6 +212,9 @@ class EditProfileVC: UIViewController {
     }
     
     func setupLayout() {
+        activityIndicator.snp.makeConstraints({ai in
+            ai.edges.equalToSuperview()
+        })
         
         labelEditProfile.snp.makeConstraints({ img in
             img.top.equalToSuperview().offset(25)

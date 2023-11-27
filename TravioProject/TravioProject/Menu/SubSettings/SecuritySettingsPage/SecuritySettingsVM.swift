@@ -24,14 +24,23 @@ class SecuritySettingsVM {
             self.showErrorAlertClosure?()
         }
     }
+    var isLoading: Bool? {
+        didSet {
+            self.updateLoadingStatus?(isLoading!)
+        }
+    }
+    var updateLoadingStatus: ((Bool)->())?
     var showSuccessAlertClosure: (()->())?
     var showErrorAlertClosure: (()->())?
+    
     func changePassword(newPassword:String){
+        self.isLoading = true
         let params = [
             "new_password": newPassword
         ]
         
         GenericNetworkingHelper.shared.fetchData(urlRequest: .changePassword(params: params), callback: {(result: Result<SuccessResponse,APIError>) in
+            self.isLoading = false
             switch result {
             case .success(let success):
                 self.successMessage = success.message

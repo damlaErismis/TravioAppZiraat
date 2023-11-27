@@ -72,6 +72,15 @@ class MyAddedPlacesVC: UICustomViewController {
         }
     }
     private func initVM(){
+        viewModel.updateLoadingStatus = { [weak self] (staus) in
+            DispatchQueue.main.async {
+                if staus {
+                    self?.activityIndicator.startAnimating()
+                } else {
+                    self?.activityIndicator.stopAnimating()
+                }
+            }
+        }
         viewModel.reloadCollectionViewForMyAddedPlaces = { [weak self] () in
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()

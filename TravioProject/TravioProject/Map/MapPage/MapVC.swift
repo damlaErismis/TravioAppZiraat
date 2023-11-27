@@ -35,6 +35,13 @@ class MapVC: UIViewController, ViewControllerDelegate{
         return map
     }()
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = .black
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
     lazy var collectionView:UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -75,6 +82,15 @@ class MapVC: UIViewController, ViewControllerDelegate{
     }
     
     func initVM(){
+        vm.updateLoadingStatus = { [weak self] (staus) in
+            DispatchQueue.main.async {
+                if staus {
+                    self?.activityIndicator.startAnimating()
+                } else {
+                    self?.activityIndicator.stopAnimating()
+                }
+            }
+        }
         vm.initFetch()
         vm.addPins = {
             self.addPins()
@@ -182,15 +198,19 @@ class MapVC: UIViewController, ViewControllerDelegate{
     
     //MARK: -- UI Methods
     func setupViews() {
-        self.view.addSubviews(mapView, collectionView)
+        self.view.addSubviews(mapView, collectionView, activityIndicator)
         setupLayout()
     }
     
     func setupLayout() {
-        // Add here the setup for layout
+        activityIndicator.snp.makeConstraints({ai in
+            ai.edges.equalToSuperview()
+        })
+        
         mapView.snp.makeConstraints({mv in
             mv.edges.equalToSuperview()
         })
+        
         collectionView.snp.makeConstraints({cv in
             cv.leading.trailing.equalToSuperview()
             cv.height.equalToSuperview().multipliedBy(0.26)
@@ -239,6 +259,7 @@ extension MapVC: CLLocationManagerDelegate {
     }
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkLocationAuthorization()
+
     }
 }
 

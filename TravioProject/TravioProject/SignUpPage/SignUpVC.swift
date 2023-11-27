@@ -8,19 +8,11 @@
 import UIKit
 import SnapKit
 
-class SignUpVC: UIViewController {
+class SignUpVC: UICustomViewController {
     
     private var viewModel = SignUpViewModel()
     
     private var isFormComplete: Bool = false
-    
-    private lazy var viewMain:UIView = {
-        let view = UIView()
-        view.backgroundColor = .viewColor
-        view.layer.cornerRadius = 75
-        view.layer.maskedCorners = [.topLeft]
-        return view
-    }()
     
     private lazy var viewUserName:UIViewCC = {
         let view = UIViewCC(labeltext: "Username", placeholderText: "bilge_adam")
@@ -38,17 +30,32 @@ class SignUpVC: UIViewController {
     }()
     
     private lazy var viewPassword:UIViewCC = {
-        let view = UIViewCC(labeltext: "Password", placeholderText: "********")
+        let view = UIViewCC(labeltext: "Password", placeholderText: "********", isStatusImageViewVisible: true)
         view.textField.isSecureTextEntry = true
         view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        view.statusImageView.image = UIImage(systemName: "eye.slash.fill")
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handlePasswordLongPress(_:)))
+        view.addGestureRecognizer(longPressGesture)
         return view
     }()
     
+    @objc func handlePasswordLongPress(_ gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            viewPassword.statusImageView.image = UIImage(systemName: "eye.fill")
+            viewPassword.textField.isSecureTextEntry = false
+        } else if gesture.state == .ended {
+            viewPassword.statusImageView.image = UIImage(systemName: "eye.slash.fill")
+            viewPassword.textField.isSecureTextEntry = true
+        }
+    }
     private lazy var viewPasswordConfirm:UIViewCC = {
         let view = UIViewCC(labeltext: "Password Confirm", placeholderText: "********", isStatusImageViewVisible: true)
         view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         view.textField.autocapitalizationType = .none
         view.textField.isSecureTextEntry = true
+        view.statusImageView.image = UIImage(systemName: "eye.slash.fill")
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handlePasswordLongPress(_:)))
+        view.addGestureRecognizer(longPressGesture)
         return view
     }()
     
@@ -59,23 +66,10 @@ class SignUpVC: UIViewController {
         sv.distribution = .fillProportionally
         return sv
     }()
-    private lazy var btnBack: UIButton = {
-        let image = UIImage(named: "vector")
-        let btn = UIButton()
-        btn.setImage(image, for: .normal)
-        btn.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        return btn
-    }()
     
     @objc func backButtonTapped(){
         self.navigationController?.popViewController(animated: true)
     }
-    
-    private lazy var labelSignUp:UILabelCC = {
-        let lbl = UILabelCC(labelText: "Sign Up", font: .poppinsBold36)
-        lbl.textColor = .white
-        return lbl
-    }()
 
     private lazy var buttonSignup:UIButton = {
         let btn = UIButton()
@@ -121,8 +115,24 @@ class SignUpVC: UIViewController {
             }
         }
     }
+    private func configureView(){
+        labelTitle.text = "Sign Up"
+        imageBack.image = UIImage(named: "vector")
+        self.viewMain.backgroundColor = .viewColor
+        let tap = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
+        imageBack.addGestureRecognizer(tap)
+    }
     
     func initVM(){
+        viewModel.updateLoadingStatus = { [weak self] (staus) in
+            DispatchQueue.main.async {
+                if staus {
+                    self?.activityIndicator.startAnimating()
+                } else {
+                    self?.activityIndicator.stopAnimating()
+                }
+            }
+        }
         viewModel.showAlertClosure = { [weak self] () in
             DispatchQueue.main.async {
                 if let message = self?.viewModel.alertMessage {
@@ -136,25 +146,17 @@ class SignUpVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
-        setupView()
-        initView()
+        configureView()
+        setupViews()
         initVM()
     }
     
-    private func setupView() {
-        
+    private func setupViews() {
         self.navigationItem.leftBarButtonItem = createLeftBarButton()
-        
         self.view.backgroundColor = .mainColor
-        self.view.addSubviews(viewMain, labelSignUp, btnBack)
         viewMain.addSubviews(stackView, buttonSignup)
         stackView.addArrangedSubviews(viewUserName, viewEmail, viewPassword, viewPasswordConfirm)
-        setupLayout()
-    }
-
-    
-    func initView(){
-        setupView()
+        setupLayouts()
     }
 
     private func createLeftBarButton() -> UIBarButtonItem {
@@ -164,29 +166,7 @@ class SignUpVC: UIViewController {
         return leftBarButton
     }
     
-    private func setupLayout() {
-        btnBack.snp.makeConstraints({ btn in
-            btn.top.equalTo(labelSignUp).offset(15)
-            btn.leading.equalToSuperview().offset(25)
-            btn.width.equalTo(25)
-            btn.height.equalTo(25)
-        })
-        
-        labelSignUp.snp.makeConstraints({ img in
-            img.top.equalToSuperview().offset(55)
-            img.centerX.equalToSuperview()
-            img.leading.equalTo(btnBack.snp.trailing).offset(30)
-            img.height.equalTo(52)
-            img.width.equalTo(150)
-        })
-        
-        viewMain.snp.makeConstraints({ view in
-            view.bottom.equalToSuperview()
-            view.leading.equalToSuperview()
-            view.trailing.equalToSuperview()
-            view.height.equalToSuperview().multipliedBy(0.80)
-        })
-        
+    private func setupLayouts() {
         stackView.snp.makeConstraints({ sv in
             sv.top.equalToSuperview().offset(65)
             sv.leading.equalToSuperview().offset(25)
@@ -203,14 +183,3 @@ class SignUpVC: UIViewController {
     }
 }
 
-//#if DEBUG
-//import SwiftUI
-//
-//@available(iOS 13, *)
-//struct SignUpVC_Preview: PreviewProvider {
-//    static var previews: some View{
-//        
-//        SignUpVC().showPreview()
-//    }
-//}
-//#endif

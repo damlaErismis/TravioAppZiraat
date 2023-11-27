@@ -13,6 +13,28 @@ final class KeychainHelper {
     
     init(){ }
     
+    func isTokenExpired() -> Bool {
+        guard let token = getToken(), let payload = decodeJwtToken(token) else {
+            return true
+        }
+        guard let exp = payload["exp"] as? TimeInterval else {
+            return true 
+        }
+        return Date().timeIntervalSince1970 > exp
+    }
+    
+    private func decodeJwtToken(_ token: String) -> [String: Any]? {
+        let segments = token.components(separatedBy: ".")
+        guard segments.count > 1 else { return nil }
+        let base64String = segments[1]
+            .replacingOccurrences(of: "-", with: "+")
+            .replacingOccurrences(of: "_", with: "/")
+        let padded = base64String.padding(toLength: ((base64String.count+3)/4)*4,
+                                          withPad: "=",
+                                          startingAt: 0)
+        guard let data = Data(base64Encoded: padded) else { return nil }
+        return try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+    }
     
     func getToken()->String?{
         

@@ -107,7 +107,7 @@ class UIViewCC: UIView{
         }
         textField.snp.makeConstraints({ txt in
             txt.top.equalTo(label.snp.bottom).offset(8)
-            txt.leading.equalToSuperview().offset(12)
+            txt.leading.equalToSuperview().inset(12)
             txt.height.equalTo(30)
         })
     }

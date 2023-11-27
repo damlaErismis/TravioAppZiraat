@@ -35,7 +35,15 @@ class LoginVC: UIViewController {
         return lbl
     }()
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = .black
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
     private lazy var labelSuggestion = UILabelCC(labelText: "Don’t have any account?", font: .poppinsRegular14)
+    
     private lazy var buttonLogin:UIButton = {
         let btn = UIButton()
         btn.setTitle("Login", for: .normal)
@@ -112,6 +120,15 @@ class LoginVC: UIViewController {
     }
     
     func initVM(){
+        vm.updateLoadingStatus = { [weak self] (staus) in
+            DispatchQueue.main.async {
+                if staus {
+                    self?.activityIndicator.startAnimating()
+                } else {
+                    self?.activityIndicator.stopAnimating()
+                }
+            }
+        }
         vm.showAlertClosure = { [weak self] () in
             DispatchQueue.main.async {
                 if let message = self?.vm.errorStatusMessage?.message, let title = self?.vm.errorStatusMessage?.status {
@@ -163,7 +180,7 @@ class LoginVC: UIViewController {
     //MARK: -- UI Methods
     private func setupView(){
         self.view.backgroundColor = .mainColor
-        self.view.addSubviews(viewMain, imageLogo)
+        self.view.addSubviews(viewMain, imageLogo, activityIndicator)
         viewMain.addSubviews(labelWelcome, stackView,  buttonLogin, stackViewSignUp)
         stackView.addArrangedSubviews(viewEmail, viewPassword)
 
@@ -172,6 +189,11 @@ class LoginVC: UIViewController {
     }
     
     private func setupLayout(){
+        
+        activityIndicator.snp.makeConstraints({ai in
+            ai.edges.equalToSuperview()
+        })
+        
         imageLogo.snp.makeConstraints({ img in
             img.top.equalToSuperview().offset(50)
             img.centerX.equalToSuperview()
