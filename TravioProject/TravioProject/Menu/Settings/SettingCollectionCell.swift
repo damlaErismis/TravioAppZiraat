@@ -48,6 +48,7 @@ class SettingCollectionCell: UICollectionViewCell {
     }
     
     //MARK: -- Life Cycles
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -58,6 +59,7 @@ class SettingCollectionCell: UICollectionViewCell {
     }
     
     //MARK: -- UI Methods
+    
     func setupViews() {
         // Add here the setup for the UI
         self.contentView.addSubviews(viewItem)

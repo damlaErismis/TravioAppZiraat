@@ -16,11 +16,11 @@ class SettingsVM {
     }
     var errorStatusMessage:ErrorResponse?{
         didSet{
-            
         }
     }
     
     var getUserProfileData: (()->())?
+    
     func initFetch(){
         GenericNetworkingHelper.shared.fetchData(urlRequest: .getUserProfile, callback: {(result: Result<UserProfileResponse,APIError>) in
             switch result {

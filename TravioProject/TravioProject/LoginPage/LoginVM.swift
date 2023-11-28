@@ -8,7 +8,6 @@
 import Foundation
 import Alamofire
 
-
 class LoginVM{
     
     var loginSuccessResponse:LoginSuccessResponse? {
@@ -22,14 +21,14 @@ class LoginVM{
             self.showAlertClosure?()
         }
     }
-    
+
     var isLoading: Bool? {
         didSet {
             self.updateLoadingStatus?(isLoading!)
         }
     }
-    var updateLoadingStatus: ((Bool)->())?
     
+    var updateLoadingStatus: ((Bool)->())?
     var makeLogin: (()->())?
     var showAlertClosure: (()->())?
     

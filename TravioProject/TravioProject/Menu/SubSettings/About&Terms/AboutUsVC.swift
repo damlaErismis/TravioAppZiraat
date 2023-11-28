@@ -50,7 +50,6 @@ class AboutUsVC: UICustomViewController{
             wb.leading.equalToSuperview()
             wb.trailing.equalToSuperview()
             wb.bottom.equalToSuperview()
-            
         })
     }
 }
@@ -58,7 +57,6 @@ class AboutUsVC: UICustomViewController{
 extension AboutUsVC: WKNavigationDelegate{
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        
         increaseFontSizeForAllH1()
         injectFontStyle()
     }
@@ -78,7 +76,7 @@ extension AboutUsVC: WKNavigationDelegate{
     
     func injectFontStyle() {
         let fontName = "Poppins-Regular"
-        let fontSize = 18
+        let fontSize = 14
         let jsCode = """
              var style = document.createElement('style');
              style.innerHTML = 'body, p, li { font-family: \(fontName), sans-serif !important; font-size: \(fontSize)px !important; }';

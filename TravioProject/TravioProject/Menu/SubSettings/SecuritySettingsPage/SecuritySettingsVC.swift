@@ -1,5 +1,5 @@
 //
-//  
+//
 //  SecuritySettingsVCVC.swift
 //  TravioProject
 //
@@ -20,6 +20,7 @@ class SecuritySettingsVC: UICustomViewController{
     
     //MARK: -- Properties
     private var isFormComplete: Bool = false
+    
     let locationManager = CLLocationManager()
     
     //MARK: -- Views
@@ -63,7 +64,7 @@ class SecuritySettingsVC: UICustomViewController{
         view.addGestureRecognizer(longPressGesture)
         return view
     }()
-
+    
     private lazy var viewPasswordConfirm: UIViewCC = {
         let view = UIViewCC(labeltext: "New Password Confirm", placeholderText: "***********", isStatusImageViewVisible: true)
         view.textField.isSecureTextEntry = true
@@ -128,6 +129,16 @@ class SecuritySettingsVC: UICustomViewController{
         return s
     }()
     
+    //MARK: -- Life Cycles
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        initVC()
+        initVM()
+    }
+    
+    //MARK: -- Component Actions
+    
     @objc func toggleSwitcChangeForLocation() {
         if toggleSwitchLocation.isOn {
             requestLocationPermission()
@@ -190,7 +201,7 @@ class SecuritySettingsVC: UICustomViewController{
             viewPassword.textField.isSecureTextEntry = true
         }
     }
-
+    
     func requestCameraPermission() {
         let status = AVCaptureDevice.authorizationStatus(for: .video)
         switch status {
@@ -272,7 +283,6 @@ class SecuritySettingsVC: UICustomViewController{
             else {
                 toggleSwitch?.isOn = true
             }
-
         }
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
@@ -305,15 +315,6 @@ class SecuritySettingsVC: UICustomViewController{
         }
     }
     
-    //MARK: -- Life Cycles
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        initVC()
-        initVM()
-    }
-    
-    //MARK: -- Component Actions
-    
     func initVM(){
         vm.updateLoadingStatus = { [weak self] (staus) in
             DispatchQueue.main.async {
@@ -345,7 +346,7 @@ class SecuritySettingsVC: UICustomViewController{
         toggleSwitchCamera.isOn = checkCameraPermission()
         toggleSwitchLocation.isOn = checkLocationPermission()
         toggleSwitchPhotoLibrary.isOn = checkPhotoLibraryPermission()
-
+        
         labelTitle.text = "Security Settings"
         buttonBack.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
         

@@ -32,6 +32,8 @@ class MapVC: UIViewController, ViewControllerDelegate{
         let map = MKMapView()
         map.showsUserLocation = true
         map.delegate = self
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gesture:)))
+        map.addGestureRecognizer(longPressGesture)
         return map
     }()
     
@@ -59,21 +61,21 @@ class MapVC: UIViewController, ViewControllerDelegate{
     //MARK: -- Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        initLocationManager()
+        initView()
+        initVM()
+    }
+    func initLocationManager(){
         locationManager = CLLocationManager()
         locationManager?.delegate = self
         locationManager?.requestWhenInUseAuthorization()
         locationManager?.requestLocation()
         locationManager?.requestAlwaysAuthorization()
-        
         let authorizationStatus = locationManager?.authorizationStatus
         if authorizationStatus == .notDetermined {
             locationManager?.requestWhenInUseAuthorization()
         }
-        
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gesture:)))
-        mapView.addGestureRecognizer(longPressGesture)
-        initView()
-        initVM()
     }
     
     func initView(){
@@ -218,6 +220,7 @@ class MapVC: UIViewController, ViewControllerDelegate{
         })
     }
 }
+
 
 extension MapVC: MKMapViewDelegate {
     
