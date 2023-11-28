@@ -39,15 +39,6 @@ class SignUpVC: UICustomViewController {
         return view
     }()
     
-    @objc func handlePasswordLongPress(_ gesture: UILongPressGestureRecognizer) {
-        if gesture.state == .began {
-            viewPassword.statusImageView.image = UIImage(systemName: "eye.fill")
-            viewPassword.textField.isSecureTextEntry = false
-        } else if gesture.state == .ended {
-            viewPassword.statusImageView.image = UIImage(systemName: "eye.slash.fill")
-            viewPassword.textField.isSecureTextEntry = true
-        }
-    }
     private lazy var viewPasswordConfirm:UIViewCC = {
         let view = UIViewCC(labeltext: "Password Confirm", placeholderText: "********", isStatusImageViewVisible: true)
         view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
@@ -63,10 +54,6 @@ class SignUpVC: UICustomViewController {
         sv.distribution = .fillProportionally
         return sv
     }()
-    
-    @objc func backButtonTapped(){
-        self.navigationController?.popViewController(animated: true)
-    }
 
     private lazy var buttonSignup:UIButton = {
         let btn = UIButton()
@@ -78,45 +65,6 @@ class SignUpVC: UICustomViewController {
         btn.addTarget(self, action: #selector(btnSignUpTapped), for: .touchUpInside)
         return btn
     }()
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        if textField == viewPassword.textField || textField == viewPasswordConfirm.textField {
-            let usernameText = viewUserName.textField.text ?? ""
-            let emailText = viewEmail.textField.text ?? ""
-            let passwordText = viewPassword.textField.text ?? ""
-            let passwordConfirmText = viewPasswordConfirm.textField.text ?? ""
-            
-            if textField == viewPasswordConfirm.textField{
-                let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmText.count >= 6
-                viewPasswordConfirm.showPasswordMatched(passwordsMatch)
-            }
-            let passwordsMatch = passwordText == passwordConfirmText
-            
-            isFormComplete = !usernameText.isEmpty && !emailText.isEmpty && !passwordText.isEmpty && !passwordConfirmText.isEmpty && passwordsMatch
-            
-
-            buttonSignup.isEnabled = isFormComplete
-            buttonSignup.backgroundColor = isFormComplete ?.mainColor : .lightGray
-        }
-    }
-    
-    @objc func btnSignUpTapped(){
-        guard let textUsername = viewUserName.textField.text else{return}
-        guard let textEmail = viewEmail.textField.text else{return}
-        guard let textPassword = viewPassword.textField.text else{return}
-        viewModel.postSignUpData(userName: textUsername, email: textEmail, password: textPassword)
-        
-        viewModel.showAlertClosure = { [weak self] in
-            if let message = self?.viewModel.alertMessage {
-                self?.showAlert(title: "Alert!", message: message)
-            }
-        }
-    }
-    private func configureView(){
-        labelTitle.text = "Sign Up"
-        self.viewMain.backgroundColor = .viewColor
-        buttonBack.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-    }
     
     func initVM(){
         viewModel.updateLoadingStatus = { [weak self] (staus) in
@@ -135,7 +83,6 @@ class SignUpVC: UICustomViewController {
                 }
             }
         }
-        
     }
     
     override func viewDidLoad() {
@@ -144,6 +91,59 @@ class SignUpVC: UICustomViewController {
         configureView()
         setupViews()
         initVM()
+    }
+    
+    @objc func handlePasswordLongPress(_ gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            viewPassword.statusImageView.image = UIImage(systemName: "eye.fill")
+            viewPassword.textField.isSecureTextEntry = false
+        } else if gesture.state == .ended {
+            viewPassword.statusImageView.image = UIImage(systemName: "eye.slash.fill")
+            viewPassword.textField.isSecureTextEntry = true
+        }
+    }
+    
+    @objc func backButtonTapped(){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if textField == viewPassword.textField || textField == viewPasswordConfirm.textField {
+            let usernameText = viewUserName.textField.text ?? ""
+            let emailText = viewEmail.textField.text ?? ""
+            let passwordText = viewPassword.textField.text ?? ""
+            let passwordConfirmText = viewPasswordConfirm.textField.text ?? ""
+            
+            if textField == viewPasswordConfirm.textField{
+                let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmText.count >= 6
+                viewPasswordConfirm.showPasswordMatched(passwordsMatch)
+            }
+            let passwordsMatch = passwordText == passwordConfirmText
+            
+            isFormComplete = !usernameText.isEmpty && !emailText.isEmpty && !passwordText.isEmpty && !passwordConfirmText.isEmpty && passwordsMatch
+    
+            buttonSignup.isEnabled = isFormComplete
+            buttonSignup.backgroundColor = isFormComplete ?.mainColor : .lightGray
+        }
+    }
+    
+    @objc func btnSignUpTapped(){
+        guard let textUsername = viewUserName.textField.text else{return}
+        guard let textEmail = viewEmail.textField.text else{return}
+        guard let textPassword = viewPassword.textField.text else{return}
+        viewModel.postSignUpData(userName: textUsername, email: textEmail, password: textPassword)
+        
+        viewModel.showAlertClosure = { [weak self] in
+            if let message = self?.viewModel.alertMessage {
+                self?.showAlert(title: "Alert!", message: message)
+            }
+        }
+    }
+    
+    private func configureView(){
+        labelTitle.text = "Sign Up"
+        self.viewMain.backgroundColor = .viewColor
+        buttonBack.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
     
     private func setupViews() {
@@ -166,7 +166,6 @@ class SignUpVC: UICustomViewController {
             btn.width.equalTo(342)
             btn.bottom.equalToSuperview().offset(-30)
         })
-
     }
 }
 

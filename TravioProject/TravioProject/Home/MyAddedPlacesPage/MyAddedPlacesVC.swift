@@ -42,9 +42,18 @@ class MyAddedPlacesVC: UICustomViewController {
         return btn
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
+        initVM()
+        bindViewModel()
+        setupViews()
+    }
+    
     @objc func backButtonTapped(){
         self.navigationController?.popViewController(animated: true)
     }
+    
     @objc func btnOrderTapped() {
         let newImageName = (currentOrderState == .ascending) ? "orderZA" : "orderAZ"
         btnOrder.setImage(UIImage(named: newImageName), for: .normal)
@@ -55,13 +64,6 @@ class MyAddedPlacesVC: UICustomViewController {
             viewModel.myAddedPlaces.sort { $0.title > $1.title }
         }
         collectionView.reloadData()
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
-        initVM()
-        bindViewModel()
-        setupViews()
     }
     
     private func bindViewModel() {
@@ -89,11 +91,10 @@ class MyAddedPlacesVC: UICustomViewController {
     }
     func configureView(){
         labelTitle.text = "My Added Places"
-
         buttonBack.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
+    
     func setupViews() {
-
         viewMain.addSubviews(collectionView, btnOrder)
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()

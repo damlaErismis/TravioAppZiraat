@@ -97,6 +97,7 @@ class PlaceDetailVC: UIViewController {
             }
         }
     }
+    
     @objc func handleBack(){
         self.navigationController?.popViewController(animated: true)
     }
@@ -107,19 +108,15 @@ class PlaceDetailVC: UIViewController {
         collectionTopView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     
-    
     //MARK: -- Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initView()
         initVM()
     }
     
     func initView(){
-        
         self.navigationController?.navigationBar.isHidden = true
-        
         setupViews()
     }
     
@@ -165,15 +162,14 @@ class PlaceDetailVC: UIViewController {
         }
     }
     
-    
     //MARK: -- UI Methods
     func setupViews() {
-        // Add here the setup for the UI
         self.view.backgroundColor = .white
         self.view.addSubviews(collectionBottomView, collectionTopView, btnBack, imageFavorite, pageControl, activityIndicator)
         self.view.bringSubviewToFront(pageControl)
         setupLayout()
     }
+    
     func setupLayout() {
         activityIndicator.snp.makeConstraints({ai in
             ai.edges.equalToSuperview()

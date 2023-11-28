@@ -45,14 +45,19 @@ class PopularPlacesVC: UICustomViewController {
         return btn
     }()
     
-    private func configureView(){
-        labelTitle.text = "Popular Places"
-        buttonBack.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
+        configureView()
+        initVM()
+        bindViewModel()
+        setupViews()
     }
     
     @objc func backButtonTapped(){
         self.navigationController?.popViewController(animated: true)
     }
+    
     @objc func btnOrderTapped() {
         let newImageName = (currentOrderState == .ascending) ? "orderZA" : "orderAZ"
         btnOrder.setImage(UIImage(named: newImageName), for: .normal)
@@ -65,13 +70,9 @@ class PopularPlacesVC: UICustomViewController {
         collectionView.reloadData()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
-        configureView()
-        initVM()
-        bindViewModel()
-        setupViews()
+    private func configureView(){
+        labelTitle.text = "Popular Places"
+        buttonBack.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
     
     private func bindViewModel() {
@@ -81,6 +82,7 @@ class PopularPlacesVC: UICustomViewController {
         viewModel.getPopularPlaces() { result in
         }
     }
+    
     private func initVM(){
         viewModel.updateLoadingStatus = { [weak self] (staus) in
             DispatchQueue.main.async {

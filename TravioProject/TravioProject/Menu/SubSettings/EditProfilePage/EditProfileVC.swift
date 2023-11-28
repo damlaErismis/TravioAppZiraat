@@ -19,6 +19,8 @@ protocol EditProfileVCDelegate: AnyObject {
 
 class EditProfileVC: UIViewController {
     
+    var selectedImageURL: URL?
+    
     weak var delegate: EditProfileVCDelegate?
     
     private var viewModel = EditProfileVM()
@@ -60,7 +62,6 @@ class EditProfileVC: UIViewController {
     }()
     private lazy var viewCreatedAtTime = UIViewCC()
     private lazy var viewUserRole = UIViewCC()
-    
     
     private lazy var labelFullNameTitle = UILabelCC(labelText: " ", font: .poppinsSemiBold24)
     
@@ -121,32 +122,6 @@ class EditProfileVC: UIViewController {
         return indicator
     }()
     
-    @objc func btnCrossTapped() {
-        self.dismiss(animated: true, completion: nil)
-    }
-
-    var selectedImageURL: URL?
-
-    @objc func btnSaveTapped() {
-        guard let fullName = viewFullName.textField.text,
-              let email = viewEmail.textField.text else {return }
-        let pp_url = self.viewModel.imageUrls?.first ?? self.viewModel.userProfile?.pp_url ?? ""
-
-        self.viewModel.updateUserProfile(fullName: fullName, email: email, pp_url: pp_url)
-        
-        viewModel.showAlertClosure = { [weak self] in
-            if let message = self?.viewModel.alertMessage {
-                self?.showAlert(title: "Success!", message: message)
-            }
-        }
-        delegate?.profilePhotoDidUpdate(imgProfilePic.image!)
-        delegate?.fullNameDidUpdate(viewFullName.textField.text ?? "")
-    }
-    
-    @objc func btnChangePhotoTapped() {
-        presentPhotoActionSheet()
-    }
-    
     private func bindViewModel() {
         viewModel.updateLoadingStatus = { [weak self] (staus) in
             DispatchQueue.main.async {
@@ -185,6 +160,30 @@ class EditProfileVC: UIViewController {
         viewModel.getPersonalInfo()
         bindViewModel()
         setupViews()
+    }
+    
+    @objc func btnCrossTapped() {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    @objc func btnSaveTapped() {
+        guard let fullName = viewFullName.textField.text,
+              let email = viewEmail.textField.text else {return }
+        let pp_url = self.viewModel.imageUrls?.first ?? self.viewModel.userProfile?.pp_url ?? ""
+
+        self.viewModel.updateUserProfile(fullName: fullName, email: email, pp_url: pp_url)
+        
+        viewModel.showAlertClosure = { [weak self] in
+            if let message = self?.viewModel.alertMessage {
+                self?.showAlert(title: "Success!", message: message)
+            }
+        }
+        delegate?.profilePhotoDidUpdate(imgProfilePic.image!)
+        delegate?.fullNameDidUpdate(viewFullName.textField.text ?? "")
+    }
+    
+    @objc func btnChangePhotoTapped() {
+        presentPhotoActionSheet()
     }
     
     override func viewWillAppear(_ animated: Bool) {

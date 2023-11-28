@@ -42,6 +42,16 @@ class NewPlacesVC: UICustomViewController {
         btn.addTarget(self, action: #selector(btnOrderTapped), for: .touchUpInside)
         return btn
     }()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
+        configureView()
+        initVM()
+        bindViewModel()
+        setupViews()
+    }
+    
     @objc func btnOrderTapped() {
         let newImageName = (currentOrderState == .ascending) ? "orderZA" : "orderAZ"
         btnOrder.setImage(UIImage(named: newImageName), for: .normal)
@@ -53,19 +63,11 @@ class NewPlacesVC: UICustomViewController {
         }
         collectionView.reloadData()
     }
+    
     @objc func backButtonTapped(){
         self.navigationController?.popViewController(animated: true)
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
-        configureView()
-        initVM()
-        bindViewModel()
-        setupViews()
-       
-    }
+    
     private func bindViewModel() {
         viewModel.newPlacesChange = { [weak self] in
             self?.collectionView.reloadData()
@@ -73,6 +75,7 @@ class NewPlacesVC: UICustomViewController {
         viewModel.getNewPlaces() { result in
         }
     }
+    
     private func initVM(){
         viewModel.updateLoadingStatus = { [weak self] (staus) in
             DispatchQueue.main.async {
@@ -89,10 +92,12 @@ class NewPlacesVC: UICustomViewController {
             }
         }
     }
+    
     func configureView(){
         labelTitle.text = "New Places"
         buttonBack.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
+    
     func setupViews() {
         viewMain.addSubviews(collectionView, btnOrder)
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)

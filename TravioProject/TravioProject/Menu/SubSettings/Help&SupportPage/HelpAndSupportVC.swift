@@ -18,8 +18,8 @@ struct  HelpAndSupportContent {
 class HelpAndSupportVC: UICustomViewController {
     
     private let data: [HelpAndSupportContent] = [
-        HelpAndSupportContent(question: "How can I create a new account on Travio?", answer: "her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem her şeyi ben bilemem"),
-        HelpAndSupportContent(question: "How can I save a visit?", answer: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ")
+        HelpAndSupportContent(question: "How can I create a new account on Travio?", answer: "To create a new account on Travio, first visit the Travio website and click on the 'Sign Up' button located at the top right corner of the homepage. You will be directed to a registration form where you need to provide your personal information, including your full name, email address, and a preferred password. After filling out the form, check the box to agree to Travio's terms and conditions, then click the 'Create Account' button. You'll receive a confirmation email shortly."),
+        HelpAndSupportContent(question: "How can I save a visit?", answer: "Click on the verification link in the email to activate your Travio account. Once your account is activated, you can start exploring all the features Travio offers for your travel needs. ")
     ]
     
     private lazy var tableView:UITableView = {
