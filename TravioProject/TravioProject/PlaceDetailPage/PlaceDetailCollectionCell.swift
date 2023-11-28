@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 import MapKit
-class PlaceDetailCollectionCell: UICollectionViewCell,MKMapViewDelegate {
+class PlaceDetailCollectionCell: UICollectionViewCell, MKMapViewDelegate {
     
     private lazy var viewBottom: UIView = {
         let backView = UIView()
@@ -84,7 +84,6 @@ class PlaceDetailCollectionCell: UICollectionViewCell,MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
         guard let annotation = annotation as? CustomAnnotation else {
             return nil
         }

@@ -75,39 +75,6 @@ class PlaceDetailVC: UIViewController {
         return img
     }()
     
-    @objc func handleVisitedPlace(){
-        
-        if self.imageFavorite.image == UIImage(named: "emptyFavorite"){
-            vm.postAVisit(placeId: selectedID)
-            vm.showAlertClosure = { [weak self] () in
-                DispatchQueue.main.async {
-                    self?.showAlert(title: "Success", message: "Visit successfully added your visits")
-                    self?.imageFavorite.image = UIImage(named: "fullyFavorite")
-                }
-            }
-        }else{
-            vm.deleteAVisit(placeId: selectedID)
-            vm.showAlertClosure = { [weak self] () in
-                DispatchQueue.main.async {
-                    if let message = self?.vm.successMessage {
-                        self?.showAlert(title: "Success", message: message)
-                        self?.imageFavorite.image = UIImage(named: "emptyFavorite")
-                    }
-                }
-            }
-        }
-    }
-    
-    @objc func handleBack(){
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func pageControlDidChange(_ sender: UIPageControl) {
-        let currentPage = sender.currentPage
-        let indexPath = IndexPath(item: currentPage, section: 0)
-        collectionTopView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-    }
-    
     //MARK: -- Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -161,6 +128,42 @@ class PlaceDetailVC: UIViewController {
             }
         }
     }
+    
+    //MARK: -- Component Actions
+    
+    @objc func handleVisitedPlace(){
+        
+        if self.imageFavorite.image == UIImage(named: "emptyFavorite"){
+            vm.postAVisit(placeId: selectedID)
+            vm.showAlertClosure = { [weak self] () in
+                DispatchQueue.main.async {
+                    self?.showAlert(title: "Success", message: "Visit successfully added your visits")
+                    self?.imageFavorite.image = UIImage(named: "fullyFavorite")
+                }
+            }
+        }else{
+            vm.deleteAVisit(placeId: selectedID)
+            vm.showAlertClosure = { [weak self] () in
+                DispatchQueue.main.async {
+                    if let message = self?.vm.successMessage {
+                        self?.showAlert(title: "Success", message: message)
+                        self?.imageFavorite.image = UIImage(named: "emptyFavorite")
+                    }
+                }
+            }
+        }
+    }
+    @objc func handleBack(){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func pageControlDidChange(_ sender: UIPageControl) {
+        let currentPage = sender.currentPage
+        let indexPath = IndexPath(item: currentPage, section: 0)
+        collectionTopView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+    
+    
     
     //MARK: -- UI Methods
     func setupViews() {

@@ -82,6 +82,7 @@ class SettingsVC: UIViewController {
     }()
     
     //MARK: -- Life Cycles
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
@@ -90,6 +91,7 @@ class SettingsVC: UIViewController {
     }
     
     //MARK: -- Component Actions
+    
     @objc func handleLogout(){
         let service = "com.travio"
         let account = "travio"
@@ -102,6 +104,12 @@ class SettingsVC: UIViewController {
         present(alert, animated: true)
     }
     
+    @objc func buttonEditProfileTapped(){
+        let editProfile = EditProfileVC()
+        editProfile.delegate = self
+        present(editProfile, animated: true)
+    }
+    
     func switchToLoginVC() {
         let loginVC = LoginVC()
         let navigationController = UINavigationController(rootViewController: loginVC)
@@ -111,17 +119,7 @@ class SettingsVC: UIViewController {
             window.makeKeyAndVisible()
         }
     }
-
-    @objc func buttonEditProfileTapped(){
-        let editProfile = EditProfileVC()
-        editProfile.delegate = self
-        present(editProfile, animated: true)
-    }
     
-    //MARK: -- Private Methods
-    
-    
-    //MARK: -- UI Methods
     func loadImageAsync(from url: URL, completion: @escaping (UIImage?) -> Void) {
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data, error == nil, let image = UIImage(data: data) else {
@@ -135,28 +133,30 @@ class SettingsVC: UIViewController {
             }
         }.resume()
     }
-
+    
     func initVM() {
         vm.initFetch()
-
         vm.getUserProfileData = { [weak self] () in
             guard let self = self,
                   let imageString = self.vm.userProfileResponse?.pp_url,
                   let imageURL = URL(string: imageString) else { return }
-
+            
             self.loadImageAsync(from: imageURL) { image in
                 self.imageProfile.image = image
             }
-
+            
             guard let userName = self.vm.userProfileResponse?.full_name else { return }
             self.labelNameSurname.text = userName
         }
     }
-
+    
     func initVC(){
         self.view.backgroundColor = .mainColor
         setupViews()
     }
+    
+    
+    //MARK: -- UI Methods
     
     func setupViews() {
         self.view.addSubviews(viewMain, lblSettings, btnLogout)

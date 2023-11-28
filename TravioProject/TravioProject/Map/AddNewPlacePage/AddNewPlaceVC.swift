@@ -139,6 +139,7 @@ class AddNewPlaceVC: UIViewController{
             }
         }
     }
+    
     @objc func handleAddPlace(){
         vm.updateLoadingStatus = { [weak self] (staus) in
             DispatchQueue.main.async {

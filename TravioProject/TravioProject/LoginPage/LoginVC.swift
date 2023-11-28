@@ -7,13 +7,11 @@
 
 import UIKit
 import SnapKit
-import Alamofire
 
 class LoginVC: UIViewController {
     
     //MARK: -- Properties
     
-
     private lazy var vm:LoginVM = {
         return LoginVM()
     }()
@@ -110,19 +108,19 @@ class LoginVC: UIViewController {
     //MARK: -- Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
         initView()
         initVM()
     }
     
     func initView(){
+        navigationController?.navigationBar.isHidden = true
         setupView()
     }
     
     func initVM(){
-        vm.updateLoadingStatus = { [weak self] (staus) in
+        vm.updateLoadingStatus = { [weak self] (status) in
             DispatchQueue.main.async {
-                if staus {
+                if status {
                     self?.activityIndicator.startAnimating()
                 } else {
                     self?.activityIndicator.stopAnimating()
@@ -139,6 +137,7 @@ class LoginVC: UIViewController {
     }
     
     //MARK: -- Component Actions
+    
     @objc func handleSignUp(){
         let vc = SignUpVC()
         self.navigationController?.pushViewController(vc, animated: true)
@@ -173,9 +172,6 @@ class LoginVC: UIViewController {
             viewPassword.textField.isSecureTextEntry = true
         }
     }
-    
-    //MARK: -- Private Methods
-    
     
     //MARK: -- UI Methods
     private func setupView(){
