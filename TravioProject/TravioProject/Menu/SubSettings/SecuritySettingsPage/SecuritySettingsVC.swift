@@ -42,9 +42,10 @@ class SecuritySettingsVC: UICustomViewController{
         return lbl
     }()
     
-    private lazy var viewCamera = UIViewCC()
-    private lazy var viewPhotoLibrary = UIViewCC()
-    private lazy var viewLocation = UIViewCC()
+    private lazy var viewCamera = UICustomTextField()
+    private lazy var viewPhotoLibrary = UICustomTextField()
+    private lazy var viewLocation = UICustomTextField()
+    
     private lazy var labelSecuritySetting:UILabelCC = {
         let lbl =  UILabelCC(labelText: "Security Setting", font: .poppinsSemiBold32)
         lbl.textColor = .white
@@ -55,21 +56,21 @@ class SecuritySettingsVC: UICustomViewController{
     private lazy var labelPhotoLibrary = UILabelCC(labelText: "Photo Library", font: .poppinsMedium14)
     private lazy var labelLocation = UILabelCC(labelText: "Location", font: .poppinsMedium14)
     
-    private lazy var viewPassword: UIViewCC = {
-        let view = UIViewCC(labeltext: "New Password", placeholderText: "***********", isStatusImageViewVisible: true)
-        view.textField.isSecureTextEntry = true
-        view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        view.statusImageView.image = UIImage(systemName: "eye.slash.fill")
+    private lazy var txtPassword: UICustomTextField = {
+        let txt = UICustomTextField(labeltext: "New Password", placeholderText: "***********", isStatusImageViewVisible: true)
+        txt.textField.isSecureTextEntry = true
+        txt.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        txt.statusImageView.image = UIImage(systemName: "eye.slash.fill")
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handlePasswordLongPress(_:)))
-        view.addGestureRecognizer(longPressGesture)
-        return view
+        txt.addGestureRecognizer(longPressGesture)
+        return txt
     }()
     
-    private lazy var viewPasswordConfirm: UIViewCC = {
-        let view = UIViewCC(labeltext: "New Password Confirm", placeholderText: "***********", isStatusImageViewVisible: true)
-        view.textField.isSecureTextEntry = true
-        view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        return view
+    private lazy var txtPasswordConfirm: UICustomTextField = {
+        let txt = UICustomTextField(labeltext: "New Password Confirm", placeholderText: "***********", isStatusImageViewVisible: true)
+        txt.textField.isSecureTextEntry = true
+        txt.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        return txt
     }()
     
     private lazy var scrollViewAll:UIScrollView = {
@@ -170,35 +171,35 @@ class SecuritySettingsVC: UICustomViewController{
     }
     
     @objc func handleSave(){
-        vm.changePassword(newPassword: viewPassword.textField.text!)
+        vm.changePassword(newPassword: txtPassword.textField.text!)
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        let passwordText = viewPassword.textField.text ?? ""
-        let passwordConfirmText = viewPasswordConfirm.textField.text ?? ""
+        let passwordText = txtPassword.textField.text ?? ""
+        let passwordConfirmText = txtPasswordConfirm.textField.text ?? ""
         let passwordLenght = passwordText.count >= 6
         let passwordConfirmLenght = passwordConfirmText.count >= 6
         
-        if textField == viewPassword.textField || textField == viewPasswordConfirm.textField {
+        if textField == txtPassword.textField || textField == txtPasswordConfirm.textField {
             let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmLenght
             isFormComplete = passwordLenght && passwordsMatch && !passwordText.isEmpty && !passwordConfirmText.isEmpty
             buttonSave.isEnabled = isFormComplete
             buttonSave.backgroundColor = isFormComplete ? .mainColor : .lightGray
         }
         
-        if textField == viewPasswordConfirm.textField{
+        if textField == txtPasswordConfirm.textField{
             let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmLenght
-            viewPasswordConfirm.showPasswordMatched(passwordsMatch)
+            txtPasswordConfirm.showPasswordMatched(passwordsMatch)
         }
     }
     
     @objc func handlePasswordLongPress(_ gesture: UILongPressGestureRecognizer) {
         if gesture.state == .began {
-            viewPassword.statusImageView.image = UIImage(systemName: "eye.fill")
-            viewPassword.textField.isSecureTextEntry = false
+            txtPassword.statusImageView.image = UIImage(systemName: "eye.fill")
+            txtPassword.textField.isSecureTextEntry = false
         } else if gesture.state == .ended {
-            viewPassword.statusImageView.image = UIImage(systemName: "eye.slash.fill")
-            viewPassword.textField.isSecureTextEntry = true
+            txtPassword.statusImageView.image = UIImage(systemName: "eye.slash.fill")
+            txtPassword.textField.isSecureTextEntry = true
         }
     }
     
@@ -358,7 +359,7 @@ class SecuritySettingsVC: UICustomViewController{
         viewMain.addSubviews(scrollViewAll)
         scrollViewAll.addSubviews(containerView)
         containerView.addSubviews(labelChangePassword, stackViewTop, labelPrivacy, stackViewBottom, buttonSave)
-        stackViewTop.addArrangedSubviews(viewPassword,viewPasswordConfirm)
+        stackViewTop.addArrangedSubviews(txtPassword,txtPasswordConfirm)
         stackViewBottom.addArrangedSubviews(viewCamera,viewPhotoLibrary,viewLocation)
         viewCamera.addSubviews(labelCamera, toggleSwitchCamera)
         viewPhotoLibrary.addSubviews(labelPhotoLibrary, toggleSwitchPhotoLibrary)

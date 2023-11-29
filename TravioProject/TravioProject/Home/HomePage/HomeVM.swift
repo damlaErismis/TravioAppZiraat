@@ -7,10 +7,6 @@
 import Foundation
 import Alamofire
 
-protocol HomeViewModelDelegate: AnyObject {
-    func reloadTableView()
-}
-
 final class HomeVM {
     
     enum TableViewSection {
@@ -22,7 +18,7 @@ final class HomeVM {
     var newPlaces:[Place] = []
     var myAddedPlaces:[Place] = []
     
-    weak var delegate: HomeViewModelDelegate?
+    var onReloadData: (() -> Void)?
     var tableSection: [TableViewSection] = []
     
     let dispatchGroup = DispatchGroup()
@@ -34,7 +30,6 @@ final class HomeVM {
     }
     var errorStatusMessage: ErrorResponse?{
         didSet{
-            
         }
     }
     var updateLoadingStatus: ((Bool)->())?
@@ -53,7 +48,7 @@ final class HomeVM {
         
         dispatchGroup.notify(queue: .main) {
             self.tableSection = [.popularPlaces, .newPlaces, .myAddedPlaces]
-            self.delegate?.reloadTableView()
+            self.onReloadData?()
             self.isLoading = false
         }
     }

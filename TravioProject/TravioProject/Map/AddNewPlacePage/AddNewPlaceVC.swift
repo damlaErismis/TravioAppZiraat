@@ -42,12 +42,12 @@ class AddNewPlaceVC: UIViewController{
         return view
     }()
     
-    private lazy var viewDescription:UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        view.layer.cornerRadius = 16
-        view.addShadow(shadowColor: .black, offsetX: 0, offsetY: 0, shadowOpacity: 0.1, shadowRadius: 10.0)
-        return view
+    private lazy var txtDescription:UIView = {
+        let txt = UIView()
+        txt.backgroundColor = .white
+        txt.layer.cornerRadius = 16
+        txt.addShadow(shadowColor: .black, offsetX: 0, offsetY: 0, shadowOpacity: 0.1, shadowRadius: 10.0)
+        return txt
     }()
     
     private lazy var labelDescription = UILabelCC(labelText: "Visit Description", font: .poppinsMedium14)
@@ -59,21 +59,21 @@ class AddNewPlaceVC: UIViewController{
         tv.autocapitalizationType = .none
         return tv
     }()
-    private lazy var viewPlaceName:UIViewCC = {
-        let view = UIViewCC(labeltext: "Place Name", placeholderText: "Please write a place name")
-        view.textField.delegate = self
-        view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        view.textField.autocapitalizationType = .none
-        return view
+    private lazy var txtPlaceName:UICustomTextField = {
+        let txt = UICustomTextField(labeltext: "Place Name", placeholderText: "Please write a place name")
+        txt.textField.delegate = self
+        txt.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        txt.textField.autocapitalizationType = .none
+        return txt
     }()
     
-    lazy var viewCountryCity:UIViewCC = {
-        let view = UIViewCC(labeltext: "Country, City", placeholderText: "France, Paris")
+    lazy var txtCountryCity:UICustomTextField = {
+        let txt = UICustomTextField(labeltext: "Country, City", placeholderText: "France, Paris")
         
-        view.textField.delegate = self
-        view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        view.textField.autocapitalizationType = .none
-        return view
+        txt.textField.delegate = self
+        txt.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        txt.textField.autocapitalizationType = .none
+        return txt
     }()
     
     private lazy var btnAddPlace:UIButton = {
@@ -153,8 +153,8 @@ class AddNewPlaceVC: UIViewController{
         uploadImages()
         vm.addNewPlaceClosure = {
             guard let imageResponse = self.vm.imageUrls,
-                  let placeTitle = self.viewPlaceName.textField.text,
-                  let place = self.viewCountryCity.textField.text,
+                  let placeTitle = self.txtPlaceName.textField.text,
+                  let place = self.txtCountryCity.textField.text,
                   let placeDescription = self.textViewDescription.text else {
                 return  }
             let latitude = self.selectedPlace.coordinate.latitude
@@ -223,8 +223,8 @@ class AddNewPlaceVC: UIViewController{
     func setupViews() {
         self.view.backgroundColor = .mainColor
         self.view.addSubviews(viewMain, activityIndicator)
-        viewMain.addSubviews(viewPlaceName, viewDescription, viewCountryCity, collectionView, btnAddPlace)
-        viewDescription.addSubviews(labelDescription, textViewDescription)
+        viewMain.addSubviews(txtPlaceName, txtDescription, txtCountryCity, collectionView, btnAddPlace)
+        txtDescription.addSubviews(labelDescription, textViewDescription)
         setupLayout()
     }
     
@@ -236,14 +236,14 @@ class AddNewPlaceVC: UIViewController{
         activityIndicator.snp.makeConstraints({ai in
             ai.edges.equalToSuperview()
         })
-        viewPlaceName.snp.makeConstraints({ view in
-            view.top.equalToSuperview().offset(64)
-            view.leading.trailing.equalToSuperview().inset(24)
+        txtPlaceName.snp.makeConstraints({ txt in
+            txt.top.equalToSuperview().offset(64)
+            txt.leading.trailing.equalToSuperview().inset(24)
         })
-        viewDescription.snp.makeConstraints({ view in
-            view.top.equalTo(viewPlaceName.snp.bottom).offset(12)
-            view.leading.trailing.equalToSuperview().inset(24)
-            view.height.equalToSuperview().multipliedBy(0.24)
+        txtDescription.snp.makeConstraints({ txt in
+            txt.top.equalTo(txtPlaceName.snp.bottom).offset(12)
+            txt.leading.trailing.equalToSuperview().inset(24)
+            txt.height.equalToSuperview().multipliedBy(0.24)
         })
         labelDescription.snp.makeConstraints({ label in
             label.top.equalToSuperview().offset(11)
@@ -254,12 +254,12 @@ class AddNewPlaceVC: UIViewController{
             txt.bottom.equalToSuperview()
             txt.leading.trailing.equalToSuperview().inset(11)
         })
-        viewCountryCity.snp.makeConstraints({ view in
-            view.top.equalTo(viewDescription.snp.bottom).offset(12)
+        txtCountryCity.snp.makeConstraints({ view in
+            view.top.equalTo(txtDescription.snp.bottom).offset(12)
             view.leading.trailing.equalToSuperview().inset(24)
         })
         collectionView.snp.makeConstraints({ cv in
-            cv.top.equalTo(viewCountryCity.snp.bottom).offset(11)
+            cv.top.equalTo(txtCountryCity.snp.bottom).offset(11)
             cv.leading.equalToSuperview()
             cv.trailing.equalToSuperview().offset(-11)
             cv.bottom.equalTo(btnAddPlace.snp.top).offset(-11)
@@ -323,9 +323,9 @@ extension AddNewPlaceVC: UIImagePickerControllerDelegate, UINavigationController
 
 extension AddNewPlaceVC: UITextFieldDelegate{
     @objc func textFieldDidChange(_ textField: UITextField) {
-        if textField == viewPlaceName.textField || textField == viewCountryCity.textField{
-            let placeTitle = viewPlaceName.textField.text ?? ""
-            let placeLocation = viewCountryCity.textField.text ?? ""
+        if textField == txtPlaceName.textField || textField == txtCountryCity.textField{
+            let placeTitle = txtPlaceName.textField.text ?? ""
+            let placeLocation = txtCountryCity.textField.text ?? ""
             isFormComplete = !placeTitle.isEmpty && !placeLocation.isEmpty
             btnAddPlace.isEnabled = isFormComplete
             btnAddPlace.backgroundColor = isFormComplete ? .mainColor : .lightGray

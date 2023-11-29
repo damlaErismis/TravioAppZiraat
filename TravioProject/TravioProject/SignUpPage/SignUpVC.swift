@@ -14,37 +14,37 @@ class SignUpVC: UICustomViewController {
     
     private var isFormComplete: Bool = false
     
-    private lazy var viewUserName:UIViewCC = {
-        let view = UIViewCC(labeltext: "Username", placeholderText: "bilge_adam")
-        view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        view.textField.autocapitalizationType = .none
-        return view
+    private lazy var txtUsername:UICustomTextField = {
+        let txt = UICustomTextField(labeltext: "Username", placeholderText: "bilge_adam")
+        txt.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        txt.textField.autocapitalizationType = .none
+        return txt
     }()
     
-    private lazy var viewEmail:UIViewCC = {
-        let view = UIViewCC(labeltext: "Email", placeholderText: "developer@bilgeadam.com")
-        view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        view.textField.autocapitalizationType = .none
-        return view
+    private lazy var txtEmail:UICustomTextField = {
+        let txt = UICustomTextField(labeltext: "Email", placeholderText: "developer@bilgeadam.com")
+        txt.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        txt.textField.autocapitalizationType = .none
+        return txt
         
     }()
     
-    private lazy var viewPassword:UIViewCC = {
-        let view = UIViewCC(labeltext: "Password", placeholderText: "********", isStatusImageViewVisible: true)
-        view.textField.isSecureTextEntry = true
-        view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        view.statusImageView.image = UIImage(systemName: "eye.slash.fill")
+    private lazy var txtPassword:UICustomTextField = {
+        let txt = UICustomTextField(labeltext: "Password", placeholderText: "********", isStatusImageViewVisible: true)
+        txt.textField.isSecureTextEntry = true
+        txt.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        txt.statusImageView.image = UIImage(systemName: "eye.slash.fill")
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handlePasswordLongPress(_:)))
-        view.addGestureRecognizer(longPressGesture)
-        return view
+        txt.addGestureRecognizer(longPressGesture)
+        return txt
     }()
     
-    private lazy var viewPasswordConfirm:UIViewCC = {
-        let view = UIViewCC(labeltext: "Password Confirm", placeholderText: "********", isStatusImageViewVisible: true)
-        view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        view.textField.autocapitalizationType = .none
-        view.textField.isSecureTextEntry = true
-        return view
+    private lazy var txtPasswordConfirm:UICustomTextField = {
+        let txt = UICustomTextField(labeltext: "Password Confirm", placeholderText: "********", isStatusImageViewVisible: true)
+        txt.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        txt.textField.autocapitalizationType = .none
+        txt.textField.isSecureTextEntry = true
+        return txt
     }()
     
     private lazy var stackView:UIStackView = {
@@ -95,11 +95,11 @@ class SignUpVC: UICustomViewController {
     
     @objc func handlePasswordLongPress(_ gesture: UILongPressGestureRecognizer) {
         if gesture.state == .began {
-            viewPassword.statusImageView.image = UIImage(systemName: "eye.fill")
-            viewPassword.textField.isSecureTextEntry = false
+            txtPassword.statusImageView.image = UIImage(systemName: "eye.fill")
+            txtPassword.textField.isSecureTextEntry = false
         } else if gesture.state == .ended {
-            viewPassword.statusImageView.image = UIImage(systemName: "eye.slash.fill")
-            viewPassword.textField.isSecureTextEntry = true
+            txtPassword.statusImageView.image = UIImage(systemName: "eye.slash.fill")
+            txtPassword.textField.isSecureTextEntry = true
         }
     }
     
@@ -108,15 +108,15 @@ class SignUpVC: UICustomViewController {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        if textField == viewPassword.textField || textField == viewPasswordConfirm.textField {
-            let usernameText = viewUserName.textField.text ?? ""
-            let emailText = viewEmail.textField.text ?? ""
-            let passwordText = viewPassword.textField.text ?? ""
-            let passwordConfirmText = viewPasswordConfirm.textField.text ?? ""
+        if textField == txtPassword.textField || textField == txtPasswordConfirm.textField {
+            let usernameText = txtUsername.textField.text ?? ""
+            let emailText = txtEmail.textField.text ?? ""
+            let passwordText = txtPassword.textField.text ?? ""
+            let passwordConfirmText = txtPasswordConfirm.textField.text ?? ""
             
-            if textField == viewPasswordConfirm.textField{
+            if textField == txtPasswordConfirm.textField{
                 let passwordsMatch = passwordText == passwordConfirmText && passwordConfirmText.count >= 6
-                viewPasswordConfirm.showPasswordMatched(passwordsMatch)
+                txtPasswordConfirm.showPasswordMatched(passwordsMatch)
             }
             let passwordsMatch = passwordText == passwordConfirmText
             
@@ -128,9 +128,9 @@ class SignUpVC: UICustomViewController {
     }
     
     @objc func btnSignUpTapped(){
-        guard let textUsername = viewUserName.textField.text else{return}
-        guard let textEmail = viewEmail.textField.text else{return}
-        guard let textPassword = viewPassword.textField.text else{return}
+        guard let textUsername = txtUsername.textField.text else{return}
+        guard let textEmail = txtEmail.textField.text else{return}
+        guard let textPassword = txtPassword.textField.text else{return}
         viewModel.postSignUpData(userName: textUsername, email: textEmail, password: textPassword)
         
         viewModel.showAlertClosure = { [weak self] in
@@ -149,7 +149,7 @@ class SignUpVC: UICustomViewController {
     private func setupViews() {
         self.view.backgroundColor = .mainColor
         viewMain.addSubviews(stackView, buttonSignup)
-        stackView.addArrangedSubviews(viewUserName, viewEmail, viewPassword, viewPasswordConfirm)
+        stackView.addArrangedSubviews(txtUsername, txtEmail, txtPassword, txtPasswordConfirm)
         setupLayouts()
     }
     

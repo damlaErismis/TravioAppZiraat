@@ -47,14 +47,20 @@ class HomeVC: UIViewController {
         tv.isPagingEnabled = true
         tv.layer.cornerRadius = 75
         tv.layer.maskedCorners = [.topLeft]
+        tv.register(CustomHeaderView.self, forHeaderFooterViewReuseIdentifier: "CustomHeaderView")
         return tv
     }()
+
+    
+    
     
     //MARK: -- Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
-        viewModel.delegate = self
+        viewModel.onReloadData = { [weak self] in
+            self?.tableView.reloadData()
+        }
         setupViews()
         initVM()
         viewModel.fetchDataDispatch()
@@ -69,6 +75,24 @@ class HomeVC: UIViewController {
                     self?.activityIndicator.stopAnimating()
                 }
             }
+        }
+    }
+    
+    @objc func btnSeeAllTapped(sender: UIButton) {
+        let sectionType = viewModel.tableSection[sender.tag]
+        var viewController: UIViewController?
+        
+        switch sectionType {
+        case .popularPlaces:
+            viewController = PopularPlacesVC()
+        case .newPlaces:
+            viewController = NewPlacesVC()
+        case .myAddedPlaces:
+            viewController = MyAddedPlacesVC()
+        }
+        
+        if let viewController = viewController {
+            self.navigationController?.pushViewController(viewController, animated: true)
         }
     }
     
@@ -113,49 +137,13 @@ extension HomeVC:UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        let lbl = VerticalAlignedLabel()
-        lbl.contentMode = .bottom
-        lbl.font = FontStatus.poppinsMedium20.defineFont
-        lbl.text = self.tableView(tableView, titleForHeaderInSection: section)
-        
-        let btn = UIButton(type: .system)
-        btn.setTitle("See All", for: .normal)
-        btn.titleLabel?.numberOfLines = 2
-        btn.titleLabel?.lineBreakMode = .byWordWrapping
-        btn.contentVerticalAlignment = .bottom
-        btn.setTitleColor(.textButtonColor, for: .normal)
-        btn.titleLabel?.font = FontStatus.poppinsMedium14.defineFont
-        btn.addTarget(self, action: #selector(btnSeeAllTapped), for: .touchUpInside)
-        btn.tag = section
-        
-        headerView.addSubviews(lbl, btn)
-        lbl.snp.makeConstraints { make in
-            make.leading.equalTo(headerView).offset(25)
-            make.top.equalTo(headerView).offset(15)
-            make.bottom.equalTo(headerView)
+        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "CustomHeaderView") as? CustomHeaderView else {
+            return nil
         }
-        btn.snp.makeConstraints { make in
-            make.trailing.equalTo(headerView).offset(-20)
-            make.centerY.equalTo(lbl.snp.centerY)
-            make.top.equalTo(headerView).offset(10)
-        }
+        guard let title = self.tableView(tableView, titleForHeaderInSection: section) else { return nil }
+        headerView.configure(title: title, section: section)
+        headerView.btnSeeAll.addTarget(self, action: #selector(btnSeeAllTapped), for: .touchUpInside)
         return headerView
-    }
-    
-    @objc func btnSeeAllTapped(sender: UIButton) {
-        let sectionType = viewModel.tableSection[sender.tag]
-        switch sectionType {
-        case .popularPlaces:
-            let popPlaces = PopularPlacesVC()
-            self.navigationController?.pushViewController(popPlaces, animated: true)
-        case .newPlaces:
-            let newPlaces = NewPlacesVC()
-            self.navigationController?.pushViewController(newPlaces, animated: true)
-        case .myAddedPlaces:
-            let myAddedPlaces = MyAddedPlacesVC()
-            self.navigationController?.pushViewController(myAddedPlaces, animated: true)
-        }
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -222,8 +210,3 @@ extension HomeVC:UITableViewDataSource{
     }
 }
 
-extension HomeVC: HomeViewModelDelegate {
-    func reloadTableView() {
-        self.tableView.reloadData()
-    }
-}

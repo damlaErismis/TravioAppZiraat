@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class UIViewCC: UIView{
+class UICustomTextField: UIView{
 
     lazy var statusImageView: UIImageView = {
         let imageView = UIImageView()
@@ -39,9 +39,9 @@ class UIViewCC: UIView{
         return lbl
     }()
     
-    lazy var textField:UITextFieldCC = {
-        let txt = UITextFieldCC()
-        txt.addFont = .poppinsRegular16
+    lazy var textField:UITextField = {
+        let txt = UITextField()
+        txt.font = FontStatus.poppinsRegular16.defineFont
         return txt
     }()
     
@@ -83,8 +83,6 @@ class UIViewCC: UIView{
     
     private func commonInit(isStatusImageViewVisible: Bool) {
         self.isStatusImageViewVisible = isStatusImageViewVisible
-
-        
         setupView()
     }
     

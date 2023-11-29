@@ -39,22 +39,14 @@ class CompositionalLayoutCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: -- Component Actions
-    
-    
-    //MARK: -- Private Methods
-    
-    
     //MARK: -- UI Methods
     func setupViews() {
-        // Add here the setup for the UI
         self.contentView.addSubviews(viewTop)
         viewTop.addSubview(imagePlace)
         setupLayout()
     }
     
     func setupLayout() {
-        // Add here the setup for layout
         viewTop.snp.makeConstraints({ view in
             view.top.leading.trailing.equalToSuperview()
             view.height.equalTo(250)

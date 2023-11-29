@@ -34,15 +34,15 @@ class EditProfileVC: UIViewController {
         return view
     }()
     
-    private lazy var viewFullName:UIViewCC = {
-        let view = UIViewCC(labeltext: "Full Name", placeholderText: "bilge_adam")
-        view.textField.autocapitalizationType = .none
-        return view
+    private lazy var txtFullName:UICustomTextField = {
+        let txt = UICustomTextField(labeltext: "Full Name", placeholderText: "bilge_adam")
+        txt.textField.autocapitalizationType = .none
+        return txt
     }()
-    private lazy var viewEmail:UIViewCC = {
-        let view = UIViewCC(labeltext: "Email", placeholderText: "developer@bilgeadam.com")
-        view.textField.autocapitalizationType = .none
-        return view
+    private lazy var txtEmail:UICustomTextField = {
+        let txt = UICustomTextField(labeltext: "Email", placeholderText: "developer@bilgeadam.com")
+        txt.textField.autocapitalizationType = .none
+        return txt
     }()
     
     private lazy var labelEditProfile:UILabelCC = {
@@ -60,8 +60,8 @@ class EditProfileVC: UIViewController {
         iv.layer.masksToBounds = true
         return iv
     }()
-    private lazy var viewCreatedAtTime = UIViewCC()
-    private lazy var viewUserRole = UIViewCC()
+    private lazy var viewCreatedAtTime = UICustomTextField()
+    private lazy var viewUserRole = UICustomTextField()
     
     private lazy var labelFullNameTitle = UILabelCC(labelText: " ", font: .poppinsSemiBold24)
     
@@ -135,8 +135,8 @@ class EditProfileVC: UIViewController {
         viewModel.userProfileDidChange = { [weak self] userProfile in
             self?.labelFullNameTitle.text = userProfile.full_name
             self?.labelUserRole.text = userProfile.role
-            self?.viewFullName.textField.text = userProfile.full_name
-            self?.viewEmail.textField.text = userProfile.email
+            self?.txtFullName.textField.text = userProfile.full_name
+            self?.txtEmail.textField.text = userProfile.email
             
             if let formattedDate = self?.viewModel.formatServerDate(dateString: userProfile.created_at) {
                 self?.labelCreatedAtTime.text = formattedDate
@@ -167,8 +167,8 @@ class EditProfileVC: UIViewController {
     }
 
     @objc func btnSaveTapped() {
-        guard let fullName = viewFullName.textField.text,
-              let email = viewEmail.textField.text else {return }
+        guard let fullName = txtFullName.textField.text,
+              let email = txtEmail.textField.text else {return }
         let pp_url = self.viewModel.imageUrls?.first ?? self.viewModel.userProfile?.pp_url ?? ""
 
         self.viewModel.updateUserProfile(fullName: fullName, email: email, pp_url: pp_url)
@@ -179,7 +179,7 @@ class EditProfileVC: UIViewController {
             }
         }
         delegate?.profilePhotoDidUpdate(imgProfilePic.image!)
-        delegate?.fullNameDidUpdate(viewFullName.textField.text ?? "")
+        delegate?.fullNameDidUpdate(txtFullName.textField.text ?? "")
     }
     
     @objc func btnChangePhotoTapped() {
@@ -203,10 +203,10 @@ class EditProfileVC: UIViewController {
     func setupViews() {
         self.view.addSubviews(viewMain, btnCross, labelEditProfile, activityIndicator)
         self.view.backgroundColor = .mainColor
-        viewMain.addSubviews(imgProfilePic, buttonChangePhoto ,buttonSave,viewCreatedAtTime,viewUserRole,viewFullName,viewEmail, labelFullNameTitle, stackView)
+        viewMain.addSubviews(imgProfilePic, buttonChangePhoto ,buttonSave,viewCreatedAtTime,viewUserRole,txtFullName,txtEmail, labelFullNameTitle, stackView)
         viewCreatedAtTime.addSubviews(imageCreatedAtTime, labelCreatedAtTime)
         viewUserRole.addSubviews(imageUserRole, labelUserRole)
-        stackView.addArrangedSubviews(viewFullName, viewEmail)
+        stackView.addArrangedSubviews(txtFullName, txtEmail)
         setupLayout()
     }
     

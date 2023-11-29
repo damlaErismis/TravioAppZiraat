@@ -68,6 +68,7 @@ class HelpAndSupportVC: UICustomViewController {
             make.trailing.equalToSuperview().offset(-20)
             make.bottom.equalToSuperview().offset(-20)
         })
+        
         labelFAQ.snp.makeConstraints({ lbl in
             lbl.top.equalToSuperview().offset(30)
             lbl.leading.equalToSuperview().offset(30)
@@ -83,9 +84,11 @@ extension HelpAndSupportVC: UITableViewDelegate, UITableViewDataSource {
         if selectedIndex == indexPath { return UITableView.automaticDimension }
         return 80
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! HelpAndSupportCell
         cell.data = data[indexPath.row]
@@ -94,6 +97,7 @@ extension HelpAndSupportVC: UITableViewDelegate, UITableViewDataSource {
 
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let isExpanded = selectedIndex == indexPath
         let previousSelectedIndex = selectedIndex
@@ -114,5 +118,4 @@ extension HelpAndSupportVC: UITableViewDelegate, UITableViewDataSource {
         }
         tableView.endUpdates()
     }
-
 }

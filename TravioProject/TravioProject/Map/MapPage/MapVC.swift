@@ -148,7 +148,7 @@ class MapVC: UIViewController, ViewControllerDelegate{
                     if let city = placemark.locality, let country = placemark.country {
                         let place = "\(city), \(country)"
                         placesTVC.selectedPlace.coordinate = coordinate
-                        placesTVC.viewCountryCity.textField.text = place
+                        placesTVC.txtCountryCity.textField.text = place
                     }
                 }
             }

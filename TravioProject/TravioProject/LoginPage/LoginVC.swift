@@ -72,21 +72,21 @@ class LoginVC: UIViewController {
         return view
     }()
     
-    private lazy var viewEmail:UIViewCC = {
-        let view = UIViewCC(labeltext: "Email", placeholderText: "developer@bilgeadam.com")
-        view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        view.textField.autocapitalizationType = .none
-        return view
+    private lazy var txtEmail:UICustomTextField = {
+        let txt = UICustomTextField(labeltext: "Email", placeholderText: "developer@bilgeadam.com")
+        txt.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        txt.textField.autocapitalizationType = .none
+        return txt
     }()
     
-    private lazy var viewPassword:UIViewCC = {
-        let view = UIViewCC(labeltext: "Password", placeholderText: "***************", isStatusImageViewVisible: true)
-        view.textField.isSecureTextEntry = true
-        view.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        view.statusImageView.image = UIImage(systemName: "eye.slash.fill")
+    private lazy var txtPassword:UICustomTextField = {
+        let txt = UICustomTextField(labeltext: "Password", placeholderText: "***************", isStatusImageViewVisible: true)
+        txt.textField.isSecureTextEntry = true
+        txt.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        txt.statusImageView.image = UIImage(systemName: "eye.slash.fill")
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handlePasswordLongPress(_:)))
-        view.addGestureRecognizer(longPressGesture)
-        return view
+        txt.addGestureRecognizer(longPressGesture)
+        return txt
     }()
     
     private lazy var stackViewSignUp:UIStackView = {
@@ -144,8 +144,8 @@ class LoginVC: UIViewController {
     }
     
     @objc func handleLogin(){
-        guard let textEmail = viewEmail.textField.text else{return}
-        guard let textPassword = viewPassword.textField.text else{return}
+        guard let textEmail = txtEmail.textField.text else{return}
+        guard let textPassword = txtPassword.textField.text else{return}
         vm.postLoginData(email:textEmail , password: textPassword)
         vm.makeLogin = { [weak self] () in
                 let vc = MainTabBar()
@@ -154,9 +154,9 @@ class LoginVC: UIViewController {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        if textField == viewEmail.textField || textField == viewPassword.textField {
-            let emailText = viewEmail.textField.text ?? ""
-            let passwordText = viewPassword.textField.text ?? ""
+        if textField == txtEmail.textField || textField == txtPassword.textField {
+            let emailText = txtEmail.textField.text ?? ""
+            let passwordText = txtPassword.textField.text ?? ""
             isFormComplete = (passwordText.count >= 6) && emailText.isValidEmail && !passwordText.isEmpty && !emailText.isEmpty
             buttonLogin.isEnabled = isFormComplete
             buttonLogin.backgroundColor = isFormComplete ? .mainColor : .lightGray
@@ -165,11 +165,11 @@ class LoginVC: UIViewController {
     
     @objc func handlePasswordLongPress(_ gesture: UILongPressGestureRecognizer) {
         if gesture.state == .began {
-            viewPassword.statusImageView.image = UIImage(systemName: "eye.fill")
-            viewPassword.textField.isSecureTextEntry = false
+            txtPassword.statusImageView.image = UIImage(systemName: "eye.fill")
+            txtPassword.textField.isSecureTextEntry = false
         } else if gesture.state == .ended {
-            viewPassword.statusImageView.image = UIImage(systemName: "eye.slash.fill")
-            viewPassword.textField.isSecureTextEntry = true
+            txtPassword.statusImageView.image = UIImage(systemName: "eye.slash.fill")
+            txtPassword.textField.isSecureTextEntry = true
         }
     }
     
@@ -178,7 +178,7 @@ class LoginVC: UIViewController {
         self.view.backgroundColor = .mainColor
         self.view.addSubviews(viewMain, imageLogo, activityIndicator)
         viewMain.addSubviews(labelWelcome, stackView,  buttonLogin, stackViewSignUp)
-        stackView.addArrangedSubviews(viewEmail, viewPassword)
+        stackView.addArrangedSubviews(txtEmail, txtPassword)
 
         stackViewSignUp.addArrangedSubviews(labelSuggestion, buttonSignUp)
         setupLayout()
@@ -210,7 +210,7 @@ class LoginVC: UIViewController {
             sv.leading.trailing.equalToSuperview().inset(25)
         })
         buttonLogin.snp.makeConstraints({ btn in
-            btn.top.equalTo(viewPassword.snp.bottom).offset(48)
+            btn.top.equalTo(txtPassword.snp.bottom).offset(48)
             btn.leading.trailing.equalToSuperview().inset(25)
             
             btn.height.equalTo(54)
