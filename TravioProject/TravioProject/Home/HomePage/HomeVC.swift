@@ -63,6 +63,9 @@ class HomeVC: UIViewController {
         }
         setupViews()
         initVM()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         viewModel.fetchDataDispatch()
     }
     

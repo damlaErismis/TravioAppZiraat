@@ -135,7 +135,7 @@ class SignUpVC: UICustomViewController {
         
         viewModel.showAlertClosure = { [weak self] in
             if let message = self?.viewModel.alertMessage {
-                self?.showAlert(title: "Alert!", message: message)
+                self?.showAlert(title: "Success!", message: message)
             }
         }
     }

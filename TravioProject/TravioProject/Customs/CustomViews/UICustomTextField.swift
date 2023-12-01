@@ -42,6 +42,7 @@ class UICustomTextField: UIView{
     lazy var textField:UITextField = {
         let txt = UITextField()
         txt.font = FontStatus.poppinsRegular16.defineFont
+        txt.autocorrectionType = .no
         return txt
     }()
     
